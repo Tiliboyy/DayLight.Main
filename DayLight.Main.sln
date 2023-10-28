@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Core", "DayLight.Core\DayLight.Core.csproj", "{2D7E872A-83F3-469B-8F77-AD2A86A345F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.GameStore", "DayLight.GameStore\DayLight.GameStore.csproj", "{8B72AA05-3B3C-47CB-8A0E-C303659C1DC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Moderation", "DayLight.Moderation\DayLight.Moderation.csproj", "{45834421-D267-4F26-AC23-90C10CB1965E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Subclasses", "DayLight.Subclasses\DayLight.Subclasses.csproj", "{7A2791B1-76EA-413B-898F-410082B34A20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D7E872A-83F3-469B-8F77-AD2A86A345F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D7E872A-83F3-469B-8F77-AD2A86A345F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D7E872A-83F3-469B-8F77-AD2A86A345F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D7E872A-83F3-469B-8F77-AD2A86A345F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B72AA05-3B3C-47CB-8A0E-C303659C1DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B72AA05-3B3C-47CB-8A0E-C303659C1DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B72AA05-3B3C-47CB-8A0E-C303659C1DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B72AA05-3B3C-47CB-8A0E-C303659C1DC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45834421-D267-4F26-AC23-90C10CB1965E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45834421-D267-4F26-AC23-90C10CB1965E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45834421-D267-4F26-AC23-90C10CB1965E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45834421-D267-4F26-AC23-90C10CB1965E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2791B1-76EA-413B-898F-410082B34A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2791B1-76EA-413B-898F-410082B34A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2791B1-76EA-413B-898F-410082B34A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2791B1-76EA-413B-898F-410082B34A20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal
