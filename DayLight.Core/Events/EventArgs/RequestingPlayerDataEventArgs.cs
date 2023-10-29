@@ -13,9 +13,9 @@ public class RequestingPlayerDataEventArgs : IEvent
     
     public RequestingPlayerDataEventArgs(Player player, Player target,string message, bool isAllowed = true)
     {
-        this.Player = player;
-        this.Target = target;
-        this.IsAllowed = isAllowed;
-        this.Message = message;
+        Player = player;
+        Target = target;
+        IsAllowed = isAllowed;
+        Message = message;
     }
 }

@@ -35,7 +35,7 @@ public class SCPScan : ActiveAbility
 
         scplistbuilder.Append(ply.Nickname);
         scplistbuilder.Append(" | ");
-        scplistbuilder.Append(DayLight.Core.Subclasses.Utils.GetSCPRoleName(ply));
+        scplistbuilder.Append(Core.Subclasses.Utils.GetSCPRoleName(ply));
         scplistbuilder.Append(" | ");
 
 
@@ -44,13 +44,13 @@ public class SCPScan : ActiveAbility
                                               ply.HumeShieldStat.MaxValue));
         scplistbuilder.Append("%</color> | ");
         scplistbuilder.Append("<color=");
-        scplistbuilder.Append(DayLight.Core.Subclasses.Utils.GetHPColor(ply));
+        scplistbuilder.Append(Core.Subclasses.Utils.GetHPColor(ply));
         scplistbuilder.Append(">HP: ");
         scplistbuilder.Append(
             (int)Math.Round((double)(100 * ply.Health) / ply.MaxHealth));
         scplistbuilder.Append("%</color> | ");
 
-        scplistbuilder.Append("Zone: " + DayLight.Core.Subclasses.Utils.GetZoneName(ply.Zone));
+        scplistbuilder.Append("Zone: " + Core.Subclasses.Utils.GetZoneName(ply.Zone));
 
         player.SendHint(ScreenZone.CenterBottom, scplistbuilder.ToString(), 10);
         base.AbilityUsed(player);

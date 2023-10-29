@@ -30,16 +30,16 @@ public class SubclassesPlugin : ReloadablePlugin<SubclassConfig, SubclassTransla
         {
             Instance = this;
 
-            if (!Directory.Exists(Base.RelativePath("Subclasses")))
-            {
-                Directory.CreateDirectory(Base.RelativePath("Subclasses"));
-            }
+//if (!Directory.Exists(Base.RelativePath("Subclasses")))
+           // {
+           //     Directory.CreateDirectory(Base.RelativePath("Subclasses"));
+            //}
 
 
             
-            File.WriteAllText(Path.Combine(Base.RelativePath("Subclasses"), "global.yml"), new Serializer().Serialize(RolesConfig));
+            //File.WriteAllText(Path.Combine(Base.RelativePath("Subclasses"), "global.yml"), new Serializer().Serialize(RolesConfig));
 
-            RolesConfig = new Deserializer().Deserialize<RolesConfigs>(File.ReadAllText(Path.Combine(Base.RelativePath("Subclasses"), "global.yml")));
+            //RolesConfig = new Deserializer().Deserialize<RolesConfigs>(File.ReadAllText(Path.Combine(Base.RelativePath("Subclasses"), "global.yml")));
             Subclass.RegisterSubclasses(overrideClass: RolesConfig);
 
         }

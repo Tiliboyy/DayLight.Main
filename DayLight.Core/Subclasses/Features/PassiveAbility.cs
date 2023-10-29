@@ -37,7 +37,7 @@ public abstract class PassiveAbility : Exiled.CustomRoles.API.Features.PassiveAb
             return true;
         }
 
-        var dateTime = this.LastUsed[player] + TimeSpan.FromSeconds(this.Cooldown);
+        var dateTime = LastUsed[player] + TimeSpan.FromSeconds(Cooldown);
         if (DateTime.Now > dateTime)
         {
             return true;

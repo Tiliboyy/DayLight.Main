@@ -19,18 +19,18 @@ public abstract class ActiveAbility : Exiled.CustomRoles.API.Features.ActiveAbil
 
     public override bool CanUseAbility(Player player, out string response, bool selectedOnly = false)
     {
-        if (this.CanUseOverride != null)
+        if (CanUseOverride != null)
         {
             response = string.Empty;
-            return this.CanUseOverride();
+            return CanUseOverride();
         }
 
-        if (!this.LastUsed.ContainsKey(player))
+        if (!LastUsed.ContainsKey(player))
         {
             response = string.Empty;
             return true;
         }
-        var dateTime = this.LastUsed[player] + TimeSpan.FromSeconds(this.Cooldown);
+        var dateTime = LastUsed[player] + TimeSpan.FromSeconds(Cooldown);
         if (DateTime.Now > dateTime)
         {
             response = string.Empty;
@@ -38,7 +38,7 @@ public abstract class ActiveAbility : Exiled.CustomRoles.API.Features.ActiveAbil
         }
 
         response =
-            $"Du must noch {(object)Math.Round((dateTime - DateTime.Now).TotalSeconds)} Sekunden warten um {(object)this.Name} zu nutzen!";
+            $"Du must noch {(object)Math.Round((dateTime - DateTime.Now).TotalSeconds)} Sekunden warten um {(object)Name} zu nutzen!";
         player.ClearBroadcasts();
         return false;
 

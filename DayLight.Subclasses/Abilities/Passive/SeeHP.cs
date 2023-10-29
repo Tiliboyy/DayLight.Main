@@ -26,7 +26,7 @@ public class SeeHP : PassiveAbility
     public void OnHurting(HurtingEventArgs ev)
     {
         if(Check(ev.Attacker))
-            ev.Attacker.SendHint(ScreenZone.CenterBottom, ev.Player.Nickname + $" - <color={DayLight.Core.Subclasses.Utils.GetHPColor(ev.Player)}>" + ev.Player.Health + "HP</color>", 1);
+            ev.Attacker.SendHint(ScreenZone.CenterBottom, ev.Player.Nickname + $" - <color={Core.Subclasses.Utils.GetHPColor(ev.Player)}>" + ev.Player.Health + "HP</color>", 1);
     }
 
 }

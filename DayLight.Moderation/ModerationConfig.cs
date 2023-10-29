@@ -27,6 +27,7 @@ public class ModerationConfig : IConfig
     [Description("ID: 0 Is Default do not change")]
     public Dictionary<int, Vector3> Towers { get; set; } = new Dictionary<int, Vector3>()
     {
+        
         {0, new Vector3(0,0,0)},
         {1, new Vector3(-15f,1014.5f,-31.4f)},
         {2, new Vector3(108,1014.01f,-13.7f)},

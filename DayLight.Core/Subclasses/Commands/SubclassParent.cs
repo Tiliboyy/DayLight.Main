@@ -1,4 +1,5 @@
 ﻿using CommandSystem;
+using DayLight.Core.API.CommandSystem;
 using DayLight.Core.Subclasses.Commands.Subcommands;
 using System;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace DayLight.Core.Subclasses.Commands;
 public class SubclassParentCommand
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    public class SubclassParent : ParentCommand
+    public class SubclassParent : CustomParent
     {
         public SubclassParent() => LoadGeneratedCommands();
         public override string Command { get; } = "subclasses";

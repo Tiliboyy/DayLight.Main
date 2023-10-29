@@ -133,22 +133,22 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="EXILED" Version="8.3.1" />
+      <PackageReference Include="EXILED" Version="8.3.2" />
       <PackageReference Include="Lib.Harmony" Version="2.2.2" />
-      <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Primitives" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Primitives" Version="7.0.0" />
       <PackageReference Include="NeuronModding.Core" Version="1.0.2" />
       <PackageReference Include="NeuronModding.Modules.Configs" Version="1.0.2" />
       <PackageReference Include="NeuronModding.Modules.Patcher" Version="1.0.2" />
       <PackageReference Include="Ninject" Version="3.3.6" />
       <PackageReference Include="SYML" Version="1.0.2" />
       <PackageReference Include="System.Buffers" Version="4.5.1" />
-      <PackageReference Include="System.Memory" Version="4.5.4" />
+      <PackageReference Include="System.Memory" Version="4.5.5" />
       <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
       <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
       <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />

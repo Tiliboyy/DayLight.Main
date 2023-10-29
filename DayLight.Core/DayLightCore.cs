@@ -3,6 +3,7 @@ using DayLight.Core.API.CommandSystem;
 using Exiled.Events.Commands.PluginManager;
 using Exiled.Events.Handlers;
 using GameCore;
+using InventorySystem.Items.Usables.Scp330;
 using Neuron.Core.Logging;
 using Neuron.Core.Meta;
 using Neuron.Core.Modules;
