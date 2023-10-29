@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net481</TargetFramework>
+        <LangVersion>10</LangVersion>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="EXILED" Version="8.0.1" />
+        <PackageReference Include="Lib.Harmony" Version="2.2.2"/>
+        <PackageReference Include="LiteDB" Version="5.0.17" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp-firstpass">
+            <HintPath>..\..\..\SCP Secret Laboratory\Assembly\Assembly-CSharp-firstpass.dll</HintPath>
+        </Reference>
+        <Reference Include="CommandSystem.Core">
+            <HintPath>..\..\..\Documents\Assembly\CommandSystem.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Core">
+            <HintPath>..\..\..\AppData\Roaming\EXILED\Plugins\Core.dll</HintPath>
+        </Reference>
+        <Reference Include="GameStore">
+            <HintPath>..\..\..\AppData\Roaming\EXILED\Plugins\GameStore.dll</HintPath>
+        </Reference>
+        <Reference Include="Mirror">
+            <HintPath>..\..\..\SCP Secret Laboratory\Assembly\Mirror.dll</HintPath>
+        </Reference>
+        <Reference Include="NorthwoodLib">
+            <HintPath>..\..\..\Documents\Assembly\NorthwoodLib.dll</HintPath>
+        </Reference>
+        <Reference Include="ScpUtils">
+            <HintPath>..\..\..\SCP Secret Laboratory\Assembly\ScpUtils.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>..\..\..\SCP Secret Laboratory\Assembly\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>..\..\..\SCP Secret Laboratory\Assembly\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+            <HintPath>..\..\..\SCP Secret Laboratory\Assembly\UnityEngine.PhysicsModule.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\DiscordSync.Dependencys\DiscordSync.Dependencys.csproj" />
+    </ItemGroup>
+
+</Project>

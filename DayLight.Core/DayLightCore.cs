@@ -1,9 +1,11 @@
 ﻿using DayLight.Core.API.Attributes;
 using DayLight.Core.API.CommandSystem;
+using DayLight.Core.Database;
 using Exiled.Events.Commands.PluginManager;
 using Exiled.Events.Handlers;
 using GameCore;
 using InventorySystem.Items.Usables.Scp330;
+using Neuron.Core;
 using Neuron.Core.Logging;
 using Neuron.Core.Meta;
 using Neuron.Core.Modules;
@@ -13,6 +15,7 @@ using Neuron.Modules.Reload;
 using Ninject;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using EventHandler = DayLight.Core.EventHandlers.EventHandler;
 using Log = Exiled.API.Features.Log;
@@ -25,6 +28,10 @@ namespace DayLight.Core
     {
         public static ILogger NeuronLogger;
         public static DayLightCore Instance;
+        
+        [Inject]
+        public NeuronBase Base {get;set;}
+
         public override void EnableModule()
         {
             NeuronLogger = Logger;
@@ -32,7 +39,6 @@ namespace DayLight.Core
             Player.Verified += EventHandler.OnVerified; 
             Server.RespawningTeam += Subclasses.EventHandlers.SubclassEventHandlers.OnRespawningTeam;
             Server.RoundEnded += Subclasses.EventHandlers.SubclassEventHandlers.OnRoundEnd;
-
             foreach (var commandBinding in ModuleCommandBindingQueue)
             {
                 CustomCommand.RegisterCommand(commandBinding.Type);
@@ -55,6 +61,7 @@ namespace DayLight.Core
         }
         public override void LateEnable()
         {
+            DayLightDatabase.CreatePlayers();
         }
         
         public override void Load(IKernel kernel)
@@ -67,7 +74,7 @@ namespace DayLight.Core
         {
             if(!args.MetaType.TryGetAttribute<AutomaticAttribute>(out _)) return;
             if(!args.MetaType.TryGetAttribute<CommandAttribute>(out _)) return;
-            if(!args.MetaType.Is<CustomCommand>()) return;
+            if(!args.MetaType.Is<CustomCommand>() && !args.MetaType.Is<CustomParent>()) return;
         
             args.Outputs.Add(new CommandBinding()
             {

@@ -1,25 +1,22 @@
 ﻿using CommandSystem;
+using DayLight.Core.API.CommandSystem;
+using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
 using System;
 
 namespace DayLight.Core.Subclasses.Commands.Subcommands;
 
-internal class Toggle : ICommand
+internal class Toggle : CustomCommand
 {
-    public string Command { get; } = "toggle";
+    public override string Command { get; } = "toggle";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "Enable/Disable subclasses";
+    public override string Description { get; } = "Enable/Disable subclasses";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    protected override string Permission { get; } = "subclasses.toggle";
+    protected override bool Respond(ArraySegment<string> arguments, Player sender, out string response)
     {
-        if (!sender.CheckPermission("subclasses.toggle"))
-        {
-            response = $"You do not have the correct permission to use this command (subclasses.toggle)";
-
-            return false;
-        }
 
         if (!Manager.NoRandomRole)
         {

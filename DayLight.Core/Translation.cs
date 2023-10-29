@@ -7,5 +7,6 @@ namespace DayLight.Core;
 [Automatic]
 public class Translation : Translations<Translation>
 {
-    
+
+    public string CurrencyName { get; set; }
 }

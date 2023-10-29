@@ -1,12 +1,11 @@
-using DayLight.GameStore.Configs;
+﻿using DayLight.GameStore.Configs;
 using DayLight.GameStore.Events.EventArgs;
 using Exiled.API.Features;
-using PluginAPI.Core;
-using Player = Exiled.API.Features.Player;
+using Neuron.Core.Events;
 
-namespace DayLight.GameStore.Events;
+namespace DayLight.Core.Events.Handlers;
 
-public static class Handlers
+public class GameStoreHandler
 {
     public static Exiled.Events.Features.Event<GainedMoneyEventArgs> GainingMoney = new();
     public static Exiled.Events.Features.Event<BuyingItemsEventArgs> BuyingItems = new();
@@ -20,4 +19,5 @@ public static class Handlers
     {
         BuyingItems?.InvokeSafely(new BuyingItemsEventArgs(player, reward, price));
     }
+
 }

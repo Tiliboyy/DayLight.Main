@@ -1,11 +1,12 @@
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Interfaces;
+using Neuron.Core.Events;
 using PluginAPI.Core;
 using Player = Exiled.API.Features.Player;
 
 namespace DayLight.GameStore.Events.EventArgs;
 
-public class GainedMoneyEventArgs : IExiledEvent
+public class GainedMoneyEventArgs : IEvent
 {
     public Player Player { get; }
     

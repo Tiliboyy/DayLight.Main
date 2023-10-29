@@ -33,7 +33,7 @@ public abstract class CustomCommand : ICommand
                 return false;
             }
             if (Permission == "" || sender.CheckPermission(Permission)) return Respond(arguments, player, out response);
-            response = $"Du hast nicht die erforderlichen Rechte.";
+            response = $"Du hast nicht die erforderlichen Rechte. ({Permission})";
             return true;
         }
         catch (Exception ex)

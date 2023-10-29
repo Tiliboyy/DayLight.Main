@@ -6,5 +6,8 @@ namespace DayLight.Core.API;
 
 public static class Utils
 {
-    public static IEnumerable<T> GetValues<T>() => Enum.GetValues(typeof(T)).Cast<T>();
+    public static List<T> GetEnumValues<T>()
+    {
+        return Enum.GetValues(typeof(T)).Cast<T>().ToList();
+    }
 }

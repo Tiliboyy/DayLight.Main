@@ -411,16 +411,10 @@
         <Compile Include="Commands\RemoteAdmin\SubCommands\ResetLimits.cs" />
         <Compile Include="Commands\RemoteAdmin\SubCommands\Set.cs" />
         <Compile Include="Commands\RemoteAdmin\SubCommands\Toggle.cs" />
-        <Compile Include="Components\GameStoreComponent.cs" />
         <Compile Include="Configs\GameStoreConfig.cs" />
         <Compile Include="Configs\GameStoreTranslation.cs" />
-        <Compile Include="Configs\Structs.cs" />
         <Compile Include="EventHandlers\EventHandlers.cs" />
-        <Compile Include="Events\EventArgs\BuyingItemsEventArgs.cs" />
-        <Compile Include="Events\EventArgs\GainedMoneyEventArgs.cs" />
-        <Compile Include="Events\Handlers.cs" />
         <Compile Include="Extensions.cs" />
-        <Compile Include="GameStoreDatabase.cs" />
         <Compile Include="GameStorePlugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
@@ -434,7 +428,7 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="EXILED" Version="8.3.2" />
+      <PackageReference Include="EXILED" Version="8.3.4" />
       <PackageReference Include="Lib.Harmony" Version="2.2.2" />
       <PackageReference Include="LiteDB" Version="5.0.17" />
       <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
@@ -455,6 +449,9 @@
       <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
       <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
       <PackageReference Include="YamlDotNet" Version="13.7.1" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Components\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,26 +1,25 @@
 ﻿using CommandSystem;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
+using Neuron.Core.Meta;
 using NorthwoodLib.Pools;
 using System;
 
 namespace DayLight.GameStore.Commands.ClientConsole;
-[CommandHandler(typeof(ClientCommandHandler))]
-internal class Buy : ICommand
+[Automatic]
+[Command(new [] { Platform.ClientConsole })]
+internal class Buy : CustomCommand
 {
-    public string Command { get; } = "buy";
+    public override string Command { get; } = "buy";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "buy";
+    public override string Description { get; } = "buy";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
     {
-        var player = Player.Get(sender);
-        if (player == null)
-        {
-            response = "You can only execute this as a Player";
-            return false;
-        }
+
         if (player.DoNotTrack)
         {
             response = GameStorePlugin.Instance.Translation.DntMessage;

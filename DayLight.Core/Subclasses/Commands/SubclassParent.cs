@@ -1,6 +1,7 @@
 ﻿using CommandSystem;
 using DayLight.Core.API.CommandSystem;
 using DayLight.Core.Subclasses.Commands.Subcommands;
+using Neuron.Core.Meta;
 using System;
 using System.Linq;
 
@@ -8,6 +9,7 @@ namespace DayLight.Core.Subclasses.Commands;
 
 public class SubclassParentCommand
 {
+    [Automatic]
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class SubclassParent : CustomParent
     {

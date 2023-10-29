@@ -1,4 +1,5 @@
 using DayLight.Core;
+using DayLight.Core.Database;
 using DayLight.GameStore.Components;
 using DayLight.GameStore.Configs;
 using Exiled.API.Features;
@@ -20,7 +21,7 @@ public static class Extensions
         if (player == null) return false;
         if (player.DoNotTrack) return false;
         var playerID = player.RawUserId.Split('@')[0];
-        var players = GameStoreDatabase.db.GetCollection<GameStoreDatabase.DatabasePlayer>("players");
+        var players = DayLightDatabase.db.GetCollection<DayLightDatabase.DatabasePlayer>("players");
         var dbplayer = players.FindOne(x => x._id != null && x._id == playerID);
 
         if (dbplayer == null) return false;
@@ -32,17 +33,17 @@ public static class Extensions
 
     public static float GetMoney(this Player player)
     {
-        return GameStoreDatabase.Database.GetPlayerMoney(player);
+        return DayLightDatabase.GetPlayerMoney(player);
     }
     
     public static void GiveReward(this Player player, Reward reward)
     {
-        GameStoreDatabase.Database.AddRewardToPlayer(player, reward);
+        DayLightDatabase.AddRewardToPlayer(player, reward);
     }
     
     public static void GiveMoney(this Player player, int money)
     {
-        GameStoreDatabase.Database.AddMoneyToPlayer(player, money);
+        DayLightDatabase.AddMoneyToPlayer(player, money);
     }
     
     public static string GetAvailableCategories(this Player player, bool ShowAll = false)
@@ -127,7 +128,7 @@ public static class Extensions
                 notfullinventory = true;
 
 
-                if (!GameStoreDatabase.Database.CanRemoveMoneyFromPlayer(player, items.Price))
+                if (!DayLightDatabase.CanRemoveMoneyFromPlayer(player, items.Price))
                 {
                     continue;
                 }
@@ -149,7 +150,7 @@ public static class Extensions
                     player.GameObject.GetComponent<GameStoreComponent>().BoughtItems.Add(result, 1);
                 }
 
-                GameStoreDatabase.Database.BuyItem(player, items);
+                DayLightDatabase.BuyItem(player, items);
                 return GameStorePlugin.Instance.Translation.BoughtItem.Replace("(itemname)", items.Name)
                     .Replace("(itemprice)", items.Price.ToString());
             }
@@ -224,7 +225,7 @@ public static class Extensions
                     return GameStorePlugin.Instance.Translation.FullInventory;
                 }
 
-                if (!GameStoreDatabase.Database.CanRemoveMoneyFromPlayer(player, items.Price))
+                if (!DayLightDatabase.CanRemoveMoneyFromPlayer(player, items.Price))
                 {
                     return GameStorePlugin.Instance.Translation.CantAfford;
                 }
@@ -243,7 +244,7 @@ public static class Extensions
                 {
                     player.GameObject.GetComponent<GameStoreComponent>().BoughtItems.Add(result, 1);
                 }
-                GameStoreDatabase.Database.BuyItem(player, items);
+                DayLightDatabase.BuyItem(player, items);
                 return GameStorePlugin.Instance.Translation.BoughtItem.Replace("(itemname)", items.Name)
                     .Replace("(itemprice)", items.Price.ToString());
             }

@@ -1,4 +1,5 @@
 using CommandSystem;
+using DayLight.Core.Database;
 using PluginAPI.Core;
 using System;
 using Player = Exiled.API.Features.Player;
@@ -36,7 +37,7 @@ internal class Delete : ICommand
                            ",if you are sure you want to do that type gamestore delete <player> CONFIRM";
                 return true;
             }
-            GameStoreDatabase.Database.RemovePlayer(player);
+            DayLightDatabase.RemovePlayer(player);
             response = $"{player.Nickname}'s database entry was removed!";
             return true;
 

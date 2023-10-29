@@ -1,3 +1,4 @@
+using DayLight.Core.Database;
 using DayLight.GameStore.Components;
 using Exiled.API.Enums;
 using Exiled.API.Features;
@@ -20,12 +21,12 @@ public class EventHandlers
     {
         if (!ev.Player.DoNotTrack)
         {
-            GameStoreDatabase.Database.AddPlayer(ev.Player);
+            DayLightDatabase.AddPlayer(ev.Player);
             ev.Player.GameObject.AddComponent<GameStoreComponent>();
         }
         else
         {
-            GameStoreDatabase.Database.RemovePlayer(ev.Player);
+            DayLightDatabase.RemovePlayer(ev.Player);
         }
     }
     
@@ -41,7 +42,7 @@ public class EventHandlers
     
     public static void OnWaitingForPlayers()
     {
-        GameStoreDatabase.Database.CreatePlayers();
+        DayLightDatabase.CreatePlayers();
     }
     
     public static void OnUsedItem(UsedItemEventArgs ev)

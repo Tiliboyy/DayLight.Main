@@ -1,4 +1,5 @@
 ﻿using CommandSystem;
+using DayLight.Core.API.CommandSystem;
 using Exiled.API.Extensions;
 using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
@@ -12,23 +13,17 @@ using CustomRole = Exiled.CustomRoles.API.Features.CustomRole;
 
 namespace DayLight.Core.Subclasses.Commands.Subcommands;
 
-internal class GenerateSubclassList : ICommand
+internal class GenerateSubclassList : CustomCommand
 {
-    public string Command { get; } = "list";
+    public override string Command { get; } = "list";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "Generates a Subclass List in the Subclass File dir";
+    public override string Description { get; } = "Generates a Subclass List in the Subclass File dir";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    protected override string Permission { get; } = "subclasses.list";
+    protected override bool Respond(ArraySegment<string> arguments, Player sender, out string response)
     {
-        
-        if (!sender.CheckPermission("subclasses.list"))
-        {
-            response = $"You do not have the correct permission to use this command (subclasses.list)";
-
-            return false;
-        }
 
         string Text = "Rollen:\n";
         var ClassD = new List<CustomRole>();
