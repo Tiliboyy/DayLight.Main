@@ -1,16 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DayLight.GameStore.Components;
+namespace DayLight.Core;
 
 public class GameStoreComponent : MonoBehaviour
 {
-    public Dictionary<int, int> BoughtItems = new();
-    public Dictionary<string, int> RewardLimit = new();
-    public void ResetBuyLimits()
-    {
-        BoughtItems = new Dictionary<int, int>();
-        RewardLimit = new Dictionary<string, int>();
-    }
+
 
 }

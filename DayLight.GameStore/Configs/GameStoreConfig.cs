@@ -1,3 +1,4 @@
+using DayLight.Core;
 using Exiled.API.Enums;
 using Exiled.API.Interfaces;
 using Neuron.Core.Meta;
@@ -20,6 +21,7 @@ public class GameStoreConfig : IConfig
     public bool ShowOnlyAvalibleItems { get; set; }= true;
 
     public bool EnableLimit { get; set; } = false;
+    
     public float MoneyLimit { get; set; } = 200000;
     
     [Description("The amount a player gets from each event. 0 disables the event. -1 Is unlimited")]

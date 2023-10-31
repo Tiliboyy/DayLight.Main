@@ -50,13 +50,14 @@ public abstract class CustomCommand : ICommand
         var customCommand = (ICommand)instance;
         var platforms = type.GetCustomAttribute<CommandAttribute>().Platforms;
 
-
         if (platforms.Contains(Platform.RemoteAdmin))
         {
             if (CommandProcessor.RemoteAdminCommandHandler.AllCommands.Any(x => x.Command == customCommand.Command))
             {
                 Logger.Error($"The command {customCommand.Command} was already registered in the RemoteAdmin commands");
             }
+            Logger.Debug($"Registering {customCommand.Command} as remoteadmin command");
+
             CommandProcessor.RemoteAdminCommandHandler.RegisterCommand(customCommand);
 
         }
@@ -66,6 +67,8 @@ public abstract class CustomCommand : ICommand
             {
                 Logger.Error($"The command {customCommand.Command} was already registered Console commands");
             }
+            Logger.Debug($"Registering {customCommand.Command} as server console command");
+
             GameCore.Console.singleton.ConsoleCommandHandler.RegisterCommand(customCommand);
 
         }
@@ -75,6 +78,8 @@ public abstract class CustomCommand : ICommand
             {
                 Logger.Error($"The command {customCommand.Command} was already registered Client commands");
             }
+            Logger.Debug($"Registering {customCommand.Command} as client console command");
+
             QueryProcessor.DotCommandHandler.RegisterCommand(customCommand);
 
         }

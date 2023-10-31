@@ -32,7 +32,7 @@ public class LinkCommand : ICommand
                 response = "Du hast bereits einen Code aktiv!";
                 return true;
             }
-            if (Link.LinkDatabase.IsSteam64Linked(iResult))
+            if (LinkDatabase.IsSteam64Linked(iResult))
             {
                 response = "Du bist bereits verlinkt!";
                 return true;

@@ -1,6 +1,7 @@
 ﻿using DayLight.Core.API.Attributes;
 using DayLight.Core.API.CommandSystem;
-using DayLight.Core.Database;
+using DayLight.Core.API.Database;
+using DayLight.Core.API.Subclasses.EventHandlers;
 using Exiled.Events.Commands.PluginManager;
 using Exiled.Events.Handlers;
 using GameCore;
@@ -37,8 +38,8 @@ namespace DayLight.Core
             NeuronLogger = Logger;
             if(!Config.Enabled) return;
             Player.Verified += EventHandler.OnVerified; 
-            Server.RespawningTeam += Subclasses.EventHandlers.SubclassEventHandlers.OnRespawningTeam;
-            Server.RoundEnded += Subclasses.EventHandlers.SubclassEventHandlers.OnRoundEnd;
+            Server.RespawningTeam += SubclassEventHandlers.OnRespawningTeam;
+            Server.RoundEnded += SubclassEventHandlers.OnRoundEnd;
             foreach (var commandBinding in ModuleCommandBindingQueue)
             {
                 CustomCommand.RegisterCommand(commandBinding.Type);
@@ -74,8 +75,8 @@ namespace DayLight.Core
         {
             if(!args.MetaType.TryGetAttribute<AutomaticAttribute>(out _)) return;
             if(!args.MetaType.TryGetAttribute<CommandAttribute>(out _)) return;
-            if(!args.MetaType.Is<CustomCommand>() && !args.MetaType.Is<CustomParent>()) return;
-        
+            if(!args.MetaType.Is<CustomCommand>() && !args.MetaType.Is<ParentCommand>()) return;
+            Core.Logger.Debug(args.MetaType.Type.FullName);
             args.Outputs.Add(new CommandBinding()
             {
                 Type = args.MetaType.Type

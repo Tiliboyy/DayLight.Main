@@ -1,5 +1,6 @@
 using CommandSystem;
-using DayLight.GameStore.Components;
+using DayLight.Core;
+using DayLight.Core.API.Features;
 using PluginAPI.Core;
 using System;
 using Player = Exiled.API.Features.Player;
@@ -29,7 +30,7 @@ internal class ResetLimits : ICommand
             return true;
         }
         
-        player.GameObject.GetComponent<GameStoreComponent>().ResetBuyLimits();
+        AdvancedPlayer.Get(player)?.ResetGameStoreLimits();
         response = $"Limits reset!";
         return true;
 

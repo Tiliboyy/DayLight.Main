@@ -1,7 +1,7 @@
 using CommandSystem;
 using DayLight.Core.API.Attributes;
 using DayLight.Core.API.CommandSystem;
-using DayLight.Core.Database;
+using DayLight.Core.API.Database;
 using Exiled.API.Features;
 using Neuron.Core.Meta;
 using System;

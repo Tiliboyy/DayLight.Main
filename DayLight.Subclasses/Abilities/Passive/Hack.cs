@@ -1,10 +1,11 @@
-﻿using Exiled.API.Enums;
+﻿using DayLight.Core.API.Subclasses.Features;
+using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 
 namespace DayLight.Subclasses.Abilities.Passive;
 
-public class Hack : DayLight.Core.Subclasses.Features.PassiveAbility
+public class Hack : PassiveAbility
 {
     public override string Name { get; set; } = "Hack";
     public override string Description { get; set; } = "Du kannst alle 60 Sekunden eine Tür hacken.";

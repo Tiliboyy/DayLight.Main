@@ -1,6 +1,6 @@
 ﻿#region
 
-using DayLight.Core.Database;
+using DayLight.Core.API.Database;
 using DayLight.Stat.Achievements;
 using DayLight.Stat.Stats.Components;
 using Exiled.API.Extensions;
@@ -95,7 +95,7 @@ public class StatsEventHandler
         {
             player.AddStatsDataToPlayer(DayLightDatabase.StatTypes.Rounds, 1);
         }
-        Achievements.GameStateData.ClearGameStats();
+        GameStateData.ClearGameStats();
         Leaderboard.UpdateLeaderboards();
     }
 

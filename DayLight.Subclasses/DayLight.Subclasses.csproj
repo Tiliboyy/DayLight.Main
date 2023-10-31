@@ -80,6 +80,10 @@
         <Compile Include="Abilities\Passive\PryGate.cs" />
         <Compile Include="Abilities\Passive\SeeHP.cs" />
         <Compile Include="Abilities\Passive\SpeedOnKill.cs" />
+        <Compile Include="Commands\SubclassParent.cs" />
+        <Compile Include="Commands\Subcommands\GenerateSubclassList.cs" />
+        <Compile Include="Commands\Subcommands\ResetSubclassSpawns.cs" />
+        <Compile Include="Commands\Subcommands\ToggleSubclasses.cs" />
         <Compile Include="SubclassConfig.cs" />
         <Compile Include="Plugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>

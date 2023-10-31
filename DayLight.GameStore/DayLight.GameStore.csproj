@@ -426,6 +426,10 @@
         <Project>{2d7e872a-83f3-469b-8f77-ad2a86a345f3}</Project>
         <Name>DayLight.Core</Name>
       </ProjectReference>
+      <ProjectReference Include="..\DayLight.DiscordSync.Dependencys\DayLight.DiscordSync.Dependencys.csproj">
+        <Project>{04f7a49f-5696-4b43-80f7-ac5b7f01eb63}</Project>
+        <Name>DayLight.DiscordSync.Dependencys</Name>
+      </ProjectReference>
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="EXILED" Version="8.3.4" />

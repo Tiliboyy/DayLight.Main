@@ -1,5 +1,5 @@
-using DayLight.Core.Database;
-using DayLight.GameStore.Components;
+using DayLight.Core;
+using DayLight.Core.API.Database;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;

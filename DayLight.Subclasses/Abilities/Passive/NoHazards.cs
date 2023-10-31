@@ -1,9 +1,10 @@
-﻿using Exiled.API.Features;
+﻿using DayLight.Core.API.Subclasses.Features;
+using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 
 namespace DayLight.Subclasses.Abilities.Passive;
 
-public class NoHazards : DayLight.Core.Subclasses.Features.PassiveAbility
+public class NoHazards : PassiveAbility
 {
     public override string Name { get; set; } = "Gut gehen";
 

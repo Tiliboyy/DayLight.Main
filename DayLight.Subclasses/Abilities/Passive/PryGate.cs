@@ -1,11 +1,12 @@
-﻿using Exiled.API.Enums;
+﻿using DayLight.Core.API.Subclasses.Features;
+using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.API.Features.Doors;
 using Exiled.Events.EventArgs.Player;
 
 namespace DayLight.Subclasses.Abilities.Passive;
 
-public class PryGate : DayLight.Core.Subclasses.Features.PassiveAbility
+public class PryGate : PassiveAbility
 {
     public override string Name { get; set; } = "Pry Gate";
     public override string Description { get; set; } = "Du kannst alle 60 Sekunden eine Tür aufreissen.";

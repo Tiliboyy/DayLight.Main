@@ -1,5 +1,5 @@
 ﻿using CustomPlayerEffects;
-using DayLight.Core.Subclasses.Features;
+using DayLight.Core.API.Subclasses.Features;
 using Exiled.API.Features;
 using Exiled.API.Features.Attributes;
 using PlayerRoles;

@@ -1,10 +1,11 @@
-﻿using Exiled.API.Enums;
+﻿using DayLight.Core.API.Subclasses.Features;
+using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 
 namespace DayLight.Subclasses.Abilities.Passive;
 
-public class No207Damage : DayLight.Core.Subclasses.Features.PassiveAbility
+public class No207Damage : PassiveAbility
 {
     public override string Name { get; set; } = "Immunity";
     public override string Description { get; set; } = "Du nimmst keinen Schaden von SCP-207.";

@@ -1,9 +1,10 @@
-﻿using Exiled.API.Features;
+﻿using DayLight.Core.API.Subclasses.Features;
+using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 
 namespace DayLight.Subclasses.Abilities.Passive;
 
-public class LifeSteal : DayLight.Core.Subclasses.Features.PassiveAbility
+public class LifeSteal : PassiveAbility
 {
     public override string Name { get; set; } = "Life Steal";
     public override string Description { get; set; } = "Du heilst dich wenn du eine Person tötest.";

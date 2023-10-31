@@ -23,7 +23,7 @@ public class PlaytimeTop : ICommand
     }
     public static void GetPTLeaderboard(int amount = 10)
     {
-        var players = SCPUtils.Database.LiteDatabase.GetCollection<Player>();
+        var players = Database.LiteDatabase.GetCollection<Player>();
         var e = players.FindAll().OrderByDescending(x => new TimeSpan(0, 0, x.PlayTimeRecords.Sum(e => e.Value))).Take(amount).ToList();
         var i = 1;
         var str = "\n";

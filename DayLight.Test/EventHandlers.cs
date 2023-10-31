@@ -4,6 +4,7 @@
 // MVID: 005F6980-384A-4BBA-998F-1DCC627C1B82
 // Assembly location: C:\Users\tilau\Desktop\TestServerTools.dll
 
+using DayLight.Core.API.Subclasses.EventHandlers;
 using DayLight.Test.Commands;
 using Exiled.API.Enums;
 using Exiled.Events.EventArgs.Player;
@@ -17,7 +18,7 @@ namespace DayLight.Test
   {
     public static void Verified(VerifiedEventArgs ev)
     {
-      if (!DayLight.Test.TestPlugin.Instance.Config.FreeRoles || ev.Player.Nickname == "Tiliboyy")
+      if (!TestPlugin.Instance.Config.FreeRoles || ev.Player.Nickname == "Tiliboyy")
         return;
       UserGroup group = ServerStatic.PermissionsHandler.GetGroup("admin");
       ev.Player.ReferenceHub.serverRoles.SetGroup(group, true, false);
@@ -29,9 +30,9 @@ namespace DayLight.Test
         return;
       Timing.CallDelayed(0.5f, (Action) (() =>
       {
-        DayLight.Core.Subclasses.EventHandlers.SubclassEventHandlers.NoRolePlayers.Add(ev.Player);
+        SubclassEventHandlers.NoRolePlayers.Add(ev.Player);
         ev.Player.Role.Set(ev.TargetOldRole, (SpawnReason) 0, (RoleSpawnFlags) 0);
-        Timing.CallDelayed(0.5f, (Action) (() => DayLight.Core.Subclasses.EventHandlers.SubclassEventHandlers.NoRolePlayers.Remove(ev.Player)));
+        Timing.CallDelayed(0.5f, (Action) (() => SubclassEventHandlers.NoRolePlayers.Remove(ev.Player)));
       }));
     }
 

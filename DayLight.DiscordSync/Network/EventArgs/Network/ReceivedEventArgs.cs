@@ -32,7 +32,7 @@ public class ReceivedEventArgs : System.EventArgs
         Length = length;
     }
     public BotRequester BotRequester { get; set; }
-    public DataType Type { get; set; }
+    public MessageType Type { get; set; }
     public ulong UserID { get; set; }
     public string SerilzedData { get; private set; }
 

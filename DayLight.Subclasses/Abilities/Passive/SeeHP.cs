@@ -1,6 +1,6 @@
 ﻿using Core.Features.Data.Enums;
 using Core.Features.Extensions;
-using DayLight.Core.Subclasses.Features;
+using DayLight.Core.API.Subclasses.Features;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.Handlers;
 
@@ -26,7 +26,7 @@ public class SeeHP : PassiveAbility
     public void OnHurting(HurtingEventArgs ev)
     {
         if(Check(ev.Attacker))
-            ev.Attacker.SendHint(ScreenZone.CenterBottom, ev.Player.Nickname + $" - <color={Core.Subclasses.Utils.GetHPColor(ev.Player)}>" + ev.Player.Health + "HP</color>", 1);
+            ev.Attacker.SendHint(ScreenZone.CenterBottom, ev.Player.Nickname + $" - <color={Core.API.Subclasses.Utils.GetHPColor(ev.Player)}>" + ev.Player.Health + "HP</color>", 1);
     }
 
 }

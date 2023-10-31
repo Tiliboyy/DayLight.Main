@@ -1,6 +1,7 @@
 ﻿using Exiled.API.Features;
 using JetBrains.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,7 +10,13 @@ namespace DayLight.Core.API.Features;
 public class AdvancedPlayer : MonoBehaviour
 {
   
-  
+  public Dictionary<int, int> GameStoreBoughtItems = new();
+  public Dictionary<string, int> GameStoreRewardLimit = new();
+  public void ResetGameStoreLimits()
+  {
+    GameStoreBoughtItems = new Dictionary<int, int>();
+    GameStoreRewardLimit = new Dictionary<string, int>();
+  }
   public Player ExiledPlayer { get; private set; }
   
   public string CustomRemoteAdminBadge { get; set; } = "";

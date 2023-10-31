@@ -1,5 +1,5 @@
 ﻿using DayLight.Core;
-using DayLight.Core.Subclasses.Features;
+using DayLight.Core.API.Subclasses.Features;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;

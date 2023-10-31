@@ -2,7 +2,8 @@
 
 using Core.Features.Data.Enums;
 using Core.Features.Extensions;
-using DayLight.Core.Database;
+using DayLight.Core.API.Database;
+using DayLight.DiscordSync.Dependencys.Stats;
 using DayLight.GameStore;
 using Exiled.API.Features;
 using JetBrains.Annotations;
@@ -22,7 +23,8 @@ public static class Achievements
         if (DiscordSyncStatsPlugin.DisableDiscordSyncStats) return;
         if (player.DoNotTrack) return;
         var achivement = DiscordSync.Dependencys.Achievements.Achievements.AllAchivements.FirstOrDefault(x => x.Id == id);
-        if (player.GetDBPlayer().StatsPlayer.UnlockedAchivements.Contains(achivement.Id))
+        var dbplayer = player.GetDBPlayer();
+        if (dbplayer != null && dbplayer.Stats.UnlockedAchivements.Contains(achivement.Id))
             return;
         player.SendHint(ScreenZone.Notifications, DiscordSyncStatsPlugin.Instance.Translation.SelfAchiveText.Replace("%achievement%", achivement.Name), DiscordSyncStatsPlugin.Instance.Config.BroadcastTime);
         foreach (var ply in Player.List.Where(x => x != player))
@@ -40,11 +42,11 @@ public static class Achievements
     {
         try
         {
-            var players = DayLightDatabase.db.GetCollection<DayLightDatabase.DatabasePlayer>("players");
+            var players = DayLightDatabase.db.GetCollection<DatabasePlayer>("players");
             var dbplayer = players.FindOne(x => x._id == steam64id);
             if (dbplayer == null)
                 return new List<DiscordSync.Dependencys.Achievements.Achievements.Achivement>();
-            return dbplayer.StatsPlayer.UnlockedAchivements
+            return dbplayer.Stats.UnlockedAchivements
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
                 .Select(achivement => DiscordSync.Dependencys.Achievements.Achievements.AllAchivements.Where(x => x.Id == achivement))
                 .Where(e => e.Count() != 0)

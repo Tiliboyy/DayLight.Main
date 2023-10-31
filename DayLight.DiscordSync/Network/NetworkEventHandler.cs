@@ -1,4 +1,4 @@
-﻿using DayLight.Core.Database;
+﻿using DayLight.Core.API.Database;
 using DayLight.DiscordSync.Dependencys.Communication;
 using DayLight.DiscordSync.Dependencys.Stats;
 using DayLight.GameStore;
@@ -21,45 +21,45 @@ public static class NetworkEventHandler
         {
             switch (ev.Type)
             {
-                case DataType.PlayerList:
+                case MessageType.PlayerList:
                     HandlePlayerList(ev);
                     break;
-                case DataType.GameStoreMoney:
+                case MessageType.GameStoreMoney:
                     HandleGameStoreMoney(ev);
                     break;
-                case DataType.PlayerSettings:
+                case MessageType.PlayerSettings:
                     HandlePlayerSettings(ev);
                     break;
-                case DataType.Stats:
+                case MessageType.Stats:
                     HandleStats(ev);
                     break;
-                case DataType.Playtime:
+                case MessageType.Playtime:
                     HandlePlaytime(ev);
                     break;
-                case DataType.Link:
+                case MessageType.Link:
                     HandleLink(ev);
                     break;
-                case DataType.LinkCheck:
+                case MessageType.LinkCheck:
                     HandleLinkCheck(ev);
                     break;
-                case DataType.Heartbeat:
+                case MessageType.Heartbeat:
                     return;
-                case DataType.Ping:
+                case MessageType.Ping:
                     HandlePing(ev);
                     return;
-                case DataType.Leaderboard:
+                case MessageType.Leaderboard:
                     HandleLeaderboard(ev);
                     return;
-                case DataType.GiveMoney:
+                case MessageType.GiveMoney:
                     HandleAddMoney(ev);
                     break;
-                case DataType.List:
-                case DataType.String:
-                case DataType.RoleUpdate:
-                case DataType.None:
+                case MessageType.List:
+                case MessageType.String:
+                case MessageType.RoleUpdate:
+                case MessageType.None:
                     break;
-                case DataType.Webhook:
-                case DataType.Achivements:
+                case MessageType.Webhook:
+                case MessageType.Achivements:
                 default:
                     Log.Error("Invalid request type recieved: " + ev.Type);
                     break;
@@ -75,7 +75,7 @@ public static class NetworkEventHandler
     private static void HandleAddMoney(ReceivedFullEventArgs ev)
     {
         var linkedSteamID = Link.LinkDatabase.GetLinkedSteamID(ev.UserID);
-        if(!int.TryParse(ev.GetData<StringSender>().String, out int i))
+        if(!int.TryParse(ev.GetData<StringMessage>().String, out int i))
         {
             return;
         }
@@ -84,19 +84,19 @@ public static class NetworkEventHandler
     }
     private static void HandleLeaderboard(ReceivedFullEventArgs ev)
     {
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(DataType.Leaderboard, new StringSender(Leaderboard.GetLeaderboard(Leaderboard.GetLeaderboardType(ev.GetData<StringSender>().String))), "");
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Leaderboard, new StringMessage(Leaderboard.GetLeaderboard(Leaderboard.GetLeaderboardType(ev.GetData<StringMessage>().String))), "");
     }
 
     private static void HandlePing(ReceivedFullEventArgs ev)
     {
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(DataType.Ping, "pong", "");
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Ping, "pong", "");
     }
     private static void HandleLinkCheck(ReceivedFullEventArgs ev)
     {
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(DataType.LinkCheck, new Linker(){Linked = Link.LinkDatabase.IsUserIdLinked(ev.UserID)}, GetNickname(ev.UserID));    }
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.LinkCheck, new LinkMessage(){Linked = Link.LinkDatabase.IsUserIdLinked(ev.UserID)}, GetNickname(ev.UserID));    }
     private static void HandleLink(ReceivedFullEventArgs ev)
     {
-        var linker = ev.GetData<Linker>();
+        var linker = ev.GetData<LinkMessage>();
         try
         {
             var flag = Link.LinkDatabase.Link(linker.UserId, linker.Code);
@@ -107,7 +107,7 @@ public static class NetworkEventHandler
             Log.Error(exception);
             throw;
         }
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(DataType.Link, linker, GetNickname(ev.UserID));
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Link, linker, GetNickname(ev.UserID));
     }
     private static void HandlePlaytime(ReceivedFullEventArgs ev)
     {
@@ -115,7 +115,7 @@ public static class NetworkEventHandler
 
         var player = Database.LiteDatabase.GetCollection<Player>().FindOne(x => x.Id == Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString());
         var playtime = new TimeSpan(0, 0, player.PlayTimeRecords.Sum(pair => pair.Value)).TotalSeconds;
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(DataType.Playtime, playtime.ToString(CultureInfo.InvariantCulture), GetNickname(ev.UserID));
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Playtime, playtime.ToString(CultureInfo.InvariantCulture), GetNickname(ev.UserID));
     }
     private static void HandleStats(ReceivedFullEventArgs ev)
     {
@@ -159,7 +159,7 @@ public static class NetworkEventHandler
     private static void HandlePlayerList(ReceivedFullEventArgs ev)
     {
         var names = Exiled.API.Features.Player.List.Select(x => x.Nickname).ToList();
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(DataType.PlayerList, names, "");
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.PlayerList, names, "");
     }
 
     public static string GetNickname(ulong UserID)

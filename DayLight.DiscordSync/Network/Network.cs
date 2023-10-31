@@ -13,7 +13,7 @@ namespace DiscordSync.Plugin.Network;
 /// <summary>
 ///     A client that sends JSON serialized strings to a connected server.
 /// </summary>
-public class Network : IDisposable
+public sealed class Network : IDisposable
 {
     /// <summary>
     ///     The reception buffer length.
@@ -211,7 +211,7 @@ public class Network : IDisposable
     ///     Releases unmanaged resources and, optionally, managed ones.
     /// </summary>
     /// <param name="shouldDisposeAllResources">Indicates whether all resources should be disposed or only unmanaged ones.</param>
-    protected virtual void Dispose(bool shouldDisposeAllResources)
+    private void Dispose(bool shouldDisposeAllResources)
     {
         if (shouldDisposeAllResources)
         {
@@ -231,7 +231,7 @@ public class Network : IDisposable
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="ReceivedFullEventArgs" /> instance.</param>
-    protected virtual void OnReceivedFull(object sender, ReceivedFullEventArgs ev)
+    private void OnReceivedFull(object sender, ReceivedFullEventArgs ev)
     {
         ReceivedFull?.Invoke(sender, ev);
     }
@@ -241,63 +241,63 @@ public class Network : IDisposable
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="ReceivedPartialEventArgs" /> instance.</param>
-    protected virtual void OnReceivedPartial(object sender, ReceivedPartialEventArgs ev) => ReceivedPartial?.Invoke(sender, ev);
+    private void OnReceivedPartial(object sender, ReceivedPartialEventArgs ev) => ReceivedPartial?.Invoke(sender, ev);
 
     /// <summary>
     ///     Called after the network thrown an exception while sending data.
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="SendingErrorEventArgs" /> instance.</param>
-    protected virtual void OnSendingError(object sender, SendingErrorEventArgs ev) => SendingError?.Invoke(sender, ev);
+    private void OnSendingError(object sender, SendingErrorEventArgs ev) => SendingError?.Invoke(sender, ev);
 
     /// <summary>
     ///     Called after the network thrown an exception while receiving data.
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="ReceivingErrorEventArgs" /> instance.</param>
-    protected virtual void OnReceivingError(object sender, ReceivingErrorEventArgs ev) => ReceivingError?.Invoke(sender, ev);
+    private void OnReceivingError(object sender, ReceivingErrorEventArgs ev) => ReceivingError?.Invoke(sender, ev);
 
     /// <summary>
     ///     Called after network sent data.
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="SentEventArgs" /> instance.</param>
-    protected virtual void OnSent(object sender, SentEventArgs ev) => Sent?.Invoke(sender, ev);
+    private void OnSent(object sender, SentEventArgs ev) => Sent?.Invoke(sender, ev);
 
     /// <summary>
     ///     Called before the network connects to the server.
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="ConnectingEventArgs" /> instance.</param>
-    protected virtual void OnConnecting(object sender, ConnectingEventArgs ev) => Connecting?.Invoke(sender, ev);
+    private void OnConnecting(object sender, ConnectingEventArgs ev) => Connecting?.Invoke(sender, ev);
 
     /// <summary>
     ///     Called after the network thrown an exception while sending data.
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="ConnectingErrorEventArgs" /> instance.</param>
-    protected virtual void OnConnectingError(object sender, ConnectingErrorEventArgs ev) => ConnectingError?.Invoke(sender, ev);
+    private void OnConnectingError(object sender, ConnectingErrorEventArgs ev) => ConnectingError?.Invoke(sender, ev);
 
     /// <summary>
     ///     Called after the network successfully connects to the server.
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="System.EventArgs" /> instance.</param>
-    protected virtual void OnConnected(object sender, System.EventArgs ev) => Connected?.Invoke(sender, ev);
+    private void OnConnected(object sender, System.EventArgs ev) => Connected?.Invoke(sender, ev);
 
     /// <summary>
     ///     Called after the network thrown an exception while updating the connection.
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="UpdatingConnectionErrorEventArgs" /> instance.</param>
-    protected virtual void OnUpdatingConnectionError(object sender, UpdatingConnectionErrorEventArgs ev) => UpdatingConnectionError?.Invoke(sender, ev);
+    private void OnUpdatingConnectionError(object sender, UpdatingConnectionErrorEventArgs ev) => UpdatingConnectionError?.Invoke(sender, ev);
 
     /// <summary>
     ///     Called after the network termination.
     /// </summary>
     /// <param name="sender">The sender instance.</param>
     /// <param name="ev">The <see cref="TerminatedEventArgs" /> instance.</param>
-    protected virtual void OnTerminated(object sender, TerminatedEventArgs ev) => Terminated?.Invoke(sender, ev);
+    private void OnTerminated(object sender, TerminatedEventArgs ev) => Terminated?.Invoke(sender, ev);
 
     private async Task ReceiveAsync(CancellationTokenSource cancellationToken)
     {
@@ -429,9 +429,9 @@ public class Network : IDisposable
         }
     }
     
-    public async Task<BotRequester> Request(DataType dataType, object data = null, string nickname = "")
+    public async Task<BotRequester> Request(MessageType messageType, object data = null, string nickname = "")
     {
-        return await WriteLineAndGetReply(new PluginSender(dataType, data, nickname), TimeSpan.FromSeconds(2f));
+        return await WriteLineAndGetReply(new PluginSender(messageType, data, nickname), TimeSpan.FromSeconds(2f));
     }
     public async Task<BotRequester> WriteLineAndGetReply(PluginSender data, TimeSpan timeout)
     {
@@ -440,7 +440,7 @@ public class Network : IDisposable
         await SendAsync(data);
         var stopwatch = new Stopwatch();
         stopwatch.Start();
-        while (Reply.Type == DataType.None && stopwatch.Elapsed < timeout)
+        while (Reply.Type == MessageType.None && stopwatch.Elapsed < timeout)
             Thread.Sleep(10);
         Log.Debug("Recieved Reply: " + Reply.Type + ": " + Reply.DataBR);
         return Reply;
@@ -451,7 +451,7 @@ public class Network : IDisposable
     {
         await DiscordSyncPlugin.Instance.Network.SendAsync(data);
     }
-    public async Task ReplyLine(DataType requestType, object data = null, string nickname = "")
+    public async Task ReplyLine(MessageType requestType, object data = null, string nickname = "")
     {
         var pluginSender = new PluginSender(requestType, data, nickname);
 

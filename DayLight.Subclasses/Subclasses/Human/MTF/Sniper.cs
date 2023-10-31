@@ -1,4 +1,4 @@
-﻿using DayLight.Core.Subclasses.Features;
+﻿using DayLight.Core.API.Subclasses.Features;
 using DayLight.Subclasses.Abilities.Passive;
 using Exiled.API.Enums;
 using Exiled.API.Features.Attributes;

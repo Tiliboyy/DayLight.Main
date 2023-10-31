@@ -1,8 +1,7 @@
 #region
 
-using DayLight.Core.Events.Handlers;
-using DayLight.GameStore.Events;
-using DayLight.GameStore.Events.EventArgs;
+using DayLight.Core.API.Events.EventArgs;
+using DayLight.Core.API.Events.Handlers;
 using Exiled.API.Enums;
 using Exiled.CustomRoles.API;
 using Exiled.Events.EventArgs.Player;

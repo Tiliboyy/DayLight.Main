@@ -1,6 +1,6 @@
 ﻿using Core.Features.Data.Enums;
 using Core.Features.Extensions;
-using DayLight.Core.Subclasses.Features;
+using DayLight.Core.API.Subclasses.Features;
 using Exiled.API.Features;
 using PlayerRoles;
 using System;
@@ -35,7 +35,7 @@ public class SCPScan : ActiveAbility
 
         scplistbuilder.Append(ply.Nickname);
         scplistbuilder.Append(" | ");
-        scplistbuilder.Append(Core.Subclasses.Utils.GetSCPRoleName(ply));
+        scplistbuilder.Append(Core.API.Subclasses.Utils.GetSCPRoleName(ply));
         scplistbuilder.Append(" | ");
 
 
@@ -44,13 +44,13 @@ public class SCPScan : ActiveAbility
                                               ply.HumeShieldStat.MaxValue));
         scplistbuilder.Append("%</color> | ");
         scplistbuilder.Append("<color=");
-        scplistbuilder.Append(Core.Subclasses.Utils.GetHPColor(ply));
+        scplistbuilder.Append(Core.API.Subclasses.Utils.GetHPColor(ply));
         scplistbuilder.Append(">HP: ");
         scplistbuilder.Append(
             (int)Math.Round((double)(100 * ply.Health) / ply.MaxHealth));
         scplistbuilder.Append("%</color> | ");
 
-        scplistbuilder.Append("Zone: " + Core.Subclasses.Utils.GetZoneName(ply.Zone));
+        scplistbuilder.Append("Zone: " + Core.API.Subclasses.Utils.GetZoneName(ply.Zone));
 
         player.SendHint(ScreenZone.CenterBottom, scplistbuilder.ToString(), 10);
         base.AbilityUsed(player);

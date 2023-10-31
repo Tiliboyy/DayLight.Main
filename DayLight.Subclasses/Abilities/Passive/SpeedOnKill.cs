@@ -1,11 +1,12 @@
 ﻿using CustomPlayerEffects;
+using DayLight.Core.API.Subclasses.Features;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 
 namespace DayLight.Subclasses.Abilities.Passive;
 
-public class SpeedOnKill : DayLight.Core.Subclasses.Features.PassiveAbility
+public class SpeedOnKill : PassiveAbility
 {
     public override string Name { get; set; } = "Schneller Tot";
     public override string Description { get; set; } = "Du wirst bei jedem Kill schneller.";

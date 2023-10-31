@@ -1,5 +1,5 @@
 ﻿using CentralAuth;
-using DayLight.Core.Events.EventArgs;
+using DayLight.Core.API.Events.EventArgs;
 using Exiled.API.Features;
 using HarmonyLib;
 using Mirror;
@@ -169,7 +169,7 @@ public static class RaPlayerPatch
           stringBuilder.Append("\n<color=#D4AF37>Some fields were hidden. GameplayData permission required.</color>");
         stringBuilder.Append("</color>");
         var eventargs = new RequestingPlayerDataEventArgs(Player.Get(sender), Player.Get(referenceHub), StringBuilderPool.Shared.ToStringReturn(stringBuilder),true);
-        Events.Handlers.RemoteAdmin.OnRequestingData(eventargs);
+        API.Events.Handlers.RemoteAdmin.OnRequestingData(eventargs);
         if (!eventargs.IsAllowed) return false;
         sender.RaReply($"${__instance.DataId} {StringBuilderPool.Shared.ToStringReturn(stringBuilder)}", true, true, string.Empty);
         RaPlayerQR.Send(sender, false, string.IsNullOrEmpty(authManager.UserId) ? "(no User ID)" : authManager.UserId);

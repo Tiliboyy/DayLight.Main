@@ -1,6 +1,7 @@
 using DayLight.Core;
-using DayLight.Core.Database;
-using DayLight.GameStore.Components;
+using DayLight.Core.API.Database;
+using DayLight.Core.API.Features;
+using DayLight.DiscordSync.Dependencys.Stats;
 using DayLight.GameStore.Configs;
 using Exiled.API.Features;
 using PlayerRoles;
@@ -21,12 +22,12 @@ public static class Extensions
         if (player == null) return false;
         if (player.DoNotTrack) return false;
         var playerID = player.RawUserId.Split('@')[0];
-        var players = DayLightDatabase.db.GetCollection<DayLightDatabase.DatabasePlayer>("players");
+        var players = DayLightDatabase.db.GetCollection<DatabasePlayer>("players");
         var dbplayer = players.FindOne(x => x._id != null && x._id == playerID);
 
         if (dbplayer == null) return false;
-        dbplayer.Money = money;
-        if (dbplayer.Money < 0) dbplayer.Money = 0;
+        dbplayer.Stats.Money = money;
+        if (dbplayer.Stats.Money < 0) dbplayer.Stats.Money = 0;
         players.Update(dbplayer);
         return true;
     }
@@ -86,6 +87,7 @@ public static class Extensions
     
     public static string BuyItemFromName(this Player player, string Name)
     {
+        var advancedPlayer = AdvancedPlayer.Get(player);
         if (!Round.IsStarted)
         {
             return GameStorePlugin.Instance.Translation.RoundNotStarted;
@@ -107,7 +109,7 @@ public static class Extensions
                 }
                 else
                 {
-                    if(items.Name.Replace(" ", "").ToLower() != Name.Replace(" ", "").ToLower()) continue;
+                    if(!string.Equals(items.Name.Replace(" ", ""), Name.Replace(" ", ""), StringComparison.CurrentCultureIgnoreCase)) continue;
                 }
                 notexisting = true;
                 var num = $"{category1.id}{items.Id}";
@@ -135,19 +137,19 @@ public static class Extensions
 
                 nomoney = true;
 
-                if (player.GameObject.GetComponent<GameStoreComponent>().BoughtItems.ContainsKey(result))
+                if (advancedPlayer != null && advancedPlayer.GameStoreBoughtItems.ContainsKey(result))
                 {
-                    if (player.GameObject.GetComponent<GameStoreComponent>().BoughtItems[result] >=
+                    if (advancedPlayer.GameStoreBoughtItems[result] >=
                         items.MaxAmount)
                     {
                         continue;
                     }
 
-                    player.GameObject.GetComponent<GameStoreComponent>().BoughtItems[result]++;
+                    advancedPlayer.GameStoreBoughtItems[result]++;
                 }
                 else
                 {
-                    player.GameObject.GetComponent<GameStoreComponent>().BoughtItems.Add(result, 1);
+                    advancedPlayer.GameStoreBoughtItems.Add(result, 1);
                 }
 
                 DayLightDatabase.BuyItem(player, items);
@@ -175,6 +177,7 @@ public static class Extensions
     
     public static string BuyItemFromId(this Player player, int category, int item, bool ShowAll = false)
     {
+        var advancedPlayer = AdvancedPlayer.Get(player);
         if (!Round.IsStarted)
         {
             return GameStorePlugin.Instance.Translation.RoundNotStarted;
@@ -230,19 +233,19 @@ public static class Extensions
                     return GameStorePlugin.Instance.Translation.CantAfford;
                 }
 
-                if (player.GameObject.GetComponent<GameStoreComponent>().BoughtItems.ContainsKey(result))
+                if (advancedPlayer != null && advancedPlayer.GameStoreBoughtItems.ContainsKey(result))
                 {
 
-                    if (player.GameObject.GetComponent<GameStoreComponent>().BoughtItems[result] >=
+                    if (advancedPlayer.GameStoreBoughtItems[result] >=
                         items.MaxAmount)
                     {
                         return GameStorePlugin.Instance.Translation.MaxAmountReached;
                     }
-                    player.GameObject.GetComponent<GameStoreComponent>().BoughtItems[result]++;
+                    advancedPlayer.GameStoreBoughtItems[result]++;
                 }
                 else
                 {
-                    player.GameObject.GetComponent<GameStoreComponent>().BoughtItems.Add(result, 1);
+                    if (advancedPlayer != null) advancedPlayer.GameStoreBoughtItems.Add(result, 1);
                 }
                 DayLightDatabase.BuyItem(player, items);
                 return GameStorePlugin.Instance.Translation.BoughtItem.Replace("(itemname)", items.Name)

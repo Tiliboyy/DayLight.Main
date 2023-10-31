@@ -1,10 +1,11 @@
-﻿using Exiled.API.Features;
+﻿using DayLight.Core.API.Subclasses.Features;
+using Exiled.API.Features;
 using Exiled.API.Features.Items;
 using Exiled.Events.EventArgs.Player;
 
 namespace DayLight.Subclasses.Abilities.Passive;
 
-public class ExplodeOnDeath : DayLight.Core.Subclasses.Features.PassiveAbility
+public class ExplodeOnDeath : PassiveAbility
 {
     public override string Name { get; set; } = "Boom";
     public override string Description { get; set; } = "Du explodierst wenn du stirbst.";
