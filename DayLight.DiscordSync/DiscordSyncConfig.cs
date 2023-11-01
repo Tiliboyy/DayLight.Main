@@ -1,11 +1,20 @@
 ﻿using Exiled.API.Interfaces;
+using Neuron.Core.Meta;
+using Syml;
 using System.ComponentModel;
+using IConfig = DayLight.Core.IConfig;
 
 namespace DiscordSync.Plugin;
 
 [Serializable]
-public class Config : IConfig
+[Automatic]
+[DocumentSection("DiscordSync")]
+public class DiscordSyncConfig : IConfig
 {
+    [Description("Enables the Plugin")]
+    public bool Enabled { get; set; } = true;
+    public bool Debug { get; set; } = false;
+
     public ushort ServerPort { get; set; } = 6969;
 
     public bool RoleSync { get; set; } = false;
@@ -16,10 +25,6 @@ public class Config : IConfig
         new PlayTimeRole { Priority = 2, RankName = "eclipse", RequiredMinutes = 600, DiscordRankID = 123 }
     };
     public string IpAdress { get; set; } = "127.0.0.1";
-    [Description("Enables the Plugin")]
-    public bool IsEnabled { get; set; } = true;
-
-    public bool Debug { get; set; } = false;
     public struct PlayTimeRole
     {
         public int Priority { get; set; }

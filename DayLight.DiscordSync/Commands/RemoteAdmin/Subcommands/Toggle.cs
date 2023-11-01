@@ -1,5 +1,4 @@
 ﻿using CommandSystem;
-using DayLight.Stat;
 using Exiled.Permissions.Extensions;
 
 namespace DiscordSync.Plugin.Commands.RemoteAdmin.Subcommands;
@@ -19,7 +18,7 @@ internal class Toggle : ICommand
             response = "You do not have permission to use this command";
             return false;
         }
-
+        /*
         if (!DiscordSyncStatsPlugin.DisableDiscordSyncStats)
         {
             response = "Stats wurde deaktiviert";
@@ -30,7 +29,8 @@ internal class Toggle : ICommand
             response = "Stats wurde aktiviert";
             DiscordSyncStatsPlugin.DisableDiscordSyncStats = false;
         }
-
+*/
+        response = "Stats wurde aktiviert";
         return true;
     }
 }

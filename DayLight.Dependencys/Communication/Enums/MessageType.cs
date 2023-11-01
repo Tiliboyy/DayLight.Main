@@ -1,4 +1,4 @@
-namespace DayLight.DiscordSync.Dependencys.Communication;
+namespace DayLight.DiscordSync.Dependencys.Communication.Enums;
 
 public enum MessageType
 {

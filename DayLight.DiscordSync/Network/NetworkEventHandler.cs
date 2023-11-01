@@ -1,7 +1,7 @@
 ﻿using DayLight.Core.API.Database;
 using DayLight.DiscordSync.Dependencys.Communication;
+using DayLight.DiscordSync.Dependencys.Communication.Enums;
 using DayLight.DiscordSync.Dependencys.Stats;
-using DayLight.GameStore;
 using DayLight.Stat;
 using DiscordSync.Plugin.Network.EventArgs.Network;
 using Exiled.API.Features;

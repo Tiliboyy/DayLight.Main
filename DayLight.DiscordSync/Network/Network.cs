@@ -1,4 +1,5 @@
 using DayLight.DiscordSync.Dependencys.Communication;
+using DayLight.DiscordSync.Dependencys.Communication.Enums;
 using DiscordSync.Plugin.Network.EventArgs.Network;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

@@ -45,6 +45,9 @@
           <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.dll</HintPath>
         </Reference>
         <Reference Include="mscorlib" />
+        <Reference Include="Neuron.Modules.Reload">
+          <HintPath>..\..\..\AppData\Roaming\SCP Secret Laboratory\Neuron\Modules\Neuron.Modules.Reload.dll</HintPath>
+        </Reference>
         <Reference Include="ScpUtils">
           <HintPath>..\..\..\AppData\Roaming\EXILED\Plugins\ScpUtils.dll</HintPath>
         </Reference>
@@ -70,7 +73,8 @@
         <Compile Include="Commands\RemoteAdmin\DiscordSyncParentCommand.cs" />
         <Compile Include="Commands\RemoteAdmin\Subcommands\SyncRoles.cs" />
         <Compile Include="Commands\RemoteAdmin\Subcommands\Toggle.cs" />
-        <Compile Include="Config.cs" />
+        <Compile Include="DiscordSyncConfig.cs" />
+        <Compile Include="DiscordSyncTranslation.cs" />
         <Compile Include="EventHandlers.cs" />
         <Compile Include="Link\LinkDatabase.cs" />
         <Compile Include="Network\DiscordConnectionHandler.cs" />
@@ -144,17 +148,9 @@
         <Project>{2d7e872a-83f3-469b-8f77-ad2a86a345f3}</Project>
         <Name>DayLight.Core</Name>
       </ProjectReference>
-      <ProjectReference Include="..\DayLight.DiscordSync.Dependencys\DayLight.DiscordSync.Dependencys.csproj">
+      <ProjectReference Include="..\DayLight.Dependencys\DayLight.Dependencys.csproj">
         <Project>{04f7a49f-5696-4b43-80f7-ac5b7f01eb63}</Project>
-        <Name>DayLight.DiscordSync.Dependencys</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\DayLight.GameStore\DayLight.GameStore.csproj">
-        <Project>{8b72aa05-3b3c-47cb-8a0e-c303659c1dc2}</Project>
-        <Name>DayLight.GameStore</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\DayLight.Stats\DayLight.Stats.csproj">
-        <Project>{dedc332a-e423-4c38-9cc7-7280d24e885f}</Project>
-        <Name>DayLight.Stats</Name>
+        <Name>DayLight.Dependencys</Name>
       </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>

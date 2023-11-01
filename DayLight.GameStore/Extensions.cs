@@ -22,7 +22,7 @@ public static class Extensions
         if (player == null) return false;
         if (player.DoNotTrack) return false;
         var playerID = player.RawUserId.Split('@')[0];
-        var players = DayLightDatabase.db.GetCollection<DatabasePlayer>("players");
+        var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
         var dbplayer = players.FindOne(x => x._id != null && x._id == playerID);
 
         if (dbplayer == null) return false;
@@ -31,21 +31,7 @@ public static class Extensions
         players.Update(dbplayer);
         return true;
     }
-
-    public static float GetMoney(this Player player)
-    {
-        return DayLightDatabase.GetPlayerMoney(player);
-    }
     
-    public static void GiveReward(this Player player, Reward reward)
-    {
-        DayLightDatabase.AddRewardToPlayer(player, reward);
-    }
-    
-    public static void GiveMoney(this Player player, int money)
-    {
-        DayLightDatabase.AddMoneyToPlayer(player, money);
-    }
     
     public static string GetAvailableCategories(this Player player, bool ShowAll = false)
     {

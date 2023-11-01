@@ -11,6 +11,7 @@ public class DatabasePlayer
         Nickname = nickname;
         Stats = new Stats();
         Private = false;
+        Warns = new List<Warn>();
     }
     public string _id { get; private set; }
 
@@ -18,6 +19,9 @@ public class DatabasePlayer
 
     public Stats Stats { get; private set; }
     public bool Private { get; set; }
+    
+    public List<Warn> Warns { get; set; }
+
 
 }
 public class Stats

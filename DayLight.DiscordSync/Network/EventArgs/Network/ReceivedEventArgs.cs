@@ -6,6 +6,7 @@
 // -----------------------------------------------------------------------
 
 using DayLight.DiscordSync.Dependencys.Communication;
+using DayLight.DiscordSync.Dependencys.Communication.Enums;
 
 namespace DiscordSync.Plugin.Network.EventArgs.Network;
 

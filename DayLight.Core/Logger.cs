@@ -11,7 +11,7 @@ public class Logger
     public static void Error(object Error) => Log.Error(Error);
     public static void Debug(object Debug)
     {
-        Assembly callingAssembly = Assembly.GetCallingAssembly();
+        var callingAssembly = Assembly.GetCallingAssembly();
         Log.Send($"[{(object)callingAssembly.GetName().Name}] {Debug}", Discord.LogLevel.Debug, ConsoleColor.Green);
     }  
 

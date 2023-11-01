@@ -24,7 +24,6 @@ public class ModerationSystemPlugin : ReloadablePlugin<ModerationConfig, Moderat
             if (!Directory.Exists(Path.Combine(Paths.Configs, "ModerationSystem/")))
                 Directory.CreateDirectory(Path.Combine(Paths.Configs, "ModerationSystem/"));
             Instance = this;
-            WarnDatabase.Database.CreatePlayers();
             //FuckExiled.Events.Handlers.RemoteAdmin.RequestingPlayerData.Subscribe(EventHandler.OnRequestingData);
         }
         catch (Exception error)

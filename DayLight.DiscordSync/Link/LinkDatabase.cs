@@ -1,4 +1,5 @@
-﻿using DiscordSync.Plugin.Commands.ClientConsole;
+﻿using DayLight.DiscordSync.Dependencys;
+using DiscordSync.Plugin.Commands.ClientConsole;
 using Exiled.API.Features;
 using Utils.NonAllocLINQ;
 using YamlDotNet.Serialization;
@@ -127,10 +128,6 @@ public class LinkDatabase
                 { Steam64Id = 0, UserID = 0 });
         }
     }
-    public struct LinkedPlayer
-    {
-        public ulong UserID { get; set; }
-        public ulong Steam64Id { get; set; }
-    }
+
     public static List<LinkCommand.LinkClass> OpenLinks = new();
 }

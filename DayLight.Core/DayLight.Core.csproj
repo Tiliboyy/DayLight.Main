@@ -428,6 +428,7 @@
         <Compile Include="EventHandlers\EventHandler.cs" />
         <Compile Include="GameStoreComponent.cs" />
         <Compile Include="IConfig.cs" />
+        <Compile Include="Leaderboard.cs" />
         <Compile Include="Logger.cs" />
         <Compile Include="Patches\RemoteAdminPatches.cs" />
         <Compile Include="Patches\RequestingInfoPatches.cs" />
@@ -462,9 +463,9 @@
       <PackageReference Include="YamlDotNet" Version="13.7.1" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\DayLight.DiscordSync.Dependencys\DayLight.DiscordSync.Dependencys.csproj">
+      <ProjectReference Include="..\DayLight.Dependencys\DayLight.Dependencys.csproj">
         <Project>{04f7a49f-5696-4b43-80f7-ac5b7f01eb63}</Project>
-        <Name>DayLight.DiscordSync.Dependencys</Name>
+        <Name>DayLight.Dependencys</Name>
       </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>

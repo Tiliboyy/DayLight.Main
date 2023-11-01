@@ -1,28 +1,24 @@
 ﻿using DiscordSync.Plugin.Network;
 using Exiled.API.Features;
+using JetBrains.Annotations;
+using Neuron.Core.Plugins;
+using Neuron.Modules.Reload;
 using Player = Exiled.Events.Handlers.Player;
 using Server = Exiled.Events.Handlers.Server;
 
 namespace DiscordSync.Plugin;
 
-public class DiscordSyncPlugin : Plugin<Config>
+[Plugin(Name = "DayLight.DiscordSync", Author = "Tiliboyy")]
+public class DiscordSyncPlugin : ReloadablePlugin<DiscordSyncConfig, DiscordSyncTranslation>
 {
-    public static DiscordSyncPlugin Instance;
+    public static DiscordSyncPlugin Instance = null!;
 
-
-    public static CancellationTokenSource NetworkCancellationTokenSource;
-    public EventHandlers EventHandlers;
-    public Network.Network Network;
-
-    public override string Name { get; } = "DiscordSync";
-    public override string Prefix { get; } = "DiscordSync";
-    public override string Author { get; } = "Tiliboyy";
-
-
-    public override void OnEnabled()
+    public static CancellationTokenSource NetworkCancellationTokenSource = null!;
+    public Network.Network Network = null!;
+    
+    public override void EnablePlugin()
     {
         Instance = this;
-        EventHandlers = new EventHandlers();
         Player.Verified += EventHandlers.OnVerified;
         Server.ReloadedRA += EventHandlers.OnReloadedRa;
 
@@ -31,12 +27,11 @@ public class DiscordSyncPlugin : Plugin<Config>
     }
 
 
-    public override void OnDisabled()
+    public override void Disable()
     {
         Server.ReloadedRA -= EventHandlers.OnReloadedRa;
         Player.Verified -= EventHandlers.OnVerified;
-        EventHandlers = null;
         DiscordConnectionHandler.Stop();
-        Instance = null;
+        Instance = null!;
     }
 }

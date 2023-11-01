@@ -1,4 +1,5 @@
 using DayLight.Core;
+using DayLight.Core.API;
 using DayLight.Core.API.Database;
 using Exiled.API.Enums;
 using Exiled.API.Features;
@@ -19,15 +20,12 @@ public class EventHandlers
 
     public static void OnVerified(VerifiedEventArgs ev)
     {
-        if (!ev.Player.DoNotTrack)
-        {
-            DayLightDatabase.AddPlayer(ev.Player);
-            ev.Player.GameObject.AddComponent<GameStoreComponent>();
-        }
-        else
+        if (ev.Player.DoNotTrack)
         {
             DayLightDatabase.RemovePlayer(ev.Player);
+            return;
         }
+        DayLightDatabase.AddPlayer(ev.Player);
     }
     
     public static void OnGainingLevel(Exiled.Events.EventArgs.Scp079.GainingLevelEventArgs ev)

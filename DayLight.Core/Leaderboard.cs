@@ -1,6 +1,5 @@
 ﻿using DayLight.Core.API.Database;
 using DayLight.DiscordSync.Dependencys.Stats;
-using DayLight.GameStore;
 using Exiled.API.Features;
 using System;
 using System.Collections.Generic;
@@ -57,7 +56,7 @@ public class Leaderboard
         {
             IsGenerated = true;
 
-            var statsPlayers = DayLightDatabase.db.GetCollection<DatabasePlayer>("players").FindAll().ToList();
+            var statsPlayers = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players").FindAll().ToList();
 
             var sortedByKills = statsPlayers.OrderByDescending(p => p.Stats.Kills).Take(10);
             KillsLeaderboard = GenerateFormattedLeaderboard(sortedByKills, player => player.Kills, "Kills");

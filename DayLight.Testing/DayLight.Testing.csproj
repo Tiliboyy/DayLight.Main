@@ -9,7 +9,7 @@
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>DayLight.Test</RootNamespace>
-        <AssemblyName>DayLight.Test</AssemblyName>
+        <AssemblyName>DayLight.Testing</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>latest</LangVersion>
@@ -401,8 +401,8 @@
         <Compile Include="EventHandlers.cs" />
         <Compile Include="Plugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="TestConfig.cs" />
-        <Compile Include="TestTranslation.cs" />
+        <Compile Include="TestingConfig.cs" />
+        <Compile Include="TestingTranslation.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="App.config" />

@@ -5,7 +5,7 @@ using Player = Exiled.Events.Handlers.Player;
 
 namespace DayLight.Test
 {
-    [Plugin(Name = "DayLight.Test", Author = "Tiliboyy")]
+    [Plugin(Name = "DayLight.Testing", Author = "Tiliboyy")]
     public class TestPlugin : ReloadablePlugin<TestConfig, TestTranslation>
     {
         public static TestPlugin Instance;

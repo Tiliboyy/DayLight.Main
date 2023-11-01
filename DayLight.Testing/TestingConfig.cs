@@ -4,7 +4,7 @@ using Syml;
 namespace DayLight.Test;
 
 [Automatic]
-[DocumentSection("DayLight.Test")]
+[DocumentSection("DayLight.Testing")]
 public class TestConfig : Core.IConfig
 {
 

@@ -2,9 +2,9 @@
 
 using Core.Features.Data.Enums;
 using Core.Features.Extensions;
+using DayLight.Core.API;
 using DayLight.Core.API.Database;
 using DayLight.DiscordSync.Dependencys.Stats;
-using DayLight.GameStore;
 using Exiled.API.Features;
 using JetBrains.Annotations;
 using MEC;
@@ -42,7 +42,7 @@ public static class Achievements
     {
         try
         {
-            var players = DayLightDatabase.db.GetCollection<DatabasePlayer>("players");
+            var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
             var dbplayer = players.FindOne(x => x._id == steam64id);
             if (dbplayer == null)
                 return new List<DiscordSync.Dependencys.Achievements.Achievements.Achivement>();

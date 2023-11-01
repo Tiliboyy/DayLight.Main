@@ -71,7 +71,6 @@
         <Compile Include="Achievements\Achievements.cs" />
         <Compile Include="Commands\PlaytimeTop.cs" />
         <Compile Include="Config.cs" />
-        <Compile Include="Leaderboard.cs" />
         <Compile Include="Plugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Stats\Components\PinkCandyComponent.cs" />
@@ -87,13 +86,9 @@
         <Project>{2d7e872a-83f3-469b-8f77-ad2a86a345f3}</Project>
         <Name>DayLight.Core</Name>
       </ProjectReference>
-      <ProjectReference Include="..\DayLight.DiscordSync.Dependencys\DayLight.DiscordSync.Dependencys.csproj">
+      <ProjectReference Include="..\DayLight.Dependencys\DayLight.Dependencys.csproj">
         <Project>{04f7a49f-5696-4b43-80f7-ac5b7f01eb63}</Project>
-        <Name>DayLight.DiscordSync.Dependencys</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\DayLight.GameStore\DayLight.GameStore.csproj">
-        <Project>{8b72aa05-3b3c-47cb-8a0e-c303659c1dc2}</Project>
-        <Name>DayLight.GameStore</Name>
+        <Name>DayLight.Dependencys</Name>
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>

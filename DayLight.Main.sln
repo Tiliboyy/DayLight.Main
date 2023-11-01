@@ -8,15 +8,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Moderation", "DayL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Subclasses", "DayLight.Subclasses\DayLight.Subclasses.csproj", "{7A2791B1-76EA-413B-898F-410082B34A20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Test", "DayLight.Test\DayLight.Test.csproj", "{AFBB90A1-1FEB-48FE-997B-253C03F1F10E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Testing", "DayLight.Testing\DayLight.Testing.csproj", "{AFBB90A1-1FEB-48FE-997B-253C03F1F10E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.DiscordSync", "DayLight.DiscordSync\DayLight.DiscordSync.csproj", "{8A754F72-A5CD-4AE6-B253-57556421C255}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Stats", "DayLight.Stats\DayLight.Stats.csproj", "{DEDC332A-E423-4C38-9CC7-7280D24E885F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.DiscordSync.Dependencys", "DayLight.DiscordSync.Dependencys\DayLight.DiscordSync.Dependencys.csproj", "{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DayLight.DisordSync", "DayLight.DisordSync", "{7B77F542-0BE6-4403-93BB-9331D8F137F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Dependencys", "DayLight.Dependencys\DayLight.Dependencys.csproj", "{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,7 +56,5 @@ Global
 		{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8A754F72-A5CD-4AE6-B253-57556421C255} = {7B77F542-0BE6-4403-93BB-9331D8F137F3}
-		{04F7A49F-5696-4B43-80F7-AC5B7F01EB63} = {7B77F542-0BE6-4403-93BB-9331D8F137F3}
 	EndGlobalSection
 EndGlobal

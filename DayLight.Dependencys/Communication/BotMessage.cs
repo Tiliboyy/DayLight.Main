@@ -1,3 +1,4 @@
+using DayLight.DiscordSync.Dependencys.Communication.Enums;
 using Newtonsoft.Json;
 using System;
 
