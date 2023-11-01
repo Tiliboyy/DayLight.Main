@@ -32,7 +32,6 @@ public class GameStorePlugin : ReloadablePlugin<GameStoreConfig, GameStoreTransl
             Instance = this;
             if (!Directory.Exists(Path.Combine(Paths.Configs, "Gamestore/")))
                 Directory.CreateDirectory(Path.Combine(Paths.Configs, "Gamestore/"));
-            Server.WaitingForPlayers += EventHandlers.EventHandlers.OnWaitingForPlayers;
             Player.Dying += EventHandlers.EventHandlers.OnDying;
             Player.Escaping += EventHandlers.EventHandlers.OnEscaping;
             Player.Spawned += EventHandlers.EventHandlers.OnSpawned;
@@ -52,7 +51,6 @@ public class GameStorePlugin : ReloadablePlugin<GameStoreConfig, GameStoreTransl
 
     public override void Disable()
     {
-        Server.WaitingForPlayers -= EventHandlers.EventHandlers.OnWaitingForPlayers;
         Player.Escaping -= EventHandlers.EventHandlers.OnEscaping;
         Player.Dying -= EventHandlers.EventHandlers.OnDying;
         Player.Spawned -= EventHandlers.EventHandlers.OnSpawned;

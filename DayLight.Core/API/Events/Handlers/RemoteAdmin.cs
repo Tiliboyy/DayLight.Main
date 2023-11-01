@@ -6,6 +6,11 @@ namespace DayLight.Core.API.Events.Handlers;
 public class RemoteAdmin
 {
     public static EventReactor<RequestingPlayerDataEventArgs> RequestingPlayerData = new();
-    public static void OnRequestingData(RequestingPlayerDataEventArgs ev) => RequestingPlayerData.Raise(ev);
+    public static void OnRequestingData(RequestingPlayerDataEventArgs ev)
+    {
+        Logger.Debug("Invoking RequestingPlayerData");
+        RequestingPlayerData.Raise(ev);
+    }
+
     
 }

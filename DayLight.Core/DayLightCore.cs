@@ -62,7 +62,7 @@ namespace DayLight.Core
         }
         public override void LateEnable()
         {
-            DayLightDatabase.CreatePlayers();
+            DayLightDatabase.CreateCollection();
         }
         
         public override void Load(IKernel kernel)

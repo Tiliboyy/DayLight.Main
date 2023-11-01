@@ -38,6 +38,10 @@ public static class RemoteAdminListPatch
           case ClientInstanceMode.Unverified:
           case ClientInstanceMode.DedicatedServer:
             continue;
+          case ClientInstanceMode.ReadyClient:
+            break;
+          case ClientInstanceMode.Host:
+            break;
           default:
             var num2 = hub.serverRoles.IsInOverwatch ? 1 : 0;
             var flag2 = VoiceChatMutes.IsMuted(hub);

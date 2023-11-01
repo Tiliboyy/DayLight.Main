@@ -20,7 +20,7 @@ internal class Baltop : CustomCommand
 
     protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
     {
-        response = DayLightDatabase.GetPlayerLeaderboard(player);
+        response = DayLightDatabase.Stats.GetPlayerLeaderboard(player);
         return true;
     }
 }

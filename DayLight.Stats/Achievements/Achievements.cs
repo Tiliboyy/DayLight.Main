@@ -4,6 +4,7 @@ using Core.Features.Data.Enums;
 using Core.Features.Extensions;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
+using DayLight.DiscordSync.Dependencys;
 using DayLight.DiscordSync.Dependencys.Stats;
 using Exiled.API.Features;
 using JetBrains.Annotations;
@@ -35,7 +36,7 @@ public static class Achievements
                 DiscordSyncStatsPlugin.Instance.Config.BroadcastTime);
         }
         Timing.CallDelayed(0.5f, () => { player.GiveMoney(achivement.Reward); });
-        player.AddStatsDataToPlayer(DayLightDatabase.StatTypes.Achivement, achivement.Id);
+        player.AddStatsDataToPlayer(StatTypes.Achivement, achivement.Id);
     }
     [UsedImplicitly]
     public static List<DiscordSync.Dependencys.Achievements.Achievements.Achivement> GetUnlockedAchivement(string steam64id)
@@ -43,7 +44,7 @@ public static class Achievements
         try
         {
             var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
-            var dbplayer = players.FindOne(x => x._id == steam64id);
+            var dbplayer = players.FindOne(x => x.SteamID == steam64id);
             if (dbplayer == null)
                 return new List<DiscordSync.Dependencys.Achievements.Achievements.Achivement>();
             return dbplayer.Stats.UnlockedAchivements

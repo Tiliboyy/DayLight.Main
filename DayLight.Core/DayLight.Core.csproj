@@ -431,7 +431,7 @@
         <Compile Include="Leaderboard.cs" />
         <Compile Include="Logger.cs" />
         <Compile Include="Patches\RemoteAdminPatches.cs" />
-        <Compile Include="Patches\RequestingInfoPatches.cs" />
+        <Compile Include="Patches\RequestingPlayerInfoPatches.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Structs.cs" />
         <Compile Include="Translation.cs" />

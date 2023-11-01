@@ -1,6 +1,8 @@
 ﻿#region
 
+using DayLight.Core.API;
 using DayLight.Core.API.Database;
+using DayLight.DiscordSync.Dependencys;
 using DayLight.Stat.Achievements;
 using DayLight.Stat.Stats.Components;
 using Exiled.API.Extensions;
@@ -18,53 +20,51 @@ using Server = Exiled.Events.Handlers.Server;
 
 namespace DayLight.Stat.Stats;
 
-public class StatsEventHandler
+internal class StatsEventHandler
 {
-    private bool HasEnded;
-    public void RegisterEvents()
+    private static bool HasEnded;
+    public static void RegisterEvents()
     {
         Player.UsedItem += OnUsingItem;
         Player.Escaping += OnEscaping;
         Player.Died += OnDeath;
         Player.Verified += OnVerified;
-        Server.WaitingForPlayers += OnWaitingForPlayers;
         Server.EndingRound += OnEndingRound;
         Map.ExplodingGrenade += OnExploding;
     }
-    public void UnRegisterEvents()
+    public static void UnRegisterEvents()
     {
         Player.UsedItem -= OnUsingItem;
         Player.Escaping -= OnEscaping;
         Player.Died -= OnDeath;
         Player.Verified -= OnVerified;
-        Server.WaitingForPlayers -= OnWaitingForPlayers;
         Server.EndingRound -= OnEndingRound;
         Map.ExplodingGrenade -= OnExploding;
     }
 
-    public void OnDeath(DiedEventArgs ev)
+    public static void OnDeath(DiedEventArgs ev)
     {
         if (RoleExtensions.GetTeam(ev.TargetOldRole) == Team.SCPs && ev.TargetOldRole != RoleTypeId.Scp0492)
         {
-            ev.Attacker?.AddStatsDataToPlayer(DayLightDatabase.StatTypes.SCPKill, 1);
+            ev.Attacker?.AddStatsDataToPlayer(StatTypes.SCPKill, 1);
         }
-        ev.Player?.AddStatsDataToPlayer(DayLightDatabase.StatTypes.Death, 1);
-        ev.Attacker?.AddStatsDataToPlayer(DayLightDatabase.StatTypes.Kills, 1);
+        ev.Player?.AddStatsDataToPlayer(StatTypes.Death, 1);
+        ev.Attacker?.AddStatsDataToPlayer(StatTypes.Kills, 1);
 
     }
 
-    public void OnUsingItem(UsedItemEventArgs ev)
+    public static void OnUsingItem(UsedItemEventArgs ev)
     {
-        ev.Player?.AddStatsDataToPlayer(DayLightDatabase.StatTypes.Items, 1, ev.Item.Type);
+        ev.Player?.AddStatsDataToPlayer(StatTypes.Items, 1, ev.Item.Type);
     }
 
-    public void OnEscaping(EscapingEventArgs ev)
+    public static void OnEscaping(EscapingEventArgs ev)
     {
         if (Round.ElapsedTime.TotalSeconds <= 120) ev.Player.Achive(37);
-        ev.Player?.AddStatsDataToPlayer(DayLightDatabase.StatTypes.EscapeTime, Round.ElapsedTime.TotalSeconds);
+        ev.Player?.AddStatsDataToPlayer(StatTypes.EscapeTime, Round.ElapsedTime.TotalSeconds);
     }
 
-    public void OnExploding(ExplodingGrenadeEventArgs ev)
+    public static void OnExploding(ExplodingGrenadeEventArgs ev)
     {
         if (ev.Projectile.GameObject.TryGetComponent<PinkCandyComponent>(out var component))
         {
@@ -75,38 +75,32 @@ public class StatsEventHandler
             }
             if (ev.TargetsToAffect.Count(X => X.Role.Team == Team.SCPs) >= 3)
                 ev.Player.Achive(30);
-            ev.Player.AddStatsDataToPlayer(DayLightDatabase.StatTypes.PinkCandyKill, ev.TargetsToAffect.Count - 1);
+            ev.Player.AddStatsDataToPlayer(StatTypes.PinkCandyKill, ev.TargetsToAffect.Count - 1);
             component.DestroyComponent();
         }
         else
         {
-            if (ev.Projectile.Type == ItemType.GrenadeHE)
-            {
-                if (ev.TargetsToAffect.Count(x => x.Role.Team == Team.SCPs) >= 3)
-                    ev.Player.Achive(32);
-            }
+            if (ev.Projectile.Type != ItemType.GrenadeHE) return;
+            if (ev.TargetsToAffect.Count(x => x.Role.Team == Team.SCPs) >= 3)
+                ev.Player.Achive(32);
         }
     }
-    public void OnEndingRound(EndingRoundEventArgs ev)
+    public static void OnEndingRound(EndingRoundEventArgs ev)
     {
         if (HasEnded) return;
         HasEnded = true;
         foreach (var player in Exiled.API.Features.Player.List)
         {
-            player.AddStatsDataToPlayer(DayLightDatabase.StatTypes.Rounds, 1);
+            player.AddStatsDataToPlayer(StatTypes.Rounds, 1);
         }
         GameStateData.ClearGameStats();
         Leaderboard.UpdateLeaderboards();
     }
 
 
-    public void OnVerified(VerifiedEventArgs ev)
+    public static void OnVerified(VerifiedEventArgs ev)
     {
         DayLightDatabase.AddPlayer(ev.Player);
     }
-
-    public void OnWaitingForPlayers()
-    {
-        DayLightDatabase.CreatePlayers();
-    }
+    
 }

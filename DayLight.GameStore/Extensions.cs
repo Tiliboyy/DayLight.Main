@@ -23,7 +23,7 @@ public static class Extensions
         if (player.DoNotTrack) return false;
         var playerID = player.RawUserId.Split('@')[0];
         var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
-        var dbplayer = players.FindOne(x => x._id != null && x._id == playerID);
+        var dbplayer = players.FindOne(x => x.SteamID != null && x.SteamID == playerID);
 
         if (dbplayer == null) return false;
         dbplayer.Stats.Money = money;
@@ -116,7 +116,7 @@ public static class Extensions
                 notfullinventory = true;
 
 
-                if (!DayLightDatabase.CanRemoveMoneyFromPlayer(player, items.Price))
+                if (!DayLightDatabase.GameStore.CanRemoveMoneyFromPlayer(player, items.Price))
                 {
                     continue;
                 }
@@ -138,7 +138,7 @@ public static class Extensions
                     advancedPlayer.GameStoreBoughtItems.Add(result, 1);
                 }
 
-                DayLightDatabase.BuyItem(player, items);
+                DayLightDatabase.GameStore.BuyItem(player, items);
                 return GameStorePlugin.Instance.Translation.BoughtItem.Replace("(itemname)", items.Name)
                     .Replace("(itemprice)", items.Price.ToString());
             }
@@ -214,7 +214,7 @@ public static class Extensions
                     return GameStorePlugin.Instance.Translation.FullInventory;
                 }
 
-                if (!DayLightDatabase.CanRemoveMoneyFromPlayer(player, items.Price))
+                if (!DayLightDatabase.GameStore.CanRemoveMoneyFromPlayer(player, items.Price))
                 {
                     return GameStorePlugin.Instance.Translation.CantAfford;
                 }
@@ -233,7 +233,7 @@ public static class Extensions
                 {
                     if (advancedPlayer != null) advancedPlayer.GameStoreBoughtItems.Add(result, 1);
                 }
-                DayLightDatabase.BuyItem(player, items);
+                DayLightDatabase.GameStore.BuyItem(player, items);
                 return GameStorePlugin.Instance.Translation.BoughtItem.Replace("(itemname)", items.Name)
                     .Replace("(itemprice)", items.Price.ToString());
             }

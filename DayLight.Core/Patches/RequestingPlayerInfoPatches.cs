@@ -134,12 +134,10 @@ public static class RaPlayerPatch
           stringBuilder.Append("\nMUTE STATUS:");
           foreach (var vcMuteFlags in EnumUtils<VcMuteFlags>.Values)
           {
-            if (vcMuteFlags != VcMuteFlags.None && (flags & vcMuteFlags) == vcMuteFlags)
-            {
-              stringBuilder.Append(" <color=#F70D1A>");
-              stringBuilder.Append(vcMuteFlags);
-              stringBuilder.Append("</color>");
-            }
+            if (vcMuteFlags == VcMuteFlags.None || (flags & vcMuteFlags) != vcMuteFlags) continue;
+            stringBuilder.Append(" <color=#F70D1A>");
+            stringBuilder.Append(vcMuteFlags);
+            stringBuilder.Append("</color>");
           }
         }
         stringBuilder.Append("\nActive flag(s):");

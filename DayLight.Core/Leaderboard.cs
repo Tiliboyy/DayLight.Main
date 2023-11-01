@@ -98,15 +98,15 @@ public class Leaderboard
         var leaderboard = new StringBuilder();
         var rank = 1;
         var statsPlayers = sortedPlayers as DatabasePlayer[] ?? enumerable.ToArray();
-        var maxNameLength = statsPlayers.Max(player => DayLightDatabase.GetNicknameFromSteam64ID(player._id).Length);
+        var maxNameLength = statsPlayers.Max(player => DayLightDatabase.GetNicknameFromSteam64ID(player.SteamID).Length);
         leaderboard.AppendLine("Rank".PadRight(5) + "Spieler".PadRight(maxNameLength + 5) + "Stat");
         leaderboard.AppendLine(new string('-', 40)); // Separator line
 
         foreach (var player in statsPlayers)
         {
-            var nickname = DayLightDatabase.GetNicknameFromSteam64ID(player._id);
+            var nickname = DayLightDatabase.GetNicknameFromSteam64ID(player.SteamID);
             if (nickname == "none")
-                nickname = player._id;
+                nickname = player.SteamID;
             var rankstr = $"[{rank++.ToString()}]";
             var formattedLine = $"{rankstr,-5}{nickname.PadRight(maxNameLength + 5)}{Math.Round(valueSelector(player.Stats), 0)} {Suffix}" ;
             leaderboard.AppendLine(formattedLine);

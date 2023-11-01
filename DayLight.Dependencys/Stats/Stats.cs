@@ -1,19 +1,21 @@
 ﻿using DayLight.DiscordSync.Dependencys.Utils;
+using LiteDB;
 using System;
 using System.Collections.Generic;
 
 namespace DayLight.DiscordSync.Dependencys.Stats;
 public class DatabasePlayer
 {
-    public DatabasePlayer(string Steam64ID, string nickname)
+    public DatabasePlayer(string steam64SteamID, string nickname)
     {
-        _id = Steam64ID;
+        SteamID = steam64SteamID;
         Nickname = nickname;
         Stats = new Stats();
         Private = false;
         Warns = new List<Warn>();
     }
-    public string _id { get; private set; }
+    [BsonId]
+    public string SteamID { get; private set; }
 
     public string Nickname { get; set; }
 
