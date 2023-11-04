@@ -39,7 +39,7 @@ public abstract class CustomCommand : ICommand
         catch (Exception ex)
         {
             response = "Error while executing the Command\n" +
-                       $"{ex.Message}";
+                       $"Error while executing command {Command}\n{ex.Message}";
             Logger.Error(ex);
             return false;
         }
@@ -50,6 +50,12 @@ public abstract class CustomCommand : ICommand
         var customCommand = (ICommand)instance;
         var platforms = type.GetCustomAttribute<CommandAttribute>().Platforms;
 
+        if (CommandProcessor.RemoteAdminCommandHandler.AllCommands.Any(x => x.Command == customCommand.Command))
+        {
+            Logger.Error($"Error while registering commands: {customCommand.Command} was already registered ({type.FullName})");
+            return;
+
+        }
         if (platforms.Contains(Platform.RemoteAdmin))
         {
             if (CommandProcessor.RemoteAdminCommandHandler.AllCommands.Any(x => x.Command == customCommand.Command))

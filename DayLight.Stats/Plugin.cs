@@ -1,40 +1,29 @@
 ﻿#region
 
+using DayLight.Core;
 using DayLight.Stat.Achievements;
 using DayLight.Stat.Commands;
 using DayLight.Stat.Stats;
 using Exiled.API.Features;
-using HarmonyLib;
 using MEC;
-using System;
+using Neuron.Core.Plugins;
+using Neuron.Modules.Reload;
 using System.IO;
 
 #endregion
 
 namespace DayLight.Stat;
 
-public class DiscordSyncStatsPlugin : Plugin<Config, Translation>
+[Plugin(Name = "DiscordSync.Stats", Author = "Tiliboyy")]
+public class DiscordSyncStatsPlugin : ReloadablePlugin<Config, StatsTranslation>
 {
     public static DiscordSyncStatsPlugin Instance;
     public static bool DisableDiscordSyncStats = false;
     public static string PlaytimeLeaderboard = "";
-    public AchievementHandlers AchievementHandlers;
-    public Harmony Harmony;
-    public StatsEventHandler StatsEventHandler;
-    public override string Author => "Tiliboyy";
-    public override string Name => "DiscordSync.Stats";
-    public override string Prefix => "DiscordSync.Stats";
-    public override Version Version => new(1, 0, 0);
-    public override Version RequiredExiledVersion => new(6, 0, 0, 0);
-    public override void OnEnabled()
+    public override void EnablePlugin()
     {
-        //Harmony = new Harmony("DiscordSync.Stats.Tiliboyy.Patches");
-        //Harmony.PatchAll();
         Instance = this;
-        StatsEventHandler = new StatsEventHandler();
-        AchievementHandlers = new AchievementHandlers();
         TryCreateDirectory();
-        StatsEventHandler.RegisterEvents();
         Timing.CallDelayed(2f,
             () =>
             {
@@ -43,23 +32,21 @@ public class DiscordSyncStatsPlugin : Plugin<Config, Translation>
 
             });
 
-        //Achivement Events
-        AchievementHandlers.RegisterEvents();
-    }
 
+        AchievementHandlers.RegisterEvents();
+        StatsEventHandler.RegisterEvents();
+
+    }
     public static void TryCreateDirectory()
     {
         if (!Directory.Exists(Path.Combine(Paths.Configs, "DiscordSync/")))
             Directory.CreateDirectory(Path.Combine(Paths.Configs, "DiscordSync/"));
     }
 
-    public override void OnDisabled()
+    public override void Disable()
     {
         AchievementHandlers.UnRegisterEvents();
         StatsEventHandler.UnRegisterEvents();
-
-        Harmony.UnpatchAll();
         Instance = null;
-        StatsEventHandler = null;
     }
 }

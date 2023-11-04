@@ -1,10 +1,8 @@
 using DayLight.Core;
 using Exiled.API.Enums;
-using Exiled.API.Interfaces;
 using Neuron.Core.Meta;
 using PlayerRoles;
 using Syml;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using IConfig = DayLight.Core.IConfig;

@@ -12,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Log = PluginAPI.Core.Log;
 using Logger = DayLight.Core.Logger;
 
 #endregion

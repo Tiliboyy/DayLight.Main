@@ -328,8 +328,8 @@ public static class DayLightDatabase
             var list = GetLeaderboard();
             var playerID = player.RawUserId.Split('@')[0];
 
-            var plypos = list.IndexOf(Enumerable.First<DatabasePlayer>(list, X => X.SteamID == playerID));
-            var leaderboard = Enumerable.Take<DatabasePlayer>(list, 10).ToList();
+            var plypos = list.IndexOf(list.First(X => X.SteamID == playerID));
+            var leaderboard = list.Take(10).ToList();
             var i = 1;
             var hasply = false;
             var str = "\n";

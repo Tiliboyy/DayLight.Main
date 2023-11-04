@@ -54,7 +54,7 @@ public class LinkDatabase
     {
 
         ReadYaml();
-        var linkClasses = Enumerable.Where<LinkCommand.LinkClass>(OpenLinks, linkClass => linkClass.Code == Code).ToList();
+        var linkClasses = OpenLinks.Where(linkClass => linkClass.Code == Code).ToList();
         if (linkClasses.Count == 0) return false;
         foreach (var linkClass in linkClasses.Where(linkClass => OpenLinks.Contains(linkClass)))
         {

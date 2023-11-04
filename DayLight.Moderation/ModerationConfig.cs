@@ -1,6 +1,5 @@
 ﻿#region
 
-using Exiled.API.Interfaces;
 using Neuron.Core.Meta;
 using Syml;
 using System.Collections.Generic;

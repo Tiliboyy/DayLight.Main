@@ -14,16 +14,6 @@
         <FileAlignment>512</FileAlignment>
         <LangVersion>10</LangVersion>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
         <DebugType>pdbonly</DebugType>
@@ -32,6 +22,15 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <DebugSymbols>true</DebugSymbols>
+      <DebugType>full</DebugType>
+      <Optimize>false</Optimize>
+      <DefineConstants>DEBUG;TRACE</DefineConstants>
+      <ErrorReport>prompt</ErrorReport>
+      <WarningLevel>4</WarningLevel>
+      <OutputPath>bin\Debug\</OutputPath>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -47,6 +46,9 @@
           <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.dll</HintPath>
         </Reference>
         <Reference Include="mscorlib" />
+        <Reference Include="Neuron.Modules.Reload">
+          <HintPath>..\..\..\AppData\Roaming\SCP Secret Laboratory\Neuron\Modules\Neuron.Modules.Reload.dll</HintPath>
+        </Reference>
         <Reference Include="ScpUtils">
           <HintPath>..\..\..\AppData\Roaming\EXILED\Plugins\ScpUtils.dll</HintPath>
         </Reference>
@@ -76,7 +78,7 @@
         <Compile Include="Stats\Components\PinkCandyComponent.cs" />
         <Compile Include="Stats\Patches.cs" />
         <Compile Include="Stats\StatsEventHandler.cs" />
-        <Compile Include="Translation.cs" />
+        <Compile Include="StatsTranslation.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="App.config" />

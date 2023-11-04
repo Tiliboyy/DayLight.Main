@@ -5,8 +5,6 @@ using DayLight.Subclasses.Subclasses.Human.MTF;
 using DayLight.Subclasses.Subclasses.Human.Scientist;
 using DayLight.Subclasses.Subclasses.SCPs.SCP049_2;
 using DayLight.Subclasses.Subclasses.SCPs.SCP173;
-using Syml;
-using System;
 
 namespace DayLight.Subclasses.Subclasses;
 

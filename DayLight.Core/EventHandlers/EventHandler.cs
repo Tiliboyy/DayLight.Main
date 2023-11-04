@@ -1,16 +1,11 @@
 ﻿using DayLight.Core.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
-using Steamworks.Data;
 
 namespace DayLight.Core.EventHandlers;
 
 public class EventHandler
 {
-    public static void OnRespawningTeam(RespawningTeamEventArgs ev)
-    {
-        
-    }
     public static void OnVerified(VerifiedEventArgs ev)
     {
         var AdvancedPlayer = ev.Player.ReferenceHub.gameObject.AddComponent<AdvancedPlayer>();

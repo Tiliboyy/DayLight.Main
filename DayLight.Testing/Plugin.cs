@@ -1,5 +1,4 @@
-﻿using Exiled.API.Features;
-using Neuron.Core.Plugins;
+﻿using Neuron.Core.Plugins;
 using Neuron.Modules.Reload;
 using Player = Exiled.Events.Handlers.Player;
 

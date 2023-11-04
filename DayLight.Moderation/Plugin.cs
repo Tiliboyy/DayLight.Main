@@ -1,8 +1,6 @@
 ﻿#region
 
-using DayLight.Moderation.Warn;
 using Exiled.API.Features;
-using Neuron.Core;
 using Neuron.Core.Plugins;
 using Neuron.Modules.Reload;
 using System;
@@ -24,7 +22,8 @@ public class ModerationSystemPlugin : ReloadablePlugin<ModerationConfig, Moderat
             if (!Directory.Exists(Path.Combine(Paths.Configs, "ModerationSystem/")))
                 Directory.CreateDirectory(Path.Combine(Paths.Configs, "ModerationSystem/"));
             Instance = this;
-            //FuckExiled.Events.Handlers.RemoteAdmin.RequestingPlayerData.Subscribe(EventHandler.OnRequestingData);
+            Core.Logger.Warn("subscibing");
+            Core.API.Events.Handlers.RemoteAdmin.RequestingPlayerData.Subscribe(EventHandler.OnRequestingData);
         }
         catch (Exception error)
         {

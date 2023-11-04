@@ -2,15 +2,21 @@
 
 #endregion
 
+using DayLight.Core;
+using DayLight.Core.API.Events.EventArgs;
+using DayLight.Moderation.Warn;
+using System;
+using System.Linq;
+using System.Text;
+
 namespace DayLight.Moderation;
 
 public class EventHandler
 {
 
-    /*
+    
     public static void OnRequestingData(RequestingPlayerDataEventArgs ev)
     {
-        Logger.Info("executed");
         var player = ev.Player;
         if (player == null) return;
         
@@ -19,32 +25,32 @@ public class EventHandler
         switch (player.Nickname.ToLower())
         {
             case "tiliboyy":
-                stringBuilder.Append($"\n<b><color=#f102f9>WENN DU MIR PUNKTE GIBST REISS ICH DEINE BALLS AUS</color></b>");
+                stringBuilder.Append($"<b><color=#f102f9>WENN DU MIR PUNKTE GIBST REISS ICH DEINE BALLS AUS</color></b>\n");
                 break;
             case "indie van gaming":
-                stringBuilder.Append($"\nFreunde:<color=#fca505> Fortnite</color>");
+                stringBuilder.Append($"Freunde:<color=#fca505> Fortnite</color>\n");
                 break;
             case "peter":
-                stringBuilder.Append($"\nStatus: <color=#fc05e3>Tinybrain</color>");
+                stringBuilder.Append($"Status: <color=#fc05e3>Tinybrain</color>\n");
                 break;
             case "schwert300":
-                stringBuilder.Append($"<color=#ed1515>RDMer</color>");
+                stringBuilder.Append($"<color=#ed1515>RDMer</color>\n");
                 break;
             case "artixthewolf":
-                stringBuilder.Append($"<color=#cc00cc>sexo</color>");
+                stringBuilder.Append($"<color=#cc00cc>sexo</color>\n");
                 break;
             case "fes":
-                stringBuilder.Append($"<color=#ffff00>Finanzen Eingesammelt: 42069€</color>");
+                stringBuilder.Append($"<color=#ffff00>Finanzen Eingesammelt: 42069€</color>\n");
                 break;
             case "leotz":
-                stringBuilder.Append($"<color=#ff80df>Cry about it</color>");
+                stringBuilder.Append($"<color=#ff80df>Cry about it</color>\n");
                 break;
 
 
         }
 
         var total = WarnDatabase.Database.GetTotal(player.UserId);
-        stringBuilder.Append($"\nPunkte: <color={GetColor(total)}>{total}</color>");
+        stringBuilder.Append($"Punkte: <color={GetColor(total)}>{total}</color>");
         var databasePlayer = SCPUtils.DatabasePlayer.GetDatabasePlayer(player);
         if (databasePlayer != null)
         {
@@ -64,7 +70,6 @@ public class EventHandler
         }
         ev.Message += $"\n{stringBuilder}";
     }
-    */
     private static string GetColor(float value)
     {
         return value switch

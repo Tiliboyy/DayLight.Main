@@ -1,6 +1,6 @@
 ﻿#region
 
-using Exiled.API.Interfaces;
+using Neuron.Modules.Configs.Localization;
 using System;
 
 #endregion
@@ -8,7 +8,8 @@ using System;
 namespace DayLight.Stat;
 
 [Serializable]
-public class Translation : ITranslation
+
+public class StatsTranslation : Translations<StatsTranslation>
 {
     public string SelfAchiveText { get; set; } =
         "<color=green>Du hast das Achivement %achievement% freigeschalten!</color>";

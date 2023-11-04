@@ -1,8 +1,6 @@
-﻿using CentralAuth;
-using DayLight.Core.API.Events.EventArgs;
+﻿using DayLight.Core.API.Events.EventArgs;
 using Exiled.API.Features;
 using HarmonyLib;
-using Mirror;
 using Neuron.Core.Meta;
 using NorthwoodLib.Pools;
 using PlayerRoles;
@@ -11,9 +9,7 @@ using PlayerStatsSystem;
 using RemoteAdmin;
 using RemoteAdmin.Communication;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Utils;
 using VoiceChat;
 
@@ -71,14 +67,14 @@ public static class RaPlayerPatch
       {
         var referenceHub = referenceHubList[0];
         ServerLogs.AddLog(ServerLogs.Modules.DataAccess, $"{sender.LogName} accessed IP address of player {referenceHub.PlayerId} ({referenceHub.nicknameSync.MyNick}).", ServerLogs.ServerLogType.RemoteAdminActivity_GameChanging);
-        var flag3 = PermissionsHandler.IsPermitted(sender.Permissions, PlayerPermissions.GameplayData);
+        var gameplayData = PermissionsHandler.IsPermitted(sender.Permissions, PlayerPermissions.GameplayData);
         var characterClassManager = referenceHub.characterClassManager;
         var authManager = referenceHub.authManager;
         var nicknameSync = referenceHub.nicknameSync;
         var connectionToClient = referenceHub.networkIdentity.connectionToClient;
         var serverRoles = referenceHub.serverRoles;
         if (sender is PlayerCommandSender playerCommandSender2)
-          playerCommandSender2.ReferenceHub.queryProcessor.GameplayData = flag3;
+          playerCommandSender2.ReferenceHub.queryProcessor.GameplayData = gameplayData;
         var stringBuilder = StringBuilderPool.Shared.Rent("<color=white>");
         stringBuilder.Append("Nickname: " + nicknameSync.CombinedName);
         stringBuilder.Append($"\nPlayer ID: {referenceHub.PlayerId} <color=green><link=CP_ID>\uF0C5</link></color>");
@@ -155,7 +151,7 @@ public static class RaPlayerPatch
           stringBuilder.Append(" <color=#43C6DB>[RA AUTHENTICATED]</color>");
         if (serverRoles.IsInOverwatch)
           stringBuilder.Append(" <color=#008080>[OVERWATCH MODE]</color>");
-        else if (flag3)
+        else if (gameplayData)
         {
           stringBuilder.Append("\nClass: ").Append(PlayerRoleLoader.AllRoles.TryGetValue(referenceHub.GetRoleId(), out var playerRoleBase) ? playerRoleBase.RoleTypeId : "None");
           stringBuilder.Append(" <color=#fcff99>[HP: ").Append(CommandProcessor.GetRoundedStat<HealthStat>(referenceHub)).Append("]</color>");
@@ -166,10 +162,13 @@ public static class RaPlayerPatch
         else
           stringBuilder.Append("\n<color=#D4AF37>Some fields were hidden. GameplayData permission required.</color>");
         stringBuilder.Append("</color>");
-        var eventargs = new RequestingPlayerDataEventArgs(Player.Get(sender), Player.Get(referenceHub), StringBuilderPool.Shared.ToStringReturn(stringBuilder),true);
-        API.Events.Handlers.RemoteAdmin.OnRequestingData(eventargs);
+        var eventargs = new 
+          RequestingPlayerDataEventArgs(Player.Get(sender), 
+            Player.Get(referenceHub), 
+            StringBuilderPool.Shared.ToStringReturn(stringBuilder),true);
+        API.Events.Handlers.RemoteAdmin.RequestingPlayerData.Raise(eventargs); 
         if (!eventargs.IsAllowed) return false;
-        sender.RaReply($"${__instance.DataId} {StringBuilderPool.Shared.ToStringReturn(stringBuilder)}", true, true, string.Empty);
+        sender.RaReply($"${__instance.DataId} {eventargs.Message}", true, true, string.Empty);
         RaPlayerQR.Send(sender, false, string.IsNullOrEmpty(authManager.UserId) ? "(no User ID)" : authManager.UserId);
         
       }

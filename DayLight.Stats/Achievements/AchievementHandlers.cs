@@ -1,5 +1,6 @@
 #region
 
+using DayLight.Core;
 using DayLight.Core.API.Events.EventArgs;
 using DayLight.Core.API.Events.Handlers;
 using Exiled.API.Enums;
@@ -25,7 +26,7 @@ using WarheadHandler = Exiled.Events.Handlers.Warhead;
 #endregion
 
 namespace DayLight.Stat.Achievements;
-public static class GameStateData
+internal static class GameStateData
 {
 
     public static Dictionary<Player, AchievementHandlers.GameStats> GameStatsMap = new Dictionary<Player, AchievementHandlers.GameStats>();
@@ -47,10 +48,10 @@ public static class GameStateData
         return GameStatsMap[player];
     }
 }
-public class AchievementHandlers
+internal class AchievementHandlers
 {
-    public bool RegisteredEvents;
-    public void RegisterEvents()
+    public static bool RegisteredEvents;
+    public static void RegisterEvents()
     {
         if(RegisteredEvents) return;
         PlayerHandler.Dying += OnDied;
@@ -66,7 +67,7 @@ public class AchievementHandlers
         RegisteredEvents = true;
     }
 
-    public void UnRegisterEvents()
+    public static void UnRegisterEvents()
     {
         if(!RegisteredEvents) return;
         PlayerHandler.Dying -= OnDied;
@@ -82,7 +83,7 @@ public class AchievementHandlers
         RegisteredEvents = false;
     }
 
-    public void OnAddedItem(ItemAddedEventArgs ev)
+    public static void OnAddedItem(ItemAddedEventArgs ev)
     {
         var data = ev.Player.GetGameStats();
         if (ev.Item.Type == ItemType.GunCom45)
@@ -95,7 +96,7 @@ public class AchievementHandlers
             ev.Player.Achive(21);
         
     }
-    public void SpendingMoney(BuyingItemsEventArgs ev)
+    public static void SpendingMoney(BuyingItemsEventArgs ev)
     {
         //10 Items
         var data = ev.Player.GetGameStats();
@@ -109,7 +110,7 @@ public class AchievementHandlers
             ev.Player.Achive(10);
 
     }
-    public void OnWaitingForPlayers()
+    public static void OnWaitingForPlayers()
     {
         Timing.RunCoroutine(GameChecks());
         Leaderboard.UpdateLeaderboards();
@@ -117,13 +118,13 @@ public class AchievementHandlers
         RegisterEvents();
     }
 
-    public void OnCuffed(HandcuffingEventArgs ev)
+    public static void OnCuffed(HandcuffingEventArgs ev)
     {
         if (ev.Target.Role.Team == Team.FoundationForces && ev.Player.Role.Type == RoleTypeId.ClassD)
             ev.Target.Achive(14);
     }
 
-    public void OnStoppingWarhead(StoppingEventArgs ev)
+    public static void OnStoppingWarhead(StoppingEventArgs ev)
     {
         var data = ev.Player.GetGameStats();
 
@@ -132,14 +133,14 @@ public class AchievementHandlers
             ev.Player.Achive(13);
     }
 
-    public void OnGainingLevel(GainingLevelEventArgs ev)
+    public static void OnGainingLevel(GainingLevelEventArgs ev)
     {
         //lvl 5
         if (ev.NewLevel == 5 && Round.Duration.TotalMinutes <= 10)
             ev.Player.Achive(22);
     }
 
-    public void OnDied(DyingEventArgs ev)
+    public static void OnDied(DyingEventArgs ev)
     {
         var data = ev.Player.GetGameStats();
 
@@ -217,7 +218,7 @@ public class AchievementHandlers
         data.LifeCollectedItems.Clear();
         data.LifeTimerKills.Clear();
     }
-    public void OnEatenCandy(EatenScp330EventArgs ev)
+    public static void OnEatenCandy(EatenScp330EventArgs ev)
     {
         //Diabetis
         var data = ev.Player.GetGameStats();
@@ -228,7 +229,7 @@ public class AchievementHandlers
     }
 
 
-    public void OnRespawningTeam(RespawningTeamEventArgs ev)
+    public static void OnRespawningTeam(RespawningTeamEventArgs ev)
     {
         foreach (var player in Player.List.Where(x => x.IsAlive))
         {
@@ -245,7 +246,7 @@ public class AchievementHandlers
     }
 
     
-    public void OnUsedItem(UsedItemEventArgs ev)
+    public static void OnUsedItem(UsedItemEventArgs ev)
     {
         if (ev.Item.Type == ItemType.SCP207)
         {

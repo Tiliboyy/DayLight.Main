@@ -1,6 +1,4 @@
 ﻿using DiscordSync.Plugin.Network;
-using Exiled.API.Features;
-using JetBrains.Annotations;
 using Neuron.Core.Plugins;
 using Neuron.Modules.Reload;
 using Player = Exiled.Events.Handlers.Player;

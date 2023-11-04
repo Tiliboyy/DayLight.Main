@@ -1,12 +1,12 @@
-﻿using DayLight.Core.API.Attributes;
+﻿using CommandSystem;
+using DayLight.Core.API.Attributes;
 using DayLight.Core.API.CommandSystem;
 using DayLight.Core.API.Database;
+using DayLight.Core.API.Events.EventArgs;
 using DayLight.Core.API.Subclasses.EventHandlers;
-using Exiled.Events.Commands.PluginManager;
 using Exiled.Events.Handlers;
-using GameCore;
-using InventorySystem.Items.Usables.Scp330;
 using Neuron.Core;
+using Neuron.Core.Events;
 using Neuron.Core.Logging;
 using Neuron.Core.Meta;
 using Neuron.Core.Modules;
@@ -16,10 +16,8 @@ using Neuron.Modules.Reload;
 using Ninject;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using EventHandler = DayLight.Core.EventHandlers.EventHandler;
-using Log = Exiled.API.Features.Log;
 using PluginManager = Neuron.Core.Plugins.PluginManager;
 
 namespace DayLight.Core
@@ -60,6 +58,7 @@ namespace DayLight.Core
 
             base.Disable();
         }
+
         public override void LateEnable()
         {
             DayLightDatabase.CreateCollection();

@@ -1,6 +1,4 @@
-﻿using DayLight.Core.API.Database;
-using DayLight.DiscordSync.Dependencys.Stats;
-using Exiled.API.Features;
+﻿using Exiled.API.Features;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;

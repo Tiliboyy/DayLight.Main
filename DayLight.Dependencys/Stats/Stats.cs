@@ -1,6 +1,5 @@
 ﻿using DayLight.DiscordSync.Dependencys.Utils;
 using LiteDB;
-using System;
 using System.Collections.Generic;
 
 namespace DayLight.DiscordSync.Dependencys.Stats;

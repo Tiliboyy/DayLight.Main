@@ -3,13 +3,9 @@
 using DayLight.Core;
 using DayLight.Core.API.Database;
 using DayLight.DiscordSync.Dependencys.Stats;
-using Exiled.API.Features;
-using LiteDB;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using YamlDotNet.Serialization;
 
 #endregion
 
