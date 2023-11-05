@@ -11,31 +11,30 @@ using Neuron.Core.Meta;
 using System;
 using System.Collections.Generic;
 
-namespace DayLight.Test.Commands
+namespace DayLight.Test.Commands;
+
+[Automatic]
+[Command(new [] { Platform.RemoteAdmin })]
+internal class AutoSpawn : CustomCommand
 {
-  [Automatic]
-  [Command(new [] { Platform.RemoteAdmin })]
-  internal class AutoSpawn : CustomCommand
+  public static List<Player> RespawnPlayers = new();
+
+  public override string Command { get; } = nameof (AutoSpawn);
+
+  public override string[] Aliases { get; } = Array.Empty<string>();
+
+  public override string Description { get; } = nameof (AutoSpawn);
+
+  protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
   {
-    public static List<Player> RespawnPlayers = new();
-
-    public override string Command { get; } = nameof (AutoSpawn);
-
-    public override string[] Aliases { get; } = Array.Empty<string>();
-
-    public override string Description { get; } = nameof (AutoSpawn);
-
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    if (RespawnPlayers.Contains(player))
     {
-      if (RespawnPlayers.Contains(player))
-      {
-        RespawnPlayers.Remove(player);
-        response = "Removed";
-        return true;
-      }
-      RespawnPlayers.Add(player);
-      response = "Added";
+      RespawnPlayers.Remove(player);
+      response = "Removed";
       return true;
     }
+    RespawnPlayers.Add(player);
+    response = "Added";
+    return true;
   }
 }

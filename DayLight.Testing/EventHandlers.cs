@@ -12,32 +12,31 @@ using MEC;
 using PlayerRoles;
 using System;
 
-namespace DayLight.Test
+namespace DayLight.Test;
+
+public class EventHandlers
 {
-  public class EventHandlers
+  public static void Verified(VerifiedEventArgs ev)
   {
-    public static void Verified(VerifiedEventArgs ev)
-    {
-      if (!TestPlugin.Instance.Config.FreeRoles || ev.Player.Nickname == "Tiliboyy")
-        return;
-      UserGroup group = ServerStatic.PermissionsHandler.GetGroup("admin");
-      ev.Player.ReferenceHub.serverRoles.SetGroup(group, true, false);
-    }
+    if (!TestPlugin.Instance.Config.FreeRoles || ev.Player.Nickname == "Tiliboyy")
+      return;
+    UserGroup group = ServerStatic.PermissionsHandler.GetGroup("admin");
+    ev.Player.ReferenceHub.serverRoles.SetGroup(group, true, false);
+  }
 
-    public static void OnDeath(DiedEventArgs ev)
+  public static void OnDeath(DiedEventArgs ev)
+  {
+    if (!AutoSpawn.RespawnPlayers.Contains(ev.Player))
+      return;
+    Timing.CallDelayed(0.5f, (Action) (() =>
     {
-      if (!AutoSpawn.RespawnPlayers.Contains(ev.Player))
-        return;
-      Timing.CallDelayed(0.5f, (Action) (() =>
-      {
-        SubclassEventHandlers.NoRolePlayers.Add(ev.Player);
-        ev.Player.Role.Set(ev.TargetOldRole, (SpawnReason) 0, (RoleSpawnFlags) 0);
-        Timing.CallDelayed(0.5f, (Action) (() => SubclassEventHandlers.NoRolePlayers.Remove(ev.Player)));
-      }));
-    }
+      SubclassEventHandlers.NoRolePlayers.Add(ev.Player);
+      ev.Player.Role.Set(ev.TargetOldRole, (SpawnReason) 0, (RoleSpawnFlags) 0);
+      Timing.CallDelayed(0.5f, (Action) (() => SubclassEventHandlers.NoRolePlayers.Remove(ev.Player)));
+    }));
+  }
 
-    public void OnRoundStart()
-    {
-    }
+  public void OnRoundStart()
+  {
   }
 }

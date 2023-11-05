@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Stats", "DayLight.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Dependencys", "DayLight.Dependencys\DayLight.Dependencys.csproj", "{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Hints", "DayLight.Hints\DayLight.Hints.csproj", "{9C537F5A-EE9E-4508-BCD5-38F6FF9A9078}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|Any CPU = Release|Any CPU
@@ -54,6 +56,10 @@ Global
 		{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C537F5A-EE9E-4508-BCD5-38F6FF9A9078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C537F5A-EE9E-4508-BCD5-38F6FF9A9078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C537F5A-EE9E-4508-BCD5-38F6FF9A9078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C537F5A-EE9E-4508-BCD5-38F6FF9A9078}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

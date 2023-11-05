@@ -92,6 +92,9 @@
         <Reference Include="NorthwoodLib">
           <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\NorthwoodLib.dll</HintPath>
         </Reference>
+        <Reference Include="Pooling">
+          <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Pooling.dll</HintPath>
+        </Reference>
         <Reference Include="SYML">
           <HintPath>..\..\..\.nuget\packages\syml\1.0.2\lib\netstandard2.0\SYML.dll</HintPath>
         </Reference>
@@ -413,8 +416,10 @@
         <Compile Include="API\Events\EventArgs\BuyingItemsEventArgs.cs" />
         <Compile Include="API\Events\EventArgs\GainedMoneyEventArgs.cs" />
         <Compile Include="API\Events\EventArgs\RequestingPlayerDataEventArgs.cs" />
+        <Compile Include="API\Events\EventArgs\SpeakingEventArgs.cs" />
         <Compile Include="API\Events\Handlers\GameStoreHandler.cs" />
         <Compile Include="API\Events\Handlers\RemoteAdmin.cs" />
+        <Compile Include="API\Events\Handlers\Voicechat.cs" />
         <Compile Include="API\Extensions.cs" />
         <Compile Include="API\Features\AdvancedPlayer.cs" />
         <Compile Include="API\Features\CategoryManager.cs" />
@@ -433,6 +438,7 @@
         <Compile Include="IConfig.cs" />
         <Compile Include="Leaderboard.cs" />
         <Compile Include="Logger.cs" />
+        <Compile Include="Patches\SpeakPatch.cs" />
         <Compile Include="Patches\PlayerListPatches.cs" />
         <Compile Include="Patches\RequestingPlayerInfoPatches.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>

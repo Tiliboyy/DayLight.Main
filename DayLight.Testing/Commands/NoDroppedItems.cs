@@ -13,50 +13,49 @@ using Neuron.Core.Meta;
 using System;
 using System.Collections.Generic;
 
-namespace DayLight.Test.Commands
+namespace DayLight.Test.Commands;
+
+[Automatic]
+
+[Command(new [] { Platform.RemoteAdmin })]
+internal class NoDroppedItems : CustomCommand
 {
-  [Automatic]
+  public static bool NoItems;
+  public CoroutineHandle CoroutineHandle;
 
-  [Command(new [] { Platform.RemoteAdmin })]
-  internal class NoDroppedItems : CustomCommand
+  public override string Command { get; } = "NoDroppedItems";
+
+  public override string[] Aliases { get; } = Array.Empty<string>();
+
+  public override string Description { get; } = nameof (NoDroppedItems);
+
+  protected override string Permission { get; } = "Test.Test";
+
+  protected override bool Respond(ArraySegment<string> arguments, Player player, out string response) 
   {
-    public static bool NoItems;
-    public CoroutineHandle CoroutineHandle;
-
-    public override string Command { get; } = "NoDroppedItems";
-
-    public override string[] Aliases { get; } = Array.Empty<string>();
-
-    public override string Description { get; } = nameof (NoDroppedItems);
-
-    protected override string Permission { get; } = "Test.Test";
-
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response) 
+    if (NoItems)
     {
-      if (NoItems)
+      NoItems = false;
+      Timing.KillCoroutines(new CoroutineHandle[1]
       {
-        NoItems = false;
-        Timing.KillCoroutines(new CoroutineHandle[1]
-        {
-          CoroutineHandle
-        });
-        response = "Disabled";
-        return true;
-      }
-      CoroutineHandle = Timing.RunCoroutine(DeleteItems());
-      NoItems = true;
-      response = "Enabled";
+        CoroutineHandle
+      });
+      response = "Disabled";
       return true;
     }
+    CoroutineHandle = Timing.RunCoroutine(DeleteItems());
+    NoItems = true;
+    response = "Enabled";
+    return true;
+  }
 
-    public IEnumerator<float> DeleteItems()
+  public IEnumerator<float> DeleteItems()
+  {
+    while (true)
     {
-      while (true)
-      {
-        foreach (Pickup item in Pickup.List)
-          item.Destroy();
-        yield return Timing.WaitForSeconds(0.2f);
-      }
+      foreach (Pickup item in Pickup.List)
+        item.Destroy();
+      yield return Timing.WaitForSeconds(0.2f);
     }
   }
 }

@@ -9,19 +9,18 @@ using Exiled.API.Features;
 using MEC;
 using System.Collections.Generic;
 
-namespace DayLight.Test.Commands
+namespace DayLight.Test.Commands;
+
+public static class UnityMethods
 {
-  public static class UnityMethods
+  public static IEnumerator<float> HandCoroutine(Player player, float time)
   {
-    public static IEnumerator<float> HandCoroutine(Player player, float time)
+    for (int i = 0; (double) i < (double) time; ++i)
     {
-      for (int i = 0; (double) i < (double) time; ++i)
-      {
-        player.EnableEffect((EffectType) 24, 0.0f, false);
-        yield return Timing.WaitForSeconds(0.05f);
-        player.DisableEffect((EffectType) 24);
-        yield return Timing.WaitForSeconds(0.05f);
-      }
+      player.EnableEffect((EffectType) 24, 0.0f, false);
+      yield return Timing.WaitForSeconds(0.05f);
+      player.DisableEffect((EffectType) 24);
+      yield return Timing.WaitForSeconds(0.05f);
     }
   }
 }

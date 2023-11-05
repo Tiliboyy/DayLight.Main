@@ -12,45 +12,44 @@ using Neuron.Core.Meta;
 using System;
 using System.Collections.Generic;
 
-namespace DayLight.Test.Commands
-{
-  [Automatic]
+namespace DayLight.Test.Commands;
 
-  [Command(new [] { Platform.RemoteAdmin })]
-  internal class Hand : CustomCommand
+[Automatic]
+
+[Command(new [] { Platform.RemoteAdmin })]
+internal class Hand : CustomCommand
+{
+
+
+  public override string Command { get; } = "Hand";
+  public override string[] Aliases { get; } = Array.Empty<string>();
+  public override string Description { get; } = "Hand someone!";
+  protected override string Permission { get; } = "Test.Hand";
+  protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
   {
 
-
-    public override string Command { get; } = "Hand";
-    public override string[] Aliases { get; } = Array.Empty<string>();
-    public override string Description { get; } = "Hand someone!";
-    protected override string Permission { get; } = "Test.Hand";
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    if (arguments.Count == 2)
     {
-
-        if (arguments.Count == 2)
-        {
-          if (arguments.Array != null && arguments.Array[1] == "*")
-          {
-            float.TryParse(arguments.Array[2], out var result);
-            foreach (Player ply in (IEnumerable<Player>) Player.List)
-              Timing.RunCoroutine(UnityMethods.HandCoroutine(ply, result));
-            response = "Handed everyone";
-            return true;
-          }
-          Player player1 = Player.Get(arguments.Array[1]);
-          if (player1 == null)
-          {
-            response = "Player not found";
-            return false;
-          }
-          float.TryParse(arguments.Array[2], out var result1);
-          Timing.RunCoroutine(UnityMethods.HandCoroutine(player1, result1));
-          response = "Handed " + player1.DisplayNickname;
-          return true;
-        }
-        response = "Usage: Hand <ID> <Amount>";
+      if (arguments.Array != null && arguments.Array[1] == "*")
+      {
+        float.TryParse(arguments.Array[2], out var result);
+        foreach (Player ply in (IEnumerable<Player>) Player.List)
+          Timing.RunCoroutine(UnityMethods.HandCoroutine(ply, result));
+        response = "Handed everyone";
+        return true;
+      }
+      Player player1 = Player.Get(arguments.Array[1]);
+      if (player1 == null)
+      {
+        response = "Player not found";
         return false;
+      }
+      float.TryParse(arguments.Array[2], out var result1);
+      Timing.RunCoroutine(UnityMethods.HandCoroutine(player1, result1));
+      response = "Handed " + player1.DisplayNickname;
+      return true;
     }
+    response = "Usage: Hand <ID> <Amount>";
+    return false;
   }
 }

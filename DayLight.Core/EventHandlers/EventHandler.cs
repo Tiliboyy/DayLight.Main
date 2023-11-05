@@ -1,6 +1,8 @@
-﻿using DayLight.Core.API.Features;
+﻿using DayLight.Core.API.Events.EventArgs;
+using DayLight.Core.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
+using VoiceChat;
 
 namespace DayLight.Core.EventHandlers;
 
@@ -20,6 +22,10 @@ public class EventHandler
         //End of Funny zone  
 
         //Plugin.Category.AddPlayer(ev.Player);
+    }
+    public void OnSpeaking(SpeakingEventArgs ev)
+    {
+        ev.Channel = VoiceChatChannel.Proximity;
     }
     public static void OnReloadedConfigs()
     {
