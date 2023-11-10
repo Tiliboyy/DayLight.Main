@@ -413,6 +413,7 @@
         <Compile Include="API\CommandSystem\CustomCommand.cs" />
         <Compile Include="API\CommandSystem\CustomParent.cs" />
         <Compile Include="API\Database\DayLightDatabase.cs" />
+        <Compile Include="API\DayLightCoreModule.cs" />
         <Compile Include="API\Events\EventArgs\BuyingItemsEventArgs.cs" />
         <Compile Include="API\Events\EventArgs\GainedMoneyEventArgs.cs" />
         <Compile Include="API\Events\EventArgs\RequestingPlayerDataEventArgs.cs" />
@@ -423,6 +424,9 @@
         <Compile Include="API\Extensions.cs" />
         <Compile Include="API\Features\AdvancedPlayer.cs" />
         <Compile Include="API\Features\CategoryManager.cs" />
+        <Compile Include="API\Leaderboard.cs" />
+        <Compile Include="API\Logger.cs" />
+        <Compile Include="API\StaticUtils.cs" />
         <Compile Include="API\Subclasses\EventHandlers\SubclassEventHandlers.cs" />
         <Compile Include="API\Subclasses\Extentions.cs" />
         <Compile Include="API\Subclasses\Features\ActiveAbility.cs" />
@@ -431,18 +435,17 @@
         <Compile Include="API\Subclasses\Manager.cs" />
         <Compile Include="API\Subclasses\Patches.cs" />
         <Compile Include="API\Subclasses\SubclassConfig.cs" />
-        <Compile Include="API\Utils.cs" />
         <Compile Include="Config.cs" />
         <Compile Include="DayLightCore.cs" />
         <Compile Include="EventHandlers\EventHandler.cs" />
         <Compile Include="IConfig.cs" />
-        <Compile Include="Leaderboard.cs" />
-        <Compile Include="Logger.cs" />
+        <Compile Include="Models\GamestoreCategory.cs" />
+        <Compile Include="Models\GameStoreItemPrice.cs" />
+        <Compile Include="Models\GameStoreReward.cs" />
         <Compile Include="Patches\SpeakPatch.cs" />
         <Compile Include="Patches\PlayerListPatches.cs" />
         <Compile Include="Patches\RequestingPlayerInfoPatches.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="Structs.cs" />
         <Compile Include="Translation.cs" />
     </ItemGroup>
     <ItemGroup>

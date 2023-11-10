@@ -26,30 +26,30 @@ public class EventHandlers
     
     public static void OnGainingLevel(Exiled.Events.EventArgs.Scp079.GainingLevelEventArgs ev)
     {
-        ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.Scp079LevelReward);
+        ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.Scp079LevelGameStoreReward);
     }
     public static void OnEscaping(EscapingEventArgs ev)
     {
-        ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.EscapeReward);
-        ev.Player?.Cuffer?.GiveGameStoreReward(GameStorePlugin.Instance.Config.CufferReward);
+        ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.EscapeGameStoreReward);
+        ev.Player?.Cuffer?.GiveGameStoreReward(GameStorePlugin.Instance.Config.CufferGameStoreReward);
     }
     
     public static void OnUsedItem(UsedItemEventArgs ev)
     {
         if(ev.Item.Type == ItemType.Medkit && ev.Player.Health == ev.Player.MaxHealth) return;
-        ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.UsingItemReward);
+        ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.UsingItemGameStoreReward);
     }
     
     public static void OnSpawned(SpawnedEventArgs ev)
     {
         if(ev.Player == null) return;
         if (ev.Reason is SpawnReason.Respawn or SpawnReason.RoundStart or SpawnReason.LateJoin)
-            ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.SpawnReward);
+            ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.SpawnGameStoreReward);
     }
     
     public static void OnThownItem(ThrownProjectileEventArgs ev)
     {
-        ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.UsingItemReward);
+        ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.UsingItemGameStoreReward);
     }
     
     public static void OnDying(DyingEventArgs ev)
@@ -57,11 +57,11 @@ public class EventHandlers
         if(Round.IsEnded || !Round.IsStarted) return;
         if (ev.Player == null) 
             return;
-        ev.Player.GiveGameStoreReward(GameStorePlugin.Instance.Config.DeathReward);
+        ev.Player.GiveGameStoreReward(GameStorePlugin.Instance.Config.DeathGameStoreReward);
         if (ev.DamageHandler.Type == DamageType.PocketDimension)
         {
             if (!PocketPlayers.ContainsKey(ev.Player)) return; 
-            PocketPlayers[ev.Player].GiveGameStoreReward(GameStorePlugin.Instance.Config.KillReward);
+            PocketPlayers[ev.Player].GiveGameStoreReward(GameStorePlugin.Instance.Config.KillGameStoreReward);
             PocketPlayers.Remove(ev.Player);
             return;
         }
@@ -72,9 +72,9 @@ public class EventHandlers
         if (ev.Attacker == null || ev.Attacker.Id == ev.Player.Id)
             return;
         if (ev.Player.Role.Team == Team.SCPs && ev.Player.Role.Type != RoleTypeId.Scp0492)
-            ev.Attacker.GiveGameStoreReward(GameStorePlugin.Instance.Config.ScpKillReward);
+            ev.Attacker.GiveGameStoreReward(GameStorePlugin.Instance.Config.ScpKillGameStoreReward);
         else
-            ev.Attacker.GiveGameStoreReward(GameStorePlugin.Instance.Config.KillReward);
+            ev.Attacker.GiveGameStoreReward(GameStorePlugin.Instance.Config.KillGameStoreReward);
 
     }
     
@@ -87,7 +87,7 @@ public class EventHandlers
     public static void OnFailingEscapePocketDimension(FailingEscapePocketDimensionEventArgs ev)
     {
         if (!PocketPlayers.ContainsKey(ev.Player)) return;
-        PocketPlayers[ev.Player].GiveGameStoreReward(GameStorePlugin.Instance.Config.KillReward);
+        PocketPlayers[ev.Player].GiveGameStoreReward(GameStorePlugin.Instance.Config.KillGameStoreReward);
         PocketPlayers.Remove(ev.Player);
     }
     

@@ -2,6 +2,7 @@
 using Core.Features.Extensions;
 using DayLight.Core.API.Events.Handlers;
 using DayLight.Core.API.Features;
+using DayLight.Core.Models;
 using DayLight.DiscordSync.Dependencys;
 using DayLight.DiscordSync.Dependencys.Stats;
 using JetBrains.Annotations;
@@ -107,7 +108,7 @@ public static class DayLightDatabase
     public class GameStore
     {
 
-        public static void BuyItem(Player player, ItemPrice item)
+        public static void BuyItem(Player player, GameStoreItemPrice gameStoreItem)
         {
             if (player.DoNotTrack) return;
             var playerID = player.RawUserId.Split('@')[0];
@@ -116,15 +117,15 @@ public static class DayLightDatabase
             var dbplayer = players.FindOne(x => x.SteamID == playerID);
 
             if (dbplayer == null) return;
-            dbplayer.Stats.Money -= item.Price;
-            if (item.IsAmmo)
-                foreach (var items in item.AmmoTypes)
+            dbplayer.Stats.Money -= gameStoreItem.Price;
+            if (gameStoreItem.IsAmmo)
+                foreach (var items in gameStoreItem.AmmoTypes)
                     player.AddAmmo(items.Key, items.Value);
             else
-                foreach (var items in item.ItemTypes)
+                foreach (var items in gameStoreItem.ItemTypes)
                     player.AddItem(items);
-            GameStoreHandler.OnBuyingItem(player, item, item.Price);
-            player.SendHint(ScreenZone.Notifications, DayLightCore.Instance.Config.BoughtItemHint.Replace("(item)", item.Name), 3);
+            GameStoreHandler.OnBuyingItem(player, gameStoreItem, gameStoreItem.Price);
+            player.SendHint(ScreenZone.Notifications, DayLightCore.Instance.Config.BoughtItemHint.Replace("(item)", gameStoreItem.Name), 3);
             players.Update(dbplayer);
         }
         public static bool CanRemoveMoneyFromPlayer(Player player, float reward)
@@ -161,7 +162,7 @@ public static class DayLightDatabase
             dbplayer.Stats.Money += money;
             if (dbplayer.Stats.Money < 0) dbplayer.Stats.Money = 0;
             GameStoreHandler.OnGainingMoney(player,
-                new Reward()
+                new GameStoreReward()
                 {
                     Name = "AddMoney", Money = new Dictionary<RoleTypeId, int>()
                     {
@@ -173,7 +174,7 @@ public static class DayLightDatabase
 
             players.Update(dbplayer);
         }
-        public static void AddRewardToPlayer(Player player, Reward reward)
+        public static void AddRewardToPlayer(Player player, GameStoreReward gameStoreReward)
         {
             if (player == null) return;
             var playerID = player.RawUserId.Split('@')[0];
@@ -182,49 +183,49 @@ public static class DayLightDatabase
 
             if (dbplayer == null) return;
 
-            if (reward.Money.ContainsKey(player.Role.Type))
+            if (gameStoreReward.Money.ContainsKey(player.Role.Type))
             {
                 var advancedPlayer = AdvancedPlayer.Get(player);
-                if (advancedPlayer != null && advancedPlayer.GameStoreRewardLimit.ContainsKey(reward.Name))
+                if (advancedPlayer != null && advancedPlayer.GameStoreRewardLimit.ContainsKey(gameStoreReward.Name))
                 {
-                    var amount = advancedPlayer.GameStoreRewardLimit[reward.Name];
-                    if (amount >= reward.MaxPerRound && reward.MaxPerRound != -1)
+                    var amount = advancedPlayer.GameStoreRewardLimit[gameStoreReward.Name];
+                    if (amount >= gameStoreReward.MaxPerRound && gameStoreReward.MaxPerRound != -1)
                     {
                         return;
                     }
 
-                    advancedPlayer.GameStoreRewardLimit[reward.Name]++;
+                    advancedPlayer.GameStoreRewardLimit[gameStoreReward.Name]++;
                 }
                 else
                 {
-                    if (advancedPlayer != null) advancedPlayer.GameStoreRewardLimit.Add(reward.Name, 1);
+                    if (advancedPlayer != null) advancedPlayer.GameStoreRewardLimit.Add(gameStoreReward.Name, 1);
                 }
-                if (reward.Money[player.Role.Type] == 0) return;
-                dbplayer.Stats.Money += reward.Money[player.Role.Type] * DayLightCore.Instance.Config.MoneyMuliplier;
-                GameStoreHandler.OnGainingMoney(player, reward, reward.Money[player.Role.Type] * DayLightCore.Instance.Config.MoneyMuliplier);
+                if (gameStoreReward.Money[player.Role.Type] == 0) return;
+                dbplayer.Stats.Money += gameStoreReward.Money[player.Role.Type] * DayLightCore.Instance.Config.MoneyMuliplier;
+                GameStoreHandler.OnGainingMoney(player, gameStoreReward, gameStoreReward.Money[player.Role.Type] * DayLightCore.Instance.Config.MoneyMuliplier);
 
 
             }
-            else if (reward.Money.ContainsKey(RoleTypeId.None))
+            else if (gameStoreReward.Money.ContainsKey(RoleTypeId.None))
             {
 
                 var adv = AdvancedPlayer.Get(player);
-                if (adv != null && adv.GameStoreRewardLimit.ContainsKey(reward.Name))
+                if (adv != null && adv.GameStoreRewardLimit.ContainsKey(gameStoreReward.Name))
                 {
-                    var amount = adv.GameStoreRewardLimit[reward.Name];
-                    if (amount >= reward.MaxPerRound && reward.MaxPerRound != -1)
+                    var amount = adv.GameStoreRewardLimit[gameStoreReward.Name];
+                    if (amount >= gameStoreReward.MaxPerRound && gameStoreReward.MaxPerRound != -1)
                     {
                         return;
                     }
 
-                    adv.GameStoreRewardLimit[reward.Name]++;
+                    adv.GameStoreRewardLimit[gameStoreReward.Name]++;
                 }
                 else
                 {
-                    if (adv != null) adv.GameStoreRewardLimit.Add(reward.Name, 1);
+                    if (adv != null) adv.GameStoreRewardLimit.Add(gameStoreReward.Name, 1);
                 }
-                dbplayer.Stats.Money += reward.Money[RoleTypeId.None] * DayLightCore.Instance.Config.MoneyMuliplier;
-                GameStoreHandler.OnGainingMoney(player, reward, reward.Money[RoleTypeId.None] * DayLightCore.Instance.Config.MoneyMuliplier);
+                dbplayer.Stats.Money += gameStoreReward.Money[RoleTypeId.None] * DayLightCore.Instance.Config.MoneyMuliplier;
+                GameStoreHandler.OnGainingMoney(player, gameStoreReward, gameStoreReward.Money[RoleTypeId.None] * DayLightCore.Instance.Config.MoneyMuliplier);
             
             }
             else

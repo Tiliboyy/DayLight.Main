@@ -1,3 +1,5 @@
+using DayLight.Core.API;
+using DayLight.Core.API.Attributes;
 using DayLight.GameStore.Configs;
 using Exiled.Events.Handlers;
 using Neuron.Core.Plugins;
@@ -10,20 +12,18 @@ using Player = Exiled.Events.Handlers.Player;
 namespace DayLight.GameStore;
 
 [Plugin(Name = "DayLight.GameStore", Author = "Tiliboyy", Version = "1.0.0")]
-public class GameStorePlugin : ReloadablePlugin<GameStoreConfig, GameStoreTranslation>
+public class GameStorePlugin : DayLightCoreModule<GameStoreConfig, GameStoreTranslation>
 {
     public static bool EnableGamestore = true;
     
     public static int MoneyMuliplier = 1;
 
     public static GameStorePlugin Instance;
-    public override void EnablePlugin()
+    public override void Enabled()
     {
         try
         {
             Instance = this;
-            if (!Directory.Exists(Path.Combine(Paths.Configs, "Gamestore/")))
-                Directory.CreateDirectory(Path.Combine(Paths.Configs, "Gamestore/"));
             Player.Dying += EventHandlers.EventHandlers.OnDying;
             Player.Escaping += EventHandlers.EventHandlers.OnEscaping;
             Player.Spawned += EventHandlers.EventHandlers.OnSpawned;

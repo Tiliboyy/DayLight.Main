@@ -1,4 +1,5 @@
 using DayLight.Core;
+using DayLight.Core.API;
 using DayLight.Core.API.Database;
 using DayLight.Core.API.Features;
 using DayLight.DiscordSync.Dependencys.Stats;
@@ -27,14 +28,12 @@ public static class Extensions
         players.Update(dbplayer);
         return true;
     }
-    
-    
     public static string GetAvailableCategories(this Player player, bool ShowAll = false)
     {
         var list = GameStorePlugin.Instance.Config.Categorys.OrderBy(category => category.id).ToList();
         var categories = list;
         if (GameStorePlugin.Instance.Config.ShowOnlyAvalibleItems && !ShowAll)
-            categories = list.Where(VARIABLE => VARIABLE.AllowedRoles.Contains(player.Role.Type) || VARIABLE.AllowedRoles.Contains(RoleTypeId.None) && !player.IsScp).ToList();
+            categories = list.Where(category => category.AllowedRoles.Contains(player.Role.Type) || category.AllowedRoles.Contains(RoleTypeId.None) && !player.IsScp).ToList();
         var category = $"";;
         var i = 1;
         foreach (var categoryitem in categories)
@@ -46,7 +45,6 @@ public static class Extensions
             category = GameStorePlugin.Instance.Translation.NothingToBuy;
         return category + "";
     }
-    
     public static string GetAvailableItems(this Player player,int category)
     {
         var items = $"";
@@ -66,7 +64,6 @@ public static class Extensions
         
         return items + "";
     }
-    
     public static string BuyItemFromName(this Player player, string Name)
     {
         var advancedPlayer = AdvancedPlayer.Get(player);
@@ -156,7 +153,6 @@ public static class Extensions
         return !nomoney ? GameStorePlugin.Instance.Translation.CantAfford : GameStorePlugin.Instance.Translation.MaxAmountReached;
 
     }
-    
     public static string BuyItemFromId(this Player player, int category, int item, bool ShowAll = false)
     {
         var advancedPlayer = AdvancedPlayer.Get(player);
@@ -240,5 +236,4 @@ public static class Extensions
 
 
     }
-
 }

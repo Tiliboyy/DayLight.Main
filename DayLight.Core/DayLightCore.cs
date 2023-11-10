@@ -25,7 +25,6 @@ namespace DayLight.Core;
 [Module(Name = "DayLight.Core", Author = "Tiliboyy", Dependencies = new[] { typeof(PatcherModule) })]
 public class DayLightCore : ReloadableModule<Config, Translation>
 {
-    public static ILogger NeuronLogger;
     public static DayLightCore Instance;
         
     [Inject]
@@ -33,11 +32,8 @@ public class DayLightCore : ReloadableModule<Config, Translation>
 
     public override void EnableModule()
     {
-        NeuronLogger = Logger;
         if(!Config.Enabled) return;
-        Player.Verified += EventHandler.OnVerified; 
-        Server.RespawningTeam += SubclassEventHandlers.OnRespawningTeam;
-        Server.RoundEnded += SubclassEventHandlers.OnRoundEnd;
+        EventHandler.RegisterEvents();
         foreach (var commandBinding in ModuleCommandBindingQueue)
         {
             CustomCommand.RegisterCommand(commandBinding.Type);
@@ -53,10 +49,9 @@ public class DayLightCore : ReloadableModule<Config, Translation>
     public override void Disable()
     {
         if(!Config.Enabled) return;
+        EventHandler.UnRegisterEvents();
         Instance = null;
-        Player.Verified -= EventHandler.OnVerified;
 
-        base.Disable();
     }
 
     public override void LateEnable()
@@ -75,7 +70,7 @@ public class DayLightCore : ReloadableModule<Config, Translation>
         if(!args.MetaType.TryGetAttribute<AutomaticAttribute>(out _)) return;
         if(!args.MetaType.TryGetAttribute<CommandAttribute>(out _)) return;
         if(!args.MetaType.Is<CustomCommand>() && !args.MetaType.Is<ParentCommand>()) return;
-        Core.Logger.Debug(args.MetaType.Type.FullName);
+        API.Logger.Debug(args.MetaType.Type.FullName);
         args.Outputs.Add(new CommandBinding()
         {
             Type = args.MetaType.Type

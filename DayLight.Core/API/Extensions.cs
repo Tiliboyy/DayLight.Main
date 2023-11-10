@@ -1,5 +1,6 @@
 
 using DayLight.Core.API.Database;
+using DayLight.Core.Models;
 using DayLight.DiscordSync.Dependencys;
 using DayLight.DiscordSync.Dependencys.Stats;
 using Exiled.API.Features;
@@ -17,9 +18,9 @@ public static class Extensions
     {
         DayLightDatabase.GameStore.AddMoneyToPlayer(player, money);
     }
-    public static void GiveGameStoreReward(this Player player, Reward reward)
+    public static void GiveGameStoreReward(this Player player, GameStoreReward gameStoreReward)
     {
-        DayLightDatabase.GameStore.AddRewardToPlayer(player, reward);
+        DayLightDatabase.GameStore.AddRewardToPlayer(player, gameStoreReward);
     }
     [CanBeNull]
     public static DatabasePlayer GetDBPlayer(this Player player) => DayLightDatabase.GetDBPlayer(player);

@@ -1,5 +1,7 @@
 ﻿#region
 
+using DayLight.Core.API;
+using DayLight.Core.API.Attributes;
 using Exiled.API.Features;
 using Neuron.Core.Plugins;
 using Neuron.Modules.Reload;
@@ -11,18 +13,18 @@ using System.IO;
 namespace DayLight.Moderation;
 
 [Plugin(Name = "ModerationSystem", Author = "Tiliboyy")]
-public class ModerationSystemPlugin : ReloadablePlugin<ModerationConfig, ModerationTranslation>
+public class ModerationSystemPlugin : DayLightCoreModule<ModerationConfig, ModerationTranslation>
 {
     public static ModerationSystemPlugin Instance;
     
-    public override void EnablePlugin()
+    public override void Enabled()
     {
         try
         {
             if (!Directory.Exists(Path.Combine(Paths.Configs, "ModerationSystem/")))
                 Directory.CreateDirectory(Path.Combine(Paths.Configs, "ModerationSystem/"));
             Instance = this;
-            Core.Logger.Warn("subscibing");
+            Core.API.Logger.Warn("subscibing");
             Core.API.Events.Handlers.RemoteAdmin.RequestingPlayerData.Subscribe(EventHandler.OnRequestingData);
         }
         catch (Exception error)

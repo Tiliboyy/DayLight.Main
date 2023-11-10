@@ -1,4 +1,6 @@
-﻿using DayLight.Core.API.Subclasses.Features;
+﻿using DayLight.Core.API;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.Subclasses.Features;
 using DayLight.Subclasses.Subclasses;
 using Neuron.Core;
 using Neuron.Core.Plugins;
@@ -9,7 +11,7 @@ using System;
 
 namespace DayLight.Subclasses;
 [Plugin(Name = "DayLight.Subclasses", Author = "Tiliboyy")]
-public class SubclassesPlugin : ReloadablePlugin<SubclassConfig, SubclassTranslation>
+public class SubclassesPlugin : DayLightCoreModule<SubclassConfig, SubclassTranslation>
 {
     public static SubclassesPlugin Instance;
     public static RolesConfigs RolesConfig = new RolesConfigs();
@@ -17,7 +19,7 @@ public class SubclassesPlugin : ReloadablePlugin<SubclassConfig, SubclassTransla
     public NeuronBase Base {get;set;}
 
     
-    public override void EnablePlugin()
+    public override void Enabled()
     {
         try
         {

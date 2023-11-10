@@ -35,7 +35,7 @@ public class CategoryManager
             return;
         Id = id;
         Size = size;
-        Color = Utils.Colors[color];
+        Color = StaticUtils.Colors[color];
         RemovePlayersFromDefaultList = removePlayersFromDefaultList;
         AbovePlayers = abovePlayers;
         Name = name;

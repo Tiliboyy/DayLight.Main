@@ -1,4 +1,5 @@
 using DayLight.Core;
+using DayLight.Core.Models;
 using Exiled.API.Enums;
 using Neuron.Core.Meta;
 using PlayerRoles;
@@ -23,7 +24,7 @@ public class GameStoreConfig : IConfig
     public float MoneyLimit { get; set; } = 200000;
     
     [Description("The amount a player gets from each event. 0 disables the event. -1 Is unlimited")]
-    public Reward EscapeReward { get; set; } = new()
+    public GameStoreReward EscapeGameStoreReward { get; set; } = new()
     {
         Name = "Escape",
 
@@ -35,7 +36,7 @@ public class GameStoreConfig : IConfig
         MaxPerRound = 1
     };
     [Description("The amount of money the cuffer of an escaped player gets when he escapes")]
-    public Reward CufferReward { get; set; } = new()
+    public GameStoreReward CufferGameStoreReward { get; set; } = new()
     {
         Name = "EscapeCuffer",
         Money = new Dictionary<RoleTypeId, int>
@@ -46,7 +47,7 @@ public class GameStoreConfig : IConfig
     };
     [Description("The amount of money SCP079 gets when leveling")]
 
-    public Reward Scp079LevelReward { get; set; } = new()
+    public GameStoreReward Scp079LevelGameStoreReward { get; set; } = new()
     {
         Name = "Scp079Level",
 
@@ -57,7 +58,7 @@ public class GameStoreConfig : IConfig
         MaxPerRound = -1
     };
     [Description("The amount of money you get per kill as that role")]
-    public Reward KillReward { get; set; } = new()
+    public GameStoreReward KillGameStoreReward { get; set; } = new()
     {
         Name = "Kill",
         Money = new Dictionary<RoleTypeId, int>
@@ -86,7 +87,7 @@ public class GameStoreConfig : IConfig
     };
     [Description("The amount of money the killer of an scp gets")]
 
-    public Reward ScpKillReward { get; set; } = new()
+    public GameStoreReward ScpKillGameStoreReward { get; set; } = new()
     {
         Name = "SCPKilled",
 
@@ -98,7 +99,7 @@ public class GameStoreConfig : IConfig
     };
     [Description("The amount of money a player gets when he dies")]
 
-    public Reward DeathReward { get; set; } = new()
+    public GameStoreReward DeathGameStoreReward { get; set; } = new()
     {
         Name = "Died",
 
@@ -110,7 +111,7 @@ public class GameStoreConfig : IConfig
     };
     [Description("The amount of money a player gets when he is using an item")]
 
-    public Reward UsingItemReward { get; set; } = new()
+    public GameStoreReward UsingItemGameStoreReward { get; set; } = new()
     {
         Name = "UsingItem",
 
@@ -122,7 +123,7 @@ public class GameStoreConfig : IConfig
     };
     [Description("The amount of money a player gets when he spawns as a role")]
 
-    public Reward SpawnReward { get; set; } = new()
+    public GameStoreReward SpawnGameStoreReward { get; set; } = new()
     {
         Name = "Spawned",
 
@@ -156,7 +157,7 @@ public class GameStoreConfig : IConfig
         {
             id = 1, AllowedRoles = new List<RoleTypeId> { RoleTypeId.ClassD }, Name = "D-Klasse",
             Description = "Hier kannst du Gegenstände für D-Klassen kaufen.",
-            Items = new List<ItemPrice>
+            Items = new List<GameStoreItemPrice>
             {
                 new()
                 {
@@ -195,7 +196,7 @@ public class GameStoreConfig : IConfig
             Name = "Wissenschaftler",
             AllowedRoles = new List<RoleTypeId> { RoleTypeId.Scientist },
             Description = "Hier kannst du Gegenstände für Wissenschaftler kaufen.",
-            Items = new List<ItemPrice>
+            Items = new List<GameStoreItemPrice>
             {
                 new()
                 {
@@ -278,7 +279,7 @@ public class GameStoreConfig : IConfig
         {
             id = 3, AllowedRoles = new List<RoleTypeId> { RoleTypeId.FacilityGuard }, Name = "Sicherheitspersonal",
             Description = "Hier kannst du Gegenstände für Sicherheitspersonal kaufen.",
-            Items = new List<ItemPrice>
+            Items = new List<GameStoreItemPrice>
             {
                 new()
                 {
@@ -350,7 +351,7 @@ public class GameStoreConfig : IConfig
             AllowedRoles = new List<RoleTypeId>
                 { RoleTypeId.NtfCaptain, RoleTypeId.NtfPrivate, RoleTypeId.NtfSergeant, RoleTypeId.NtfSpecialist },
             Name = "MTF", Description = "Hier kannst du Gegenstände für das MTF kaufen.",
-            Items = new List<ItemPrice>
+            Items = new List<GameStoreItemPrice>
             {
                 new()
                 {
@@ -443,7 +444,7 @@ public class GameStoreConfig : IConfig
                 RoleTypeId.ChaosConscript, RoleTypeId.ChaosMarauder, RoleTypeId.ChaosRepressor, RoleTypeId.ChaosRifleman
             },
             Name = "Chaos", Description = "Hier kannst du Gegenstände für Chaos insurgency kaufen.",
-            Items = new List<ItemPrice>
+            Items = new List<GameStoreItemPrice>
             {
                 new()
                 {
@@ -535,7 +536,7 @@ public class GameStoreConfig : IConfig
         {
             id = 6, AllowedRoles = new List<RoleTypeId> { RoleTypeId.None }, Name = "Allgemein",
             Description = "Hier findest du allgemeine Sachen.",
-            Items = new List<ItemPrice>
+            Items = new List<GameStoreItemPrice>
             {
                 new()
                 {
@@ -594,7 +595,7 @@ public class GameStoreConfig : IConfig
         {
             id = 7, AllowedRoles = new List<RoleTypeId> { RoleTypeId.None },
             Name = "Munition", Description = "Hier findest du Munition",
-            Items = new List<ItemPrice>
+            Items = new List<GameStoreItemPrice>
             {
                 new()
                 {

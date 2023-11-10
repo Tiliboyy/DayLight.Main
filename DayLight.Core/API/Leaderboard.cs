@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DayLight.Core;
+namespace DayLight.Core.API;
 
 public class Leaderboard
 {

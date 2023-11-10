@@ -1,7 +1,9 @@
 ﻿using DayLight.Core.API.Events.EventArgs;
 using DayLight.Core.API.Features;
+using DayLight.Core.API.Subclasses.EventHandlers;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
+using Exiled.Events.Handlers;
 using VoiceChat;
 
 namespace DayLight.Core.EventHandlers;
@@ -34,5 +36,17 @@ public class EventHandler
     public static void OnRoundEnd(RoundEndedEventArgs ev)
     {
         
+    }
+    public static void RegisterEvents()
+    {
+        Player.Verified += EventHandler.OnVerified; 
+        Server.RespawningTeam += SubclassEventHandlers.OnRespawningTeam;
+        Server.RoundEnded += SubclassEventHandlers.OnRoundEnd;
+    }
+    public static void UnRegisterEvents()
+    {
+        Player.Verified -= EventHandler.OnVerified; 
+        Server.RespawningTeam -= SubclassEventHandlers.OnRespawningTeam;
+        Server.RoundEnded -= SubclassEventHandlers.OnRoundEnd;
     }
 }

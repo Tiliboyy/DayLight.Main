@@ -1,3 +1,4 @@
+using DayLight.Core.Models;
 using Neuron.Core.Events;
 using Player = Exiled.API.Features.Player;
 
@@ -8,11 +9,11 @@ public class GainedMoneyEventArgs : IEvent
     public Player Player { get; }
     
     public int Amount { get; }
-    public Reward Reward { get; }
+    public GameStoreReward GameStoreReward { get; }
 
-    public GainedMoneyEventArgs(Player player, Reward reward, int amount)
+    public GainedMoneyEventArgs(Player player, GameStoreReward gameStoreReward, int amount)
     {
-        Reward = reward;
+        GameStoreReward = gameStoreReward;
         Player = player;
         Amount = amount;
     }

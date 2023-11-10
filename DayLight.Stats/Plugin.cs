@@ -1,6 +1,8 @@
 ﻿#region
 
 using DayLight.Core;
+using DayLight.Core.API;
+using DayLight.Core.API.Attributes;
 using DayLight.Stat.Achievements;
 using DayLight.Stat.Commands;
 using DayLight.Stat.Stats;
@@ -15,12 +17,12 @@ using System.IO;
 namespace DayLight.Stat;
 
 [Plugin(Name = "DiscordSync.Stats", Author = "Tiliboyy")]
-public class DiscordSyncStatsPlugin : ReloadablePlugin<Config, StatsTranslation>
+public class DiscordSyncStatsPlugin : DayLightCoreModule<Config, StatsTranslation>
 {
     public static DiscordSyncStatsPlugin Instance;
     public static bool DisableDiscordSyncStats = false;
     public static string PlaytimeLeaderboard = "";
-    public override void EnablePlugin()
+    public override void Enabled()
     {
         Instance = this;
         TryCreateDirectory();

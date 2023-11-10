@@ -1,6 +1,7 @@
 ﻿#region
 
 using DayLight.Core;
+using DayLight.Core.API;
 using DayLight.Core.API.Database;
 using DayLight.DiscordSync.Dependencys.Stats;
 using System;
