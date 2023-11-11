@@ -1,9 +1,0 @@
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.DiscordSync.Dependencys\bin\Debug\DayLight.DiscordSync.Dependencys.dll
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.DiscordSync.Dependencys\bin\Debug\DayLight.DiscordSync.Dependencys.pdb
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.DiscordSync.Dependencys\bin\Debug\Newtonsoft.Json.dll
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.DiscordSync.Dependencys\bin\Debug\Newtonsoft.Json.xml
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.DiscordSync.Dependencys\obj\Debug\DayLight.DiscordSync.Dependencys.csproj.AssemblyReference.cache
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.DiscordSync.Dependencys\obj\Debug\DayLight.DiscordSync.Dependencys.csproj.CoreCompileInputs.cache
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.DiscordSync.Dependencys\obj\Debug\DayLight.DiscordSync.Dependencys.csproj.CopyComplete
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.DiscordSync.Dependencys\obj\Debug\DayLight.DiscordSync.Dependencys.dll
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.DiscordSync.Dependencys\obj\Debug\DayLight.DiscordSync.Dependencys.pdb
