@@ -479,6 +479,10 @@
         <Project>{04f7a49f-5696-4b43-80f7-ac5b7f01eb63}</Project>
         <Name>DayLight.Dependencys</Name>
       </ProjectReference>
+      <ProjectReference Include="..\Neuron.Bootstrap\Neuron.Bootstrap.csproj">
+        <Project>{a42fb731-7860-4ff5-be59-a00feb7fa35d}</Project>
+        <Name>Neuron.Bootstrap</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

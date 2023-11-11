@@ -1,4 +1,5 @@
-﻿using Neuron.Core;
+﻿using Exiled.Events.Handlers;
+using Neuron.Core;
 using Neuron.Modules.Configs.Localization;
 using Neuron.Modules.Reload;
 using System.Reflection;
@@ -20,11 +21,16 @@ public class DayLightCoreModule<TConfig, TTranslation> : ReloadablePlugin<TConfi
         {
             return;
         }
+        Server.WaitingForPlayers += LateLoad;
         Enabled();
         API.Logger.Info($"Loaded plugin {Assembly.GetAssembly(this.GetType()).GetName().Name}");
 
     }
 
+    public virtual void LateLoad()
+    {
+        
+    }
     public override void OnReload()
     {
         if (!StaticUtils.GetOrCreate<TConfig>().Enabled)

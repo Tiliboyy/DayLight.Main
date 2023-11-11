@@ -1,0 +1,57 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Bootstrap\\Neuron.Bootstrap.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Bootstrap\\Neuron.Bootstrap.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Bootstrap\\Neuron.Bootstrap.csproj",
+        "projectName": "Neuron.Bootstrap",
+        "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Bootstrap\\Neuron.Bootstrap.csproj",
+        "packagesPath": "C:\\Users\\tilau\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Bootstrap\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "C:\\Users\\tilau\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net481"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net481": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net481": {
+          "dependencies": {
+            "EXILED": {
+              "target": "Package",
+              "version": "[8.3.4, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
