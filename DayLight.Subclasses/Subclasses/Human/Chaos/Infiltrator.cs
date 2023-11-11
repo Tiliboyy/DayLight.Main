@@ -27,7 +27,7 @@ public class Infiltrator: Subclass
 
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override List<string> Inventory { get; set; } = new List<string>()
+    public override List<string> Inventory { get; set; } = new()
     {
         $"{ItemType.GunAK}",
         $"{ItemType.KeycardChaosInsurgency}",
@@ -42,7 +42,7 @@ public class Infiltrator: Subclass
 
 
 
-    public override List<CustomAbility> CustomAbilities { get; set; } = new List<CustomAbility>()
+    public override List<CustomAbility> CustomAbilities { get; set; } = new()
     {
     };
 }

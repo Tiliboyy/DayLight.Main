@@ -35,7 +35,7 @@ public class Juggernaut : Subclass
         base.RoleAdded(player);
     }
 
-    public override List<CustomAbility> CustomAbilities { get; set; } = new List<CustomAbility>()
+    public override List<CustomAbility> CustomAbilities { get; set; } = new()
     {
     };
 }

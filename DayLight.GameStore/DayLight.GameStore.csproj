@@ -419,7 +419,7 @@
         <Compile Include="Configs\GameStoreTranslation.cs" />
         <Compile Include="EventHandlers\EventHandlers.cs" />
         <Compile Include="Extensions.cs" />
-        <Compile Include="GameStorePlugin.cs" />
+        <Compile Include="Plugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>

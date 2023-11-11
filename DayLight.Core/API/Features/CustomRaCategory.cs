@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace DayLight.Core.API.Features;
 
-public class CategoryManager
+public class CustomRaCategory
 {
-    public static List<CategoryManager> RemoteAdminCategories = new List<CategoryManager>();
+    public static List<CustomRaCategory> RemoteAdminCategories = new();
     
     public int Id { get; set; }
 
@@ -23,13 +23,13 @@ public class CategoryManager
     public int Size { get; set; }
     
     [CanBeNull]
-    public CategoryManager Get(int id)
+    public CustomRaCategory Get(int id)
     {
         return RemoteAdminCategories.First(x => x.Id == id);
     }
 
-    public List<ReferenceHub> Players = new List<ReferenceHub>();
-    public CategoryManager(string name,int id,int priority,bool abovePlayers, bool removePlayersFromDefaultList, Misc.PlayerInfoColorTypes color, int size = 20)
+    public List<ReferenceHub> Players = new();
+    public CustomRaCategory(string name,int id,int priority,bool abovePlayers, bool removePlayersFromDefaultList, Misc.PlayerInfoColorTypes color, int size = 20)
     {
         if(RemoteAdminCategories.Exists(x => RemoteAdminCategories.Contains(x)))
             return;
@@ -41,14 +41,6 @@ public class CategoryManager
         Name = name;
         Priority = priority;
         RemoteAdminCategories.Add(this);
-    }
-    public void AddPlayer(List<Player> players)
-    {
-        players.ForEach(x=> Players.Add(x.ReferenceHub));
-    }
-    public void AddPlayer(Player player)
-    {
-        Players.Add(player.ReferenceHub);
     }
 
 }

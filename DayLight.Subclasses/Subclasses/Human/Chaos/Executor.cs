@@ -28,7 +28,7 @@ public class Executor: Subclass
 
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override List<string> Inventory { get; set; } = new List<string>()
+    public override List<string> Inventory { get; set; } = new()
     {
         $"{ItemType.GunRevolver}",
         $"{ItemType.KeycardChaosInsurgency}",
@@ -40,7 +40,7 @@ public class Executor: Subclass
 
     };
     
-    public override List<CustomAbility> CustomAbilities { get; set; } = new List<CustomAbility>()
+    public override List<CustomAbility> CustomAbilities { get; set; } = new()
     {
         new No207Damage(),
     };

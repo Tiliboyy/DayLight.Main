@@ -11,11 +11,11 @@ public class EventHandlers
 {
     public static List<CoroutineHandle> Coroutines = new();
     public static Dictionary<Player, int> TrackedPlayer = new();
-    public static Dictionary<Player, Player> pocketPlayers = new Dictionary<Player, Player>();
+    public static Dictionary<Player, Player> pocketPlayers = new();
 
     public static void OnVerified(VerifiedEventArgs ev)
     {
-        Coroutines.Add(Timing.RunCoroutine(HintDisplay.Hints(ev.Player)));
+        Coroutines.Add(Timing.RunCoroutine(HintDisplay.DisplayHint(ev.Player)));
     }
 
     public static void OnDied(DiedEventArgs ev)

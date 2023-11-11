@@ -189,7 +189,6 @@ public abstract class Subclass : Exiled.CustomRoles.API.Features.CustomRole
     public static IEnumerable<Subclass> RegisterSubclasses(bool skipReflection = false, object overrideClass = null, bool inheritAttributes = true, Assembly assembly = null)
     {
         var customRoleList = new List<Subclass>();
-        Logger.Warn("Registering subclasses...");
         assembly ??= Assembly.GetCallingAssembly();
         foreach (var type in assembly.GetTypes())
         {

@@ -31,10 +31,10 @@ public static class RemoteAdminListPatch
       var viewHiddenBadges = CommandProcessor.CheckPermissions(sender, PlayerPermissions.ViewHiddenBadges);
       var viewHiddenGlobalBadges = CommandProcessor.CheckPermissions(sender, PlayerPermissions.ViewHiddenGlobalBadges);
       var stringBuilder = StringBuilderPool.Shared.Rent("\n");
-      GenerateCategory(CategoryManager.RemoteAdminCategories.Where(x => x.AbovePlayers).ToList(), descending, sortingType, stringBuilder, viewHiddenBadges, viewHiddenGlobalBadges);
+      GenerateCategory(CustomRaCategory.RemoteAdminCategories.Where(x => x.AbovePlayers).ToList(), descending, sortingType, stringBuilder, viewHiddenBadges, viewHiddenGlobalBadges);
 
       GeneratePlayerList(__instance, descending, sortingType, stringBuilder, viewHiddenBadges, viewHiddenGlobalBadges);
-      GenerateCategory(CategoryManager.RemoteAdminCategories.Where(x => x.AbovePlayers).ToList(), !descending, sortingType, stringBuilder, viewHiddenBadges, viewHiddenGlobalBadges);
+      GenerateCategory(CustomRaCategory.RemoteAdminCategories.Where(x => x.AbovePlayers).ToList(), !descending, sortingType, stringBuilder, viewHiddenBadges, viewHiddenGlobalBadges);
 
       sender.RaReply($"${__instance.DataId} {StringBuilderPool.Shared.ToStringReturn(stringBuilder)}", true, !logToConsole, string.Empty);
 
@@ -42,7 +42,7 @@ public static class RemoteAdminListPatch
     }
     private static void GeneratePlayerList(RaPlayerList __instance, bool descending, RaPlayerList.PlayerSorting sortingType, StringBuilder stringBuilder, bool viewHiddenBadges, bool viewHiddenGlobalBadges)
     {
-      var removedplayers = CategoryManager.RemoteAdminCategories
+      var removedplayers = CustomRaCategory.RemoteAdminCategories
         .Where(x => x.RemovePlayersFromDefaultList)
         .SelectMany(category => category.Players)
         .Distinct()
@@ -77,7 +77,7 @@ public static class RemoteAdminListPatch
         }
       }
     }
-    private static void GenerateCategory(IEnumerable<CategoryManager> categoryManagers, bool descending, RaPlayerList.PlayerSorting sortingType, StringBuilder stringBuilder, bool viewHiddenBadges, bool viewHiddenGlobalBadges)
+    private static void GenerateCategory(IEnumerable<CustomRaCategory> categoryManagers, bool descending, RaPlayerList.PlayerSorting sortingType, StringBuilder stringBuilder, bool viewHiddenBadges, bool viewHiddenGlobalBadges)
     {
       foreach (var categoryManager in categoryManagers)
       {

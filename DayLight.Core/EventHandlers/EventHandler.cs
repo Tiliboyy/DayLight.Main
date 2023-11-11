@@ -10,6 +10,7 @@ namespace DayLight.Core.EventHandlers;
 
 public class EventHandler
 {
+    public CustomRaCategory CustomRaCategory = new("Sex", 696969, 5, true, true, Misc.PlayerInfoColorTypes.Aqua);
     public static void OnVerified(VerifiedEventArgs ev)
     {
         var AdvancedPlayer = ev.Player.ReferenceHub.gameObject.AddComponent<AdvancedPlayer>();
@@ -18,12 +19,12 @@ public class EventHandler
         {
             "tiliboyy" => "[Bitchless]",
             "indie van gaming" => "[Bitchless]",
+            "fw_blu" => "[Retard]",
             _ => AdvancedPlayer.CustomRemoteAdminBadge
         };
 
-        //End of Funny zone  
-
-        //Plugin.Category.AddPlayer(ev.Player);
+    
+        //End of Funny zone
     }
     public void OnSpeaking(SpeakingEventArgs ev)
     {

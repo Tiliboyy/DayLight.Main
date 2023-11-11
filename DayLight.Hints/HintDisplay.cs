@@ -17,7 +17,7 @@ namespace DayLight.Hints;
 
 public class HintDisplay
 {
-    internal static IEnumerator<float> Hints(Player player)
+    internal static IEnumerator<float> DisplayHint(Player player)
     {
         while (true)
         {
@@ -44,7 +44,7 @@ public class HintDisplay
         else
         {
             if (spectatorcount == 0 || ToggleSpectators.NoSpectateList.Contains(player)) return;
-            for (int i = 0; i > spectatorcount + 1; i++)
+            for (var i = 0; i > spectatorcount + 1; i++)
             {
                 spectatorList.Append("\n");
             }
@@ -54,6 +54,7 @@ public class HintDisplay
 
 
     }
+    public override string ToString() => base.ToString();
     private static StringBuilder GenenerateSpectatorList(Player player, out int count)
     {
         StringBuilder Spectators = new();

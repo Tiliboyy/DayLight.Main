@@ -20,7 +20,7 @@ public class HintsConfig : IConfig
     public bool Debug { get; set; } = false;
     
     public int SpectatorLimit { get; set; } = 15;
-    public List<RoleTypeId> KillCounterRoles { get; set; } = new List<RoleTypeId>()
+    public List<RoleTypeId> KillCounterRoles { get; set; } = new()
     {
         RoleTypeId.Scp049,
         RoleTypeId.Scp079,

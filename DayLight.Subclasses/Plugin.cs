@@ -14,7 +14,7 @@ namespace DayLight.Subclasses;
 public class SubclassesPlugin : DayLightCoreModule<SubclassConfig, SubclassTranslation>
 {
     public static SubclassesPlugin Instance;
-    public static RolesConfigs RolesConfig = new RolesConfigs();
+    public static RolesConfigs RolesConfig = new();
     [Inject]
     public NeuronBase Base {get;set;}
 

@@ -41,7 +41,7 @@ public class WaffenExperte : Subclass
         $"{ItemType.ArmorHeavy}"
     };
 
-    public override Dictionary<AmmoType, ushort> Ammo { get; set; } = new Dictionary<AmmoType, ushort>()
+    public override Dictionary<AmmoType, ushort> Ammo { get; set; } = new()
     {
         { AmmoType.Nato762, 50 },
         { AmmoType.Nato556, 30 }

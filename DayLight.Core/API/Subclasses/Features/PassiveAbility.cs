@@ -15,7 +15,7 @@ public abstract class PassiveAbility : Exiled.CustomRoles.API.Features.PassiveAb
     public virtual bool EnableCooldown { get; set; } = false;
     [YamlIgnore]
 
-    public Dictionary<Player, DateTime> LastUsed = new Dictionary<Player, DateTime>();
+    public Dictionary<Player, DateTime> LastUsed = new();
 
 
     protected void UseAbility(Player player)

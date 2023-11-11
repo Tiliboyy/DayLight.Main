@@ -30,7 +30,7 @@ namespace DayLight.Stat.Achievements;
 internal static class GameStateData
 {
 
-    public static Dictionary<Player, AchievementHandlers.GameStats> GameStatsMap = new Dictionary<Player, AchievementHandlers.GameStats>();
+    public static Dictionary<Player, AchievementHandlers.GameStats> GameStatsMap = new();
     
     public static void ClearGameStats()
     {

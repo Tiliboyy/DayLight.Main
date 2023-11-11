@@ -24,7 +24,6 @@ public class ModerationSystemPlugin : DayLightCoreModule<ModerationConfig, Moder
             if (!Directory.Exists(Path.Combine(Paths.Configs, "ModerationSystem/")))
                 Directory.CreateDirectory(Path.Combine(Paths.Configs, "ModerationSystem/"));
             Instance = this;
-            Core.API.Logger.Warn("subscibing");
             Core.API.Events.Handlers.RemoteAdmin.RequestingPlayerData.Subscribe(EventHandler.OnRequestingData);
         }
         catch (Exception error)

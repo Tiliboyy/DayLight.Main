@@ -10,15 +10,19 @@ public class DayLightCoreModule<TConfig, TTranslation> : ReloadablePlugin<TConfi
     where TConfig : IConfig
     where TTranslation : Translations<TTranslation>, new(){
     
+    
+    
     public override sealed void EnablePlugin()
     {
+        
 
-        Logger.Info(StaticUtils.GetOrCreate<TConfig>().Enabled);
         if (!StaticUtils.GetOrCreate<TConfig>().Enabled)
         {
             return;
         }
         Enabled();
+        API.Logger.Info($"Loaded plugin {Assembly.GetAssembly(this.GetType()).GetName().Name}");
+
     }
 
     public override void OnReload()

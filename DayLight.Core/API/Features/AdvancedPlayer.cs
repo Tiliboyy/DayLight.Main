@@ -20,6 +20,9 @@ public class AdvancedPlayer : MonoBehaviour
   public Player ExiledPlayer { get; private set; }
   
   public string CustomRemoteAdminBadge { get; set; } = "";
+
+  [CanBeNull]
+  public CustomRaCategory CustomRaCategory { get; set; } = null;
   
   #region Get
     [CanBeNull]

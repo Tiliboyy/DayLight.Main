@@ -423,7 +423,7 @@
         <Compile Include="API\Events\Handlers\Voicechat.cs" />
         <Compile Include="API\Extensions.cs" />
         <Compile Include="API\Features\AdvancedPlayer.cs" />
-        <Compile Include="API\Features\CategoryManager.cs" />
+        <Compile Include="API\Features\CustomRaCategory.cs" />
         <Compile Include="API\Leaderboard.cs" />
         <Compile Include="API\Logger.cs" />
         <Compile Include="API\StaticUtils.cs" />

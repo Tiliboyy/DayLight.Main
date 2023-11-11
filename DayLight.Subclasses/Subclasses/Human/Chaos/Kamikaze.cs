@@ -38,7 +38,7 @@ public class Kamikaze : Subclass
         $"{ItemType.SCP207}"
     };
 
-    public override List<CustomAbility> CustomAbilities { get; set; } = new List<CustomAbility>()
+    public override List<CustomAbility> CustomAbilities { get; set; } = new()
     {
         new No207Damage(),
     };

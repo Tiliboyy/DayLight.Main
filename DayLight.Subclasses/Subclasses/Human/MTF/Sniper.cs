@@ -44,7 +44,7 @@ public class Sniper : Subclass
         $"{ItemType.ArmorCombat}"
     };
 
-    public override Dictionary<AmmoType, ushort> Ammo { get; set; } = new Dictionary<AmmoType, ushort>()
+    public override Dictionary<AmmoType, ushort> Ammo { get; set; } = new()
     {
         { AmmoType.Nato762, 50 },
         { AmmoType.Nato9, 30 }
