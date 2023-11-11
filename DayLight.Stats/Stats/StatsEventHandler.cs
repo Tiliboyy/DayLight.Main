@@ -101,7 +101,6 @@ internal class StatsEventHandler
 
     public static void OnVerified(VerifiedEventArgs ev)
     {
-        DayLightDatabase.AddPlayer(ev.Player);
     }
     
 }

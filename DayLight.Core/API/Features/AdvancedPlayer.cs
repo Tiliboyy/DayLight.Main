@@ -1,7 +1,11 @@
-﻿using Exiled.API.Features;
+﻿using DayLight.Core.API.Database;
+using DayLight.DiscordSync.Dependencys.Stats;
+using Exiled.API.Features;
+using Exiled.Events.EventArgs.Player;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
@@ -9,13 +13,33 @@ namespace DayLight.Core.API.Features;
 
 public class AdvancedPlayer : MonoBehaviour
 {
-  
   public Dictionary<int, int> GameStoreBoughtItems = new();
   public Dictionary<string, int> GameStoreRewardLimit = new();
   public void ResetGameStoreLimits()
   {
     GameStoreBoughtItems = new Dictionary<int, int>();
     GameStoreRewardLimit = new Dictionary<string, int>();
+  }
+
+  /// <summary>
+  /// test
+  /// </summary>
+  /// <exception cref="NullReferenceException">Is null if player has dnt enabled</exception>
+  [CanBeNull] 
+  public IDatabasePlayer DatabasePlayer { get; private set; } = new DummyDatabasePlayer();
+  private void Awake()
+  {
+    ExiledPlayer = Player.Get(gameObject);
+    if(ExiledPlayer.DoNotTrack) return;
+    DayLightDatabase.AddPlayer(ExiledPlayer);
+    DatabasePlayer = DayLightDatabase.GetDBPlayer(ExiledPlayer);
+    if (DatabasePlayer == null) return;
+    DatabasePlayer.PropertyChanged += OnPropertyChanged;
+    DatabasePlayer.Stats.PropertyChanged += OnPropertyChanged;
+  }
+  public void OnPropertyChanged(object sender, PropertyChangedEventArgs ev)
+  {
+    DayLightDatabase.UpdatePlayer(DatabasePlayer);
   }
   public Player ExiledPlayer { get; private set; }
   
@@ -89,10 +113,7 @@ public class AdvancedPlayer : MonoBehaviour
 
 
 
-    private void Awake()
-    {
-        ExiledPlayer = Player.Get(gameObject);
-    }
+
 
     
 }

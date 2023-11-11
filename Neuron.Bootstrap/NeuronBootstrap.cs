@@ -1,6 +1,5 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
-using Neuron.Bootstrap.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,10 +18,6 @@ public class NeuronBootstrap : Plugin<Configs>
     public override void OnEnabled()
     {
         if(!Config.IsEnabled) return;
-        Server.WaitingForPlayers += delegate
-        {
-            Handler.LateLoad.InvokeSafely();
-        };
         StartTime = DateTime.Now;
         BootstrapNeuron();
         var bootTimeSpan = StartTime - DateTime.Now;

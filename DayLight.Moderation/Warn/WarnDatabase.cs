@@ -21,7 +21,7 @@ public static class WarnDatabase
         public static string RemoveWarn(string steam64id, int id)
         {
             var playerID = steam64id.Split('@')[0];
-            var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
+            var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
 
             var dbplayer = players.FindOne(x => x.SteamID == playerID);
             if (dbplayer.Warns == null) return "Spieler wurde nicht gefunden";
@@ -44,7 +44,7 @@ public static class WarnDatabase
             try
             {
                 var playerID = warned.Split('@')[0];
-                var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
+                var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
 
                 var dbplayer = players.FindOne(x => x.SteamID == playerID);
 
@@ -74,7 +74,7 @@ public static class WarnDatabase
         public static string GetWarns(string steamid, bool onlynew, out bool haswarns)
         {
             var playerID = steamid.Split('@')[0];
-            var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
+            var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
             var dbplayer = players.FindOne(x => x.SteamID == playerID);
             if (dbplayer == null)
             {
@@ -144,7 +144,7 @@ public static class WarnDatabase
         public static float GetTotal(string steamid)
         {
             var playerID = steamid.Split('@')[0];
-            var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
+            var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
 
             var dbplayer = players.FindOne(x => x.SteamID == playerID);
 

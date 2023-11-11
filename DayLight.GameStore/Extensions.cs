@@ -19,7 +19,7 @@ public static class Extensions
         if (player == null) return false;
         if (player.DoNotTrack) return false;
         var playerID = player.RawUserId.Split('@')[0];
-        var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
+        var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
         var dbplayer = players.FindOne(x => x.SteamID != null && x.SteamID == playerID);
 
         if (dbplayer == null) return false;

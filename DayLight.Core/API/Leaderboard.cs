@@ -56,7 +56,7 @@ public class Leaderboard
         {
             IsGenerated = true;
 
-            var statsPlayers = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players").FindAll().ToList();
+            var statsPlayers = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players").FindAll().ToList();
 
             var sortedByKills = statsPlayers.OrderByDescending(p => p.Stats.Kills).Take(10);
             KillsLeaderboard = GenerateFormattedLeaderboard(sortedByKills, player => player.Kills, "Kills");
@@ -88,7 +88,7 @@ public class Leaderboard
 
     }
 
-    private static string GenerateFormattedLeaderboard(IEnumerable<DatabasePlayer> sortedPlayers, Func<DiscordSync.Dependencys.Stats.Stats, double> valueSelector, string Suffix = "")
+    private static string GenerateFormattedLeaderboard(IEnumerable<IDatabasePlayer> sortedPlayers, Func<DiscordSync.Dependencys.Stats.Stats, double> valueSelector, string Suffix = "")
     {
         var enumerable = sortedPlayers as DatabasePlayer[] ?? sortedPlayers.ToArray();
         if (!enumerable.Any())
