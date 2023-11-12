@@ -10,9 +10,9 @@ public class GameStoreHandler
     public static Exiled.Events.Features.Event<BuyingItemsEventArgs> BuyingItems = new();
     
 
-    public static void OnGainingMoney(Player player, GameStoreReward gameStoreReward, int amount)
+    public static void OnGainingMoney(GainedMoneyEventArgs ev)
     {
-        GainingMoney?.InvokeSafely(new GainedMoneyEventArgs(player,gameStoreReward, amount));
+        GainingMoney?.InvokeSafely(ev);
     }
     public static void OnBuyingItem(Player player, GameStoreItemPrice reward, int price)
     {

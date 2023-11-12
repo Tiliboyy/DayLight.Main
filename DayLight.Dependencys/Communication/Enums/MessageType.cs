@@ -1,4 +1,4 @@
-namespace DayLight.DiscordSync.Dependencys.Communication.Enums;
+namespace DayLight.Dependencys.Communication.Enums;
 
 public enum MessageType
 {
@@ -8,7 +8,7 @@ public enum MessageType
     GameStoreMoney,
     Playtime,
     Link,
-    Stats,
+    DatabasePlayer,
     Achivements,
     LinkCheck,
     Heartbeat,

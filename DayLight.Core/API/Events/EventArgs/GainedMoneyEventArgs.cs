@@ -8,13 +8,13 @@ public class GainedMoneyEventArgs : IEvent
 {
     public Player Player { get; }
     
-    public int Amount { get; }
+    public int Money { get; }
     public GameStoreReward GameStoreReward { get; }
 
-    public GainedMoneyEventArgs(Player player, GameStoreReward gameStoreReward, int amount)
+    public GainedMoneyEventArgs(Player player, GameStoreReward gameStoreReward, int money)
     {
         GameStoreReward = gameStoreReward;
         Player = player;
-        Amount = amount;
+        Money = money;
     }
 }

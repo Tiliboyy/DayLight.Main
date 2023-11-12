@@ -3,7 +3,6 @@
 using DayLight.Core;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
-using DayLight.DiscordSync.Dependencys;
 using DayLight.Stat.Achievements;
 using DayLight.Stat.Stats.Components;
 using Exiled.API.Extensions;
@@ -12,6 +11,7 @@ using Exiled.Events.EventArgs.Map;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
 using PlayerRoles;
+using System;
 using System.Linq;
 using Map = Exiled.Events.Handlers.Map;
 using Player = Exiled.Events.Handlers.Player;
@@ -47,22 +47,30 @@ internal class StatsEventHandler
     {
         if (RoleExtensions.GetTeam(ev.TargetOldRole) == Team.SCPs && ev.TargetOldRole != RoleTypeId.Scp0492)
         {
-            ev.Attacker?.AddStatsDataToPlayer(StatTypes.SCPKill, 1);
+            ev.Attacker.GetAdvancedPlayer().DatabasePlayer.Stats.KilledScps += 1;
         }
-        ev.Player?.AddStatsDataToPlayer(StatTypes.Death, 1);
-        ev.Attacker?.AddStatsDataToPlayer(StatTypes.Kills, 1);
+        ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.Deaths += 1;
+        ev.Attacker.GetAdvancedPlayer().DatabasePlayer.Stats.Kills += 1;
 
     }
 
     public static void OnUsingItem(UsedItemEventArgs ev)
     {
-        ev.Player?.AddStatsDataToPlayer(StatTypes.Items, 1, ev.Item.Type);
+        var item = Enum.TryParse<Dependencys.Utils.ItemType>(ev.Item.Type.ToString(), out var e);
+        if (ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems.ContainsKey(e))
+        {
+            ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems[e] += 1;
+        }
+        else
+        {
+            ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems.Add(e, 1);
+        }
     }
 
     public static void OnEscaping(EscapingEventArgs ev)
     {
         if (Round.ElapsedTime.TotalSeconds <= 120) ev.Player.Achive(37);
-        ev.Player?.AddStatsDataToPlayer(StatTypes.EscapeTime, Round.ElapsedTime.TotalSeconds);
+        ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.FastestEscapeSeconds = Round.ElapsedTime.TotalSeconds;
     }
 
     public static void OnExploding(ExplodingGrenadeEventArgs ev)
@@ -76,7 +84,7 @@ internal class StatsEventHandler
             }
             if (ev.TargetsToAffect.Count(X => X.Role.Team == Team.SCPs) >= 3)
                 ev.Player.Achive(30);
-            ev.Player.AddStatsDataToPlayer(StatTypes.PinkCandyKill, ev.TargetsToAffect.Count - 1);
+            ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.PinkCandyKills += 1;
             component.DestroyComponent();
         }
         else
@@ -92,7 +100,7 @@ internal class StatsEventHandler
         HasEnded = true;
         foreach (var player in Exiled.API.Features.Player.List)
         {
-            player.AddStatsDataToPlayer(StatTypes.Rounds, 1);
+            player.GetAdvancedPlayer().DatabasePlayer.Stats.PlayedRounds += 1;
         }
         GameStateData.ClearGameStats();
         Leaderboard.UpdateLeaderboards();

@@ -1,4 +1,4 @@
-﻿namespace DayLight.DiscordSync.Dependencys.Utils;
+﻿namespace DayLight.Dependencys.Utils;
 
 public struct WebhookMessage
 {

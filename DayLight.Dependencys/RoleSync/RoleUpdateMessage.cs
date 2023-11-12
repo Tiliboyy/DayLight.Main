@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DayLight.DiscordSync.Dependencys.RoleSync;
+namespace DayLight.Dependencys.RoleSync;
 
 [Serializable]
 public struct RoleUpdater

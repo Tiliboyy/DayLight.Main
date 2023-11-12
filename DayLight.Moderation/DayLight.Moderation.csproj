@@ -422,7 +422,7 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="EXILED" Version="8.3.4" />
+      <PackageReference Include="EXILED" Version="8.3.11" />
       <PackageReference Include="Lib.Harmony" Version="2.2.2" />
       <PackageReference Include="LiteDB" Version="5.0.17" />
       <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />

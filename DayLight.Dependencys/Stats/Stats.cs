@@ -1,16 +1,16 @@
-﻿using DayLight.DiscordSync.Dependencys.Utils;
+﻿using DayLight.Dependencys.Utils;
 using LiteDB;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace DayLight.DiscordSync.Dependencys.Stats;
-using System.ComponentModel;
+namespace DayLight.Dependencys.Stats;
 
 public interface IDatabasePlayer
 {
     
     public bool IsDummy { get; } 
-    public string SteamID { get; }
+    [BsonId]
+    public ulong SteamID { get; }
     public string Nickname { get; set; }
     public Stats Stats { get; set; }
     public bool Profileprivate { get; set; }
@@ -25,7 +25,7 @@ public class DummyDatabasePlayer : IDatabasePlayer
 {
 
     public bool IsDummy { get; } = true;
-    public string SteamID { get; } = "Dummy";
+    public ulong SteamID { get; } = 0;
     public string Nickname { get; set; } = "Dummy";
     public Stats Stats { get; set; } = null;
     public bool Profileprivate { get; set; } = true;
@@ -36,13 +36,13 @@ public class DummyDatabasePlayer : IDatabasePlayer
 public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
 {
     public bool IsDummy { get; } = false;
-    private string steamID;
+    private ulong steamID;
     private string nickname;
     private Stats stats;
     private bool profileprivate;
     private List<Warn> warns;
 
-    public DatabasePlayer(string steam64SteamID, string nickname)
+    public DatabasePlayer(ulong steam64SteamID, string nickname)
     {
         SteamID = steam64SteamID;
         Nickname = nickname;
@@ -52,7 +52,7 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
     }
 
     [BsonId]
-    public string SteamID
+    public ulong SteamID
     {
         get => steamID;
         private set
@@ -126,17 +126,17 @@ public class Stats : INotifyPropertyChanged
     private double deaths;
     private double playedRounds;
     private double fastestEscapeSeconds;
-
     private float money;
 
-    private Dictionary<ItemType, float> usedItems;
-    private List<double> unlockedAchievements;
+    private CustomDictionary<ItemType, float> usedItems;
 
     public Stats()
     {
-        UsedItems = new Dictionary<ItemType, float>();
-        UnlockedAchievements = new List<double>();
+        UsedItems = new CustomDictionary<ItemType, float>();
+        UnlockedAchievements = new CustomList<double>();
     }
+
+    public CustomList<double> UnlockedAchievements { get; private set; }
 
     public double Kills
     {
@@ -208,7 +208,7 @@ public class Stats : INotifyPropertyChanged
         }
     }
 
-    public Dictionary<ItemType, float> UsedItems
+    public CustomDictionary<ItemType, float> UsedItems
     {
         get => usedItems;
         set
@@ -217,22 +217,13 @@ public class Stats : INotifyPropertyChanged
             OnPropertyChanged(nameof(UsedItems));
         }
     }
-
-    public List<double> UnlockedAchievements
-    {
-        get => unlockedAchievements;
-        private set
-        {
-            unlockedAchievements = value;
-            OnPropertyChanged(nameof(UnlockedAchievements));
-        }
-    }
-
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+    
+    
 }
 

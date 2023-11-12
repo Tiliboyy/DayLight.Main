@@ -1,4 +1,4 @@
-﻿namespace DayLight.DiscordSync.Dependencys;
+﻿namespace DayLight.Dependencys;
 
 public enum StatTypes
 {
@@ -10,6 +10,6 @@ public enum StatTypes
     Rounds,
     EscapeTime,
     Items,
-    Achivement
+    Achivement,
 }
 

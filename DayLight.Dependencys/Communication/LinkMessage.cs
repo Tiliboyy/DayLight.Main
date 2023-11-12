@@ -1,6 +1,6 @@
 using System;
 
-namespace DayLight.DiscordSync.Dependencys.Communication;
+namespace DayLight.Dependencys.Communication;
 
 [Serializable]
 public struct LinkMessage

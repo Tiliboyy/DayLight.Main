@@ -1,4 +1,4 @@
-﻿namespace DayLight.DiscordSync.Dependencys.Communication;
+﻿namespace DayLight.Dependencys.Communication;
 
 public struct StringMessage
 {

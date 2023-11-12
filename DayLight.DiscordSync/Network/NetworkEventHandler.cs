@@ -1,8 +1,8 @@
 ﻿using DayLight.Core;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
-using DayLight.DiscordSync.Dependencys.Communication;
-using DayLight.DiscordSync.Dependencys.Communication.Enums;
+using DayLight.Dependencys.Communication;
+using DayLight.Dependencys.Communication.Enums;
 using DiscordSync.Plugin.Network.EventArgs.Network;
 using Exiled.API.Features;
 using System.Globalization;
@@ -30,8 +30,8 @@ public static class NetworkEventHandler
                 case MessageType.PlayerSettings:
                     HandlePlayerSettings(ev);
                     break;
-                case MessageType.Stats:
-                    HandleStats(ev);
+                case MessageType.DatabasePlayer:
+                    HandleDatabasePlayer(ev);
                     break;
                 case MessageType.Playtime:
                     HandlePlaytime(ev);
@@ -80,7 +80,7 @@ public static class NetworkEventHandler
             return;
         }
         //Todo: 
-        //GameStoreDatabase.Database.AddMoneyToSteam64ID(linkedSteamID, i);
+        DayLightDatabase.GameStore.AddMoneyToSteam64ID(linkedSteamID, i);
     }
     private static void HandleLeaderboard(ReceivedFullEventArgs ev)
     {
@@ -117,24 +117,22 @@ public static class NetworkEventHandler
         var playtime = new TimeSpan(0, 0, player.PlayTimeRecords.Sum(pair => pair.Value)).TotalSeconds;
         _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Playtime, playtime.ToString(CultureInfo.InvariantCulture), GetNickname(ev.UserID));
     }
-    private static void HandleStats(ReceivedFullEventArgs ev)
+    private static void HandleDatabasePlayer(ReceivedFullEventArgs ev)
     {
         try
         {
-            //Todo: 
 
-            //var ply = Database.LiteDatabase.GetCollection<Player>().FindOne(x => x.Id == Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString());
-            //var pt = new TimeSpan(0, 0, ply.PlayTimeRecords.Sum(pt => pt.Value)).TotalSeconds;
+            var ply = Database.LiteDatabase.GetCollection<Player>().FindOne(x => x.Id == Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString());
+            var pt = new TimeSpan(0, 0, ply.PlayTimeRecords.Sum(pt => pt.Value)).TotalSeconds;
 
-            //var statssender = new StatsSender
-            //{
+            var statssender = new DayLight.Dependencys.Stats.DatabasePlayerSender()
+            {
 
-            //    Stats = Stats.Database.GetStatsFromSteam64(Link.LinkDatabase.GetLinkedSteamID(ev.UserID)),
-            //    Playtime = pt.ToString(CultureInfo.InvariantCulture),
-           //     Money = GameStoreDatabase.Database.GetMoneyFromSteam64ID(Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString()).ToString(CultureInfo.InvariantCulture)
+                DatabasePlayer = DayLightDatabase.GetDataBasePlayerSteam64ID(Link.LinkDatabase.GetLinkedSteamID(ev.UserID)),
+                Playtime = pt.ToString(CultureInfo.InvariantCulture),
 
-            //};
-            //_ = DiscordSyncPlugin.Instance.Network.ReplyLine(DataType.Stats, statssender, GetNickname(ev.UserID));
+            };
+            _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.DatabasePlayer, statssender, GetNickname(ev.UserID));
 
         }
         catch (Exception exception)
@@ -146,15 +144,12 @@ public static class NetworkEventHandler
     private static void HandlePlayerSettings(ReceivedFullEventArgs ev)
     {
         var settings = ev.GetData<bool>();
-        //Todo: 
-        //Stats.Database.ChangeSettings(Link.LinkDatabase.GetLinkedSteamID(ev.UserID), settings);
+        DayLightDatabase.GetDataBasePlayerSteam64ID(ev.UserID).Profileprivate = ev.GetData<bool>();
     }
     private static void HandleGameStoreMoney(ReceivedFullEventArgs ev)
     {
-        //Todo: 
-
-        //var moneyFromSteam64ID = GameStoreDatabase.Database.GetMoneyFromSteam64ID(Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString());
-        //_ = DiscordSyncPlugin.Instance.Network.ReplyLine(DataType.String, moneyFromSteam64ID, "");
+        var moneyFromSteam64ID = DayLightDatabase.GameStore.GetMoneyFromSteam64ID(Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString());
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.String, moneyFromSteam64ID, "");
     }
     private static void HandlePlayerList(ReceivedFullEventArgs ev)
     {

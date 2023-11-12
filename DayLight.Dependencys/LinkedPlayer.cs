@@ -1,4 +1,4 @@
-﻿namespace DayLight.DiscordSync.Dependencys;
+﻿namespace DayLight.Dependencys;
 
 public struct LinkedPlayer
 {

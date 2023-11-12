@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DayLight.DiscordSync.Dependencys.Achievements;
+namespace DayLight.Dependencys.Achievements;
 
 public class Achievements
 {

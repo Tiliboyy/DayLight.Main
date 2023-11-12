@@ -1,4 +1,4 @@
-﻿using DayLight.DiscordSync.Dependencys;
+﻿using DayLight.Dependencys;
 using DiscordSync.Plugin.Commands.ClientConsole;
 using Exiled.API.Features;
 using Utils.NonAllocLINQ;

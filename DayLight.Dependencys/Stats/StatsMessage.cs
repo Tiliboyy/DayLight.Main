@@ -1,7 +1,7 @@
-namespace DayLight.DiscordSync.Dependencys.Stats;
+namespace DayLight.Dependencys.Stats;
 
-public struct StatsSender
+public struct DatabasePlayerSender
 {
-    public Stats Stats { get; set; }
+    public IDatabasePlayer DatabasePlayer{ get; set; }
     public string Playtime { get; set; }
 }

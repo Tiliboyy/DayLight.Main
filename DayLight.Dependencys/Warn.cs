@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DayLight.DiscordSync.Dependencys;
+namespace DayLight.Dependencys;
 
 public struct Warn
 {

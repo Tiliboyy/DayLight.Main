@@ -1,5 +1,5 @@
 ﻿using DayLight.Core.API.Database;
-using DayLight.DiscordSync.Dependencys.Stats;
+using DayLight.Dependencys.Stats;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using JetBrains.Annotations;
@@ -25,7 +25,6 @@ public class AdvancedPlayer : MonoBehaviour
   /// test
   /// </summary>
   /// <exception cref="NullReferenceException">Is null if player has dnt enabled</exception>
-  [CanBeNull] 
   public IDatabasePlayer DatabasePlayer { get; private set; } = new DummyDatabasePlayer();
   private void Awake()
   {

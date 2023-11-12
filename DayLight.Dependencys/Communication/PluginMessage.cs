@@ -1,8 +1,8 @@
-using DayLight.DiscordSync.Dependencys.Communication.Enums;
+using DayLight.Dependencys.Communication.Enums;
 using Newtonsoft.Json;
 using System;
 
-namespace DayLight.DiscordSync.Dependencys.Communication;
+namespace DayLight.Dependencys.Communication;
 
 [Serializable]
 public struct PluginSender

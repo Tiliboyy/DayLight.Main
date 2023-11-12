@@ -1,4 +1,4 @@
-﻿namespace DayLight.DiscordSync.Dependencys.Stats;
+﻿namespace DayLight.Dependencys.Stats;
 
 public struct ProfileSettings
 {

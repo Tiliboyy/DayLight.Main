@@ -2,7 +2,7 @@ using DayLight.Core;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
 using DayLight.Core.API.Features;
-using DayLight.DiscordSync.Dependencys.Stats;
+using DayLight.Dependencys.Stats;
 using PlayerRoles;
 using System;
 using System.Linq;

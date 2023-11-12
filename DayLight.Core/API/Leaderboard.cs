@@ -1,5 +1,5 @@
 ﻿using DayLight.Core.API.Database;
-using DayLight.DiscordSync.Dependencys.Stats;
+using DayLight.Dependencys.Stats;
 using Exiled.API.Features;
 using System;
 using System.Collections.Generic;
@@ -88,7 +88,7 @@ public class Leaderboard
 
     }
 
-    private static string GenerateFormattedLeaderboard(IEnumerable<IDatabasePlayer> sortedPlayers, Func<DiscordSync.Dependencys.Stats.Stats, double> valueSelector, string Suffix = "")
+    private static string GenerateFormattedLeaderboard(IEnumerable<IDatabasePlayer> sortedPlayers, Func<Stats, double> valueSelector, string Suffix = "")
     {
         var enumerable = sortedPlayers as DatabasePlayer[] ?? sortedPlayers.ToArray();
         if (!enumerable.Any())
@@ -106,7 +106,7 @@ public class Leaderboard
         {
             var nickname = DayLightDatabase.GetNicknameFromSteam64ID(player.SteamID);
             if (nickname == "none")
-                nickname = player.SteamID;
+                nickname = player.SteamID.ToString();
             var rankstr = $"[{rank++.ToString()}]";
             var formattedLine = $"{rankstr,-5}{nickname.PadRight(maxNameLength + 5)}{Math.Round(valueSelector(player.Stats), 0)} {Suffix}" ;
             leaderboard.AppendLine(formattedLine);

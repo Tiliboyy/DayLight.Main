@@ -3,7 +3,7 @@
 using DayLight.Core;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
-using DayLight.DiscordSync.Dependencys.Stats;
+using DayLight.Dependencys.Stats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,11 +55,11 @@ public static class WarnDatabase
                     max += 1;
                 }
 
-                var warn = new DiscordSync.Dependencys.Warn
+                var warn = new Dependencys.Warn
                 {
                     Reason = reason, Points = points, WarnerUsername = warner, Date = time ?? DateTime.Now.Date, Id = max
                 };
-                dbplayer.Warns ??= new List<DiscordSync.Dependencys.Warn>();
+                dbplayer.Warns ??= new List<Dependencys.Warn>();
                 dbplayer.Warns.Add(warn);
                 players.Update(dbplayer);
                 return "Spieler wurde verwarnt";

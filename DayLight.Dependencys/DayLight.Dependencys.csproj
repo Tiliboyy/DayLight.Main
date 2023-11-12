@@ -8,7 +8,7 @@
         <ProjectGuid>{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>DayLight.DiscordSync.Dependencys</RootNamespace>
+        <RootNamespace>DayLight.Dependencys</RootNamespace>
         <AssemblyName>DayLight.Dependencys</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
@@ -51,6 +51,8 @@
         <Compile Include="Communication\LinkMessage.cs" />
         <Compile Include="Communication\PluginMessage.cs" />
         <Compile Include="Communication\StringMessage.cs" />
+        <Compile Include="CustomDictionary.cs" />
+        <Compile Include="CustomList.cs" />
         <Compile Include="LinkedPlayer.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="RoleSync\RoleUpdateMessage.cs" />

@@ -123,7 +123,7 @@
         <WCFMetadata Include="Connected Services\"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="EXILED" Version="8.3.9" />
+        <PackageReference Include="EXILED" Version="8.3.11" />
         <PackageReference Include="Lib.Harmony" Version="2.2.2"/>
         <PackageReference Include="NeuronModding.Core" Version="1.0.2" />
         <PackageReference Include="NeuronModding.Modules.Commands" Version="1.0.2" />

@@ -1,10 +1,10 @@
 ﻿using Core.Features.Data.Enums;
 using Core.Features.Extensions;
+using DayLight.Core.API.Events.EventArgs;
 using DayLight.Core.API.Events.Handlers;
 using DayLight.Core.API.Features;
 using DayLight.Core.Models;
-using DayLight.DiscordSync.Dependencys;
-using DayLight.DiscordSync.Dependencys.Stats;
+using DayLight.Dependencys.Stats;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using JetBrains.Annotations;
@@ -27,13 +27,22 @@ public static class DayLightDatabase
         var players = Database.GetCollection<IDatabasePlayer>("players");
         players.Update(player);
     }
+    public static IDatabasePlayer GetDataBasePlayerSteam64ID(ulong id)
+    {
+        var players = Database.GetCollection<IDatabasePlayer>("players");
+
+        var dbplayer = players.FindOne(x => x.SteamID == id);
+
+        return dbplayer;
+
+    }
 
     [CanBeNull]
     public static IDatabasePlayer GetDBPlayer(Player player)
     {
         if (player.DoNotTrack) return null;
         
-        var playerID = player.RawUserId.Split('@')[0];
+        var playerID = player.GetSteam64Id();
         var players = Database.GetCollection<IDatabasePlayer>("players");
 
         var dbplayer = players.FindOne(x => x.SteamID == playerID);
@@ -50,7 +59,6 @@ public static class DayLightDatabase
                 Directory.CreateDirectory(DayLightCore.Instance.Base.RelativePath("DayLight.Core"));
             }
             var players = Database.GetCollection<IDatabasePlayer>("players");
-
             if (!players.Exists(x => true)) players.EnsureIndex(x => x.SteamID);
         }
         catch (Exception e)
@@ -64,9 +72,8 @@ public static class DayLightDatabase
     {
         if (player == null) return;
         if (player.DoNotTrack) return;
-        var playerID = player.RawUserId.Split('@')[0];
+        var playerID = player.GetSteam64Id();
         var players = Database.GetCollection<IDatabasePlayer>("players");
-        
         if (players.FindOne(x => x.SteamID == playerID) != null)
         {
             var udbplayer = players.FindOne(x => x.SteamID == playerID);
@@ -74,29 +81,24 @@ public static class DayLightDatabase
             players.Update(udbplayer);
             return;
         }
-
         players.Insert(new DatabasePlayer(playerID, player.Nickname));
         var dbplayer = players.FindOne(x => x.SteamID == playerID);
         players.Update(dbplayer);
     }
 
-    public static string GetNicknameFromSteam64ID(string steam64id)
+    public static string GetNicknameFromSteam64ID(ulong steam64id)
     {
-        var playerID = steam64id.Split('@')[0];
         var players = Database.GetCollection<IDatabasePlayer>("players");
-
-        var dbplayer = players.FindOne(x => x.SteamID == playerID);
-
+        var dbplayer = players.FindOne(x => x.SteamID == steam64id);
         return dbplayer != null ? dbplayer.Nickname : "None";
     }
 
     public static void RemovePlayer(Player player)
     {
         if (player == null) return;
-        var playerID = player.RawUserId.Split('@')[0];
+        var playerID = ulong.Parse(player.RawUserId);
         var players = Database.GetCollection<IDatabasePlayer>("players");
         var dbplayer = players.FindOne(x => x.SteamID == playerID);
-
         if (dbplayer != null) players.Delete(dbplayer.SteamID);
     }
 
@@ -107,7 +109,7 @@ public static class DayLightDatabase
         public static void BuyItem(Player player, GameStoreItemPrice gameStoreItem)
         {
             if (player.DoNotTrack) return;
-            var playerID = player.RawUserId.Split('@')[0];
+            var playerID = player.GetSteam64Id();
             var players = Database.GetCollection<IDatabasePlayer>("players");
 
             var dbplayer = players.FindOne(x => x.SteamID == playerID);
@@ -132,18 +134,14 @@ public static class DayLightDatabase
         {
             if (player == null) return false;
             if (player.DoNotTrack) return false;
-            var playerID = player.RawUserId.Split('@')[0];
-            var players = Database.GetCollection<IDatabasePlayer>("players");
-            var dbplayer = players.FindOne(x => x.SteamID == playerID);
-
+            var dbplayer = player.GetAdvancedPlayer().DatabasePlayer;
             if (dbplayer != null) return dbplayer.Stats.Money >= reward;
-
             return false;
         }
         public static void AddMoneyToSteam64ID(ulong steamid, int money)
         {
             var players = Database.GetCollection<IDatabasePlayer>("players");
-            var dbplayer = players.FindOne(x => x.SteamID != null && x.SteamID == steamid.ToString());
+            var dbplayer = players.FindOne(x => x.SteamID == null && x.SteamID == steamid);
             if (dbplayer == null) return;
             dbplayer.Stats.Money += money;
             if (dbplayer.Stats.Money < 0) dbplayer.Stats.Money = 0;
@@ -153,31 +151,25 @@ public static class DayLightDatabase
         {
             if (player == null) return;
             if (player.DoNotTrack || money == 0) return;
-            var playerID = player.RawUserId.Split('@')[0];
-            var players = Database.GetCollection<IDatabasePlayer>("players");
-
-            var dbplayer = players.FindOne(x => x.SteamID != null && x.SteamID == playerID);
-
+            var dbplayer = player.GetAdvancedPlayer().DatabasePlayer;
             if (dbplayer == null) return;
-            dbplayer.Stats.Money += money;
             if (dbplayer.Stats.Money < 0) dbplayer.Stats.Money = 0;
-            GameStoreHandler.OnGainingMoney(player,
-                new GameStoreReward
+            var moneyEventArgs = new GainedMoneyEventArgs(player,new GameStoreReward
                 {
                     Name = "AddMoney", Money = new Dictionary<RoleTypeId, int>
                     {
                         { RoleTypeId.None, money }
                     },
                     MaxPerRound = -1
-                },
-                money);
-
-            players.Update(dbplayer);
+                }, money);
+            GameStoreHandler.OnGainingMoney(moneyEventArgs);
+            
+            dbplayer.Stats.Money += money;
         }
         public static void AddRewardToPlayer(Player player, GameStoreReward gameStoreReward)
         {
             if (player == null) return;
-            var playerID = player.RawUserId.Split('@')[0];
+            var playerID = player.GetSteam64Id();
             var players = Database.GetCollection<IDatabasePlayer>("players");
             var dbplayer = players.FindOne(x => x.SteamID != null && x.SteamID == playerID);
 
@@ -201,9 +193,11 @@ public static class DayLightDatabase
                     if (advancedPlayer != null) advancedPlayer.GameStoreRewardLimit.Add(gameStoreReward.Name, 1);
                 }
                 if (gameStoreReward.Money[player.Role.Type] == 0) return;
-                dbplayer.Stats.Money += gameStoreReward.Money[player.Role.Type] * DayLightCore.Instance.Config.MoneyMuliplier;
-                GameStoreHandler.OnGainingMoney(player, gameStoreReward, gameStoreReward.Money[player.Role.Type] * DayLightCore.Instance.Config.MoneyMuliplier);
+                if (gameStoreReward.Money[player.Role.Type] == 0) return;
+                var moneyEventArgs = new GainedMoneyEventArgs(player, gameStoreReward, gameStoreReward.Money[player.Role.Type] * DayLightCore.Instance.Config.MoneyMuliplier);
+                GameStoreHandler.OnGainingMoney(moneyEventArgs);
 
+                player.GiveMoney(moneyEventArgs.Money);
 
             }
             else if (gameStoreReward.Money.ContainsKey(RoleTypeId.None))
@@ -224,9 +218,11 @@ public static class DayLightDatabase
                 {
                     if (adv != null) adv.GameStoreRewardLimit.Add(gameStoreReward.Name, 1);
                 }
-                dbplayer.Stats.Money += gameStoreReward.Money[RoleTypeId.None] * DayLightCore.Instance.Config.MoneyMuliplier;
-                GameStoreHandler.OnGainingMoney(player, gameStoreReward, gameStoreReward.Money[RoleTypeId.None] * DayLightCore.Instance.Config.MoneyMuliplier);
+                if (gameStoreReward.Money[player.Role.Type] == 0) return;
+                var moneyEventArgs = new GainedMoneyEventArgs(player, gameStoreReward, gameStoreReward.Money[player.Role.Type] * DayLightCore.Instance.Config.MoneyMuliplier);
+                GameStoreHandler.OnGainingMoney(moneyEventArgs);
 
+                player.GiveMoney(moneyEventArgs.Money);
             }
             else
             {
@@ -236,28 +232,13 @@ public static class DayLightDatabase
             if (dbplayer.Stats.Money < 0) dbplayer.Stats.Money = 0;
             if (dbplayer.Stats.Money > DayLightCore.Instance.Config.MoneyLimit && DayLightCore.Instance.Config.EnableLimit)
                 dbplayer.Stats.Money = DayLightCore.Instance.Config.MoneyLimit;
-
-            players.Update(dbplayer);
-        }
-        public static float GetPlayerMoney(Player player)
-        {
-            if (player.DoNotTrack) return 0;
-            var playerID = player.RawUserId.Split('@')[0];
-            var players = Database.GetCollection<IDatabasePlayer>("players");
-
-            var dbplayer = players.FindOne(x => x.SteamID == playerID);
-
-            if (dbplayer != null)
-                return dbplayer.Stats.Money;
-            return 0;
         }
         [UsedImplicitly]
-        public static float GetMoneyFromSteam64ID(string steam64id)
+        public static float GetMoneyFromSteam64ID(ulong steam64id)
         {
-            var playerID = steam64id.Split('@')[0];
             var players = Database.GetCollection<IDatabasePlayer>("players");
 
-            var dbplayer = players.FindOne(x => x.SteamID == playerID);
+            var dbplayer = players.FindOne(x => x.SteamID == steam64id);
 
             if (dbplayer != null)
                 return dbplayer.Stats.Money;
@@ -267,67 +248,10 @@ public static class DayLightDatabase
 
     public class Stats
     {
-
-        public static void AddStatsDataToPlayer(Player player, StatTypes types, double number, ItemType itemTypeid = ItemType.None)
-        {
-            if (!Enum.TryParse(itemTypeid.ToString(), out DiscordSync.Dependencys.Utils.ItemType itemType))
-                return;
-
-            if (player == null) return;
-            if (player.DoNotTrack) return;
-            var playerID = player.RawUserId.Split('@')[0];
-            var players = Database.GetCollection<IDatabasePlayer>("players");
-
-            var dbplayer = players.FindOne(x => x.SteamID != null && x.SteamID == playerID);
-
-            if (dbplayer == null) return;
-            switch (types)
-            {
-                case StatTypes.Kills:
-                    dbplayer.Stats.Kills += number;
-                    break;
-                case StatTypes.Death:
-                    dbplayer.Stats.Deaths += number;
-                    break;
-                case StatTypes.KD:
-                    break;
-                case StatTypes.Rounds:
-                    dbplayer.Stats.PlayedRounds += number;
-                    break;
-                case StatTypes.EscapeTime:
-                    if (number < dbplayer.Stats.FastestEscapeSeconds)
-                        dbplayer.Stats.FastestEscapeSeconds = number;
-                    break;
-                case StatTypes.Items:
-                    if (dbplayer.Stats.UsedItems.ContainsKey(itemType))
-                    {
-                        dbplayer.Stats.UsedItems[itemType]++;
-                    }
-                    else
-                    {
-                        dbplayer.Stats.UsedItems ??= new Dictionary<DiscordSync.Dependencys.Utils.ItemType, float>();
-                        dbplayer.Stats.UsedItems.Add(itemType, 1);
-                    }
-
-                    break;
-                case StatTypes.SCPKill:
-                    dbplayer.Stats.KilledScps += number;
-                    break;
-                case StatTypes.PinkCandyKill:
-                    dbplayer.Stats.PinkCandyKills += number;
-                    break;
-                case StatTypes.Achivement:
-                    dbplayer.Stats.UnlockedAchievements.Add(number);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(types), types, null);
-            }
-            players.Update(dbplayer);
-        }
         public static string GetPlayerLeaderboard(Player player)
         {
             var list = GetLeaderboard();
-            var playerID = player.RawUserId.Split('@')[0];
+            var playerID = player.GetSteam64Id();
 
             var plypos = list.IndexOf(list.First(X => X.SteamID == playerID));
             var leaderboard = list.Take(10).ToList();
