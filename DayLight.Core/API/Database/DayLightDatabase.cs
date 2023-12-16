@@ -27,7 +27,7 @@ public static class DayLightDatabase
         var players = Database.GetCollection<IDatabasePlayer>("players");
         players.Update(player);
     }
-    public static IDatabasePlayer GetDataBasePlayerSteam64ID(ulong id)
+    public static IDatabasePlayer GetDatabasePlayerSteam64ID(ulong id)
     {
         var players = Database.GetCollection<IDatabasePlayer>("players");
 
@@ -50,7 +50,7 @@ public static class DayLightDatabase
         return dbplayer;
     }
 
-    public static void CreateCollection()
+    public static void CreateDatabase()
     {
         try
         {
@@ -141,7 +141,7 @@ public static class DayLightDatabase
         public static void AddMoneyToSteam64ID(ulong steamid, int money)
         {
             var players = Database.GetCollection<IDatabasePlayer>("players");
-            var dbplayer = players.FindOne(x => x.SteamID == null && x.SteamID == steamid);
+            var dbplayer = players.FindOne(x => x.SteamID == steamid);
             if (dbplayer == null) return;
             dbplayer.Stats.Money += money;
             if (dbplayer.Stats.Money < 0) dbplayer.Stats.Money = 0;
@@ -169,9 +169,7 @@ public static class DayLightDatabase
         public static void AddRewardToPlayer(Player player, GameStoreReward gameStoreReward)
         {
             if (player == null) return;
-            var playerID = player.GetSteam64Id();
-            var players = Database.GetCollection<IDatabasePlayer>("players");
-            var dbplayer = players.FindOne(x => x.SteamID != null && x.SteamID == playerID);
+            var dbplayer = AdvancedPlayer.Get(player)?.DatabasePlayer;
 
             if (dbplayer == null) return;
 

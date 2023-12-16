@@ -39,16 +39,7 @@ public class Leaderboard
 
     public static LeaderboardType GetLeaderboardType(string input)
     {
-        if(        Enum.TryParse<LeaderboardType>(input, out var loaderboardtype)
-        )
-        {
-            return loaderboardtype;
-
-        }
-        else
-        {
-            return LeaderboardType.Kills;
-        }
+        return Enum.TryParse<LeaderboardType>(input, out var loaderboardtype) ? loaderboardtype : LeaderboardType.Kills;
     }
     public static void UpdateLeaderboards()
     {

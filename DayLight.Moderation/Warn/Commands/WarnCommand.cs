@@ -46,7 +46,7 @@ public class WarnCommand : ICommand
 
         if (arguments.At(0).Contains("@"))
         {
-            response = WarnDatabase.Database.AddWarn(arguments.At(0), player.Nickname, number,
+            response = WarnDatabase.AddWarn(arguments.At(0), player.Nickname, number,
                 FormatArguments(arguments, 2), null);
             return true;
         }
@@ -60,7 +60,7 @@ public class WarnCommand : ICommand
                 return true;
             }
 
-            response = WarnDatabase.Database.AddWarn(playera.UserId, player.Nickname, number,
+            response = WarnDatabase.AddWarn(playera.UserId, player.Nickname, number,
                 FormatArguments(arguments, 2), null);
             return true;
         }

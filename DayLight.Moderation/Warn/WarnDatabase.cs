@@ -14,117 +14,95 @@ namespace DayLight.Moderation.Warn;
 
 public static class WarnDatabase
 {
-    
-    public static class Database
+
+    public static string RemoveWarn(string steam64id, int id)
     {
+        var playerID = ulong.Parse(steam64id.Split('@')[0]);
+        var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
 
-        public static string RemoveWarn(string steam64id, int id)
+        var dbplayer = players.FindOne(x => x.SteamID == playerID);
+        if (dbplayer.Warns == null) return "Spieler wurde nicht gefunden";
+        var foundwarn = false;
+        foreach (var warn in dbplayer.Warns.Where(warn => warn.Id == id))
         {
-            var playerID = steam64id.Split('@')[0];
+            dbplayer.Warns.Remove(warn);
+            foundwarn = true;
+            players.Update(dbplayer);
+            break;
+        }
+
+        return foundwarn ? "Verwarnung wurde gelöscht" : "Verwarnung wurde nicht gefunden";
+
+
+    }
+
+    public static string AddWarn(string warned, string warner, float points, string reason, DateTime? time)
+    {
+        try
+        {
+            var playerID =ulong.Parse( warned.Split('@')[0]);
             var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
 
             var dbplayer = players.FindOne(x => x.SteamID == playerID);
-            if (dbplayer.Warns == null) return "Spieler wurde nicht gefunden";
-            var foundwarn = false;
-            foreach (var warn in dbplayer.Warns.Where(warn => warn.Id == id))
+
+            int max = 0;
+            if (dbplayer.Warns != null && dbplayer.Warns.Count != 0)
             {
-                dbplayer.Warns.Remove(warn);
-                foundwarn = true;
-                players.Update(dbplayer);
-                break;
+                max = dbplayer.Warns.Select(keyValue => keyValue.Id).Prepend(max).Max();
+                max += 1;
             }
 
-            return foundwarn ? "Verwarnung wurde gelöscht" : "Verwarnung wurde nicht gefunden";
+            var warn = new Dependencys.Warn
+            {
+                Reason = reason, Points = points, WarnerUsername = warner, Date = time ?? DateTime.Now.Date, Id = max
+            };
+            dbplayer.Warns ??= new List<Dependencys.Warn>();
+            dbplayer.Warns.Add(warn);
+            players.Update(dbplayer);
+            return "Spieler wurde verwarnt";
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e);
+            throw;
+        }
+    }
 
-
+    public static string GetWarns(string steamid, bool onlynew, out bool haswarns)
+    {
+        var playerID = ulong.Parse(steamid.Split('@')[0]);
+        var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
+        var dbplayer = players.FindOne(x => x.SteamID == playerID);
+        if (dbplayer == null)
+        {
+            haswarns = false;
+            return "Dieser Spieler hat keine Verwarnungen";
         }
 
-        public static string AddWarn(string warned, string warner, float points, string reason, DateTime? time)
+        if (dbplayer.Warns == null || dbplayer.Warns.Count == 0)
         {
-            try
-            {
-                var playerID = warned.Split('@')[0];
-                var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
+            haswarns = false;
+            return "Dieser Spieler hat keine Verwarnungen";
 
-                var dbplayer = players.FindOne(x => x.SteamID == playerID);
+        } 
+        string builder = "\n------------------------------------------------\n";
+        float total = 0;
 
-                int max = 0;
-                if (dbplayer.Warns != null && dbplayer.Warns.Count != 0)
-                {
-                    max = dbplayer.Warns.Select(keyValue => keyValue.Id).Prepend(max).Max();
-                    max += 1;
-                }
-
-                var warn = new Dependencys.Warn
-                {
-                    Reason = reason, Points = points, WarnerUsername = warner, Date = time ?? DateTime.Now.Date, Id = max
-                };
-                dbplayer.Warns ??= new List<Dependencys.Warn>();
-                dbplayer.Warns.Add(warn);
-                players.Update(dbplayer);
-                return "Spieler wurde verwarnt";
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e);
-                throw;
-            }
-        }
-
-        public static string GetWarns(string steamid, bool onlynew, out bool haswarns)
+            
+            
+        if (onlynew)
         {
-            var playerID = steamid.Split('@')[0];
-            var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
-            var dbplayer = players.FindOne(x => x.SteamID == playerID);
-            if (dbplayer == null)
+            var newWarns = (from warn in dbplayer.Warns
+                let date = warn.Date.AddDays(30)
+                let span = DateTime.Now - warn.Date
+                where span.Days <= 30
+                select warn).ToList();
+            if (newWarns.Count == 0)
             {
                 haswarns = false;
                 return "Dieser Spieler hat keine Verwarnungen";
             }
-
-            if (dbplayer.Warns == null || dbplayer.Warns.Count == 0)
-            {
-                haswarns = false;
-                return "Dieser Spieler hat keine Verwarnungen";
-
-            } 
-            string builder = "\n------------------------------------------------\n";
-            float total = 0;
-
-            
-            
-            if (onlynew)
-            {
-                    var newWarns = (from warn in dbplayer.Warns
-                        let date = warn.Date.AddDays(30)
-                        let span = DateTime.Now - warn.Date
-                        where span.Days <= 30
-                        select warn).ToList();
-                    if (newWarns.Count == 0)
-                    {
-                        haswarns = false;
-                        return "Dieser Spieler hat keine Verwarnungen";
-                    }
-                    foreach (var warn in newWarns)
-                    {
-                        var span = DateTime.Now - warn.Date;
-                        total += warn.Points;
-
-                        builder +=
-                            $"Verwarnung({warn.Id})" +
-                            $"\nGrund: {warn.Reason}" +
-                            $"\nPunkte: {warn.Points}" +
-                            $"\nModerator: {warn.WarnerUsername}" +
-                            $"\nVor {span.Days} Tagen" +
-                            $"\n------------------------------------------------\n";
-                    }
-
-                    haswarns = true;
-                    return builder + "\n\nTotal: " + GetTotal(steamid) + " Punkte";
-            }
-            
-            var oldwarns = dbplayer.Warns;
-            foreach (var warn in oldwarns)
+            foreach (var warn in newWarns)
             {
                 var span = DateTime.Now - warn.Date;
                 total += warn.Points;
@@ -137,32 +115,49 @@ public static class WarnDatabase
                     $"\nVor {span.Days} Tagen" +
                     $"\n------------------------------------------------\n";
             }
+
             haswarns = true;
             return builder + "\n\nTotal: " + GetTotal(steamid) + " Punkte";
         }
-
-        public static float GetTotal(string steamid)
+            
+        var oldwarns = dbplayer.Warns;
+        foreach (var warn in oldwarns)
         {
-            var playerID = steamid.Split('@')[0];
-            var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
+            var span = DateTime.Now - warn.Date;
+            total += warn.Points;
 
-            var dbplayer = players.FindOne(x => x.SteamID == playerID);
-
-            if (dbplayer?.Warns == null)
-            {
-                return 0;
-            }
-
-            if (dbplayer.Warns.Count == 0)
-                return 0;
-            var newWarns = (from warn in dbplayer.Warns
-                let date = warn.Date.AddDays(30)
-                let span = DateTime.Now - warn.Date
-                where span.Days <= 30
-                select warn).ToList();
-            return (from warn in newWarns let span = DateTime.Now - warn.Date select warn.Points).Sum();
+            builder +=
+                $"Verwarnung({warn.Id})" +
+                $"\nGrund: {warn.Reason}" +
+                $"\nPunkte: {warn.Points}" +
+                $"\nModerator: {warn.WarnerUsername}" +
+                $"\nVor {span.Days} Tagen" +
+                $"\n------------------------------------------------\n";
         }
-        
+        haswarns = true;
+        return builder + "\n\nTotal: " + GetTotal(steamid) + " Punkte";
     }
 
+    public static float GetTotal(string steamid)
+    {
+        var playerID = ulong.Parse(steamid.Split('@')[0]);
+        var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
+
+        var dbplayer = players.FindOne(x => x.SteamID == playerID);
+
+        if (dbplayer?.Warns == null)
+        {
+            return 0;
+        }
+
+        if (dbplayer.Warns.Count == 0)
+            return 0;
+        var newWarns = (from warn in dbplayer.Warns
+            let date = warn.Date.AddDays(30)
+            let span = DateTime.Now - warn.Date
+            where span.Days <= 30
+            select warn).ToList();
+        return (from warn in newWarns let span = DateTime.Now - warn.Date select warn.Points).Sum();
+    }
+        
 }

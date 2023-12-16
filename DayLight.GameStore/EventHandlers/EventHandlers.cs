@@ -1,6 +1,8 @@
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
+using DayLight.Core.API.Features;
 using Exiled.API.Enums;
+using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using PlayerRoles;
 using System.Collections.Generic;
@@ -39,6 +41,11 @@ public class EventHandlers
     public static void OnSpawned(SpawnedEventArgs ev)
     {
         if(ev.Player == null) return;
+        Logger.Info("test");
+
+        var adv = AdvancedPlayer.Get(ev.Player);
+        Logger.Info(adv.CustomRaCategory);
+        Logger.Info(adv.DatabasePlayer.SteamID);
         if (ev.Reason is SpawnReason.Respawn or SpawnReason.RoundStart or SpawnReason.LateJoin)
             ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.SpawnGameStoreReward);
     }

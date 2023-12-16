@@ -51,7 +51,7 @@ public class Getwarns : ICommand
         string e = "";
         if (arguments.At(0).Contains("@"))
         {
-            e = WarnDatabase.Database.GetWarns(arguments.At(0), onlynew, out bool b);
+            e = WarnDatabase.GetWarns(arguments.At(0), onlynew, out bool b);
             if (b)
             {
                 e = e.Insert(0, "\nVerwarnungen");
@@ -69,7 +69,7 @@ public class Getwarns : ICommand
                 return true;
             }
 
-            e = WarnDatabase.Database.GetWarns(player.UserId, onlynew, out bool b);
+            e = WarnDatabase.GetWarns(player.UserId, onlynew, out bool b);
             if (b)
             {
                 e = e.Insert(0, "\nVerwarnungen von " + player.Nickname);

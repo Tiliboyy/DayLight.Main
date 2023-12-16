@@ -31,7 +31,7 @@ public class Getwarnsplayer : ICommand
             return true;
         }
 
-        string str = WarnDatabase.Database.GetWarns(player.UserId, true, out bool e);
+        string str = WarnDatabase.GetWarns(player.UserId, true, out bool e);
         if (e == false)
         {
             response = "Du hast keine Verwarnungen";

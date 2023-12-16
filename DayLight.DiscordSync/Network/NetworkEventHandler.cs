@@ -128,7 +128,7 @@ public static class NetworkEventHandler
             var statssender = new DayLight.Dependencys.Stats.DatabasePlayerSender()
             {
 
-                DatabasePlayer = DayLightDatabase.GetDataBasePlayerSteam64ID(Link.LinkDatabase.GetLinkedSteamID(ev.UserID)),
+                DatabasePlayer = DayLightDatabase.GetDatabasePlayerSteam64ID(Link.LinkDatabase.GetLinkedSteamID(ev.UserID)),
                 Playtime = pt.ToString(CultureInfo.InvariantCulture),
 
             };
@@ -144,11 +144,11 @@ public static class NetworkEventHandler
     private static void HandlePlayerSettings(ReceivedFullEventArgs ev)
     {
         var settings = ev.GetData<bool>();
-        DayLightDatabase.GetDataBasePlayerSteam64ID(ev.UserID).Profileprivate = ev.GetData<bool>();
+        DayLightDatabase.GetDatabasePlayerSteam64ID(ev.UserID).Profileprivate = ev.GetData<bool>();
     }
     private static void HandleGameStoreMoney(ReceivedFullEventArgs ev)
     {
-        var moneyFromSteam64ID = DayLightDatabase.GameStore.GetMoneyFromSteam64ID(Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString());
+        var moneyFromSteam64ID = DayLightDatabase.GameStore.GetMoneyFromSteam64ID(Link.LinkDatabase.GetLinkedSteamID(ev.UserID));
         _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.String, moneyFromSteam64ID, "");
     }
     private static void HandlePlayerList(ReceivedFullEventArgs ev)
@@ -160,7 +160,7 @@ public static class NetworkEventHandler
     public static string GetNickname(ulong UserID)
     {
 
-        var e = DayLightDatabase.GetNicknameFromSteam64ID(Link.LinkDatabase.GetLinkedSteamID(UserID).ToString());
+        var e = DayLightDatabase.GetNicknameFromSteam64ID(Link.LinkDatabase.GetLinkedSteamID(UserID));
         return e ?? "None";
     }
 }

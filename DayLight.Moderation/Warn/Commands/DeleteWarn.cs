@@ -34,7 +34,7 @@ public class delwarn : ICommand
         {
             if (int.TryParse(arguments.At(1), out var id))
             {
-                string e = WarnDatabase.Database.RemoveWarn(player.UserId, id);
+                string e = WarnDatabase.RemoveWarn(player.UserId, id);
                 response = e;
                 return true;
             }
@@ -44,7 +44,7 @@ public class delwarn : ICommand
 
         if (int.TryParse(arguments.At(1), out var i))
         {
-            string e = WarnDatabase.Database.RemoveWarn(arguments.At(0), i);
+            string e = WarnDatabase.RemoveWarn(arguments.At(0), i);
             response = e;
             return true;
         }

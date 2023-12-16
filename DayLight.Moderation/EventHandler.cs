@@ -49,7 +49,7 @@ public class EventHandler
 
         }
 
-        var total = WarnDatabase.Database.GetTotal(player.UserId);
+        var total = WarnDatabase.GetTotal(player.UserId);
         stringBuilder.Append($"Punkte: <color={GetColor(total)}>{total}</color>");
         var databasePlayer = SCPUtils.DatabasePlayer.GetDatabasePlayer(player);
         if (databasePlayer != null)

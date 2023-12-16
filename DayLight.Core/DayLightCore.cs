@@ -57,7 +57,7 @@ public class DayLightCore : ReloadableModule<Config, Translation>
 
     public override void LateEnable()
     {
-        DayLightDatabase.CreateCollection();
+        DayLightDatabase.CreateDatabase();
     }
         
     public override void Load(IKernel kernel)
