@@ -1,3 +1,3 @@
 # DayLight Main Plugin
 
-The main Core plugin i made for the DayLight Gaming Server
+The main core plugin i made for the DayLight server
