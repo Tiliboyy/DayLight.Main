@@ -77,95 +77,106 @@ public class HintDisplay
     }
     private static void GenerateScpList(Player player, int count, StringBuilder Spectators)
     {
-        var scplistbuilder = new StringBuilder();
-        if (!EventHandlers.EventHandlers.TrackedPlayer.ContainsKey(player))
-        {
-            EventHandlers.EventHandlers.TrackedPlayer.Add(player, 0);
-        }
-        scplistbuilder.Append($"\n<align=right><size=60%>");
-        scplistbuilder.Append(player.SessionVariables.ContainsKey("SCPProximity") ? $"\n{PlayerHintsPlugin.Instance.Translation.ProximityChatText}" : "\n");
-        foreach (var teammate in Player.Get(Team.SCPs))
-        {
-            scplistbuilder.Append("\n");
-            var RoleName = teammate.Role.Type switch
+            if (!EventHandlers.EventHandlers.TrackedPlayer.ContainsKey(player))
             {
-                Scp939 => "SCP-939",
-                Scp173 => "SCP-173",
-                Scp106 => "SCP-106",
-                Scp049 => "SCP-049",
-                Scp0492 => "SCP-049-2",
-                Scp096 => "SCP-096",
-                Scp079 => "SCP-079",
-                _ => string.Empty
-            };
-            scplistbuilder.Append(teammate.Nickname);
-            scplistbuilder.Append(" | ");
-            scplistbuilder.Append(RoleName);
-            scplistbuilder.Append(" | ");
-            if (teammate.Role == Scp079)
-            {
-                teammate.Role.Is(out Scp079Role scp079Role);
-                scplistbuilder.Append("</color><color=#00FFFF>Level: ");
-                scplistbuilder.Append(scp079Role.Level);
-                scplistbuilder.Append("</color> | ");
-                scplistbuilder.Append("Zone: ");
-                var zone = scp079Role.Camera.Zone switch
-                {
-                    ZoneType.Entrance => "Entrance",
-                    ZoneType.Unspecified => "Unspecified",
-                    ZoneType.Other => "Other",
-                    ZoneType.Surface => "Surface",
-                    ZoneType.LightContainment => "Light",
-                    ZoneType.HeavyContainment => "Heavy",
-                    _ => "Unspecified"
-                };
-                scplistbuilder.Append(zone);
+                EventHandlers.EventHandlers.TrackedPlayer.Add(player, 0);
             }
-            else
+            Spectators.Append($"\n<align=right><size=60%>");
+            Spectators.Append(player.SessionVariables.ContainsKey("SCPProximity") ? $"\n{PlayerHintsPlugin.Instance.Translation.ProximityChatText}" : "\n");
+            foreach (var teammate in Player.Get(player.Role.Team))
             {
-                if (teammate.HumeShield > 0)
+                switch (teammate.Role.Type)
                 {
-                    scplistbuilder.Append("<color=green>AHP: ");
-                    scplistbuilder.Append((int)Math.Round((double)(100 * teammate.HumeShield) /
-                                                          teammate.HumeShieldStat.MaxValue));
-                    scplistbuilder.Append("%</color> | ");
+                    case Scp0492:
+                        continue;
+                    case Flamingo:
+                        continue;
                 }
-
-                scplistbuilder.Append("<color=");
-                scplistbuilder.Append(GetHPColor(teammate));
-                scplistbuilder.Append(">HP: ");
-                scplistbuilder.Append(
-                    (int)Math.Round((double)(100 * teammate.Health) / teammate.MaxHealth));
-                scplistbuilder.Append("%</color> | ");
-                if (player.Role.Type == Scp079)
+                Spectators.Append("\n");
+                var RoleName = teammate.Role.Type switch
                 {
-                    player.Role.Is(out Scp079Role scp079Role);
-                    scplistbuilder.Append("Distanz: ");
-                    scplistbuilder.Append(Math.Round(Vector3.Distance(scp079Role.Camera.Position,
-                        teammate.Position)));
-                    scplistbuilder.Append(" m");
+                    Scp939 => "SCP-939",
+                    Scp173 => "SCP-173",
+                    Scp106 => "SCP-106",
+                    Scp049 => "SCP-049",
+                    Scp0492 => "SCP-049-2",
+                    Scp096 => "SCP-096",
+                    Scp079 => "SCP-079",
+                    Flamingo => "Flamingo",
+                    AlphaFlamingo => "Alpha Flamingo",
+                    _ => "Unknown"
+                };
+                Spectators.Append(teammate.Nickname);
+                Spectators.Append(" | ");
+                Spectators.Append(RoleName);
+                Spectators.Append(" | ");
+                if (teammate.Role == Scp079)
+                {
+                    teammate.Role.Is(out Scp079Role scp079Role);
+                    Spectators.Append("</color><color=#00FFFF>Level: ");
+                    Spectators.Append(scp079Role.Level);
+                    Spectators.Append("</color> | ");
+                    Spectators.Append("Zone: ");
+                    string zone = scp079Role.Camera.Zone switch
+                    {
+                        ZoneType.Entrance => "Entrance",
+                        ZoneType.Unspecified => "Unspecified",
+                        ZoneType.Other => "Other",
+                        ZoneType.Surface => "Surface",
+                        ZoneType.LightContainment => "Light",
+                        ZoneType.HeavyContainment => "Heavy",
+                        _ => "Unspecified"
+                    };
+                    Spectators.Append(zone);
                 }
                 else
                 {
-                    scplistbuilder.Append("Distanz: ");
-                    scplistbuilder.Append(Math.Round(Vector3.Distance(player.Position, teammate.Position)));
-                    scplistbuilder.Append(" m");
+                    if (teammate.HumeShield > 0)
+                    {
+                        Spectators.Append("<color=green>AHP: ");
+                        Spectators.Append((int)Math.Round((double)(100 * teammate.HumeShield) /
+                                                              teammate.HumeShieldStat.MaxValue));
+                        Spectators.Append("%</color> | ");
+                    }
+
+                    Spectators.Append("<color=");
+                    Spectators.Append(GetHPColor(teammate));
+                    Spectators.Append(">HP: ");
+                    Spectators.Append(
+                        (int)Math.Round((double)(100 * teammate.Health) / teammate.MaxHealth));
+                    Spectators.Append("%</color> | ");
+                    if (player.Role.Type == Scp079)
+                    {
+                        player.Role.Is(out Scp079Role scp079Role);
+                        Spectators.Append("Distanz: ");
+                        Spectators.Append(Math.Round(Vector3.Distance(scp079Role.Camera.Position,
+                            teammate.Position)));
+                        Spectators.Append(" m");
+                    }
+                    else
+                    {
+                        Spectators.Append("Distanz: ");
+                        Spectators.Append(Math.Round(Vector3.Distance(player.Position, teammate.Position)));
+                        Spectators.Append(" m");
+                    }
                 }
             }
-        }
-        var kills = "";
-        if (Instance.Instance.Config.KillCounterRoles.Contains(player.Role.Type) && EventHandlers.EventHandlers.TrackedPlayer.ContainsKey(player))
-            kills = $"\n\n<color=red><align=right><size=60%>{Instance.Instance.Translation.Kills.Replace("(KILLS)", EventHandlers.EventHandlers.TrackedPlayer[player].ToString())}</align></color></size>";
-        if (count == 0 || ToggleSpectators.NoSpectateList.Contains(player))
-        {
-            scplistbuilder.Append("</align></size>");
-            player.SendHint(ScreenZone.Center, scplistbuilder + kills);
-        }
-        else
-        {
-            scplistbuilder.Append("</align></size>");
-            player.SendHint(ScreenZone.Center, Spectators + scplistbuilder.ToString() + kills);
-        }
+            var kills = "";
+            if(Instance.Instance.Config.KillCounterRoles.Contains(player.Role.Type) && EventHandlers.EventHandlers.TrackedPlayer.ContainsKey(player))
+                kills = $"\n\n<color=red><align=right><size=60%>{Instance.Instance.Translation.Kills.Replace("(KILLS)", EventHandlers.EventHandlers.TrackedPlayer[player].ToString() )}</align></color></size>";
+            if (count == 0 || ToggleSpectators.NoSpectateList.Contains(player))
+            {
+                Spectators.Append("</align></size>");
+
+                player.SendHint(ScreenZone.Center, Spectators + kills);
+            }
+            else
+            {
+                Spectators.Append("</align></size>");
+
+                player.SendHint(ScreenZone.Center, Spectators + Spectators.ToString() + kills);
+            }
+
     }
 
     private static string GetHPColor(Player player)

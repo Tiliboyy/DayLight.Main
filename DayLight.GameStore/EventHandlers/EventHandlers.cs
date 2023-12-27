@@ -1,10 +1,12 @@
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
 using DayLight.Core.API.Features;
+using Discord;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using PlayerRoles;
+using System;
 using System.Collections.Generic;
 using DamageType = Exiled.API.Enums.DamageType;
 using Player = Exiled.API.Features.Player;
@@ -44,7 +46,9 @@ public class EventHandlers
         Logger.Info("test");
 
         var adv = AdvancedPlayer.Get(ev.Player);
-        Logger.Info(adv.CustomRaCategory);
+        if(adv == null)
+            Logger.Error("NULL");
+        Logger.Info(adv.CustomRemoteAdminBadge);
         Logger.Info(adv.DatabasePlayer.SteamID);
         if (ev.Reason is SpawnReason.Respawn or SpawnReason.RoundStart or SpawnReason.LateJoin)
             ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.SpawnGameStoreReward);

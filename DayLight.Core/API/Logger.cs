@@ -13,7 +13,11 @@ public class Logger
     {
         if(Globals.Get<Config>().Debug)
             Log.Send($"[{(object)Assembly.GetCallingAssembly().GetName().Name}] {Debug}", Discord.LogLevel.Debug, ConsoleColor.Green);
-    }  
+    }
+    public static void Sent(object message, Discord.LogLevel level, ConsoleColor color = ConsoleColor.Gray)
+    {
+        Log.SendRaw("[" + level.ToString().ToUpper() + "] " + message, color);
+    }
 
     public static void Warn(object Warning) => Log.Send($"[{(object)Assembly.GetCallingAssembly().GetName().Name}] {Warning}", Discord.LogLevel.Warn, ConsoleColor.Magenta);
 

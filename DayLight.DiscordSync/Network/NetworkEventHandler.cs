@@ -144,7 +144,7 @@ public static class NetworkEventHandler
     private static void HandlePlayerSettings(ReceivedFullEventArgs ev)
     {
         var settings = ev.GetData<bool>();
-        DayLightDatabase.GetDatabasePlayerSteam64ID(ev.UserID).Profileprivate = ev.GetData<bool>();
+        DayLightDatabase.GetDatabasePlayerSteam64ID(ev.UserID).Stats.Public = !ev.GetData<bool>();
     }
     private static void HandleGameStoreMoney(ReceivedFullEventArgs ev)
     {

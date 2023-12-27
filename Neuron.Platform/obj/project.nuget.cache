@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Wsw/KS0Zs5GMCjG/Hyig1FD41ROU9Ana1ixMLNzm0pYoSEIjRAiu44hhBBgu+EGwqtQMqQDYPUn9iiazg7xbyA==",
+  "dgSpecHash": "wF6GP3RdSlD4RwlITSmtrTlZnyZ07DNWkK4E/Yg+m/JWTH8cLb8njd32v251kLzjF3CQbh3LkpndiF5ea0hYDQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Platform\\Neuron.Platform.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\tilau\\.nuget\\packages\\exiled\\8.3.11\\exiled.8.3.11.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\exiled\\8.5.0\\exiled.8.5.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",

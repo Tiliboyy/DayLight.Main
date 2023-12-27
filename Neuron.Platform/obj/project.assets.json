@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.8.1": {
-      "EXILED/8.3.11": {
+      "EXILED/8.5.0": {
         "type": "package",
         "compile": {
           "lib/net48/Assembly-CSharp-Publicized.dll": {},
@@ -332,7 +332,7 @@
       }
     },
     ".NETFramework,Version=v4.8.1/win": {
-      "EXILED/8.3.11": {
+      "EXILED/8.5.0": {
         "type": "package",
         "compile": {
           "lib/net48/Assembly-CSharp-Publicized.dll": {},
@@ -662,7 +662,7 @@
       }
     },
     ".NETFramework,Version=v4.8.1/win-x64": {
-      "EXILED/8.3.11": {
+      "EXILED/8.5.0": {
         "type": "package",
         "compile": {
           "lib/net48/Assembly-CSharp-Publicized.dll": {},
@@ -992,7 +992,7 @@
       }
     },
     ".NETFramework,Version=v4.8.1/win-x86": {
-      "EXILED/8.3.11": {
+      "EXILED/8.5.0": {
         "type": "package",
         "compile": {
           "lib/net48/Assembly-CSharp-Publicized.dll": {},
@@ -1323,14 +1323,14 @@
     }
   },
   "libraries": {
-    "EXILED/8.3.11": {
-      "sha512": "0adECHh+e7hshqz8mEd+XBeiby7RS86RFUCwy7TMVxuyEQQrZZrBVcCxpKumaT/zgm7yVsHgvJmw8bwDlX9dgA==",
+    "EXILED/8.5.0": {
+      "sha512": "Z1W+iN8S+FTA7KkFISvavaff4AJGkNO9zjpnyEcQST30pSoi1ttT3EU/o18GHu6hIqMWDc3+Hk8cGCNJV2YBlA==",
       "type": "package",
-      "path": "exiled/8.3.11",
+      "path": "exiled/8.5.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "exiled.8.3.11.nupkg.sha512",
+        "exiled.8.5.0.nupkg.sha512",
         "exiled.nuspec",
         "images/Exiled_Icon.jpg",
         "lib/net48/Assembly-CSharp-Publicized.dll",
@@ -1766,7 +1766,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8.1": [
-      "EXILED >= 8.3.11",
+      "EXILED >= 8.5.0",
       "Microsoft.Bcl.AsyncInterfaces >= 6.0.0",
       "Microsoft.Extensions.Caching.Abstractions >= 6.0.0",
       "Microsoft.Extensions.Caching.Memory >= 6.0.1",
@@ -1820,7 +1820,7 @@
         "dependencies": {
           "EXILED": {
             "target": "Package",
-            "version": "[8.3.11, )"
+            "version": "[8.5.0, )"
           },
           "Microsoft.Bcl.AsyncInterfaces": {
             "target": "Package",

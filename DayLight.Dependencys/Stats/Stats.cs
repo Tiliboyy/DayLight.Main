@@ -8,12 +8,11 @@ namespace DayLight.Dependencys.Stats;
 public interface IDatabasePlayer
 {
     
-    public bool IsDummy { get; } 
+    public bool IsDummy { get; }
     [BsonId]
     public ulong SteamID { get; }
     public string Nickname { get; set; }
     public Stats Stats { get; set; }
-    public bool Profileprivate { get; set; }
     public List<Warn> Warns { get; set; }
     
     public event PropertyChangedEventHandler PropertyChanged;
@@ -25,29 +24,33 @@ public class DummyDatabasePlayer : IDatabasePlayer
 {
 
     public bool IsDummy { get; } = true;
-    public ulong SteamID { get; } = 0;
+    public ulong SteamID { get; } = 99999999999999999;
     public string Nickname { get; set; } = "Dummy";
-    public Stats Stats { get; set; } = null;
-    public bool Profileprivate { get; set; } = true;
+    public Stats Stats { get; set; } = new Stats();
+    public bool Public { get; set; } = true;
     public List<Warn> Warns { get; set; } = new List<Warn>();
     public event PropertyChangedEventHandler PropertyChanged;
 }
 
 public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
 {
-    public bool IsDummy { get; } = false;
+    public bool IsDummy => false;
     private ulong steamID;
     private string nickname;
     private Stats stats;
     private bool profileprivate;
     private List<Warn> warns;
 
+    public DatabasePlayer()
+    {
+        
+    }
     public DatabasePlayer(ulong steam64SteamID, string nickname)
     {
         SteamID = steam64SteamID;
         Nickname = nickname;
         Stats = new Stats();
-        Profileprivate = false;
+        Public = false;
         Warns = new List<Warn>();
     }
 
@@ -82,13 +85,13 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
         }
     }
 
-    public bool Profileprivate
+    public bool Public
     {
         get => profileprivate;
         set
         { 
             profileprivate = value;
-            OnPropertyChanged(nameof(Profileprivate));
+            OnPropertyChanged(nameof(Public));
         }
     }
 
@@ -120,15 +123,15 @@ public class Warns
 
 public class Stats : INotifyPropertyChanged
 {
-    private double kills;
-    private double killedScps;
-    private double pinkCandyKills;
-    private double deaths;
-    private double playedRounds;
-    private double fastestEscapeSeconds;
-    private float money;
-
-    private CustomDictionary<ItemType, float> usedItems;
+    private double _kills;
+    private double _killedScps;
+    private double _pinkCandyKills;
+    private double _deaths;
+    private double _playedRounds;
+    private double _fastestEscapeSeconds;
+    private float _money;
+    private bool _public;
+    private CustomDictionary<ItemType, float> _usedItems;
 
     public Stats()
     {
@@ -136,84 +139,94 @@ public class Stats : INotifyPropertyChanged
         UnlockedAchievements = new CustomList<double>();
     }
 
+    public bool Public
+    {
+        get => _public;
+        set
+        {
+            _public = value;
+            OnPropertyChanged(nameof(_public));
+        }
+    }
+
     public CustomList<double> UnlockedAchievements { get; private set; }
 
     public double Kills
     {
-        get => kills;
+        get => _kills;
         set
         {
-            kills = value;
+            _kills = value;
             OnPropertyChanged(nameof(Kills));
         }
     }
 
     public double KilledScps
     {
-        get => killedScps;
+        get => _killedScps;
         set
         {
-            killedScps = value;
+            _killedScps = value;
             OnPropertyChanged(nameof(KilledScps));
         }
     }
 
     public double PinkCandyKills
     {
-        get => pinkCandyKills;
+        get => _pinkCandyKills;
         set
         {
-            pinkCandyKills = value;
+            _pinkCandyKills = value;
             OnPropertyChanged(nameof(PinkCandyKills));
         }
     }
 
     public double Deaths
     {
-        get => deaths;
+        get => _deaths;
         set
         {
-            deaths = value;
+            _deaths = value;
             OnPropertyChanged(nameof(Deaths));
         }
     }
 
     public double PlayedRounds
     {
-        get => playedRounds;
+        get => _playedRounds;
         set
         {
-            playedRounds = value;
+            _playedRounds = value;
             OnPropertyChanged(nameof(PlayedRounds));
         }
     }
 
     public double FastestEscapeSeconds
     {
-        get => fastestEscapeSeconds;
+        get => _fastestEscapeSeconds;
         set
         {
-            fastestEscapeSeconds = value;
+            _fastestEscapeSeconds = value;
             OnPropertyChanged(nameof(FastestEscapeSeconds));
         }
     }
 
     public float Money
     {
-        get => money;
+        get => _money;
         set
         {
-            money = value;
+            _money = value;
             OnPropertyChanged(nameof(Money));
         }
     }
 
     public CustomDictionary<ItemType, float> UsedItems
     {
-        get => usedItems;
+        get => _usedItems;
         set
         {
-            usedItems = value;
+            _usedItems = value;
             OnPropertyChanged(nameof(UsedItems));
         }
     }

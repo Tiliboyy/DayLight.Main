@@ -30,9 +30,4 @@ public class HintsConfig : IConfig
         RoleTypeId.Scp0492,
         RoleTypeId.Scp939,
     };
-    
-    public int ProximityRange { get; set; } = 100;
-    
-    public bool SpectatorChat { get; set; } = false;
-
 }

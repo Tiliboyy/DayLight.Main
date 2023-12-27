@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 namespace DayLight.Core.API.Features;
@@ -29,10 +30,10 @@ public class AdvancedPlayer : MonoBehaviour
   private void Awake()
   {
     ExiledPlayer = Player.Get(gameObject);
-    if(ExiledPlayer.DoNotTrack) return;
     DayLightDatabase.AddPlayer(ExiledPlayer);
-    DatabasePlayer = DayLightDatabase.GetDBPlayer(ExiledPlayer);
-    if (DatabasePlayer == null) return;
+    var dbplayer = DayLightDatabase.GetDBPlayer(ExiledPlayer);
+    if (dbplayer == null) return;
+    DatabasePlayer = dbplayer;
     DatabasePlayer.PropertyChanged += OnPropertyChanged;
     DatabasePlayer.Stats.PropertyChanged += OnPropertyChanged;
   }
@@ -51,7 +52,11 @@ public class AdvancedPlayer : MonoBehaviour
     [CanBeNull]
     public static AdvancedPlayer Get(GameObject gameObject)
     {
-        return gameObject.GetComponent<AdvancedPlayer>();
+      var adv = gameObject.GetComponent<AdvancedPlayer>();
+      if(adv == null)
+        Logger.Error("AdvancedPlayer is null");
+      return adv;
+      
     }
     [CanBeNull]
     public static AdvancedPlayer Get(int id)

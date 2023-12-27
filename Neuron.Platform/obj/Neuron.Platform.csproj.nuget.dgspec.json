@@ -36,7 +36,7 @@
           "dependencies": {
             "EXILED": {
               "target": "Package",
-              "version": "[8.3.11, )"
+              "version": "[8.5.0, )"
             },
             "Microsoft.Bcl.AsyncInterfaces": {
               "target": "Package",

@@ -40,13 +40,16 @@ public static class DayLightDatabase
     [CanBeNull]
     public static IDatabasePlayer GetDBPlayer(Player player)
     {
+        Logger.Info("getting db entry");
         if (player.DoNotTrack) return null;
         
         var playerID = player.GetSteam64Id();
         var players = Database.GetCollection<IDatabasePlayer>("players");
 
         var dbplayer = players.FindOne(x => x.SteamID == playerID);
-
+        if(dbplayer == null) 
+            Logger.Error($"Dbplayer was not found ({player.Nickname})");
+        Logger.Info(dbplayer.SteamID);
         return dbplayer;
     }
 
@@ -70,20 +73,30 @@ public static class DayLightDatabase
 
     public static void AddPlayer(Player player)
     {
-        if (player == null) return;
-        if (player.DoNotTrack) return;
-        var playerID = player.GetSteam64Id();
-        var players = Database.GetCollection<IDatabasePlayer>("players");
-        if (players.FindOne(x => x.SteamID == playerID) != null)
+
+        try
         {
-            var udbplayer = players.FindOne(x => x.SteamID == playerID);
-            udbplayer.Nickname = player.Nickname;
-            players.Update(udbplayer);
-            return;
+            new DatabasePlayer();
+            if (player.DoNotTrack) return;
+            var playerID = player.GetSteam64Id();
+            var players = Database.GetCollection<DatabasePlayer>("players");
+            if (players.FindOne(x => x.SteamID == playerID) != null)
+            {
+                var udbplayer = players.FindOne(x => x.SteamID == playerID);
+                udbplayer.Nickname = player.Nickname;
+
+                players.Update(udbplayer);
+                return;
+            }
+            players.Insert(new DatabasePlayer(playerID, player.Nickname));
+            var dbplayer = players.FindOne(x => x.SteamID == playerID);
+            players.Update(dbplayer);
         }
-        players.Insert(new DatabasePlayer(playerID, player.Nickname));
-        var dbplayer = players.FindOne(x => x.SteamID == playerID);
-        players.Update(dbplayer);
+        catch (Exception e)
+        {
+            Logger.Error(e);
+            throw;
+        }
     }
 
     public static string GetNicknameFromSteam64ID(ulong steam64id)
@@ -135,6 +148,8 @@ public static class DayLightDatabase
             if (player == null) return false;
             if (player.DoNotTrack) return false;
             var dbplayer = player.GetAdvancedPlayer().DatabasePlayer;
+            
+            Log.Info(dbplayer.SteamID);
             if (dbplayer != null) return dbplayer.Stats.Money >= reward;
             return false;
         }
