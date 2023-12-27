@@ -54,7 +54,6 @@ public class HintDisplay
 
 
     }
-    public override string ToString() => base.ToString();
     private static StringBuilder GenenerateSpectatorList(Player player, out int count)
     {
         StringBuilder Spectators = new();

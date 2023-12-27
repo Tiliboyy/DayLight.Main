@@ -1,13 +1,15 @@
 using CommandSystem;
+using DayLight.Core.API.Attributes;
 using DayLight.GameStore.Commands.RemoteAdmin.SubCommands;
 using Exiled.Permissions.Extensions;
+using Neuron.Core.Meta;
 using System;
 using System.Linq;
 
 namespace DayLight.GameStore.Commands.RemoteAdmin;
 
-
-[CommandHandler(typeof(RemoteAdminCommandHandler))]
+[Automatic]
+[Command(new [] { Platform.RemoteAdmin })]
 public class GameStoreParentCommand : ParentCommand
 {
     public GameStoreParentCommand() => LoadGeneratedCommands();

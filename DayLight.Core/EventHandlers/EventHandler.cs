@@ -16,8 +16,6 @@ public class EventHandler
     public CustomRaCategory CustomRaCategory = new("Sex", 696969, 5, true, true, Misc.PlayerInfoColorTypes.Aqua);
     public static void OnVerified(VerifiedEventArgs ev)
     {
-        Logger.Info($"{ev.Player.Nickname} has joined");
-
         var AdvancedPlayer = ev.Player.ReferenceHub.gameObject.AddComponent<AdvancedPlayer>();
         //Funny Zone
         AdvancedPlayer.CustomRemoteAdminBadge = ev.Player.Nickname.ToLower() switch
@@ -26,14 +24,7 @@ public class EventHandler
             "fw_blu" => "[Retard]",
             _ => AdvancedPlayer.CustomRemoteAdminBadge
         };
-        Logger.Info(AdvancedPlayer.CustomRemoteAdminBadge);
-
-    
         //End of Funny zone
-    }
-    public void OnSpeaking(SpeakingEventArgs ev)
-    {
-        ev.Channel = VoiceChatChannel.Proximity;
     }
     public static void OnReloadedConfigs()
     {

@@ -36,9 +36,7 @@ public static class Extensions
         GameStoreHandler.OnGainingMoney(moneyEventArgs);
             
         databasePlayer.Stats.Money += money;
-
-        Logger.Info(databasePlayer.Stats.Money);
-
+        
     }
     public static void GiveGameStoreReward(this Player player, GameStoreReward gameStoreReward)
     {

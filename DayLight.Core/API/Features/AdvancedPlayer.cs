@@ -26,13 +26,19 @@ public class AdvancedPlayer : MonoBehaviour
   /// test
   /// </summary>
   /// <exception cref="NullReferenceException">Is null if player has dnt enabled</exception>
-  public IDatabasePlayer DatabasePlayer { get; private set; } = new DummyDatabasePlayer();
+  public DatabasePlayer DatabasePlayer { get; private set; } = new DatabasePlayer();
   private void Awake()
   {
     ExiledPlayer = Player.Get(gameObject);
+    Logger.Info($"Adding {nameof(AdvancedPlayer)} component to player {ExiledPlayer.Nickname}");
+
     DayLightDatabase.AddPlayer(ExiledPlayer);
+    Logger.Info("here");
+
     var dbplayer = DayLightDatabase.GetDBPlayer(ExiledPlayer);
-    if (dbplayer == null) return;
+    Logger.Info("here");
+    Logger.Info(dbplayer.SteamID);
+    //if (dbplayer == null) return;
     DatabasePlayer = dbplayer;
     DatabasePlayer.PropertyChanged += OnPropertyChanged;
     DatabasePlayer.Stats.PropertyChanged += OnPropertyChanged;
@@ -55,6 +61,7 @@ public class AdvancedPlayer : MonoBehaviour
       var adv = gameObject.GetComponent<AdvancedPlayer>();
       if(adv == null)
         Logger.Error("AdvancedPlayer is null");
+      
       return adv;
       
     }

@@ -57,8 +57,8 @@ public static class RemoteAdminListPatch
           case ClientInstanceMode.DedicatedServer:
             continue;
           default:
-            int num2 = hub.serverRoles.IsInOverwatch ? 1 : 0;
-            bool flag2 = VoiceChatMutes.IsMuted(hub);
+            var num2 = hub.serverRoles.IsInOverwatch ? 1 : 0;
+            var flag2 = VoiceChatMutes.IsMuted(hub);
             stringBuilder.Append(RaPlayerList.GetPrefix(hub, viewHiddenBadges, viewHiddenGlobalBadges));
             if (num2 != 0)
               stringBuilder.Append("<link=RA_OverwatchEnabled><color=white>[</color><color=#03f8fc>\uF06E</color><color=white>]</color></link> ");

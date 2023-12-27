@@ -51,7 +51,7 @@ public class CustomList<T> : ICollection<T>, INotifyPropertyChanged
     {
         if (EqualityComparer<T>.Default.Equals(field, value)) return false;
         field = value;
-        OnPropertyChanged(propertyName);
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         return true;
     }
 }

@@ -43,7 +43,7 @@ public static class Achievements
         try
         {
             var id = ulong.Parse(steam64id);
-            var players = DayLightDatabase.Database.GetCollection<IDatabasePlayer>("players");
+            var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
             var dbplayer = players.FindOne(x => x.SteamID == id);
             if (dbplayer == null)
                 return new List<Dependencys.Achievements.Achievements.Achivement>();

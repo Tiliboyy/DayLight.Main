@@ -7,35 +7,23 @@ namespace DayLight.Dependencys.Stats;
 
 public interface IDatabasePlayer
 {
-    
-    public bool IsDummy { get; }
+
+    public bool IsDummy { get; set; }
     [BsonId]
     public ulong SteamID { get; }
     public string Nickname { get; set; }
     public Stats Stats { get; set; }
     public List<Warn> Warns { get; set; }
-    
-    public event PropertyChangedEventHandler PropertyChanged;
-    
-    
 
-}
-public class DummyDatabasePlayer : IDatabasePlayer
-{
-
-    public bool IsDummy { get; } = true;
-    public ulong SteamID { get; } = 99999999999999999;
-    public string Nickname { get; set; } = "Dummy";
-    public Stats Stats { get; set; } = new Stats();
-    public bool Public { get; set; } = true;
-    public List<Warn> Warns { get; set; } = new List<Warn>();
     public event PropertyChangedEventHandler PropertyChanged;
+
 }
 
 public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
 {
-    public bool IsDummy => false;
+    public bool IsDummy { get; set; }= false;
     private ulong steamID;
+    private ulong discordID;
     private string nickname;
     private Stats stats;
     private bool profileprivate;
@@ -43,7 +31,8 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
 
     public DatabasePlayer()
     {
-        
+        IsDummy = true;
+        steamID = 99999999;
     }
     public DatabasePlayer(ulong steam64SteamID, string nickname)
     {
@@ -51,6 +40,7 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
         Nickname = nickname;
         Stats = new Stats();
         Public = false;
+        DiscordID = 0;
         Warns = new List<Warn>();
     }
 
@@ -72,6 +62,15 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
         {
             nickname = value;
             OnPropertyChanged(nameof(Nickname));
+        }
+    }
+    public ulong DiscordID
+    {
+        get => discordID;
+        set
+        {
+            discordID = value;
+            OnPropertyChanged(nameof(DiscordID));
         }
     }
 

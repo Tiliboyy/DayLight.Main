@@ -20,8 +20,6 @@ public class EventHandlers
 
     public static void OnVerified(VerifiedEventArgs ev)
     {
-        if (!ev.Player.DoNotTrack) return;
-        DayLightDatabase.RemovePlayer(ev.Player);
     }
     
     public static void OnGainingLevel(Exiled.Events.EventArgs.Scp079.GainingLevelEventArgs ev)
@@ -43,13 +41,10 @@ public class EventHandlers
     public static void OnSpawned(SpawnedEventArgs ev)
     {
         if(ev.Player == null) return;
-        Logger.Info("test");
 
         var adv = AdvancedPlayer.Get(ev.Player);
         if(adv == null)
             Logger.Error("NULL");
-        Logger.Info(adv.CustomRemoteAdminBadge);
-        Logger.Info(adv.DatabasePlayer.SteamID);
         if (ev.Reason is SpawnReason.Respawn or SpawnReason.RoundStart or SpawnReason.LateJoin)
             ev.Player?.GiveGameStoreReward(GameStorePlugin.Instance.Config.SpawnGameStoreReward);
     }
@@ -75,8 +70,7 @@ public class EventHandlers
         if (PocketPlayers.ContainsKey(ev.Player))
             PocketPlayers.Remove(ev.Player);
         
-        
-        if (ev.Attacker == null || ev.Attacker.Id == ev.Player.Id)
+        if (ev.Attacker == null)
             return;
         if (ev.Player.Role.Team == Team.SCPs && ev.Player.Role.Type != RoleTypeId.Scp0492)
             ev.Attacker.GiveGameStoreReward(GameStorePlugin.Instance.Config.ScpKillGameStoreReward);
