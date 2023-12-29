@@ -41,7 +41,7 @@ public sealed class Network : IDisposable
     /// <param name="reconnectionInterval">
     ///     <inheritdoc cref="ReconnectionInterval" />
     /// </param>
-    public Network(IPEndPoint ipEndPoint, TimeSpan reconnectionInterval)
+    public Network(IPEndPoint? ipEndPoint, TimeSpan reconnectionInterval)
     {
         IPEndPoint = ipEndPoint;
         ReconnectionInterval = reconnectionInterval;
@@ -55,7 +55,7 @@ public sealed class Network : IDisposable
     /// <summary>
     ///     Gets the IP end point to connect with.
     /// </summary>
-    public IPEndPoint IPEndPoint { get; private set; }
+    public IPEndPoint? IPEndPoint { get; private set; }
 
     /// <summary>
     ///     Gets a value indicating whether the <see cref="TcpClient" /> is connected or not.
@@ -88,51 +88,51 @@ public sealed class Network : IDisposable
     /// <summary>
     ///     Invoked after network received partial data.
     /// </summary>
-    public event EventHandler<ReceivedPartialEventArgs> ReceivedPartial;
+    public event EventHandler<ReceivedPartialEventArgs>? ReceivedPartial;
 
     /// <summary>
     ///     Invoked after network received full data.
     /// </summary>
-    public event EventHandler<ReceivedFullEventArgs> ReceivedFull;
+    public event EventHandler<ReceivedFullEventArgs>? ReceivedFull;
 
     /// <summary>
     ///     Invoked after the network thrown an exception while sending data.
     /// </summary>
-    public event EventHandler<SendingErrorEventArgs> SendingError;
+    public event EventHandler<SendingErrorEventArgs>? SendingError;
 
     /// <summary>
     ///     Invoked after the network thrown an exception while receiving data.
     /// </summary>
-    public event EventHandler<ReceivingErrorEventArgs> ReceivingError;
+    public event EventHandler<ReceivingErrorEventArgs>? ReceivingError;
     /// <summary>
     ///     Invoked after network sent data.
     /// </summary>
-    public event EventHandler<SentEventArgs> Sent;
+    public event EventHandler<SentEventArgs>? Sent;
 
     /// <summary>
     ///     Invoked before the network connects to the server.
     /// </summary>
-    public event EventHandler<ConnectingEventArgs> Connecting;
+    public event EventHandler<ConnectingEventArgs>? Connecting;
 
     /// <summary>
     ///     Invoked after successfully connecting to the server.
     /// </summary>
-    public event EventHandler<ConnectingErrorEventArgs> ConnectingError;
+    public event EventHandler<ConnectingErrorEventArgs>? ConnectingError;
 
     /// <summary>
     ///     Invoked after the network successfully connects to the server.
     /// </summary>
-    public event EventHandler Connected;
+    public event EventHandler? Connected;
 
     /// <summary>
     ///     Invoked after the network thrown an exception while updating the connection.
     /// </summary>
-    public event EventHandler<UpdatingConnectionErrorEventArgs> UpdatingConnectionError;
+    public event EventHandler<UpdatingConnectionErrorEventArgs>? UpdatingConnectionError;
 
     /// <summary>
     ///     Invoked after the network termination.
     /// </summary>
-    public event EventHandler<TerminatedEventArgs> Terminated;
+    public event EventHandler<TerminatedEventArgs>? Terminated;
 
     /// <summary>
     ///     Starts the <see cref="TcpClient" />.
@@ -430,7 +430,7 @@ public sealed class Network : IDisposable
         }
     }
     
-    public async Task<BotRequester> Request(MessageType messageType, object data = null, string nickname = "")
+    public async Task<BotRequester> Request(MessageType messageType, object? data = null, string nickname = "")
     {
         return await WriteLineAndGetReply(new PluginSender(messageType, data, nickname), TimeSpan.FromSeconds(2f));
     }
@@ -452,7 +452,7 @@ public sealed class Network : IDisposable
     {
         await DiscordSyncPlugin.Instance.Network.SendAsync(data);
     }
-    public async Task ReplyLine(MessageType requestType, object data = null, string nickname = "")
+    public async Task ReplyLine(MessageType requestType, object? data = null, string nickname = "")
     {
         var pluginSender = new PluginSender(requestType, data, nickname);
 

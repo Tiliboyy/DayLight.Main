@@ -2,6 +2,7 @@
 
 using DayLight.Core.API;
 using DayLight.Core.API.Attributes;
+using DayLight.Moderation.Configs;
 using Exiled.API.Features;
 using Neuron.Core.Plugins;
 using Neuron.Modules.Reload;
@@ -13,11 +14,11 @@ using System.IO;
 namespace DayLight.Moderation;
 
 [Plugin(Name = "ModerationSystem", Author = "Tiliboyy")]
-public class ModerationSystemPlugin : DayLightCoreModule<ModerationConfig, ModerationTranslation>
+public class ModerationSystemPlugin : DayLightCorePlugin<ModerationConfig, ModerationTranslation>
 {
     public static ModerationSystemPlugin Instance;
-    
-    public override void Enabled()
+
+    protected override void Enabled()
     {
         try
         {

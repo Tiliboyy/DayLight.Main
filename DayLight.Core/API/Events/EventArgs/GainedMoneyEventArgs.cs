@@ -12,7 +12,7 @@ public class GainedMoneyEventArgs : IEvent
     public GameStoreReward GameStoreReward { get; }
 
     public GainedMoneyEventArgs(Player player, GameStoreReward gameStoreReward, int money)
-    {
+    {  
         GameStoreReward = gameStoreReward;
         Player = player;
         Money = money;

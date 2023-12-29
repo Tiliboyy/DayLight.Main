@@ -38,7 +38,7 @@ public class ReceivedEventArgs : System.EventArgs
     public string SerilzedData { get; private set; }
 
     
-    public T GetData<T>()
+    public T? GetData<T>()
     {
         try
         {

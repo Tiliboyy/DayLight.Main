@@ -27,7 +27,7 @@ namespace DayLight.Core;
 public class DayLightCore : ReloadableModule<Config, Translation>
 {
     public static DayLightCore Instance;
-        
+    
     [Inject]
     public NeuronBase Base {get;set;}
 
@@ -93,7 +93,7 @@ public class DayLightCore : ReloadableModule<Config, Translation>
     
     public class CommandBinding : IMetaBinding
     {
-        public Type Type { get; set; }
+        public Type Type { get; init; }
 
         public IEnumerable<Type> PromisedServices => new Type[] { };
     }

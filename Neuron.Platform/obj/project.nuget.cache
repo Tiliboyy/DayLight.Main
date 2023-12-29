@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wF6GP3RdSlD4RwlITSmtrTlZnyZ07DNWkK4E/Yg+m/JWTH8cLb8njd32v251kLzjF3CQbh3LkpndiF5ea0hYDQ==",
+  "dgSpecHash": "94mFEjI6QPHwm69EB4O7Vbi5ccfeeLIM/ScLWkDkJuB9YCdrj0h9eiyjLgWVpEySGjg66xxZk1re0BpXfMZbdw==",
   "success": true,
   "projectFilePath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Platform\\Neuron.Platform.csproj",
   "expectedPackageFiles": [
@@ -20,7 +20,7 @@
     "C:\\Users\\tilau\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\tilau\\.nuget\\packages\\yamldotnet\\11.2.1\\yamldotnet.11.2.1.nupkg.sha512"
+    "C:\\Users\\tilau\\.nuget\\packages\\yamldotnet\\13.7.1\\yamldotnet.13.7.1.nupkg.sha512"
   ],
   "logs": []
 }

@@ -21,7 +21,7 @@ public static class Extensions
     }
     public static void GiveMoney(this Player player, int money)
     {
-        
+        Logger.Debug($"Giving {money} Money to {player.Nickname}");
         var databasePlayer = player.GetAdvancedPlayer().DatabasePlayer;
         if (databasePlayer == null) return;
         if (databasePlayer.Stats.Money < 0) databasePlayer.Stats.Money = 0;
@@ -38,9 +38,6 @@ public static class Extensions
         databasePlayer.Stats.Money += money;
         
     }
-    public static void GiveGameStoreReward(this Player player, GameStoreReward gameStoreReward)
-    {
-        DayLightDatabase.GameStore.AddRewardToPlayer(player, gameStoreReward);
-    }
+
     public static ulong GetSteam64Id(this Player player) => ulong.Parse(player.RawUserId);
 }

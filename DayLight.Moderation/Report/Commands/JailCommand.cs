@@ -1,37 +1,37 @@
 ﻿#region
 
 using CommandSystem;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.CommandSystem;
+using DayLight.Moderation.Configs;
 using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
 using MEC;
 using Neuron.Core;
+using Neuron.Core.Meta;
 using System;
 
 #endregion
 
 namespace DayLight.Moderation.Report.Commands;
 
-internal class JailCommand : ICommand
+[Automatic]
+[Command(new [] { Platform.RemoteAdmin })]
+internal class JailCommand : CustomCommand
 {
-    public string Command { get; } = "jail";
+    public override string Command { get; } = "jail";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "Usage: Jail <player> <Jail ID>";
-
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    public override string Description { get; } = "Usage: Jail <player> <Jail ID>";
+    protected override string Permission { get; } = "ws.jail";
+    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
     {
-        if (!sender.CheckPermission("ws.jail"))
-        {
-            response = "You do not have permission to use this command";
-            return false;
-        }
-        Player player;
+
         var pos = ModerationSystemPlugin.Instance.Config.Towers[0];
         switch (arguments.Count)
         {
             case 0:
-                player = Player.Get(sender);
                 break;
             case 1:
                 player = Player.Get(arguments.At(0));

@@ -16,7 +16,7 @@
         <RunPostBuildEvent>Always</RunPostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
+        <PlatformTarget>x64</PlatformTarget>
         <DebugType>pdbonly</DebugType>
         <Optimize>true</Optimize>
         <OutputPath>bin\Release\</OutputPath>
@@ -34,6 +34,7 @@
       <WarningLevel>4</WarningLevel>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <OutputPath>bin\Debug\</OutputPath>
+      <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
     <PropertyGroup>
       <PostBuildEvent>xcopy /y "$(TargetDir)*.dll" "C:\Users\tilau\SCP Secret Laboratory\Build Output"
@@ -432,7 +433,7 @@
       <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
       <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
       <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-      <PackageReference Include="YamlDotNet" Version="11.2.1" />
+      <PackageReference Include="YamlDotNet" Version="13.7.1" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\DayLight.Core\DayLight.Core.csproj">

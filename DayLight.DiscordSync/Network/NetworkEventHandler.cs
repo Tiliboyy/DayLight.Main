@@ -74,13 +74,12 @@ public static class NetworkEventHandler
     }
     private static void HandleAddMoney(ReceivedFullEventArgs ev)
     {
-        var linkedSteamID = Link.LinkDatabase.GetLinkedSteamID(ev.UserID);
-        if(!int.TryParse(ev.GetData<StringMessage>().String, out int i))
-        {
+        if(!int.TryParse(ev.GetData<StringMessage>().String, out int Money))
             return;
-        }
-        //Todo: 
-        DayLightDatabase.GameStore.AddMoneyToSteam64ID(linkedSteamID, i);
+        var dbPlayer = DayLightDatabase.GetDBPlayer(Link.LinkDatabase.GetLinkedSteamID(ev.UserID));
+        if (dbPlayer != null && dbPlayer.Stats != null)
+            dbPlayer.Stats.Money += Money;
+
     }
     private static void HandleLeaderboard(ReceivedFullEventArgs ev)
     {
@@ -111,8 +110,6 @@ public static class NetworkEventHandler
     }
     private static void HandlePlaytime(ReceivedFullEventArgs ev)
     {
-        Todo: 
-
         var player = Database.LiteDatabase.GetCollection<Player>().FindOne(x => x.Id == Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString());
         var playtime = new TimeSpan(0, 0, player.PlayTimeRecords.Sum(pair => pair.Value)).TotalSeconds;
         _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Playtime, playtime.ToString(CultureInfo.InvariantCulture), GetNickname(ev.UserID));
@@ -148,8 +145,11 @@ public static class NetworkEventHandler
     }
     private static void HandleGameStoreMoney(ReceivedFullEventArgs ev)
     {
-        var moneyFromSteam64ID = DayLightDatabase.GameStore.GetMoneyFromSteam64ID(Link.LinkDatabase.GetLinkedSteamID(ev.UserID));
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.String, moneyFromSteam64ID, "");
+        var dbPlayer = DayLightDatabase.GetDBPlayer(Link.LinkDatabase.GetLinkedSteamID(ev.UserID));
+        float money = 0;
+        if (dbPlayer != null && dbPlayer.Stats != null)
+            money = dbPlayer.Stats.Money;
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.String, money, "");
     }
     private static void HandlePlayerList(ReceivedFullEventArgs ev)
     {

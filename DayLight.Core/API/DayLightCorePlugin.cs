@@ -7,16 +7,15 @@ using System.Reflection;
 namespace DayLight.Core.API;
 
 
-public class DayLightCoreModule<TConfig, TTranslation> : ReloadablePlugin<TConfig, TTranslation>
+public class DayLightCorePlugin<TConfig, TTranslation> : ReloadablePlugin<TConfig, TTranslation>
     where TConfig : IConfig
-    where TTranslation : Translations<TTranslation>, new(){
+    where TTranslation : Translations<TTranslation>, new()
+{
     
     
     
     public override sealed void EnablePlugin()
     {
-        
-
         if (!StaticUtils.GetOrCreate<TConfig>().Enabled)
         {
             return;
@@ -27,7 +26,7 @@ public class DayLightCoreModule<TConfig, TTranslation> : ReloadablePlugin<TConfi
 
     }
 
-    public virtual void LateLoad()
+    protected virtual void LateLoad()
     {
         
     }
@@ -40,7 +39,7 @@ public class DayLightCoreModule<TConfig, TTranslation> : ReloadablePlugin<TConfi
         }
         Reloading();
     }
-    public virtual void Enabled()
+    protected virtual void Enabled()
     {
         
     }

@@ -16,7 +16,7 @@
         <RunPostBuildEvent>Always</RunPostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
+        <PlatformTarget>x64</PlatformTarget>
         <DebugType>pdbonly</DebugType>
         <Optimize>true</Optimize>
         <OutputPath>bin\Release\</OutputPath>
@@ -32,6 +32,7 @@
       <ErrorReport>prompt</ErrorReport>
       <WarningLevel>4</WarningLevel>
       <OutputPath>bin\Debug\</OutputPath>
+      <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
     <PropertyGroup>
       <PostBuildEvent>xcopy /y "$(TargetDir)*.dll" "C:\Users\tilau\SCP Secret Laboratory\Build Output"
@@ -417,6 +418,7 @@
         <Compile Include="Commands\RemoteAdmin\SubCommands\Toggle.cs" />
         <Compile Include="Configs\GameStoreConfig.cs" />
         <Compile Include="Configs\GameStoreTranslation.cs" />
+        <Compile Include="Database.cs" />
         <Compile Include="EventHandlers\EventHandlers.cs" />
         <Compile Include="Extensions.cs" />
         <Compile Include="Plugin.cs" />

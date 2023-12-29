@@ -1,7 +1,10 @@
 ﻿#region
 
 using CommandSystem;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.CommandSystem;
 using Exiled.Permissions.Extensions;
+using Neuron.Core.Meta;
 using System;
 using Player = Exiled.API.Features.Player;
 
@@ -9,20 +12,17 @@ using Player = Exiled.API.Features.Player;
 
 namespace DayLight.Moderation.Warn.Commands;
 
-[CommandHandler(typeof(RemoteAdminCommandHandler))]
-public class delwarn : ICommand
+[Automatic]
+[Command(new [] { Platform.RemoteAdmin })]
+public class delwarn : CustomCommand
 {
-    public string Command { get; } = "removewarn";
-    public string[] Aliases { get; } = new string[] { "rwarn" };
-    public string Description { get; } = "Usage: removewarn <Steam64ID> <WARN ID>)";
+    public override string Command { get; } = "removewarn";
+    public override string[] Aliases { get; } = new string[] { "rwarn" };
+    public override string Description { get; } = "Usage: removewarn <Steam64ID> <WARN ID>)";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    protected override string Permission { get; } = "ws.delete";
+    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
     {
-        if (!sender.CheckPermission("ws.delete"))
-        {
-            response = "You do not have permission to use this command";
-            return false;
-        }
 
         if (arguments.Count != 2)
         {
@@ -30,11 +30,11 @@ public class delwarn : ICommand
             return true;
         }
 
-        if (Player.TryGet(arguments.At(0), out var player))
+        if (Player.TryGet(arguments.At(0), out var ply))
         {
             if (int.TryParse(arguments.At(1), out var id))
             {
-                string e = WarnDatabase.RemoveWarn(player.UserId, id);
+                string e = WarnDatabase.RemoveWarn(ply.UserId, id);
                 response = e;
                 return true;
             }

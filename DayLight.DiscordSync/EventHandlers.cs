@@ -1,6 +1,12 @@
-﻿using Exiled.API.Features;
+﻿using DayLight.Dependencys.Communication;
+using DayLight.Dependencys.Communication.Enums;
+using DayLight.Dependencys.RoleSync;
+using DiscordSync.Plugin.Link;
+using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using MEC;
+using Neuron.Core;
+using SCPUtils;
 using Player = Exiled.API.Features.Player;
 
 namespace DiscordSync.Plugin;
@@ -40,7 +46,6 @@ public class EventHandlers
 
     public static async Task<bool> AssignRole(Player player, bool Discord = true)
     {
-            /*
             var databasePlayer = player.GetDatabasePlayer();
             if (databasePlayer == null)
             {
@@ -53,7 +58,7 @@ public class EventHandlers
             var overridable = false;
             var groupstring = "";
 
-            Config.PlayTimeRole FinalRole = default;
+            DiscordSyncConfig.PlayTimeRole FinalRole = default;
 
             var rolelist = DiscordSyncPlugin.Instance?.Config.Ranks.OrderBy(x => x.Priority);
             if (rolelist == null) return false;
@@ -97,7 +102,7 @@ public class EventHandlers
                     { RoleName = groupstring, UserID = LinkDatabase.GetLinkedUserID(iResult), RoleID = FinalRole.DiscordRankID, Overrideables = OverridbleRoles()};
 
                 if (DiscordSyncPlugin.Instance.Network.IsConnected)
-                    await DiscordSyncPlugin.Instance.Network.SendAsync(new PluginSender(DataType.RoleUpdate, data, player.Nickname));
+                    await DiscordSyncPlugin.Instance.Network.SendAsync(new PluginSender(MessageType.RoleUpdate, data, player.Nickname));
 
                 return true;
             }
@@ -106,11 +111,10 @@ public class EventHandlers
             Log.Debug(
                 player.Nickname + " group " + player.ReferenceHub.serverRoles.Group.BadgeText + " was not overridable");
         
-        */
         return false;
     }
 
-    public static List<ulong> OverridbleRoles()
+    public static List<ulong>? OverridbleRoles()
     {
         return DiscordSyncPlugin.Instance?.Config.Ranks.Select(x => x.DiscordRankID).ToList();
     }

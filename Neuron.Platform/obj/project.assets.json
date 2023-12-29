@@ -317,15 +317,15 @@
           }
         }
       },
-      "YamlDotNet/11.2.1": {
+      "YamlDotNet/13.7.1": {
         "type": "package",
         "compile": {
-          "lib/net45/YamlDotNet.dll": {
+          "lib/net47/YamlDotNet.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net45/YamlDotNet.dll": {
+          "lib/net47/YamlDotNet.dll": {
             "related": ".xml"
           }
         }
@@ -647,15 +647,15 @@
           }
         }
       },
-      "YamlDotNet/11.2.1": {
+      "YamlDotNet/13.7.1": {
         "type": "package",
         "compile": {
-          "lib/net45/YamlDotNet.dll": {
+          "lib/net47/YamlDotNet.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net45/YamlDotNet.dll": {
+          "lib/net47/YamlDotNet.dll": {
             "related": ".xml"
           }
         }
@@ -977,15 +977,15 @@
           }
         }
       },
-      "YamlDotNet/11.2.1": {
+      "YamlDotNet/13.7.1": {
         "type": "package",
         "compile": {
-          "lib/net45/YamlDotNet.dll": {
+          "lib/net47/YamlDotNet.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net45/YamlDotNet.dll": {
+          "lib/net47/YamlDotNet.dll": {
             "related": ".xml"
           }
         }
@@ -1307,15 +1307,15 @@
           }
         }
       },
-      "YamlDotNet/11.2.1": {
+      "YamlDotNet/13.7.1": {
         "type": "package",
         "compile": {
-          "lib/net45/YamlDotNet.dll": {
+          "lib/net47/YamlDotNet.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net45/YamlDotNet.dll": {
+          "lib/net47/YamlDotNet.dll": {
             "related": ".xml"
           }
         }
@@ -1738,28 +1738,30 @@
         "version.txt"
       ]
     },
-    "YamlDotNet/11.2.1": {
-      "sha512": "tBt8K+korVfrjH9wyDEhiLKxbs8qoLCLIFwvYgkSUuMC9//w3z0cFQ8LQAI/5MCKq+BMil0cfRTRvPeE7eXhQw==",
+    "YamlDotNet/13.7.1": {
+      "sha512": "X4m1PnFcJwvAj1sCDMntg/eZcX96CJLrWMiYnq41KqhFVZPuw63ZTSxIGqgdCwHWHvCAyTxheELC/VDf1HsU2A==",
       "type": "package",
-      "path": "yamldotnet/11.2.1",
+      "path": "yamldotnet/13.7.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.txt",
         "images/yamldotnet.png",
-        "lib/net20/YamlDotNet.dll",
-        "lib/net20/YamlDotNet.xml",
-        "lib/net35-client/YamlDotNet.dll",
-        "lib/net35-client/YamlDotNet.xml",
         "lib/net35/YamlDotNet.dll",
         "lib/net35/YamlDotNet.xml",
         "lib/net45/YamlDotNet.dll",
         "lib/net45/YamlDotNet.xml",
-        "lib/netstandard1.3/YamlDotNet.dll",
-        "lib/netstandard1.3/YamlDotNet.xml",
+        "lib/net47/YamlDotNet.dll",
+        "lib/net47/YamlDotNet.xml",
+        "lib/net6.0/YamlDotNet.dll",
+        "lib/net6.0/YamlDotNet.xml",
+        "lib/net7.0/YamlDotNet.dll",
+        "lib/net7.0/YamlDotNet.xml",
+        "lib/netstandard2.0/YamlDotNet.dll",
+        "lib/netstandard2.0/YamlDotNet.xml",
         "lib/netstandard2.1/YamlDotNet.dll",
         "lib/netstandard2.1/YamlDotNet.xml",
-        "yamldotnet.11.2.1.nupkg.sha512",
+        "yamldotnet.13.7.1.nupkg.sha512",
         "yamldotnet.nuspec"
       ]
     }
@@ -1782,7 +1784,7 @@
       "System.Numerics.Vectors >= 4.5.0",
       "System.Runtime.CompilerServices.Unsafe >= 6.0.0",
       "System.Threading.Tasks.Extensions >= 4.5.4",
-      "YamlDotNet >= 11.2.1"
+      "YamlDotNet >= 13.7.1"
     ]
   },
   "packageFolders": {
@@ -1884,7 +1886,7 @@
           },
           "YamlDotNet": {
             "target": "Package",
-            "version": "[11.2.1, )"
+            "version": "[13.7.1, )"
           }
         }
       }

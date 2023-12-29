@@ -12,14 +12,14 @@ using Player = Exiled.Events.Handlers.Player;
 namespace DayLight.GameStore;
 
 [Plugin(Name = "DayLight.GameStore", Author = "Tiliboyy", Version = "1.0.0")]
-public class GameStorePlugin : DayLightCoreModule<GameStoreConfig, GameStoreTranslation>
+public class GameStorePlugin : DayLightCorePlugin<GameStoreConfig, GameStoreTranslation>
 {
     public static bool EnableGamestore = true;
     
     public static int MoneyMuliplier = 1;
 
     public static GameStorePlugin Instance;
-    public override void Enabled()
+    protected override void Enabled()
     {
         try
         {

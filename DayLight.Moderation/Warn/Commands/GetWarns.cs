@@ -1,28 +1,31 @@
 ﻿#region
 
 using CommandSystem;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
+using Neuron.Core.Meta;
 using System;
 
 #endregion
 
 namespace DayLight.Moderation.Warn.Commands;
 
-[CommandHandler(typeof(RemoteAdminCommandHandler))]
-public class Getwarns : ICommand
+[Automatic]
+[Command(new [] { Platform.RemoteAdmin })]
+public class Getwarns : CustomCommand
 {
-    public string Command { get; } = "getwarns";
-    public string[] Aliases { get; } = new string[] { "gwarns", "showwarns" };
-    public string Description { get; } = "Usage: getwarns <ID/SteamID> <Optional: true/false>)";
+    public override string Command { get; } = "getwarns";
+    public override string[] Aliases { get; } = new string[] { "gwarns", "showwarns" };
+    public override string Description { get; } = "Usage: getwarns <ID/SteamID> <Optional: true/false>)";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    protected override string Permission { get; } = "ws.getwarns";
+
+
+    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
     {
-        if (!sender.CheckPermission("ws.getwarns"))
-        {
-            response = "You do not have permission to use this command";
-            return false;
-        }
+
 
         var onlynew = true;
         switch (arguments.Count)
@@ -62,17 +65,17 @@ public class Getwarns : ICommand
 
         if (int.TryParse(arguments.At(0), out var id))
         {
-            var player = Player.Get(id);
-            if (player == null)
+            var ply = Player.Get(id);
+            if (ply == null)
             {
                 response = "Spieler wurde nicht gefunden";
                 return true;
             }
 
-            e = WarnDatabase.GetWarns(player.UserId, onlynew, out bool b);
+            e = WarnDatabase.GetWarns(ply.UserId, onlynew, out bool b);
             if (b)
             {
-                e = e.Insert(0, "\nVerwarnungen von " + player.Nickname);
+                e = e.Insert(0, "\nVerwarnungen von " + ply.Nickname);
             }
             response = e;
 

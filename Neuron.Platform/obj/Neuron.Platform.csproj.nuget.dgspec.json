@@ -100,7 +100,7 @@
             },
             "YamlDotNet": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[13.7.1, )"
             }
           }
         }

@@ -1,8 +1,11 @@
 ﻿#region
 
 using CommandSystem;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
+using Neuron.Core.Meta;
 using NorthwoodLib.Pools;
 using System;
 
@@ -10,28 +13,25 @@ using System;
 
 namespace DayLight.Moderation.Warn.Commands;
 
-[CommandHandler(typeof(RemoteAdminCommandHandler))]
-public class WarnCommand : ICommand
+[Automatic]
+[Command(new [] { Platform.RemoteAdmin })]
+public class WarnCommand : CustomCommand
 {
-    public string Command { get; } = "warn";
-    public string[] Aliases { get; } = new string[] { "WarnPlayer" };
-    public string Description { get; } = "Usage: warn <steam64ID@steam> <Punkte> <Grund>";
+    public override string Command { get; } = "warn";
+    public override string[] Aliases { get; } = new string[] { "WarnPlayer" };
+    public override string Description { get; } = "Usage: warn <Steam64ID@steam/Spieler> <Punkte> <Grund>";
+    protected override string Permission { get; } = "ws.addwarn";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+
+    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
     {
-        if (!sender.CheckPermission("ws.addwarn"))
-        {
-            response = "You do not have permission to use this command";
-            return false;
-        }
 
         if (arguments.Count < 3)
         {
             response = "Usage: warn <Steam64ID@Steam> <Punkte> <Grund>";
-            return true;
+            return false;
         }
 
-        var player = Player.Get(sender);
         if (player == null)
         {
                 
@@ -39,10 +39,13 @@ public class WarnCommand : ICommand
             return true;
         }
 
-        var b = float.TryParse(arguments.At(1), out var number);
-        var oplayer = Player.Get(arguments.At(0));
-        oplayer?.Broadcast(ModerationSystemPlugin.Instance.Config.Broadcasttexttime, ModerationSystemPlugin.Instance.Config.Broadcasttext);
+        var parsed = float.TryParse(arguments.At(1), out var number);
+        if (!parsed)
+        {
+            response = "Usage: warn <Steam64ID@Steam> <Punkte> <Grund>";
+            return false;
 
+        }
 
         if (arguments.At(0).Contains("@"))
         {
@@ -51,21 +54,19 @@ public class WarnCommand : ICommand
             return true;
         }
 
-        if (int.TryParse(arguments.At(0), out var id))
+ 
+        var playera = Player.Get(arguments.At(0));
+        if (playera == null)
         {
-            var playera = Player.Get(id);
-            if (playera == null)
-            {
-                response = "Spieler wurde nicht gefunden";
-                return true;
-            }
-
-            response = WarnDatabase.AddWarn(playera.UserId, player.Nickname, number,
-                FormatArguments(arguments, 2), null);
+            response = "Spieler wurde nicht gefunden";
             return true;
         }
-        response = "Spieler wurde nicht gefunden";
+        playera?.Broadcast(ModerationSystemPlugin.Instance.Config.Broadcasttexttime, ModerationSystemPlugin.Instance.Config.Broadcasttext);
+
+        response = WarnDatabase.AddWarn(playera.UserId, player.Nickname, number,
+            FormatArguments(arguments, 2), null);
         return true;
+
     }
 
 

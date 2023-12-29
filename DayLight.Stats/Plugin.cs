@@ -17,12 +17,12 @@ using System.IO;
 namespace DayLight.Stat;
 
 [Plugin(Name = "DiscordSync.Stats", Author = "Tiliboyy")]
-public class DiscordSyncStatsPlugin : DayLightCoreModule<Config, StatsTranslation>
+public class DiscordSyncStatsPlugin : DayLightCorePlugin<Config, StatsTranslation>
 {
     public static DiscordSyncStatsPlugin Instance;
     public static bool DisableDiscordSyncStats = false;
     public static string PlaytimeLeaderboard = "";
-    public override void Enabled()
+    protected override void Enabled()
     {
         Instance = this;
         TryCreateDirectory();

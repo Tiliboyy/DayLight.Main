@@ -16,7 +16,7 @@
         <RunPostBuildEvent>Always</RunPostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
+        <PlatformTarget>x64</PlatformTarget>
         <DebugType>pdbonly</DebugType>
         <Optimize>true</Optimize>
         <OutputPath>bin\Release\</OutputPath>
@@ -34,6 +34,7 @@
       <WarningLevel>4</WarningLevel>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <OutputPath>bin\Debug\</OutputPath>
+      <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
     <PropertyGroup>
       <PostBuildEvent>xcopy /y "$(TargetDir)*.dll" "C:\Users\tilau\SCP Secret Laboratory\Build Output"
@@ -413,7 +414,7 @@
         <Compile Include="API\CommandSystem\CustomCommand.cs" />
         <Compile Include="API\CommandSystem\CustomParent.cs" />
         <Compile Include="API\Database\DayLightDatabase.cs" />
-        <Compile Include="API\DayLightCoreModule.cs" />
+        <Compile Include="API\DayLightCorePlugin.cs" />
         <Compile Include="API\Events\EventArgs\BuyingItemsEventArgs.cs" />
         <Compile Include="API\Events\EventArgs\GainedMoneyEventArgs.cs" />
         <Compile Include="API\Events\EventArgs\RequestingPlayerDataEventArgs.cs" />

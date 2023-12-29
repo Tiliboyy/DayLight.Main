@@ -3,41 +3,39 @@
 #region
 
 using CommandSystem;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
+using Neuron.Core.Meta;
 using System;
 
 #endregion
 
 namespace DayLight.Moderation.Warn.Commands;
 
-[CommandHandler(typeof(ClientCommandHandler))]
-public class Getwarnsplayer : ICommand
+[Automatic]
+[Command(new [] { Platform.ClientConsole })]
+public class Getwarnsplayer : CustomCommand
 {
-    public string Command { get; } = "getwarns";
+    public override string Command { get; } = "showwarns";
 
-    public string[] Aliases { get; } = new[]
+    public override string[] Aliases { get; } = new[]
     {
-        "gwarns", "showwarns"
+        "mywarns", "swarns"
     };
 
-    public string Description { get; } = "Usage: .getwarns";
+    public override string Description { get; } = "Usage: .getwarns";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
     {
-        var player = Player.Get(sender);
-        if (player == null)
-        {
-            response = "You can only execute this as a player.";
-            return true;
-        }
 
-        string str = WarnDatabase.GetWarns(player.UserId, true, out bool e);
+        var warns = WarnDatabase.GetWarns(player.UserId, true, out bool e);
         if (e == false)
         {
             response = "Du hast keine Verwarnungen";
             return true;
         }
-        response = str;
+        response = warns;
         return true;
     }
 }

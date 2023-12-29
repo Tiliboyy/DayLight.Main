@@ -7,6 +7,7 @@ namespace DayLight.Core.API.Subclasses.Features;
 
 public abstract class ActiveAbility : Exiled.CustomRoles.API.Features.ActiveAbility
 {
+    [Obsolete("The Keypress Activator will already do this, you do not need to call this unless you are overwriting the keypress activator.", true)]
     protected override void ShowMessage(Player player)
     {
 

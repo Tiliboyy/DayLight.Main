@@ -10,7 +10,7 @@ using Player = Exiled.Events.Handlers.Player;
 namespace DayLight.Hints;
 
 [Plugin(Name = "DayLight.Hints", Author = "Tiliboyy")]
-public class PlayerHintsPlugin : DayLightCoreModule<HintsConfig, HintsTranslation>
+public class PlayerHintsPlugin : DayLightCorePlugin<HintsConfig, HintsTranslation>
 {
     
     public static bool DisableAllHints = false;
@@ -18,7 +18,7 @@ public class PlayerHintsPlugin : DayLightCoreModule<HintsConfig, HintsTranslatio
     public static bool DisableScpList = false;
 
     public static PlayerHintsPlugin Instance;
-    public override void Enabled()
+    protected override void Enabled()
     {                                            
         Instance = this;                                                                                       
         Player.EscapingPocketDimension += EventHandlers.EventHandlers.OnEscapingPocketDimension;                             

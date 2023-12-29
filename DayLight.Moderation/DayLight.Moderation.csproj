@@ -15,7 +15,7 @@
         <LangVersion>10</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
+        <PlatformTarget>x64</PlatformTarget>
         <DebugType>pdbonly</DebugType>
         <Optimize>true</Optimize>
         <OutputPath>bin\Release\</OutputPath>
@@ -31,6 +31,7 @@
       <ErrorReport>prompt</ErrorReport>
       <WarningLevel>4</WarningLevel>
       <OutputPath>bin\Debug\</OutputPath>
+      <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
     <PropertyGroup>
       <PostBuildEvent>xcopy /y "$(TargetDir)*.dll" "C:\Users\tilau\SCP Secret Laboratory\Build Output"</PostBuildEvent>
@@ -393,14 +394,14 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="ModerationConfig.cs" />
+        <Compile Include="Configs\ModerationConfig.cs" />
+        <Compile Include="Configs\ModerationTranslation.cs" />
         <Compile Include="EventHandler.cs" />
         <Compile Include="Plugin.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Report\Commands\Jail.cs" />
         <Compile Include="Report\Commands\JailCommand.cs" />
         <Compile Include="Report\ReportPlayerList.cs" />
-        <Compile Include="ModerationTranslation.cs" />
         <Compile Include="Warn\Commands\DeleteWarn.cs" />
         <Compile Include="Warn\Commands\GetWarns.cs" />
         <Compile Include="Warn\Commands\PlayerGetWarns.cs" />

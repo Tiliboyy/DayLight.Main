@@ -9,7 +9,7 @@ using Vector3 = UnityEngine.Vector3;
 
 #endregion
 
-namespace DayLight.Moderation;
+namespace DayLight.Moderation.Configs;
 
 [Automatic]
 [DocumentSection("ModerationSystem")]

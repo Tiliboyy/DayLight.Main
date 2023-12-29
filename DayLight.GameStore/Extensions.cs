@@ -2,6 +2,7 @@ using DayLight.Core;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
 using DayLight.Core.API.Features;
+using DayLight.Core.Models;
 using DayLight.Dependencys.Stats;
 using PlayerRoles;
 using System;
@@ -20,7 +21,7 @@ public static class Extensions
         if (player.DoNotTrack) return false;
         var playerID = ulong.Parse(player.RawUserId.Split('@')[0]);
         var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
-        var dbplayer = players.FindOne(x => x.SteamID != null && x.SteamID == playerID);
+        var dbplayer = players.FindOne(x => x.SteamID == playerID);
 
         if (dbplayer == null) return false;
         dbplayer.Stats.Money = money;
@@ -109,7 +110,7 @@ public static class Extensions
                 notfullinventory = true;
 
 
-                if (!DayLightDatabase.GameStore.CanRemoveMoneyFromPlayer(player, items.Price))
+                if (!Database.CanRemoveMoneyFromPlayer(player, items.Price))
                 {
                     continue;
                 }
@@ -128,10 +129,12 @@ public static class Extensions
                 }
                 else
                 {
-                    advancedPlayer.GameStoreBoughtItems.Add(result, 1);
+                    if(advancedPlayer == null)
+                        Logger.Error($"{nameof(AdvancedPlayer)} is null");
+                    if (advancedPlayer != null) advancedPlayer.GameStoreBoughtItems.Add(result, 1);
                 }
 
-                DayLightDatabase.GameStore.BuyItem(player, items);
+                Database.BuyItem(player, items);
                 return GameStorePlugin.Instance.Translation.BoughtItem.Replace("(itemname)", items.Name)
                     .Replace("(itemprice)", items.Price.ToString());
             }
@@ -206,7 +209,7 @@ public static class Extensions
                     return GameStorePlugin.Instance.Translation.FullInventory;
                 }
 
-                if (!DayLightDatabase.GameStore.CanRemoveMoneyFromPlayer(player, items.Price))
+                if (!Database.CanRemoveMoneyFromPlayer(player, items.Price))
                 {
                     return GameStorePlugin.Instance.Translation.CantAfford;
                 }
@@ -225,7 +228,7 @@ public static class Extensions
                 {
                     if (advancedPlayer != null) advancedPlayer.GameStoreBoughtItems.Add(result, 1);
                 }
-                DayLightDatabase.GameStore.BuyItem(player, items);
+                Database.BuyItem(player, items);
                 return GameStorePlugin.Instance.Translation.BoughtItem.Replace("(itemname)", items.Name)
                     .Replace("(itemprice)", items.Price.ToString());
             }
@@ -235,5 +238,10 @@ public static class Extensions
         return GameStorePlugin.Instance.Translation.ItemDoesNotExist;
 
 
+    }
+    
+    public static void GiveGameStoreReward(this Player player, GameStoreReward gameStoreReward)
+    {
+        Database.AddRewardToPlayer(player, gameStoreReward);
     }
 }

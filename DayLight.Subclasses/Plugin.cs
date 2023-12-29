@@ -11,15 +11,15 @@ using System;
 
 namespace DayLight.Subclasses;
 [Plugin(Name = "DayLight.Subclasses", Author = "Tiliboyy")]
-public class SubclassesPlugin : DayLightCoreModule<SubclassConfig, SubclassTranslation>
+public class SubclassesPlugin : DayLightCorePlugin<SubclassConfig, SubclassTranslation>
 {
     public static SubclassesPlugin Instance;
     public static RolesConfigs RolesConfig = new();
     [Inject]
     public NeuronBase Base {get;set;}
 
-    
-    public override void Enabled()
+
+    protected override void Enabled()
     {
         try
         {

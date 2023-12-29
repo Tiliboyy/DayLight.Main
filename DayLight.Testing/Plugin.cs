@@ -7,11 +7,11 @@ using Player = Exiled.Events.Handlers.Player;
 namespace DayLight.Test;
 
 [Plugin(Name = "DayLight.Testing", Author = "Tiliboyy")]
-public class TestPlugin : DayLightCoreModule<TestConfig, TestTranslation>
+public class TestPlugin : DayLightCorePlugin<TestConfig, TestTranslation>
 {
     public static TestPlugin Instance;
 
-    public override void Enabled()
+    protected override void Enabled()
     {
         Instance = this;
         Player.Verified += EventHandlers.Verified;
