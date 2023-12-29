@@ -1,0 +1,135 @@
+{
+  "version": 2,
+  "dgSpecHash": "Sf5Ef3OZBA4Z10C2s5kbjCx9OH9Joz5mXF/2Gl2Q1Kh5e2Y4XJpZr91DXwJNTr6it1AV5jGl3suP7YAhxEL3PA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Misc\\DayLight.Misc.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tilau\\.nuget\\packages\\exiled\\8.5.0\\exiled.8.5.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\lib.harmony\\2.2.2\\lib.harmony.2.2.2.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\litedb\\5.0.17\\litedb.5.0.17.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\neuronmodding.core\\1.0.2\\neuronmodding.core.1.0.2.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\neuronmodding.modules.configs\\1.0.2\\neuronmodding.modules.configs.1.0.2.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\neuronmodding.modules.patcher\\1.0.2\\neuronmodding.modules.patcher.1.0.2.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\ninject\\3.3.6\\ninject.3.3.6.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\syml\\1.0.2\\syml.1.0.2.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\yamldotnet\\13.7.1\\yamldotnet.13.7.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.Bcl.AsyncInterfaces from 7.0.0 to 6.0.0. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> Microsoft.Bcl.AsyncInterfaces (>= 7.0.0) \r\n DayLight.Misc -> Microsoft.Bcl.AsyncInterfaces (>= 6.0.0)",
+      "libraryId": "Microsoft.Bcl.AsyncInterfaces",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1",
+        ".NETFramework,Version=v4.8.1/win",
+        ".NETFramework,Version=v4.8.1/win-x64",
+        ".NETFramework,Version=v4.8.1/win-x86"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.Extensions.Caching.Abstractions from 7.0.0 to 6.0.0. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> Microsoft.Extensions.Caching.Abstractions (>= 7.0.0) \r\n DayLight.Misc -> Microsoft.Extensions.Caching.Abstractions (>= 6.0.0)",
+      "libraryId": "Microsoft.Extensions.Caching.Abstractions",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1",
+        ".NETFramework,Version=v4.8.1/win",
+        ".NETFramework,Version=v4.8.1/win-x64",
+        ".NETFramework,Version=v4.8.1/win-x86"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.Extensions.Caching.Memory from 7.0.0 to 6.0.1. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> Microsoft.Extensions.Caching.Memory (>= 7.0.0) \r\n DayLight.Misc -> Microsoft.Extensions.Caching.Memory (>= 6.0.1)",
+      "libraryId": "Microsoft.Extensions.Caching.Memory",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1",
+        ".NETFramework,Version=v4.8.1/win",
+        ".NETFramework,Version=v4.8.1/win-x64",
+        ".NETFramework,Version=v4.8.1/win-x86"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.Extensions.DependencyInjection.Abstractions from 7.0.0 to 6.0.0. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 7.0.0) \r\n DayLight.Misc -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 6.0.0)",
+      "libraryId": "Microsoft.Extensions.DependencyInjection.Abstractions",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1",
+        ".NETFramework,Version=v4.8.1/win",
+        ".NETFramework,Version=v4.8.1/win-x64",
+        ".NETFramework,Version=v4.8.1/win-x86"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.Extensions.Logging.Abstractions from 7.0.1 to 6.0.0. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> Microsoft.Extensions.Logging.Abstractions (>= 7.0.1) \r\n DayLight.Misc -> Microsoft.Extensions.Logging.Abstractions (>= 6.0.0)",
+      "libraryId": "Microsoft.Extensions.Logging.Abstractions",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1",
+        ".NETFramework,Version=v4.8.1/win",
+        ".NETFramework,Version=v4.8.1/win-x64",
+        ".NETFramework,Version=v4.8.1/win-x86"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.Extensions.Options from 7.0.1 to 6.0.0. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> Microsoft.Extensions.Options (>= 7.0.1) \r\n DayLight.Misc -> Microsoft.Extensions.Options (>= 6.0.0)",
+      "libraryId": "Microsoft.Extensions.Options",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1",
+        ".NETFramework,Version=v4.8.1/win",
+        ".NETFramework,Version=v4.8.1/win-x64",
+        ".NETFramework,Version=v4.8.1/win-x86"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.Extensions.Primitives from 7.0.0 to 6.0.0. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> Microsoft.Extensions.Primitives (>= 7.0.0) \r\n DayLight.Misc -> Microsoft.Extensions.Primitives (>= 6.0.0)",
+      "libraryId": "Microsoft.Extensions.Primitives",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1",
+        ".NETFramework,Version=v4.8.1/win",
+        ".NETFramework,Version=v4.8.1/win-x64",
+        ".NETFramework,Version=v4.8.1/win-x86"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: System.Memory from 4.5.5 to 4.5.4. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> System.Memory (>= 4.5.5) \r\n DayLight.Misc -> System.Memory (>= 4.5.4)",
+      "libraryId": "System.Memory",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1",
+        ".NETFramework,Version=v4.8.1/win",
+        ".NETFramework,Version=v4.8.1/win-x64",
+        ".NETFramework,Version=v4.8.1/win-x86"
+      ]
+    }
+  ]
+}

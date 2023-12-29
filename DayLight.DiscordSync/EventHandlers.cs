@@ -24,7 +24,7 @@ public class EventHandlers
     {
         if (ev.Player.DoNotTrack && ulong.TryParse(ev.Player.RawUserId, out var playerUserID))
         {
-            Link.LinkDatabase.Unlink(playerUserID);
+            LinkDatabase.Unlink(playerUserID);
             return;
         }
         if (!DiscordSyncPlugin.Instance.Config.RoleSync)

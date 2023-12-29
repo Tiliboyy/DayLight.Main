@@ -16,6 +16,7 @@ public class DiscordSyncPlugin : DayLightCorePlugin<DiscordSyncConfig, DiscordSy
 
     public static CancellationTokenSource NetworkCancellationTokenSource = null!;
     public Network.Network Network = null!;
+    public static bool DisableDiscordSyncStats { get; set; } = false;
 
     protected override void Enabled()
     {

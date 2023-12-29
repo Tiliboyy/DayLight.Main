@@ -1,31 +1,31 @@
 ﻿using CommandSystem;
 using DayLight.Core.API;
+using DayLight.Core.API.CommandSystem;
 using Exiled.Permissions.Extensions;
 using System;
 using Player = Exiled.API.Features.Player;
 
 namespace DayLight.GameStore.Commands.RemoteAdmin.SubCommands;
 
-internal class Add : ICommand
+internal class Add : CustomCommand
 {
-    public string Command { get; } = "add";
+    public override string Command { get; } = "add";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "Gives a player money";
+    public override string Description { get; } = "Gives a player money";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    public override string Permission { get; } = "gs.add";
+
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult commandResult)
     {
-        if (!sender.CheckPermission($"gs.{Command}"))
-        {
-            response = "You do not have permission to use this command";
-            return false;
-        }
+
 
         if (arguments.Count != 2)
         {
-            response = "Usage: gamestore Add <<PlayerID> or <all / *>> <amount>";
-            return false;
+            commandResult.Response = "Usage: gamestore Add <<PlayerID> or <all / *>> <amount>";
+            commandResult.Success = false;
+            return;
         }
 
         switch (arguments.At(0))
@@ -34,33 +34,38 @@ internal class Add : ICommand
             case "all":
                 if (!int.TryParse(arguments.At(1), out var amount) && amount <= 0)
                 {
-                    response = "Thats not a number!";
-                    return false;
+                    commandResult.Response = "Thats not a number!";
+                    commandResult.Success = false;
+                    return;
                 }
 
                 foreach (var ply in Player.List)
                     ply.GiveMoney(amount);
 
-                response = $"Everyone was given {amount} {GameStorePlugin.Instance.Translation.CurrencyName}";
-                return true;
+                commandResult.Response = $"Everyone was given {amount} {GameStorePlugin.Instance.Translation.CurrencyName}";
+                commandResult.Success = true;
+                return;
             default:
                 var pl = Player.Get(arguments.At(0));
                 if (pl == null)
                 {
-                    response = $"Player not found: {arguments.At(0)}";
-                    return false;
+                    commandResult.Response = $"Player not found: {arguments.At(0)}";
+                    commandResult.Success = false;
+                    return;
                 }
 
                 if (!int.TryParse(arguments.At(1), out var amountsingle) && amountsingle <= 0)
                 {
-                    response = $"Money argument invalid: {arguments.At(1)}";
-                    return false;
+                    commandResult.Response = $"Money argument invalid: {arguments.At(1)}";
+                    commandResult.Success = false;
+                    return;
                 }
                 pl.GiveMoney(amountsingle);
 
-                response =
+                commandResult.Response =
                     $"Player {pl.Nickname} has been given {amountsingle} {GameStorePlugin.Instance.Translation.CurrencyName}";
-                return true;
+                commandResult.Success = true;
+                break;
         }
     }
 }

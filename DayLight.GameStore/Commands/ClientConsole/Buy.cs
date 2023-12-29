@@ -16,25 +16,20 @@ internal class Buy : CustomCommand
 
     public override string Description { get; } = "buy";
 
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult commandResult)
     {
 
         if (player.DoNotTrack)
         {
-            response = GameStorePlugin.Instance.Translation.DntMessage;
-            return true;
+            commandResult.Response = GameStorePlugin.Instance.Translation.DntMessage;
+            commandResult.Success = false;
+            return;
         }
         if (!GameStorePlugin.EnableGamestore)
         {
-            response = GameStorePlugin.Instance.Translation.DisabledStore;
-            return true;
-        }
-
-
-        if (arguments.Array == null)
-        {
-            response = "What the fuck did you do";
-            return false;
+            commandResult.Response = GameStorePlugin.Instance.Translation.DisabledStore;
+            commandResult.Success = false;
+            return;
         }
 
         switch (arguments.Count)
@@ -43,11 +38,11 @@ internal class Buy : CustomCommand
                 
                 if (!player.IsAlive)
                 {
-                    response = player.GetAvailableCategories(true);
-                    return true;
+                    commandResult.Response = player.GetAvailableCategories(true);
+                    return;
                 }
-                response = player.GetAvailableCategories();
-                return true;
+                commandResult.Response = player.GetAvailableCategories();
+                return;
             case 1:
             {
                 
@@ -56,20 +51,21 @@ internal class Buy : CustomCommand
                 {
                     if (!player.IsAlive)
                     {
-                        response = player.GetAvailableItems(argument1);
-                        return true;
+                        commandResult.Response = player.GetAvailableItems(argument1);
+                        return;
                     }
-                    response = player.GetAvailableItems(argument1);
-                    return true;
+                    commandResult.Response = player.GetAvailableItems(argument1);
+                    return;
                 }
                 if (!player.IsAlive)
                 {
-                    response = GameStorePlugin.Instance.Translation.WrongeRole;
-                    return true;
+                    commandResult.Response = GameStorePlugin.Instance.Translation.WrongeRole;
+                    commandResult.Success = false;
+                    return;
                 }
                 var name = FormatArguments(arguments, 0);
-                response = player.BuyItemFromName(name);
-                return true;
+                commandResult.Response = player.BuyItemFromName(name);
+                return;
 
             }
             case 2:
@@ -77,27 +73,27 @@ internal class Buy : CustomCommand
                 
                 if (!player.IsAlive)
                 {
-                    response = player.GetAvailableCategories(true);
-                    return true;
+                    commandResult.Response = player.GetAvailableCategories(true);
+                    return;
                 }
                 if (int.TryParse(arguments.Array[1], out var category) &&
                     int.TryParse(arguments.Array[2], out var item))
                 {
-                    response = player.BuyItemFromId(category, item);
-                    return true;
+                    commandResult.Response = player.BuyItemFromId(category, item);
+                    return;
                 }
                 var name1 = FormatArguments(arguments, 0);
-                response = player.BuyItemFromName(name1);
-                return true;
+                commandResult.Response = player.BuyItemFromName(name1);
+                return;
                 
             }
             case >2:                 
                 var name2 = FormatArguments(arguments, 0);
-                response = player.BuyItemFromName(name2);
-                return true;
+                commandResult.Response = player.BuyItemFromName(name2);
+                return;
             default:
-                response = player.GetAvailableCategories();
-                return true;
+                commandResult.Response = player.GetAvailableCategories();
+                return;
         }
         
     }

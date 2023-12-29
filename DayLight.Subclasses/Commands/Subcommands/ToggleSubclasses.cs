@@ -15,21 +15,21 @@ internal class Toggle : CustomCommand
 
     public override string Description { get; } = "Enable/Disable subclasses";
 
-    protected override string Permission { get; } = "subclasses.toggle";
-    protected override bool Respond(ArraySegment<string> arguments, Player sender, out string response)
+    public override string Permission { get; } = "subclasses.toggle";
+    protected override void Respond(ArraySegment<string> arguments, Player sender, ref CommandResult response)
     {
 
         if (!Manager.NoRandomRole)
         {
             Manager.NoRandomRole = true;
-            response = $"Disabled Subclasses";
+            response.Response = $"Disabled Subclasses";
         }
         else
         {
             Manager.NoRandomRole = false;
-            response = $"Enabled Subclasses";
+            response.Response = $"Enabled Subclasses";
         }
 
-        return true;
+        response.Success = true;
     }
 }

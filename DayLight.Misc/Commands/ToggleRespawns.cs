@@ -17,20 +17,19 @@ internal class ToggleRepsawn : CustomCommand
 
     public override string Description { get; } = "Enables/Disables team respawns";
 
-    protected override string Permission { get; } = "DU.togglerespawns";
+    public override string Permission { get; } = "DU.togglerespawns";
 
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult commandResult)
     {
 
         if (MiscPlugin.EnableTeamRespawns)
         {
             MiscPlugin.EnableTeamRespawns = false;
-            response = "Respawns Disabled!";
-            return true;
+            commandResult.Response = "Respawns Disabled!";
+            return;
         }
         MiscPlugin.EnableTeamRespawns = true;
-        response = "Respawns Enabled!";
-        return true;
+        commandResult.Response = "Respawns Disabled!";
 
     }
 

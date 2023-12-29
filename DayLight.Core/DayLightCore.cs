@@ -70,7 +70,7 @@ public class DayLightCore : ReloadableModule<Config, Translation>
     {
         if(!args.MetaType.TryGetAttribute<AutomaticAttribute>(out _)) return;
         if(!args.MetaType.TryGetAttribute<CommandAttribute>(out _)) return;
-        if(!args.MetaType.Is<CustomCommand>() && !args.MetaType.Is<ParentCommand>()) return;
+        if(!args.MetaType.Is<CustomCommand>() && !args.MetaType.Is<CustomParentCommand>()) return;
         API.Logger.Debug(args.MetaType.Type.FullName);
         args.Outputs.Add(new CommandBinding()
         {

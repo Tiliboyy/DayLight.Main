@@ -29,9 +29,9 @@ internal class NoDroppedItems : CustomCommand
 
   public override string Description { get; } = nameof (NoDroppedItems);
 
-  protected override string Permission { get; } = "Test.Test";
+  public override string Permission { get; } = "Test.Test";
 
-  protected override bool Respond(ArraySegment<string> arguments, Player player, out string response) 
+  protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult commandResult) 
   {
     if (NoItems)
     {
@@ -40,13 +40,14 @@ internal class NoDroppedItems : CustomCommand
       {
         CoroutineHandle
       });
-      response = "Disabled";
-      return true;
+      commandResult.Response = "Disabled";
+      commandResult.Success = true;
+      return;
     }
     CoroutineHandle = Timing.RunCoroutine(DeleteItems());
     NoItems = true;
-    response = "Enabled";
-    return true;
+    commandResult.Response = "Enabled";
+    commandResult.Success = true;
   }
 
   public IEnumerator<float> DeleteItems()

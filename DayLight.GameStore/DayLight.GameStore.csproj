@@ -418,7 +418,7 @@
         <Compile Include="Commands\RemoteAdmin\SubCommands\Toggle.cs" />
         <Compile Include="Configs\GameStoreConfig.cs" />
         <Compile Include="Configs\GameStoreTranslation.cs" />
-        <Compile Include="Database.cs" />
+        <Compile Include="MoneyManager.cs" />
         <Compile Include="EventHandlers\EventHandlers.cs" />
         <Compile Include="Extensions.cs" />
         <Compile Include="Plugin.cs" />

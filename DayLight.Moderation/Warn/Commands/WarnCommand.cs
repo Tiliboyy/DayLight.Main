@@ -20,52 +20,56 @@ public class WarnCommand : CustomCommand
     public override string Command { get; } = "warn";
     public override string[] Aliases { get; } = new string[] { "WarnPlayer" };
     public override string Description { get; } = "Usage: warn <Steam64ID@steam/Spieler> <Punkte> <Grund>";
-    protected override string Permission { get; } = "ws.addwarn";
+    public override string Permission { get; } = "ws.addwarn";
 
 
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Player sender, ref CommandResult response)
     {
 
         if (arguments.Count < 3)
         {
-            response = "Usage: warn <Steam64ID@Steam> <Punkte> <Grund>";
-            return false;
+            response.Response = "Usage: warn <Steam64ID@Steam> <Punkte> <Grund>";
+            response.Success = false;
+            return;
         }
 
-        if (player == null)
+        if (sender == null)
         {
                 
-            response = "Something went wrong try again";
-            return true;
+            response.Response = "Something went wrong try again";
+            response.Success = false;
+            return;
         }
 
         var parsed = float.TryParse(arguments.At(1), out var number);
         if (!parsed)
         {
-            response = "Usage: warn <Steam64ID@Steam> <Punkte> <Grund>";
-            return false;
+            response.Response = "Usage: warn <Steam64ID@Steam> <Punkte> <Grund>";
+            response.Success = false;
+            return;
 
         }
 
         if (arguments.At(0).Contains("@"))
         {
-            response = WarnDatabase.AddWarn(arguments.At(0), player.Nickname, number,
+            response.Response = WarnDatabase.AddWarn(arguments.At(0), sender.Nickname, number,
                 FormatArguments(arguments, 2), null);
-            return true;
+            response.Success = true;
+            return;
         }
 
  
         var playera = Player.Get(arguments.At(0));
         if (playera == null)
         {
-            response = "Spieler wurde nicht gefunden";
-            return true;
+            response.Response = "Spieler wurde nicht gefunden";
+            response.Success = true;
+            return;
         }
         playera?.Broadcast(ModerationSystemPlugin.Instance.Config.Broadcasttexttime, ModerationSystemPlugin.Instance.Config.Broadcasttext);
-
-        response = WarnDatabase.AddWarn(playera.UserId, player.Nickname, number,
+        response.Response = WarnDatabase.AddWarn(playera.UserId, sender.Nickname, number,
             FormatArguments(arguments, 2), null);
-        return true;
+        response.Success = true;
 
     }
 

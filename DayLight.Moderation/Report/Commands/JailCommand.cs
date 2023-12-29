@@ -24,8 +24,8 @@ internal class JailCommand : CustomCommand
     public override string[] Aliases { get; } = Array.Empty<string>();
 
     public override string Description { get; } = "Usage: Jail <player> <Jail ID>";
-    protected override string Permission { get; } = "ws.jail";
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    public override string Permission { get; } = "ws.jail";
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult response)
     {
 
         var pos = ModerationSystemPlugin.Instance.Config.Towers[0];
@@ -39,32 +39,38 @@ internal class JailCommand : CustomCommand
             case 2:
                 if (!int.TryParse(arguments.At(1), out int i))
                 {
-                    response = "Tower ID wurde nicht gefunden";
-                    return true;
+                    response.Response = "Tower ID wurde nicht gefunden";
+                    response.Success = false;
+                    return;
                 }
 
                 if (!Globals.Get<ModerationConfig>().Towers.ContainsKey(i))
                 {
-                    response = "Tower ID wurde nicht gefunden";
-                    return true;
+                    response.Response= "Tower ID wurde nicht gefunden";
+                    response.Success = false;
+                    return;
                 }
 
                 pos = ModerationSystemPlugin.Instance.Config.Towers[i];
                 player = Player.Get(arguments.At(0));
                 break;
             default:
-                response = "Usage: Jail <player> <Jail ID>";
-                return true;
+                response.Response = "Usage: Jail <player> <Jail ID>";
+                response.Success = false;
+                return;
         }
 
         if (player == null)
         {
-            response = "Player not found";
-            return true;
+            response.Response = "Player not found";
+            response.Success = false;
+            return;
         }
 
         Timing.RunCoroutine(Jail.JailPlayer(player, pos));
-        response = $"{player.Nickname} was Jailed";
-        return true;
+        response.Response = $"{player.Nickname} was Jailed";
+        response.Success = true;
+
+        return;
     }
 }

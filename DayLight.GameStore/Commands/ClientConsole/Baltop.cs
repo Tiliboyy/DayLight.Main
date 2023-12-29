@@ -17,9 +17,8 @@ internal class Baltop : CustomCommand
 
     public override string Description { get; } = "Shows Baltop";
 
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult commandResult)
     {
-        response = DayLightDatabase.Stats.GetPlayerLeaderboard(player);
-        return true;
+        commandResult.Response = DayLightDatabase.Stats.GetPlayerLeaderboard(player);
     }
 }

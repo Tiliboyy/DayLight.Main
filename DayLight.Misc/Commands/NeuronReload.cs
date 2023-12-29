@@ -19,20 +19,19 @@ public class NeuronReload : CustomCommand
     public override string Command { get; } = "NeuronReload";
     public override string[] Aliases { get; } = Array.Empty<string>();
     public override string Description { get; } = "Reloads Neuron Plugins and Modules";
-    protected override string Permission { get; } = "neuron.reload";
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    public override string Permission { get; } = "neuron.reload";
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult commandResult)
     {
         try
         {
             Globals.Get<ReloadModule>().Reload();
-            response = "Reloaded";
-            return true;
+            commandResult.Response = "Reloaded";
         }
         catch(Exception ex)
         {
-            response = "Error while reloading. Check console for further information";
+            commandResult.Response = "Error while reloading. Check console for further information";
             Logger.Error("Error while reloading\n" + ex);
-            return false;
+            commandResult.Success = false;
 
         }
     }

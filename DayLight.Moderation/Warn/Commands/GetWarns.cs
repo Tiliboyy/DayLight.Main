@@ -20,10 +20,10 @@ public class Getwarns : CustomCommand
     public override string[] Aliases { get; } = new string[] { "gwarns", "showwarns" };
     public override string Description { get; } = "Usage: getwarns <ID/SteamID> <Optional: true/false>)";
 
-    protected override string Permission { get; } = "ws.getwarns";
+    public override string Permission { get; } = "ws.getwarns";
 
 
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Player sender, ref CommandResult response)
     {
 
 
@@ -31,19 +31,12 @@ public class Getwarns : CustomCommand
         switch (arguments.Count)
         {
             case 0:
-                response = "Usage: getwarns <ID/SteamID>";
-                return true;
+                response.Response = "Usage: getwarns <ID/SteamID>";
+                response.Success = false;
+                return;
             case >= 2 when bool.TryParse(arguments.At(1), out var onlynewb):
             {
-                if (onlynewb)
-                {
-                    onlynew = false;
-                }
-                else
-                {
-                    onlynew = true;
-                }
-
+                onlynew = !onlynewb;
                 break;
             }
             case >= 2:
@@ -51,7 +44,7 @@ public class Getwarns : CustomCommand
                 break;
         }
 
-        string e = "";
+        string e;
         if (arguments.At(0).Contains("@"))
         {
             e = WarnDatabase.GetWarns(arguments.At(0), onlynew, out bool b);
@@ -59,8 +52,9 @@ public class Getwarns : CustomCommand
             {
                 e = e.Insert(0, "\nVerwarnungen");
             }
-            response = e;
-            return true;
+            response.Response = e;
+            response.Success = true;
+            return;
         }
 
         if (int.TryParse(arguments.At(0), out var id))
@@ -68,8 +62,9 @@ public class Getwarns : CustomCommand
             var ply = Player.Get(id);
             if (ply == null)
             {
-                response = "Spieler wurde nicht gefunden";
-                return true;
+                response.Response = "Spieler wurde nicht gefunden";
+                response.Success = false;
+                return;
             }
 
             e = WarnDatabase.GetWarns(ply.UserId, onlynew, out bool b);
@@ -77,14 +72,13 @@ public class Getwarns : CustomCommand
             {
                 e = e.Insert(0, "\nVerwarnungen von " + ply.Nickname);
             }
-            response = e;
-
-            return true;
+            response.Response = e;
+            response.Success = true;
+            return;
         }
 
 
-        response = "Spieler wurde nicht gefunden";
-
-        return true;
+        response.Response = "Spieler wurde nicht gefunden";
+        response.Success = false;
     }
 }

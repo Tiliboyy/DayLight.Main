@@ -20,14 +20,15 @@ public class delwarn : CustomCommand
     public override string[] Aliases { get; } = new string[] { "rwarn" };
     public override string Description { get; } = "Usage: removewarn <Steam64ID> <WARN ID>)";
 
-    protected override string Permission { get; } = "ws.delete";
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    public override string Permission { get; } = "ws.delete";
+    protected override void Respond(ArraySegment<string> arguments, Player sender, ref CommandResult response)
     {
 
         if (arguments.Count != 2)
         {
-            response = "Usage: removewarn <Steam64ID/ID> <WARN ID>";
-            return true;
+            response.Response = "Usage: removewarn <Steam64ID/ID> <WARN ID>";
+            response.Success = true;
+            return;
         }
 
         if (Player.TryGet(arguments.At(0), out var ply))
@@ -35,21 +36,24 @@ public class delwarn : CustomCommand
             if (int.TryParse(arguments.At(1), out var id))
             {
                 string e = WarnDatabase.RemoveWarn(ply.UserId, id);
-                response = e;
-                return true;
+                response.Response = e;
+                response.Success = true;
+                return;
             }
-            response = "ERROR: ID ist keine Zahl";
-            return true;
+            response.Response = "ERROR: ID ist keine Zahl";
+            response.Success = true;
+            return;
         }
 
         if (int.TryParse(arguments.At(1), out var i))
         {
             string e = WarnDatabase.RemoveWarn(arguments.At(0), i);
-            response = e;
-            return true;
+            response.Response = e;
+            response.Success = true;
+            return;
         }
 
-        response = "ERROR: ID ist keine Zahl";
-        return true;
+        response.Response = "ERROR: ID ist keine Zahl";
+        response.Success = true;
     }
 }

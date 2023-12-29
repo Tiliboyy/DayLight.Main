@@ -25,16 +25,18 @@ internal class AutoSpawn : CustomCommand
 
   public override string Description { get; } = nameof (AutoSpawn);
 
-  protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+  protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult commandResult)
   {
     if (RespawnPlayers.Contains(player))
     {
       RespawnPlayers.Remove(player);
-      response = "Removed";
-      return true;
+      commandResult.Response = "Removed";
+      commandResult.Success = true;
+      return;
     }
     RespawnPlayers.Add(player);
-    response = "Added";
-    return true;
+    commandResult.Response = "Added";
+    commandResult.Success = true;
+    
   }
 }

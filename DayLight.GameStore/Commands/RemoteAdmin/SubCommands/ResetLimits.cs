@@ -1,36 +1,41 @@
 using CommandSystem;
+using DayLight.Core.API.CommandSystem;
 using DayLight.Core.API.Features;
 using System;
 using Player = Exiled.API.Features.Player;
 
 namespace DayLight.GameStore.Commands.RemoteAdmin.SubCommands;
 
-internal class ResetLimits : ICommand
+internal class ResetLimits : CustomCommand
 {
-    public string Command { get; } = "resetlimits";
+    public override string Command { get; } = "resetlimits";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "Resets a players buy Limits";
+    public override string Description { get; } = "Resets a players buy Limits";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    public override string Permission { get; } = "gs.resetlimits";
+
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult response)
     {
         if (arguments.Count != 1)
         {
-            response = "Usage: gamestore resetlimits <PlayerID>";
-            return true;
+            response.Response = "Usage: gamestore resetlimits <PlayerID>";
+            response.Success = false;
+            return;
         }
 
-        var player = Player.Get(arguments.At(0));
         if (player == null)
         {
-            response = "Player was not found";
-            return true;
+            response.Response = "Player was not found";
+            response.Success = true;
+            return;
+
         }
         
         AdvancedPlayer.Get(player)?.ResetGameStoreLimits();
-        response = $"Limits reset!";
-        return true;
+        response.Response = $"Limits reset!";
+        response.Success = true;
 
     }
 }

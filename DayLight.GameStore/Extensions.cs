@@ -110,7 +110,7 @@ public static class Extensions
                 notfullinventory = true;
 
 
-                if (!Database.CanRemoveMoneyFromPlayer(player, items.Price))
+                if (!MoneyManager.CanRemoveMoneyFromPlayer(player, items.Price))
                 {
                     continue;
                 }
@@ -134,7 +134,7 @@ public static class Extensions
                     if (advancedPlayer != null) advancedPlayer.GameStoreBoughtItems.Add(result, 1);
                 }
 
-                Database.BuyItem(player, items);
+                MoneyManager.BuyItem(player, items);
                 return GameStorePlugin.Instance.Translation.BoughtItem.Replace("(itemname)", items.Name)
                     .Replace("(itemprice)", items.Price.ToString());
             }
@@ -209,7 +209,7 @@ public static class Extensions
                     return GameStorePlugin.Instance.Translation.FullInventory;
                 }
 
-                if (!Database.CanRemoveMoneyFromPlayer(player, items.Price))
+                if (!MoneyManager.CanRemoveMoneyFromPlayer(player, items.Price))
                 {
                     return GameStorePlugin.Instance.Translation.CantAfford;
                 }
@@ -228,7 +228,7 @@ public static class Extensions
                 {
                     if (advancedPlayer != null) advancedPlayer.GameStoreBoughtItems.Add(result, 1);
                 }
-                Database.BuyItem(player, items);
+                MoneyManager.BuyItem(player, items);
                 return GameStorePlugin.Instance.Translation.BoughtItem.Replace("(itemname)", items.Name)
                     .Replace("(itemprice)", items.Price.ToString());
             }
@@ -242,6 +242,6 @@ public static class Extensions
     
     public static void GiveGameStoreReward(this Player player, GameStoreReward gameStoreReward)
     {
-        Database.AddRewardToPlayer(player, gameStoreReward);
+        MoneyManager.AddRewardToPlayer(player, gameStoreReward);
     }
 }

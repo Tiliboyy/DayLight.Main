@@ -17,18 +17,17 @@ internal class ToggleSpectators : CustomCommand
 
     public override string Description { get; } = "Toggles the Spectator List";
 
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult commandResult)
     {
         if (NoSpectateList.Contains(player))
         {
-            response = "Die Spectator Liste wurde aktiviert";
+            commandResult.Response = "Die Spectator Liste wurde aktiviert";
             NoSpectateList.Remove(player);
         }
         else
         {
-            response = "Die Spectator Liste wurde deaktiviert";
+            commandResult.Response = "Die Spectator Liste wurde deaktiviert";
             NoSpectateList.Add(player);
         }
-        return true;
     }
 }

@@ -18,22 +18,18 @@ internal class Balance : CustomCommand
 
     public override string Description { get; } = "Zeigt dir deinen Kontostand an";
 
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult response)
     {
-        if (player == null)
-        {
-            response = "You can only execute this as a Player";
-            return false;
-        }
 
         if (player.DoNotTrack)
         {
-            response = GameStorePlugin.Instance.Translation.DntMessage;
-            return true;
+            response.Response = GameStorePlugin.Instance.Translation.DntMessage;
+            response.Success = false;
+            return;
         }
         
         var balance = player.GetMoney();
-        response = GameStorePlugin.Instance.Translation.BalanceMessage.Replace("(balance)", balance.ToString(CultureInfo.InvariantCulture));
-        return true;
+        response.Response = GameStorePlugin.Instance.Translation.BalanceMessage.Replace("(balance)", balance.ToString(CultureInfo.InvariantCulture));
+        return;
     }
 }

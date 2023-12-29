@@ -411,8 +411,9 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="API\Attributes\CommandAttribute.cs" />
+        <Compile Include="API\CommandSystem\CommandResult.cs" />
         <Compile Include="API\CommandSystem\CustomCommand.cs" />
-        <Compile Include="API\CommandSystem\CustomParent.cs" />
+        <Compile Include="API\CommandSystem\CustomParentCommand.cs" />
         <Compile Include="API\Database\DayLightDatabase.cs" />
         <Compile Include="API\DayLightCorePlugin.cs" />
         <Compile Include="API\Events\EventArgs\BuyingItemsEventArgs.cs" />

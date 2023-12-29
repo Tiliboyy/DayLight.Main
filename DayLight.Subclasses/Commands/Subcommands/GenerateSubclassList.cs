@@ -23,8 +23,8 @@ internal class GenerateSubclassList : CustomCommand
 
     public override string Description { get; } = "Generates a Subclass List in the Subclass File dir";
 
-    protected override string Permission { get; } = "subclasses.list";
-    protected override bool Respond(ArraySegment<string> arguments, Player sender, out string response)
+    public override string Permission { get; } = "subclasses.list";
+    protected override void Respond(ArraySegment<string> arguments, Player sender, ref CommandResult response)
     {
 
         string Text = "Rollen:\n";
@@ -99,7 +99,7 @@ internal class GenerateSubclassList : CustomCommand
 
         File.WriteAllText(filePath, Text);
 
-        response = $"{Text} \n\nSuccess written text to: " + filePath;
-        return true;
+        response.Response = $"{Text} \n\nSuccess written text to: " + filePath;
+        response.Success =  true;
     }
 }

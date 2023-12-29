@@ -17,24 +17,32 @@ public abstract class CustomCommand : ICommand
     public abstract string Command { get; }
     public abstract string[] Aliases { get; }
     public abstract string Description { get; }
-    protected virtual string Permission { get; } = "";
+    public virtual string Permission { get; } = "";
+    protected virtual bool OnlyPlayers { get; } = true;
 
-    protected abstract bool Respond(ArraySegment<string> arguments, Player player, out string response);
-  
-    
-    
+    protected abstract void Respond(ArraySegment<string> arguments, Player player, ref CommandResult response);
+
+
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         try
         {
-            if (!Player.TryGet(sender, out var player) || player.IsHost)
+            if (!Player.TryGet(sender, out var player) || player.IsHost && OnlyPlayers)
             {
-                response = "Knecht";
+                response = "Error you can only execute this as a Player";
                 return false;
             }
-            if (Permission == "" || sender.CheckPermission(Permission)) return Respond(arguments, player, out response);
+            if (Permission == "" || sender.CheckPermission(Permission))
+            {
+
+                var result = new CommandResult(); 
+                Respond(arguments, player, ref result);
+                response = result.Response;
+                return result.Success;
+
+            }
             response = $"Du hast nicht die erforderlichen Rechte. ({Permission})";
-            return true;
+            return false;
         }
         catch (Exception ex)
         {
@@ -50,17 +58,13 @@ public abstract class CustomCommand : ICommand
         var customCommand = (ICommand)instance;
         var platforms = type.GetCustomAttribute<CommandAttribute>().Platforms;
 
-        if (CommandProcessor.RemoteAdminCommandHandler.AllCommands.Any(x => x.Command == customCommand.Command))
-        {
-            Logger.Error($"Error while registering commands: {customCommand.Command} was already registered ({type.FullName})");
-            return;
 
-        }
         if (platforms.Contains(Platform.RemoteAdmin))
         {
             if (CommandProcessor.RemoteAdminCommandHandler.AllCommands.Any(x => x.Command == customCommand.Command))
             {
                 Logger.Error($"The command {customCommand.Command} was already registered in the RemoteAdmin commands");
+                return;
             }
             Logger.Debug($"Registering {customCommand.Command} as remoteadmin command");
 
@@ -72,6 +76,7 @@ public abstract class CustomCommand : ICommand
             if (CommandProcessor.RemoteAdminCommandHandler.AllCommands.Any(x => x.Command == customCommand.Command))
             {
                 Logger.Error($"The command {customCommand.Command} was already registered Console commands");
+                return;
             }
             Logger.Debug($"Registering {customCommand.Command} as server console command");
 
@@ -83,6 +88,7 @@ public abstract class CustomCommand : ICommand
             if (CommandProcessor.RemoteAdminCommandHandler.AllCommands.Any(x => x.Command == customCommand.Command))
             {
                 Logger.Error($"The command {customCommand.Command} was already registered Client commands");
+                return;
             }
             Logger.Debug($"Registering {customCommand.Command} as client console command");
 

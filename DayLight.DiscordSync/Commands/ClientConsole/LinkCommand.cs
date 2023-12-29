@@ -1,49 +1,51 @@
 ﻿using CommandSystem;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.CommandSystem;
 using DiscordSync.Plugin.Link;
 using Exiled.API.Features;
 using MEC;
+using Neuron.Core.Meta;
 using Random = UnityEngine.Random;
 
 namespace DiscordSync.Plugin.Commands.ClientConsole;
 
-[CommandHandler(typeof(ClientCommandHandler))]
-[CommandHandler(typeof(RemoteAdminCommandHandler))]
-public class LinkCommand : ICommand
+[Automatic]
+[Command(new [] { Platform.ClientConsole })]
+public class LinkCommand : CustomCommand
 {
 
-    public string Command { get; } = "Link";
+    public override string Command { get; } = "Link";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "Links a Player";
+    public override string Description { get; } = "Links a Player";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult response)
     {
-        var player = Player.Get(sender);
         if (player.DoNotTrack)
         {
-            response = "Du hast DoNotTrack aktiviert du kannst dich nicht linken";
-            return true;
+            response.Response = "Du hast DoNotTrack aktiviert du kannst dich nicht linken";
+            response.Success = false;
+            return;
         }
-        if (ulong.TryParse(player.RawUserId, out var iResult))
+        if (!ulong.TryParse(player.RawUserId, out var iResult)) return;
+        
+        if (HasLinkcode(iResult))
         {
-            if (HasLinkcode(iResult))
-            {
-                response = "Du hast bereits einen Code aktiv!";
-                return true;
-            }
-            if (LinkDatabase.IsSteam64Linked(iResult))
-            {
-                response = "Du bist bereits verlinkt!";
-                return true;
-            }
-            response = GenerateLinkCode(iResult);
-            return true;
+            response.Response = "Du hast bereits einen Code aktiv!";
+            response.Success = false;
+            return;
         }
-
-        response = "response";
-        return true;
+        if (LinkDatabase.IsSteam64Linked(iResult))
+        {
+            response.Response = "Du bist bereits verlinkt!";
+            response.Success = false;
+            return;
+        }
+        response.Response = GenerateLinkCode(iResult);
     }
+
+
     public static string GenerateLinkCode(ulong steam64ID)
     {
         var Code = GenerateCode();

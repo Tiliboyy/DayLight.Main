@@ -22,7 +22,7 @@ public class DayLightCorePlugin<TConfig, TTranslation> : ReloadablePlugin<TConfi
         }
         Server.WaitingForPlayers += LateLoad;
         Enabled();
-        API.Logger.Info($"Loaded plugin {Assembly.GetAssembly(this.GetType()).GetName().Name}");
+        API.Logger.Info($"Loaded plugin {Assembly.GetAssembly(GetType()).GetName().Name}");
 
     }
 

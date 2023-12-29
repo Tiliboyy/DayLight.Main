@@ -15,21 +15,17 @@ using System.Collections.Generic;
 
 namespace DayLight.GameStore;
 
-public class Database
+public class MoneyManager
 {
 
 
 
     public static void BuyItem(Player player, GameStoreItemPrice gameStoreItem)
     {
-        Logger.Info("Here 1");
         if (player.DoNotTrack) return;
         var dbplayer = player.GetAdvancedPlayer().DatabasePlayer;
-
         if (dbplayer == null) return;
         dbplayer.Stats.Money -= gameStoreItem.Price;
-        Logger.Info("Here 2");
-
         if (gameStoreItem.IsAmmo)
             foreach (var items in gameStoreItem.AmmoTypes)
             {
@@ -40,12 +36,8 @@ public class Database
             {
                 player.AddItem(items);
             }
-        Logger.Info("Here 3");
-
         GameStoreHandler.OnBuyingItem(player, gameStoreItem, gameStoreItem.Price);
-        Logger.Info("Here 4");
-
-        player.SendHint(ScreenZone.Notifications, DayLightCore.Instance.Config.BoughtItemHint.Replace("(item)", gameStoreItem.Name), 3);
+        player.SendHint(ScreenZone.Notifications, GameStorePlugin.Instance.Translation.BoughtItemBHint.Replace("(item)", gameStoreItem.Name), 3);
     }
     public static bool CanRemoveMoneyFromPlayer(Player player, float reward)
     {

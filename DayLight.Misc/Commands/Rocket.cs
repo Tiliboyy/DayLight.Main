@@ -25,13 +25,14 @@ internal class Rocket : CustomCommand
 
     public override string Description { get; } = "Sends players high in the sky and explodes them";
 
-    protected override string Permission { get; } = "AT.rocket";
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    public override string Permission { get; } = "AT.rocket";
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult commandResult)
     {
         if (arguments.Count != 2)
         {
-            response = "Usage: rocket ((player id / name) or (all / *)) (speed)";
-            return false;
+            commandResult.Response = "Usage: rocket ((player id / name) or (all / *)) (speed)";
+            commandResult.Success = false;
+            return;
         }
 
         switch (arguments.At(0))
@@ -40,37 +41,44 @@ internal class Rocket : CustomCommand
             case "all":
                 if (!float.TryParse(arguments.At(1), out var speed) && speed <= 0)
                 {
-                    response = $"Speed argument invalid: {arguments.At(1)}";
-                    return false;
+                    commandResult.Response = $"Speed argument invalid: {arguments.At(1)}";
+                    commandResult.Success = false;
+                    return;
                 }
 
                 foreach (Player ply in Player.List)
                     Timing.RunCoroutine(DoRocket(ply, speed));
 
-                response = "Everyone has been rocketed into the sky (We're going on a trip, in our favorite rocketship)";
-                return true;
+                commandResult.Response = "Everyone has been rocketed into the sky (We're going on a trip, in our favorite rocketship)";
+                commandResult.Success = true;
+                return;
             default:
                 var pl = Player.Get(arguments.At(0));
                 if (pl == null)
                 {
-                    response = $"Player not found: {arguments.At(0)}";
-                    return false;
+                    commandResult.Response = $"Player not found: {arguments.At(0)}";
+                    commandResult.Success = false;
+                    return;
                 }
                 if (pl.Role == RoleTypeId.Spectator || pl.Role == RoleTypeId.None)
                 {
-                    response = $"Player {pl.Nickname} is not a valid class to rocket";
-                    return false;
+                    commandResult.Response = $"Player {pl.Nickname} is not a valid class to rocket";
+                    commandResult.Success = false;
+                    return;
                 }
 
                 if (!float.TryParse(arguments.At(1), out float spd) && spd <= 0)
                 {
-                    response = $"Speed argument invalid: {arguments.At(1)}";
-                    return false;
+                    commandResult.Response = $"Speed argument invalid: {arguments.At(1)}";
+                    commandResult.Success = false;
+
+                    return;
                 }
 
                 Timing.RunCoroutine(DoRocket(pl, spd));
-                response = $"Player {pl.Nickname} has been rocketed into the sky (We're going on a trip, in our favorite rocketship)";
-                return true;
+                commandResult.Response = $"Player {pl.Nickname} has been rocketed into the sky (We're going on a trip, in our favorite rocketship)";
+                commandResult.Success = true;
+                return;
         }
     }
     public static IEnumerator<float> DoRocket(Player player, float speed)

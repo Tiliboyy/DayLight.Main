@@ -1,22 +1,25 @@
 ﻿using CommandSystem;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
+using Neuron.Core.Meta;
 
 namespace DiscordSync.Plugin.Commands.ClientConsole;
 
-[CommandHandler(typeof(RemoteAdminCommandHandler))]
-[CommandHandler(typeof(ClientCommandHandler))]
-internal class UnLink : ICommand
+[Automatic]
+[Command(new [] { Platform.ClientConsole })]
+internal class UnLink : CustomCommand
 {
-    public string Command { get; } = "unlink";
+    public override string Command { get; } = "unlink";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "Unlinkt deinen Discord Account";
-
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    public override string Description { get; } = "Unlinkt deinen Discord Account";
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult response)
     {
-        ulong.TryParse(Player.Get(sender).RawUserId, out var result);
-        response = Link.LinkDatabase.Unlink(result) ? "Unlinked!" : "Du bist nicht verlinkt!";
-        return true;
+        ulong.TryParse(player.RawUserId, out var result);
+        response.Response = Link.LinkDatabase.Unlink(result) ? "Unlinked!" : "Du bist nicht verlinkt!";
+        
     }
+
 }

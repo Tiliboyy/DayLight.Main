@@ -1,24 +1,27 @@
 ﻿using CommandSystem;
+using DayLight.Core.API.Attributes;
+using DayLight.Core.API.CommandSystem;
+using Neuron.Core.Meta;
 using SCPUtils;
 using System;
 using System.Linq;
 
 namespace DayLight.Stat.Commands;
 
-[CommandHandler(typeof(ClientCommandHandler))]
-public class PlaytimeTop : ICommand
+[Automatic]
+[Command(new [] { Platform.ClientConsole })]
+public class PlaytimeTop : CustomCommand
 {
 
-    public string Command { get; } = "pttop";
-    public string[] Aliases { get; } = Array.Empty<string>();
-    public string Description { get; } = "Shows pttop";
+    public override string Command { get; } = "pttop";
+    public override string[] Aliases { get; } = Array.Empty<string>();
+    public override string Description { get; } = "Shows pttop";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Exiled.API.Features.Player player, ref CommandResult commandResult)
     {
 
 
-        response = DiscordSyncStatsPlugin.PlaytimeLeaderboard;
-        return true;
+        commandResult.Response = DiscordSyncStatsPlugin.PlaytimeLeaderboard;
 
     }
     public static void GetPTLeaderboard(int amount = 10)

@@ -25,9 +25,9 @@ internal class Shit : CustomCommand
 
   public override string Description { get; } = "shit";
 
-  protected override string Permission { get; } = "Test.Fun";
+  public override string Permission { get; } = "Test.Fun";
 
-  protected override bool Respond(ArraySegment<string> arguments, Player sender, out string response)
+  protected override void Respond(ArraySegment<string> arguments, Player sender, ref CommandResult commandResult)
   {
 
     if (arguments.Count == 2)
@@ -39,25 +39,31 @@ internal class Shit : CustomCommand
           float.TryParse(arguments.Array[2], out var result);
           foreach (Player player in (IEnumerable<Player>) Player.List)
             Timing.RunCoroutine(ShitPlayer(player, result));
-          response = "Shat everyone";
-          return true;
+          commandResult.Response = "Shat everyone";
+          commandResult.Success = true;
+          return;
         }
         Player player1 = Player.Get(arguments.Array[1]);
         if (player1 == null)
         {
-          response = "Player not found";
-          return false;
+          commandResult.Response = "Player not found";
+          commandResult.Success = false;
+          return;
         }
         float.TryParse(arguments.Array[2], out var result1);
         Timing.RunCoroutine(ShitPlayer(player1, result1));
-        response = "Shit " + player1.DisplayNickname;
-        return true;
+        commandResult.Response = "Shit " + player1.DisplayNickname;
+        commandResult.Success = true;
+        return;
       }
-      response = "Usage: Shit <ID> <Amount>";
-      return false;
+      commandResult.Response = "Usage: Shit <ID> <Amount>";
+      commandResult.Success = false;
+      return;
+      
     }
-    response = "Usage: Shit <ID> <Amount>";
-    return false;
+    commandResult.Response = "Usage: Shit <ID> <Amount>";
+    commandResult.Success = false;
+    
   }
 
   public IEnumerator<float> ShitPlayer(Player player, float amount)

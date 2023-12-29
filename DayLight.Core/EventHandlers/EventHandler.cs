@@ -42,7 +42,7 @@ public class EventHandler
     }
     public static void UnRegisterEvents()
     {
-        Player.Verified -= EventHandler.OnVerified; 
+        Player.Verified -= OnVerified; 
         Server.RespawningTeam -= SubclassEventHandlers.OnRespawningTeam;
         Server.RoundEnded -= SubclassEventHandlers.OnRoundEnd;
     }

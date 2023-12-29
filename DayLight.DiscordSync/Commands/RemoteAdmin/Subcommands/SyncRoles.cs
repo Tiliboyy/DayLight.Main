@@ -1,28 +1,27 @@
 ﻿using CommandSystem;
+using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
 
 namespace DiscordSync.Plugin.Commands.RemoteAdmin.Subcommands;
 
-internal class SyncRoles : ICommand
+internal class SyncRoles : CustomCommand
 {
-    public string Command { get; } = "syncroles";
+    public override string Command { get; } = "syncroles";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "Syncs you roles used for debug";
+    public override string Description { get; } = "Syncs you roles used for debug";
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    public override string Permission { get; } = "DiscordSync.Debug";
+
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult response)
     {
-        var player = Player.Get(sender);
-        if (!player.CheckPermission("DiscordSync.Debug"))
-        {
-            response = "You do not have the required permission for this command";
-            return true;
-        }
 
         _ = EventHandlers.AssignRole(player);
-        response = "Synced!";
-        return true;
+        response.Response = "Synced!";
+        response.Success = true;
+        
     }
+    
 }

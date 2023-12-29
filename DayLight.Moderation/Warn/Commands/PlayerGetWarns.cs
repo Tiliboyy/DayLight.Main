@@ -26,16 +26,17 @@ public class Getwarnsplayer : CustomCommand
 
     public override string Description { get; } = "Usage: .getwarns";
 
-    protected override bool Respond(ArraySegment<string> arguments, Player player, out string response)
+    protected override void Respond(ArraySegment<string> arguments, Player sender, ref CommandResult response)
     {
 
-        var warns = WarnDatabase.GetWarns(player.UserId, true, out bool e);
+        var warns = WarnDatabase.GetWarns(sender.UserId, true, out bool e);
         if (e == false)
         {
-            response = "Du hast keine Verwarnungen";
-            return true;
+            response.Response = "Du hast keine Verwarnungen";
+            response.Success = true;
+            return;
         }
-        response = warns;
-        return true;
+        response.Response = warns;
+        response.Success = true;
     }
 }

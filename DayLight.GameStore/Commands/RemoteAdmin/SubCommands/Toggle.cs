@@ -1,36 +1,30 @@
 ﻿using CommandSystem;
+using DayLight.Core.API.CommandSystem;
+using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
 using System;
 
 namespace DayLight.GameStore.Commands.RemoteAdmin.SubCommands;
 
-internal class Toggle : ICommand
+internal class Toggle : CustomCommand
 {
-    public string Command { get; } = "toggle";
+    public override string Command { get; } = "toggle";
 
-    public string[] Aliases { get; } = Array.Empty<string>();
+    public override string[] Aliases { get; } = Array.Empty<string>();
 
-    public string Description { get; } = "Turn the GameStore on or off";
-
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+    public override string Description { get; } = "Turn the GameStore on or off";
+    public override string Permission { get; } = "gs.toggle";
+    protected override void Respond(ArraySegment<string> arguments, Player player, ref CommandResult response)
     {
-        if (!sender.CheckPermission($"gs.{Command}"))
-        {
-            response = "You do not have permission to use this command";
-            return false;
-        }
-
         if (GameStorePlugin.EnableGamestore)
         {
-            response = "GameStore wurde deaktiviert";
+            response.Response = "GameStore wurde deaktiviert";
             GameStorePlugin.EnableGamestore = false;
         }
         else
         {
-            response = "GameStore wurde aktiviert";
+            response.Response = "GameStore wurde aktiviert";
             GameStorePlugin.EnableGamestore = true;
         }
-
-        return true;
     }
 }
