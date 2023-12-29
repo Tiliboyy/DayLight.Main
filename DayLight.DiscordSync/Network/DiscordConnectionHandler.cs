@@ -31,9 +31,7 @@ public class DiscordConnectionHandler
         LinkTimer = Timing.RunCoroutine(LinkCommand.Timer(), "Checks");
         AliveChecks = Timing.RunCoroutine(AliveCheck(), "AliveCheck");
         Log.Info("Started Client!");
-
-        Link.LinkDatabase.ReadYaml();
-
+        
     }
 
     internal static void Stop()
@@ -56,8 +54,6 @@ public class DiscordConnectionHandler
             Directory.CreateDirectory(Path.Combine(Paths.Configs, "DiscordSync/"));
         Timing.KillCoroutines(LinkTimer);
         Timing.KillCoroutines(AliveChecks);
-        Link.LinkDatabase.ReadYaml();
-
     }
 
     public static IEnumerator<float> AliveCheck()

@@ -35,7 +35,7 @@ public class AdvancedPlayer : MonoBehaviour
     DayLightDatabase.AddPlayer(ExiledPlayer);
     Logger.Info("here");
 
-    var dbplayer = DayLightDatabase.GetDBPlayer(ExiledPlayer);
+    var dbplayer = DayLightDatabase.GetDatabasePlayer(ExiledPlayer);
     Logger.Info("here");
     Logger.Info(dbplayer.SteamID);
     //if (dbplayer == null) return;

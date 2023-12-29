@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "Sf5Ef3OZBA4Z10C2s5kbjCx9OH9Joz5mXF/2Gl2Q1Kh5e2Y4XJpZr91DXwJNTr6it1AV5jGl3suP7YAhxEL3PA==",
+  "dgSpecHash": "Ec2OsaW2q2XUefWTyRONszoMg1j9RBz9KInuOMz83+RhSVJKYSkx7ycpS+1P5AKFKXnkGZDnw1PWFYg10/yobg==",
   "success": true,
   "projectFilePath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Misc\\DayLight.Misc.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tilau\\.nuget\\packages\\exiled\\8.5.0\\exiled.8.5.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\lib.harmony\\2.2.2\\lib.harmony.2.2.2.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\litedb\\5.0.17\\litedb.5.0.17.nupkg.sha512",
-    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
-    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
@@ -31,21 +31,8 @@
       "code": "NU1605",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package downgrade: Microsoft.Bcl.AsyncInterfaces from 7.0.0 to 6.0.0. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> Microsoft.Bcl.AsyncInterfaces (>= 7.0.0) \r\n DayLight.Misc -> Microsoft.Bcl.AsyncInterfaces (>= 6.0.0)",
-      "libraryId": "Microsoft.Bcl.AsyncInterfaces",
-      "targetGraphs": [
-        ".NETFramework,Version=v4.8.1",
-        ".NETFramework,Version=v4.8.1/win",
-        ".NETFramework,Version=v4.8.1/win-x64",
-        ".NETFramework,Version=v4.8.1/win-x86"
-      ]
-    },
-    {
-      "code": "NU1605",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package downgrade: Microsoft.Extensions.Caching.Abstractions from 7.0.0 to 6.0.0. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> DayLight.Core -> Microsoft.Extensions.Caching.Abstractions (>= 7.0.0) \r\n DayLight.Misc -> Microsoft.Extensions.Caching.Abstractions (>= 6.0.0)",
-      "libraryId": "Microsoft.Extensions.Caching.Abstractions",
+      "message": "Detected package downgrade: Microsoft.Extensions.Primitives from 8.0.0 to 6.0.0. Reference the package directly from the project to select a different version. \r\n DayLight.Misc -> Microsoft.Extensions.Caching.Abstractions 8.0.0 -> Microsoft.Extensions.Primitives (>= 8.0.0) \r\n DayLight.Misc -> Microsoft.Extensions.Primitives (>= 6.0.0)",
+      "libraryId": "Microsoft.Extensions.Primitives",
       "targetGraphs": [
         ".NETFramework,Version=v4.8.1",
         ".NETFramework,Version=v4.8.1/win",

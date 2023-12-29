@@ -14,32 +14,32 @@ public interface IDatabasePlayer
     public string Nickname { get; set; }
     public Stats Stats { get; set; }
     public List<Warn> Warns { get; set; }
-
     public event PropertyChangedEventHandler PropertyChanged;
 
 }
 
 public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
 {
-    public bool IsDummy { get; set; }= false;
-    private ulong steamID;
-    private ulong discordID;
-    private string nickname;
-    private Stats stats;
-    private bool profileprivate;
-    private List<Warn> warns;
+    public bool IsDummy { get; set; } = false;
+    private ulong _steamID;
+    private ulong _discordID;
+    private string _nickname;
+    private Stats _stats;
+    private List<Warn> _warns;
 
     public DatabasePlayer()
     {
         IsDummy = true;
-        steamID = 99999999;
+        _steamID = 0;
+        _discordID = 0;
+        _stats = null;
+        _warns = new List<Warn>();
     }
     public DatabasePlayer(ulong steam64SteamID, string nickname)
     {
         SteamID = steam64SteamID;
         Nickname = nickname;
         Stats = new Stats();
-        Public = false;
         DiscordID = 0;
         Warns = new List<Warn>();
     }
@@ -47,59 +47,51 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
     [BsonId]
     public ulong SteamID
     {
-        get => steamID;
+        get => _steamID;
         private set
         {
-            steamID = value;
+            _steamID = value;
             OnPropertyChanged(nameof(SteamID));
         }
     }
 
     public string Nickname
     {
-        get => nickname;
+        get => _nickname;
         set
         {
-            nickname = value;
+            _nickname = value;
             OnPropertyChanged(nameof(Nickname));
         }
     }
     public ulong DiscordID
     {
-        get => discordID;
+        get => _discordID;
         set
         {
-            discordID = value;
+            _discordID = value;
             OnPropertyChanged(nameof(DiscordID));
         }
     }
 
     public Stats Stats
     {
-        get => stats;
+        get => _stats;
         set
         {
-            stats = value;
+            _stats = value;
             OnPropertyChanged(nameof(Stats));
         }
     }
 
-    public bool Public
-    {
-        get => profileprivate;
-        set
-        { 
-            profileprivate = value;
-            OnPropertyChanged(nameof(Public));
-        }
-    }
+
 
     public List<Warn> Warns
     {
-        get => warns;
+        get => _warns;
         set
         {
-            warns = value;
+            _warns = value;
             OnPropertyChanged(nameof(Warns));
         }
     }
@@ -120,6 +112,17 @@ public class Warns
     }
 }
 
+public enum StatType
+{
+    //todo: Become VSR Compliant
+    Kills,
+    KilledScps,
+    PinkCandyKills,
+    Deaths,
+    FastestEscape,
+    Money,
+    UsedItems
+}
 public class Stats : INotifyPropertyChanged
 {
     private double _kills;

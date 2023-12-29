@@ -58,6 +58,7 @@ internal class AchievementHandlers
         PlayerHandler.Dying += OnDied;
         PlayerHandler.Handcuffing += OnCuffed;
         PlayerHandler.UsedItem += OnUsedItem;
+        PlayerHandler.Escaping += OnEscaping;
         Scp079.GainingLevel += OnGainingLevel;
         ServerHandler.RespawningTeam += OnRespawningTeam;
         ServerHandler.WaitingForPlayers += OnWaitingForPlayers;
@@ -72,6 +73,8 @@ internal class AchievementHandlers
     {
         if(!RegisteredEvents) return;
         PlayerHandler.Dying -= OnDied;
+        PlayerHandler.Escaping -= OnEscaping;
+
         PlayerHandler.Handcuffing -= OnCuffed;
         PlayerHandler.UsedItem -= OnUsedItem;
         Scp079.GainingLevel -= OnGainingLevel;
@@ -82,6 +85,11 @@ internal class AchievementHandlers
         PlayerHandler.ItemAdded -= OnAddedItem;
         GameStoreHandler.BuyingItems -= SpendingMoney;
         RegisteredEvents = false;
+    }
+    public static void OnEscaping(EscapingEventArgs ev)
+    {
+        if (Exiled.API.Features.Round.ElapsedTime.TotalSeconds <= 120 && !ev.Player.DoNotTrack) 
+            ev.Player.Achive(37);
     }
 
     public static void OnAddedItem(ItemAddedEventArgs ev)

@@ -441,8 +441,8 @@
       <PackageReference Include="EXILED" Version="8.5.0" />
       <PackageReference Include="Lib.Harmony" Version="2.2.2" />
       <PackageReference Include="LiteDB" Version="5.0.17" />
-      <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
       <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />

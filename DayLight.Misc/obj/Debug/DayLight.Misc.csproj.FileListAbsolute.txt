@@ -1,5 +1,3 @@
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.csproj.AssemblyReference.cache
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.csproj.CoreCompileInputs.cache
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Misc.dll.config
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Misc.dll
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Misc.pdb
@@ -50,6 +48,8 @@ C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Co
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Core.dll.config
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Dependencys.pdb
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\Newtonsoft.Json.xml
+C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.csproj.AssemblyReference.cache
+C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.csproj.CoreCompileInputs.cache
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.csproj.CopyComplete
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.dll
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.pdb

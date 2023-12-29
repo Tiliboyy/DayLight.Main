@@ -27,18 +27,8 @@ public static class DayLightDatabase
         var players = Database.GetCollection<DatabasePlayer>("players");
         players.Update(player);
     }
-    public static DatabasePlayer GetDatabasePlayerSteam64ID(ulong id)
-    {
-        var players = Database.GetCollection<DatabasePlayer>("players");
-
-        var dbplayer = players.FindOne(x => x.SteamID == id);
-
-        return dbplayer;
-
-    }
-
     [CanBeNull]
-    public static DatabasePlayer GetDBPlayer(Player player)
+    public static DatabasePlayer GetDatabasePlayer(Player player)
     {
         try
         {
@@ -59,13 +49,29 @@ public static class DayLightDatabase
         }
     }
     [CanBeNull]
-    public static DatabasePlayer GetDBPlayer(ulong Steam64ID)
+    public static DatabasePlayer GetDatabasePlayer(ulong Steam64ID)
     {
         try
         {
             var players = Database.GetCollection<DatabasePlayer>("players");
 
             var dbplayer = players.FindOne(x => x.SteamID == Steam64ID);
+            return dbplayer;
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e);
+            throw;
+        }
+    }
+    [CanBeNull]
+    public static DatabasePlayer GetDatabasePlayerDiscord(ulong UserID)
+    {
+        try
+        {
+            var players = Database.GetCollection<DatabasePlayer>("players");
+
+            var dbplayer = players.FindOne(x => x.DiscordID == UserID);
             return dbplayer;
         }
         catch (Exception e)

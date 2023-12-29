@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "94mFEjI6QPHwm69EB4O7Vbi5ccfeeLIM/ScLWkDkJuB9YCdrj0h9eiyjLgWVpEySGjg66xxZk1re0BpXfMZbdw==",
+  "dgSpecHash": "NQ61SFlOO0CJU9kR0rBDae+JSrc8emnKadAblsgKRO+57wX4kH/In+CsS8iTVjEOdZ+ZLVl6qdsMUdfKUFW1EA==",
   "success": true,
   "projectFilePath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Platform\\Neuron.Platform.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tilau\\.nuget\\packages\\exiled\\8.5.0\\exiled.8.5.0.nupkg.sha512",
-    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
-    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
+    "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
@@ -22,5 +22,19 @@
     "C:\\Users\\tilau\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\tilau\\.nuget\\packages\\yamldotnet\\13.7.1\\yamldotnet.13.7.1.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.Extensions.Primitives from 8.0.0 to 6.0.0. Reference the package directly from the project to select a different version. \r\n Neuron.Platform -> Microsoft.Extensions.Caching.Abstractions 8.0.0 -> Microsoft.Extensions.Primitives (>= 8.0.0) \r\n Neuron.Platform -> Microsoft.Extensions.Primitives (>= 6.0.0)",
+      "libraryId": "Microsoft.Extensions.Primitives",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1",
+        ".NETFramework,Version=v4.8.1/win",
+        ".NETFramework,Version=v4.8.1/win-x64",
+        ".NETFramework,Version=v4.8.1/win-x86"
+      ]
+    }
+  ]
 }

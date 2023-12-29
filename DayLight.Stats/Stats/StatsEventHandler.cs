@@ -47,34 +47,40 @@ internal class StatsEventHandler
     {
         if (RoleExtensions.GetTeam(ev.TargetOldRole) == Team.SCPs && ev.TargetOldRole != RoleTypeId.Scp0492)
         {
-            ev.Attacker.GetAdvancedPlayer().DatabasePlayer.Stats.KilledScps += 1;
+            if(!ev.Attacker.DoNotTrack)
+                ev.Attacker.GetAdvancedPlayer().DatabasePlayer.Stats.KilledScps += 1;
         }
-        ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.Deaths += 1;
-        ev.Attacker.GetAdvancedPlayer().DatabasePlayer.Stats.Kills += 1;
+        if(!ev.Player.DoNotTrack)
+            ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.Deaths += 1;
+        if(!ev.Attacker.DoNotTrack)
+            ev.Attacker.GetAdvancedPlayer().DatabasePlayer.Stats.Kills += 1;
 
     }
 
     public static void OnUsingItem(UsedItemEventArgs ev)
     {
-        var item = Enum.TryParse<Dependencys.Utils.ItemType>(ev.Item.Type.ToString(), out var e);
-        if (ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems.ContainsKey(e))
+        if(ev.Player.DoNotTrack) return;
+        Enum.TryParse<Dependencys.Utils.ItemType>(ev.Item.Type.ToString(), out var itemType);
+        if (ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems.ContainsKey(itemType))
         {
-            ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems[e] += 1;
+
+                ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems[itemType] += 1;
         }
         else
         {
-            ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems.Add(e, 1);
+            ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems.Add(itemType, 1);
         }
     }
 
     public static void OnEscaping(EscapingEventArgs ev)
     {
-        if (Round.ElapsedTime.TotalSeconds <= 120) ev.Player.Achive(37);
-        ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.FastestEscapeSeconds = Round.ElapsedTime.TotalSeconds;
+        if(!ev.Player.DoNotTrack)
+            ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.FastestEscapeSeconds = Round.ElapsedTime.TotalSeconds;
     }
 
     public static void OnExploding(ExplodingGrenadeEventArgs ev)
     {
+        if(ev.Player.DoNotTrack) return;
         if (ev.Projectile.GameObject.TryGetComponent<PinkCandyComponent>(out var component))
         {
             if (ev.TargetsToAffect.Count - 1 >= 5)

@@ -49,16 +49,16 @@ public class LinkCommand : CustomCommand
     public static string GenerateLinkCode(ulong steam64ID)
     {
         var Code = GenerateCode();
-        while (LinkDatabase.OpenLinks.Select(x => x.Code).Contains(Code))
+        while (LinkDatabase.TemporaryCodes.Select(x => x.Code).Contains(Code))
             Code = GenerateCode();
-        LinkDatabase.OpenLinks.Add(new LinkClass(steam64ID, 60, Code));
+        LinkDatabase.TemporaryCodes.Add(new LinkClass(steam64ID, 60, Code));
         return "Dein Code ist " + Code + " er ist für 60 Sekunden aktiv!";
 
     }
 
     public static bool HasLinkcode(ulong steamid)
     {
-        return LinkDatabase.OpenLinks.Count(x => x.Steam64ID == steamid) >= 1;
+        return LinkDatabase.TemporaryCodes.Count(x => x.Steam64ID == steamid) >= 1;
     }
 
     public static int GenerateCode()
@@ -71,10 +71,10 @@ public class LinkCommand : CustomCommand
         for (;;)
         {
             yield return Timing.WaitForSeconds(1f);
-            foreach (var pair in LinkDatabase.OpenLinks)
+            foreach (var pair in LinkDatabase.TemporaryCodes)
             {
                 pair.Time -= 1;
-                if (pair.Time == 0) LinkDatabase.OpenLinks.Remove(pair);
+                if (pair.Time == 0) LinkDatabase.TemporaryCodes.Remove(pair);
             }
         }
     }
