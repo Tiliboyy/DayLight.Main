@@ -1,11 +1,11 @@
-using DayLight.Dependencys.Communication.Enums;
+using DayLight.Dependencys.Enums;
 using Newtonsoft.Json;
 using System;
 
-namespace DayLight.Dependencys.Communication;
+namespace DayLight.Dependencys.Models.Communication;
 
 [Serializable]
-public struct PluginSender
+public struct PluginMessage
 {
     public MessageType Type { get; set; }
     public string Nickname { get; set; }
@@ -25,7 +25,7 @@ public struct PluginSender
         return JsonConvert.SerializeObject(this);
     }
 
-    public PluginSender(MessageType messageType = MessageType.None, object data = null, string nickname = "")
+    public PluginMessage(MessageType messageType = MessageType.None, object data = null, string nickname = "")
     {
         Type = messageType;
         DataPS = JsonConvert.SerializeObject(data);

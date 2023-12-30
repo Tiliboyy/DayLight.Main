@@ -1,4 +1,4 @@
-namespace DayLight.Dependencys.Stats;
+namespace DayLight.Dependencys.Enums;
 
 public enum LeaderboardType
 {

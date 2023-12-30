@@ -46,26 +46,24 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Achievements\Achievements.cs" />
-        <Compile Include="Communication\BotMessage.cs" />
-        <Compile Include="Communication\Enums\MessageType.cs" />
-        <Compile Include="Communication\LinkMessage.cs" />
-        <Compile Include="Communication\PluginMessage.cs" />
-        <Compile Include="Communication\StringMessage.cs" />
-        <Compile Include="CustomDictionary.cs" />
-        <Compile Include="CustomList.cs" />
-        <Compile Include="LinkedPlayer.cs" />
+        <Compile Include="Enums\LeaderboardType.cs" />
+        <Compile Include="Enums\MessageType.cs" />
+        <Compile Include="Lists\ObservedDictionary.cs" />
+        <Compile Include="Lists\ObservedList.cs" />
+        <Compile Include="Models\Achievements.cs" />
+        <Compile Include="Models\Communication\BotMessage.cs" />
+        <Compile Include="Models\Communication\PluginMessage.cs" />
+        <Compile Include="Models\Helpers\BoolHelper.cs" />
+        <Compile Include="Models\Helpers\LinkHelper.cs" />
+        <Compile Include="Models\Helpers\PlayerInformationHelper.cs" />
+        <Compile Include="Models\Helpers\RoleUpdateHelper.cs" />
+        <Compile Include="Models\Helpers\StringHelper.cs" />
+        <Compile Include="Models\Stats.cs" />
+        <Compile Include="Models\Warn.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="RoleSync\RoleUpdateMessage.cs" />
-        <Compile Include="Stats\LeaderboardType.cs" />
-        <Compile Include="Stats\ProfileSettings.cs" />
-        <Compile Include="Stats\Stats.cs" />
-        <Compile Include="Stats\StatsMessage.cs" />
-        <Compile Include="StatTypes.cs" />
-        <Compile Include="Utils\ItemType.cs" />
+        <Compile Include="Utils\ParsedItemType.cs" />
         <Compile Include="Utils\TimeSpanUtils.cs" />
         <Compile Include="Utils\WebhookMessage.cs" />
-        <Compile Include="Warn.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />

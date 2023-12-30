@@ -4,7 +4,7 @@ using Core.Features.Data.Enums;
 using Core.Features.Extensions;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
-using DayLight.Dependencys.Stats;
+using DayLight.Dependencys.Models;
 using Exiled.API.Features;
 using JetBrains.Annotations;
 using MEC;
@@ -22,7 +22,7 @@ public static class Achievements
     {
         if (DiscordSyncStatsPlugin.DisableDiscordSyncStats) return;
         if (player.DoNotTrack) return;
-        var achivement = Dependencys.Achievements.Achievements.AllAchivements.FirstOrDefault(x => x.Id == id);
+        var achivement = Dependencys.Models.Achievements.AllAchivements.FirstOrDefault(x => x.Id == id);
         var dbplayer = player.GetAdvancedPlayer().DatabasePlayer;
         if (dbplayer != null && dbplayer.Stats.UnlockedAchievements.Contains(achivement.Id))
             return;
@@ -38,7 +38,7 @@ public static class Achievements
         player.GetAdvancedPlayer().DatabasePlayer.Stats.UnlockedAchievements.Add(achivement.Id);
     }
     [UsedImplicitly]
-    public static List<Dependencys.Achievements.Achievements.Achivement> GetUnlockedAchivement(string steam64id)
+    public static List<Dependencys.Models.Achievements.Achivement> GetUnlockedAchivement(string steam64id)
     {
         try
         {
@@ -46,10 +46,10 @@ public static class Achievements
             var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
             var dbplayer = players.FindOne(x => x.SteamID == id);
             if (dbplayer == null)
-                return new List<Dependencys.Achievements.Achievements.Achivement>();
+                return new List<Dependencys.Models.Achievements.Achivement>();
             return dbplayer.Stats.UnlockedAchievements
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
-                .Select(achivement => Dependencys.Achievements.Achievements.AllAchivements.Where(x => x.Id == achivement))
+                .Select(achivement => Dependencys.Models.Achievements.AllAchivements.Where(x => x.Id == achivement))
                 .Where(e => e.Count() != 0)
                 .Select(e => e.First()).ToList();
         }

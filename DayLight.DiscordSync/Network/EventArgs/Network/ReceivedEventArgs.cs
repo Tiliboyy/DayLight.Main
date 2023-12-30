@@ -5,8 +5,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using DayLight.Dependencys.Communication;
-using DayLight.Dependencys.Communication.Enums;
+using DayLight.Dependencys.Enums;
+using DayLight.Dependencys.Models.Communication;
 
 namespace DiscordSync.Plugin.Network.EventArgs.Network;
 
@@ -24,15 +24,15 @@ public class ReceivedEventArgs : System.EventArgs
     /// <param name="length">
     ///     <inheritdoc cref="Length" />
     /// </param>
-    public ReceivedEventArgs(BotRequester data, int length)
+    public ReceivedEventArgs(BotMessage data, int length)
     {
         SerilzedData = data.DataBR;
         UserID = data.UserID;
         Type = data.Type;
-        BotRequester = data;
+        BotMessage = data;
         Length = length;
     }
-    public BotRequester BotRequester { get; set; }
+    public BotMessage BotMessage { get; set; }
     public MessageType Type { get; set; }
     public ulong UserID { get; set; }
     public string SerilzedData { get; private set; }
@@ -42,7 +42,7 @@ public class ReceivedEventArgs : System.EventArgs
     {
         try
         {
-            return BotRequester.GetData<T>();
+            return BotMessage.GetData<T>();
         }
         catch (Exception e)
         {

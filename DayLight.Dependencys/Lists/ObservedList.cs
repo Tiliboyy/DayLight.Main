@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace DayLight.Dependencys;
+namespace DayLight.Dependencys.Lists;
 
-public class CustomList<T> : ICollection<T>, INotifyPropertyChanged
+public class ObservedList<T> : ICollection<T>, INotifyPropertyChanged
 {
 
     public readonly List<T> List = new List<T>();
@@ -22,7 +22,7 @@ public class CustomList<T> : ICollection<T>, INotifyPropertyChanged
         List.Clear();
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Clear)));
     }
-    public bool Contains(T item) => throw new System.NotImplementedException();
+    public bool Contains(T item) => List.Contains(item);
     public void CopyTo(T[] array, int arrayIndex)
     {
         List.CopyTo(array, arrayIndex);

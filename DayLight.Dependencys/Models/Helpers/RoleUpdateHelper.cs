@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DayLight.Dependencys.RoleSync;
+namespace DayLight.Dependencys.Models.Helpers;
 
 [Serializable]
-public struct RoleUpdater
+public struct RoleSyncHelper
 {
     public ulong UserID { get; set; }
 

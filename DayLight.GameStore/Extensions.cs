@@ -3,7 +3,7 @@ using DayLight.Core.API;
 using DayLight.Core.API.Database;
 using DayLight.Core.API.Features;
 using DayLight.Core.Models;
-using DayLight.Dependencys.Stats;
+using DayLight.Dependencys.Models;
 using PlayerRoles;
 using System;
 using System.Linq;

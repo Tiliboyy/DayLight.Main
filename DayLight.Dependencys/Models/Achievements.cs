@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DayLight.Dependencys.Achievements;
+namespace DayLight.Dependencys.Models;
 
 public class Achievements
 {

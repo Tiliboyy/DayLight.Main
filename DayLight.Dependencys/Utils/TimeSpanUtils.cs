@@ -7,10 +7,10 @@ public class TimeSpanUtils
 {
     public static string FormatTimeSpan(TimeSpan ts, bool useSeconds = false)
     {
-        if (ts == TimeSpan.Zero)
+        if (ts <= TimeSpan.Zero)
             return "N/A";
         var parts = new List<string>();
-
+        
         if (ts.Days > 0)
             parts.Add($"{ts.Days} {(ts.Days == 1 ? "Tag" : "Tage")}");
 

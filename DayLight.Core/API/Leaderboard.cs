@@ -1,5 +1,6 @@
 ﻿using DayLight.Core.API.Database;
-using DayLight.Dependencys.Stats;
+using DayLight.Dependencys.Enums;
+using DayLight.Dependencys.Models;
 using Exiled.API.Features;
 using System;
 using System.Collections.Generic;

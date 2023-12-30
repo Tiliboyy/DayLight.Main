@@ -4,7 +4,7 @@ using DayLight.Core.API.Events.EventArgs;
 using DayLight.Core.API.Events.Handlers;
 using DayLight.Core.API.Features;
 using DayLight.Core.Models;
-using DayLight.Dependencys.Stats;
+using DayLight.Dependencys.Models;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using JetBrains.Annotations;
@@ -54,8 +54,9 @@ public static class DayLightDatabase
         try
         {
             var players = Database.GetCollection<DatabasePlayer>("players");
-
             var dbplayer = players.FindOne(x => x.SteamID == Steam64ID);
+            if(dbplayer == null)
+                Logger.Debug($"Database Entry of  {Steam64ID} was not found");
             return dbplayer;
         }
         catch (Exception e)

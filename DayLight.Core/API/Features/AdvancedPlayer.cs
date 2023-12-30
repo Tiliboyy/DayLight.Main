@@ -1,5 +1,5 @@
 ﻿using DayLight.Core.API.Database;
-using DayLight.Dependencys.Stats;
+using DayLight.Dependencys.Models;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using JetBrains.Annotations;
@@ -33,15 +33,13 @@ public class AdvancedPlayer : MonoBehaviour
     Logger.Info($"Adding {nameof(AdvancedPlayer)} component to player {ExiledPlayer.Nickname}");
 
     DayLightDatabase.AddPlayer(ExiledPlayer);
-    Logger.Info("here");
-
     var dbplayer = DayLightDatabase.GetDatabasePlayer(ExiledPlayer);
-    Logger.Info("here");
-    Logger.Info(dbplayer.SteamID);
     //if (dbplayer == null) return;
     DatabasePlayer = dbplayer;
+    if (DatabasePlayer == null) return;
     DatabasePlayer.PropertyChanged += OnPropertyChanged;
-    DatabasePlayer.Stats.PropertyChanged += OnPropertyChanged;
+    if (!ExiledPlayer.DoNotTrack)
+      DatabasePlayer.Stats.PropertyChanged += OnPropertyChanged;
   }
   public void OnPropertyChanged(object sender, PropertyChangedEventArgs ev)
   {

@@ -6,7 +6,7 @@
 
 namespace DayLight.Dependencys.Utils;
 
-public enum ItemType
+public enum ParsedItemType
 {
   None = -1, // 0xFFFFFFFF
   KeycardJanitor = 0,

@@ -1,6 +1,7 @@
-﻿using DayLight.Dependencys.Communication;
-using DayLight.Dependencys.Communication.Enums;
-using DayLight.Dependencys.RoleSync;
+﻿using DayLight.Core.API;
+using DayLight.Dependencys.Enums;
+using DayLight.Dependencys.Models.Communication;
+using DayLight.Dependencys.Models.Helpers;
 using DiscordSync.Plugin.Link;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
@@ -98,17 +99,17 @@ public class EventHandlers
 
                 ulong.TryParse(player.RawUserId, out var iResult);
                 if (!LinkDatabase.IsSteam64Linked(iResult)) return true;
-                var data = new RoleUpdater
+                var data = new RoleSyncHelper
                     { RoleName = groupstring, UserID = LinkDatabase.GetLinkedUserID(iResult), RoleID = FinalRole.DiscordRankID, Overrideables = OverridbleRoles()};
 
                 if (DiscordSyncPlugin.Instance.Network.IsConnected)
-                    await DiscordSyncPlugin.Instance.Network.SendAsync(new PluginSender(MessageType.RoleUpdate, data, player.Nickname));
+                    await DiscordSyncPlugin.Instance.Network.SendAsync(new PluginMessage(MessageType.RoleUpdate, data, player.Nickname));
 
                 return true;
             }
 
             if (overridable) return false;
-            Log.Debug(
+            Logger.Debug(
                 player.Nickname + " group " + player.ReferenceHub.serverRoles.Group.BadgeText + " was not overridable");
         
         return false;

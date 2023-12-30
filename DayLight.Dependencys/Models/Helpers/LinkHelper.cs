@@ -1,9 +1,9 @@
 using System;
 
-namespace DayLight.Dependencys.Communication;
+namespace DayLight.Dependencys.Models.Helpers;
 
 [Serializable]
-public struct LinkMessage
+public struct LinkHelper
 {
     public ulong UserId { get; set; }
     public int Code { get; set; }

@@ -5,7 +5,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using DayLight.Dependencys.Communication;
+using DayLight.Dependencys.Models.Communication;
 
 namespace DiscordSync.Plugin.Network.EventArgs.Network;
 
@@ -23,6 +23,6 @@ public class ReceivedPartialEventArgs : ReceivedEventArgs
     /// <param name="length">
     ///     <inheritdoc cref="ReceivedEventArgs.Length" />
     /// </param>
-    public ReceivedPartialEventArgs(BotRequester data, int length)
+    public ReceivedPartialEventArgs(BotMessage data, int length)
         : base(data, length) { }
 }

@@ -1,5 +1,6 @@
-using DayLight.Dependencys.Communication;
-using DayLight.Dependencys.Communication.Enums;
+using DayLight.Core.API;
+using DayLight.Dependencys.Enums;
+using DayLight.Dependencys.Models.Communication;
 using DiscordSync.Plugin.Network.EventArgs.Network;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -158,7 +159,7 @@ public sealed class Network : IDisposable
     /// <typeparam name="T">he data type.</typeparam>
     /// <param name="data">The data to be sent.</param>
     /// <returns>Returns the <see cref="ValueTask" />.</returns>
-    public async ValueTask SendAsync(PluginSender data)
+    public async ValueTask SendAsync(PluginMessage data)
     {
         await SendAsync(data, CancellationToken.None);
     }
@@ -170,7 +171,7 @@ public sealed class Network : IDisposable
     /// <param name="data">The data to be sent.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>Returns the <see cref="ValueTask" />.</returns>
-    public async ValueTask SendAsync(PluginSender data, CancellationToken cancellationToken)
+    public async ValueTask SendAsync(PluginMessage data, CancellationToken cancellationToken)
     {
         try
         {
@@ -331,11 +332,11 @@ public sealed class Network : IDisposable
                                 continue;
                             if (totalReceivedData.Length > 0)
                             {
-                                BotRequester botRequester;
+                                BotMessage botMessage;
                                 try
                                 {
                                     
-                                    botRequester = JsonConvert.DeserializeObject<BotRequester>(receivedData + splitData, JsonSerializerSettings)!; 
+                                    botMessage = JsonConvert.DeserializeObject<BotMessage>(receivedData + splitData, JsonSerializerSettings)!; 
                                         
                                 }
                                 catch
@@ -343,17 +344,17 @@ public sealed class Network : IDisposable
                                     totalReceivedData.Clear();
                                     continue;
                                 }
-                                OnReceivedFull(this, new ReceivedFullEventArgs(botRequester, bytesRead));
+                                OnReceivedFull(this, new ReceivedFullEventArgs(botMessage, bytesRead));
 
                                 totalReceivedData.Clear();
                             }
                             else if (!string.IsNullOrEmpty(splitData))
                             {
-                                BotRequester botRequester;
+                                BotMessage botMessage;
 
                                 try
                                 {
-                                    botRequester = JsonConvert.DeserializeObject<BotRequester>(receivedData + splitData, JsonSerializerSettings)!;
+                                    botMessage = JsonConvert.DeserializeObject<BotMessage>(receivedData + splitData, JsonSerializerSettings)!;
 
                                 }
                                 catch
@@ -366,7 +367,7 @@ public sealed class Network : IDisposable
 
 
 
-                                OnReceivedFull(this, new ReceivedFullEventArgs(botRequester, bytesRead));
+                                OnReceivedFull(this, new ReceivedFullEventArgs(botMessage, bytesRead));
 
                                 totalReceivedData.Clear();
                             }
@@ -430,31 +431,31 @@ public sealed class Network : IDisposable
         }
     }
     
-    public async Task<BotRequester> Request(MessageType messageType, object? data = null, string nickname = "")
+    public async Task<BotMessage> Request(MessageType messageType, object? data = null, string nickname = "")
     {
-        return await WriteLineAndGetReply(new PluginSender(messageType, data, nickname), TimeSpan.FromSeconds(2f));
+        return await WriteLineAndGetReply(new PluginMessage(messageType, data, nickname), TimeSpan.FromSeconds(2f));
     }
-    public async Task<BotRequester> WriteLineAndGetReply(PluginSender data, TimeSpan timeout)
+    public async Task<BotMessage> WriteLineAndGetReply(PluginMessage data, TimeSpan timeout)
     {
-        var Reply = new BotRequester();
-        ReceivedFull += (s, e) => Reply = e.BotRequester;
+        var Reply = new BotMessage();
+        ReceivedFull += (s, e) => Reply = e.BotMessage;
         await SendAsync(data);
         var stopwatch = new Stopwatch();
         stopwatch.Start();
         while (Reply.Type == MessageType.None && stopwatch.Elapsed < timeout)
             Thread.Sleep(10);
-        Log.Debug("Recieved Reply: " + Reply.Type + ": " + Reply.DataBR);
+        Logger.Debug("Recieved Reply: " + Reply.Type + ": " + Reply.DataBR);
         return Reply;
     }
 
 
-    private async Task ReplyLine(PluginSender data)
+    private async Task ReplyLine(PluginMessage data)
     {
         await DiscordSyncPlugin.Instance.Network.SendAsync(data);
     }
     public async Task ReplyLine(MessageType requestType, object? data = null, string nickname = "")
     {
-        var pluginSender = new PluginSender(requestType, data, nickname);
+        var pluginSender = new PluginMessage(requestType, data, nickname);
 
         await DiscordSyncPlugin.Instance.Network.SendAsync(pluginSender);
     }

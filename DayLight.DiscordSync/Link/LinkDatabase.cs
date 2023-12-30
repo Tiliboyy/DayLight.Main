@@ -1,4 +1,5 @@
-﻿using DayLight.Core.API.Database;
+﻿using DayLight.Core.API;
+using DayLight.Core.API.Database;
 using DayLight.Dependencys;
 using DiscordSync.Plugin.Commands.ClientConsole;
 using Exiled.API.Features;
@@ -54,7 +55,12 @@ public class LinkDatabase
     {
        var dbPlayer =  DayLightDatabase.GetDatabasePlayer(Steam64ID);
        if (dbPlayer != null)
+       {
            dbPlayer.DiscordID = UserID;
+           Logger.Debug($"Set link to {dbPlayer.Nickname}");
+           DayLightDatabase.UpdatePlayer(dbPlayer);
+
+       }
        else
        {
            return false;

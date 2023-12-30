@@ -1,13 +1,14 @@
-namespace DayLight.Dependencys.Communication.Enums;
+namespace DayLight.Dependencys.Enums;
 
 public enum MessageType
 {
     List,
     String,
     RoleUpdate,
-    Link,
+    UpdateLink,
     CheckLink,
     PlayerInformation,
+    ChangeProfilePublicState,
     Heartbeat,
     Ping,
     Leaderboard,

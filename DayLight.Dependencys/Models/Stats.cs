@@ -1,9 +1,10 @@
-﻿using DayLight.Dependencys.Utils;
+﻿using DayLight.Dependencys.Lists;
+using DayLight.Dependencys.Utils;
 using LiteDB;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace DayLight.Dependencys.Stats;
+namespace DayLight.Dependencys.Models;
 
 public interface IDatabasePlayer
 {
@@ -12,6 +13,7 @@ public interface IDatabasePlayer
     [BsonId]
     public ulong SteamID { get; }
     public string Nickname { get; set; }
+    public bool DoNotTrack { get; set; }
     public Stats Stats { get; set; }
     public List<Warn> Warns { get; set; }
     public event PropertyChangedEventHandler PropertyChanged;
@@ -22,6 +24,7 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
 {
     public bool IsDummy { get; set; } = false;
     private ulong _steamID;
+    private bool _doNotTrack { get; set; } = false;
     private ulong _discordID;
     private string _nickname;
     private Stats _stats;
@@ -30,6 +33,7 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
     public DatabasePlayer()
     {
         IsDummy = true;
+        Nickname = "None";
         _steamID = 0;
         _discordID = 0;
         _stats = null;
@@ -54,7 +58,15 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
             OnPropertyChanged(nameof(SteamID));
         }
     }
-
+    public bool DoNotTrack
+    {
+        get => _doNotTrack; 
+        set
+        {
+            _doNotTrack = value;
+            OnPropertyChanged(nameof(_doNotTrack));
+        }
+    }
     public string Nickname
     {
         get => _nickname;
@@ -100,28 +112,9 @@ public class DatabasePlayer : INotifyPropertyChanged, IDatabasePlayer
 
     protected void OnPropertyChanged(string propertyName)
     {
+        
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-}
-public class Warns
-{
-    private List<Warn> warns = new List<Warn>();
-    public void AddWarn()
-    {
-        
-    }
-}
-
-public enum StatType
-{
-    //todo: Become VSR Compliant
-    Kills,
-    KilledScps,
-    PinkCandyKills,
-    Deaths,
-    FastestEscape,
-    Money,
-    UsedItems
 }
 public class Stats : INotifyPropertyChanged
 {
@@ -133,12 +126,13 @@ public class Stats : INotifyPropertyChanged
     private double _fastestEscapeSeconds;
     private float _money;
     private bool _public;
-    private CustomDictionary<ItemType, float> _usedItems;
+    private ObservedDictionary<ParsedItemType, float> _usedItems;
 
     public Stats()
     {
-        UsedItems = new CustomDictionary<ItemType, float>();
-        UnlockedAchievements = new CustomList<double>();
+        UsedItems = new ObservedDictionary<ParsedItemType, float>();
+        UnlockedAchievements = new ObservedList<double>();
+        Public = true;
     }
 
     public bool Public
@@ -151,7 +145,7 @@ public class Stats : INotifyPropertyChanged
         }
     }
 
-    public CustomList<double> UnlockedAchievements { get; private set; }
+    public ObservedList<double> UnlockedAchievements { get; private set; }
 
     public double Kills
     {
@@ -223,7 +217,7 @@ public class Stats : INotifyPropertyChanged
         }
     }
 
-    public CustomDictionary<ItemType, float> UsedItems
+    public ObservedDictionary<ParsedItemType, float> UsedItems
     {
         get => _usedItems;
         set

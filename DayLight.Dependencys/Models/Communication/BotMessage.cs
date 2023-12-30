@@ -1,18 +1,18 @@
-using DayLight.Dependencys.Communication.Enums;
+using DayLight.Dependencys.Enums;
 using Newtonsoft.Json;
 using System;
 
-namespace DayLight.Dependencys.Communication;
+namespace DayLight.Dependencys.Models.Communication;
 
 [Serializable]
-public struct BotRequester
+public struct BotMessage
 {
     public MessageType Type { get; set; }
     public ulong UserID { get; set; }
     public string DataBR { get; set; }
 
 
-    public BotRequester(MessageType messageType = MessageType.None, object data = null, ulong userID = 0) 
+    public BotMessage(MessageType messageType = MessageType.None, object data = null, ulong userID = 0) 
     {
         Type = messageType;
         UserID = userID;

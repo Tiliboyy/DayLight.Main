@@ -1,9 +1,9 @@
 ﻿using DayLight.Core;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
-using DayLight.Dependencys.Communication;
-using DayLight.Dependencys.Communication.Enums;
-using DayLight.Dependencys.Stats;
+using DayLight.Dependencys.Enums;
+using DayLight.Dependencys.Models;
+using DayLight.Dependencys.Models.Helpers;
 using DiscordSync.Plugin.Network.EventArgs.Network;
 using Exiled.API.Features;
 using System.Globalization;
@@ -17,7 +17,8 @@ public static class NetworkEventHandler
 
     public static void DataReceived(object sender, ReceivedFullEventArgs ev)
     {
-        Log.Debug(ev.Type);
+        Logger.Debug(ev.Type);
+        Logger.Debug(ev.SerilzedData);
         try
         {
             switch (ev.Type)
@@ -25,12 +26,11 @@ public static class NetworkEventHandler
                 case MessageType.PlayerList:
                     HandlePlayerList(ev);
                     break;
-
                 case MessageType.PlayerInformation:
                     HandleDatabasePlayer(ev);
                     break;
-                case MessageType.Link:
-                    HandleLink(ev);
+                case MessageType.UpdateLink:
+                    HandleUpdateLink(ev);
                     break;
                 case MessageType.CheckLink:
                     HandleLinkCheck(ev);
@@ -46,12 +46,14 @@ public static class NetworkEventHandler
                 case MessageType.GiveMoney:
                     HandleAddMoney(ev);
                     break;
+                case MessageType.ChangeProfilePublicState:
+                    HandleProfilePublicState(ev);
+                    break;
+                case MessageType.Webhook:
                 case MessageType.List:
                 case MessageType.String:
                 case MessageType.RoleUpdate:
                 case MessageType.None:
-                    break;
-                case MessageType.Webhook:
                 default:
                     Log.Error("Invalid request type recieved: " + ev.Type);
                     break;
@@ -66,51 +68,59 @@ public static class NetworkEventHandler
     }
     private static void HandleAddMoney(ReceivedFullEventArgs ev)
     {
-        if(!int.TryParse(ev.GetData<StringMessage>().String, out int Money))
+        if(!int.TryParse(ev.GetData<StringHelper>().String, out int Money))
             return;
         var dbPlayer = DayLightDatabase.GetDatabasePlayer(Link.LinkDatabase.GetLinkedSteamID(ev.UserID));
-        if (dbPlayer != null && dbPlayer.Stats != null)
+        if (dbPlayer is { Stats: not null })
             dbPlayer.Stats.Money += Money;
+        DayLightDatabase.UpdatePlayer(dbPlayer);
+
 
     }
-    private static void HandleLeaderboard(ReceivedFullEventArgs ev)
+    private static void HandleLeaderboard(ReceivedEventArgs ev)
     {
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Leaderboard, new StringMessage(Leaderboard.GetLeaderboard(Leaderboard.GetLeaderboardType(ev.GetData<StringMessage>().String))), "");
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Leaderboard, new StringHelper(Leaderboard.GetLeaderboard(Leaderboard.GetLeaderboardType(ev.GetData<StringHelper>().String))), "");
     }
 
     private static void HandlePing(ReceivedFullEventArgs ev)
     {
         _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Ping, "pong", "");
     }
-    private static void HandleLinkCheck(ReceivedFullEventArgs ev)
+    private static void HandleLinkCheck(ReceivedEventArgs ev)
     {
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.CheckLink, new LinkMessage(){Linked = Link.LinkDatabase.IsUserIdLinked(ev.UserID)}, GetNickname(ev.UserID));    }
-    private static void HandleLink(ReceivedFullEventArgs ev)
+        var nickname = DayLightDatabase.GetDatabasePlayerDiscord(ev.UserID)?.Nickname ?? "None";
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.CheckLink, new LinkHelper()
+        {
+            Linked = Link.LinkDatabase.IsUserIdLinked(ev.UserID)
+        }, nickname);
+        
+    }
+    private static void HandleUpdateLink(ReceivedEventArgs ev)
     {
-        var linker = ev.GetData<LinkMessage>();
+        var linkHelper = ev.GetData<LinkHelper>();
         try
         {
-            var flag = Link.LinkDatabase.Link(linker.UserId, linker.Code);
-            linker.Linked = flag;
+            var flag = Link.LinkDatabase.Link(linkHelper.UserId, linkHelper.Code);
+            linkHelper.Linked = flag;
         }
         catch (Exception exception)
         {
             Log.Error(exception);
             throw;
         }
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.Link, linker, GetNickname(ev.UserID));
+        var nickname = DayLightDatabase.GetDatabasePlayerDiscord(ev.UserID)?.Nickname ?? "None";
+        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.UpdateLink, linkHelper, nickname);
     }
-    private static void HandleDatabasePlayer(ReceivedFullEventArgs ev)
+    private static void HandleDatabasePlayer(ReceivedEventArgs ev)
     {
         try
         {
+            var playtime = GetScpUtilsPlaytimeSeconds(ev);
 
-            var ply = Database.LiteDatabase.GetCollection<Player>().FindOne(x => x.Id == Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString());
-            var playtime = new TimeSpan(0, 0, ply.PlayTimeRecords.Sum(pt => pt.Value)).TotalSeconds;
+            var DatabaseEntry = DayLightDatabase.GetDatabasePlayer(Link.LinkDatabase.GetLinkedSteamID(ev.UserID)) ?? new DatabasePlayer();
+            var databasePlayerSender = new PlayerInformationHelper(DatabaseEntry, playtime);
 
-            var DatabaseEntry = DayLightDatabase.GetDatabasePlayer(Link.LinkDatabase.GetLinkedSteamID(ev.UserID));
-            var databasePlayerSender = new PlayerInformation(DatabaseEntry, playtime);
-            _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.PlayerInformation, databasePlayerSender, GetNickname(ev.UserID));
+            _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.PlayerInformation, databasePlayerSender, DatabaseEntry.Nickname);
 
         }
         catch (Exception exception)
@@ -119,31 +129,25 @@ public static class NetworkEventHandler
             throw;
         }
     }
-    private static void HandlePlayerSettings(ReceivedFullEventArgs ev)
+    private static void HandleProfilePublicState(ReceivedEventArgs ev)
     {
-        var IsPublic = ev.GetData<bool>();
+        var IsPublic = ev.GetData<BoolHelper>()!.Bool;
         var DatabaseEntry = DayLightDatabase.GetDatabasePlayer(Link.LinkDatabase.GetLinkedSteamID(ev.UserID));
-
         if (DatabaseEntry != null) DatabaseEntry.Stats.Public = IsPublic;
-    }
-    private static void HandleGameStoreMoney(ReceivedFullEventArgs ev)
-    {
-        var dbPlayer = DayLightDatabase.GetDatabasePlayer(Link.LinkDatabase.GetLinkedSteamID(ev.UserID));
-        float money = 0;
-        if (dbPlayer != null && dbPlayer.Stats != null)
-            money = dbPlayer.Stats.Money;
-        _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.String, money, "");
+        DayLightDatabase.UpdatePlayer(DatabaseEntry);
+
     }
     private static void HandlePlayerList(ReceivedFullEventArgs ev)
     {
         var names = Exiled.API.Features.Player.List.Select(x => x.Nickname).ToList();
         _ = DiscordSyncPlugin.Instance.Network.ReplyLine(MessageType.PlayerList, names, "");
     }
-
-    public static string GetNickname(ulong UserID)
+    
+    private static double GetScpUtilsPlaytimeSeconds(ReceivedEventArgs ev)
     {
-
-        var e = DayLightDatabase.GetNicknameFromSteam64ID(Link.LinkDatabase.GetLinkedSteamID(UserID));
-        return e ?? "None";
+        var ply = Database.LiteDatabase.GetCollection<Player>().FindOne(x => x.Id == Link.LinkDatabase.GetLinkedSteamID(ev.UserID).ToString());
+        var playtime = new TimeSpan(0, 0, ply.PlayTimeRecords.Sum(pt => pt.Value)).TotalSeconds;
+        return playtime;
     }
+
 }

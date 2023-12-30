@@ -60,7 +60,7 @@ internal class StatsEventHandler
     public static void OnUsingItem(UsedItemEventArgs ev)
     {
         if(ev.Player.DoNotTrack) return;
-        Enum.TryParse<Dependencys.Utils.ItemType>(ev.Item.Type.ToString(), out var itemType);
+        Enum.TryParse<Dependencys.Utils.ParsedItemType>(ev.Item.Type.ToString(), out var itemType);
         if (ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems.ContainsKey(itemType))
         {
 

@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace DayLight.Dependencys;
+namespace DayLight.Dependencys.Lists;
 
-public class CustomDictionary<TKey, TValue> : IDictionary<TKey, TValue>, INotifyPropertyChanged
+public class ObservedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 
