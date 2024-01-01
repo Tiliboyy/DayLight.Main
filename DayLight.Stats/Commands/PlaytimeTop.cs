@@ -1,12 +1,11 @@
-﻿using CommandSystem;
-using DayLight.Core.API.Attributes;
+﻿using DayLight.Core.API.Attributes;
 using DayLight.Core.API.CommandSystem;
 using Neuron.Core.Meta;
 using SCPUtils;
 using System;
 using System.Linq;
 
-namespace DayLight.Stat.Commands;
+namespace DayLight.Stats.Commands;
 
 [Automatic]
 [Command(new [] { Platform.ClientConsole })]
@@ -21,7 +20,7 @@ public class PlaytimeTop : CustomCommand
     {
 
 
-        commandResult.Response = DiscordSyncStatsPlugin.PlaytimeLeaderboard;
+        commandResult.Response = DayLightStatsPlugin.PlaytimeLeaderboard;
 
     }
     public static void GetPTLeaderboard(int amount = 10)
@@ -43,6 +42,6 @@ public class PlaytimeTop : CustomCommand
 
             i++;
         }
-        DiscordSyncStatsPlugin.PlaytimeLeaderboard = str;
+        DayLightStatsPlugin.PlaytimeLeaderboard = str;
     }
 }

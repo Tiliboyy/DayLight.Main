@@ -1,11 +1,9 @@
 ﻿#region
 
-using CommandSystem;
 using DayLight.Core.API.Attributes;
 using DayLight.Core.API.CommandSystem;
 using DayLight.Moderation.Configs;
 using Exiled.API.Features;
-using Exiled.Permissions.Extensions;
 using MEC;
 using Neuron.Core;
 using Neuron.Core.Meta;

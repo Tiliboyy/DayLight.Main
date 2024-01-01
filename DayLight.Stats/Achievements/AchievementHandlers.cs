@@ -1,6 +1,5 @@
 #region
 
-using DayLight.Core;
 using DayLight.Core.API;
 using DayLight.Core.API.Events.EventArgs;
 using DayLight.Core.API.Events.Handlers;
@@ -26,7 +25,7 @@ using WarheadHandler = Exiled.Events.Handlers.Warhead;
 
 #endregion
 
-namespace DayLight.Stat.Achievements;
+namespace DayLight.Stats.Achievements;
 internal static class GameStateData
 {
 

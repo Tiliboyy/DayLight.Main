@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Server = Exiled.Events.Handlers.Server;
 
 namespace Neuron.Bootstrap;
 

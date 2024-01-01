@@ -1,7 +1,4 @@
-﻿using Exiled.API.Features;
-using JetBrains.Annotations;
-using PlayerRoles.PlayableScps.Scp173;
-using System;
+﻿using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 

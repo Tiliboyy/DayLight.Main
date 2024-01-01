@@ -1,7 +1,5 @@
-﻿using CommandSystem;
-using DayLight.Core.API;
+﻿using DayLight.Core.API;
 using DayLight.Core.API.CommandSystem;
-using Exiled.Permissions.Extensions;
 using System;
 using Player = Exiled.API.Features.Player;
 

@@ -1,6 +1,6 @@
 #region
 
-using DayLight.Stat.Stats.Components;
+using DayLight.Stats.Stats.Components;
 using Footprinting;
 using HarmonyLib;
 using InventorySystem;
@@ -11,7 +11,7 @@ using Utils;
 
 #endregion
 
-namespace DayLight.Stat.Stats;
+namespace DayLight.Stats.Stats;
 
 public class Patches
 {

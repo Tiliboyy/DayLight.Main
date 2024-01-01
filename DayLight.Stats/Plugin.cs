@@ -1,26 +1,23 @@
 ﻿#region
 
-using DayLight.Core;
 using DayLight.Core.API;
-using DayLight.Core.API.Attributes;
-using DayLight.Stat.Achievements;
-using DayLight.Stat.Commands;
-using DayLight.Stat.Stats;
+using DayLight.Stats.Achievements;
+using DayLight.Stats.Commands;
+using DayLight.Stats.Stats;
 using Exiled.API.Features;
 using MEC;
 using Neuron.Core.Plugins;
-using Neuron.Modules.Reload;
 using System.IO;
 
 #endregion
 
-namespace DayLight.Stat;
+namespace DayLight.Stats;
 
-[Plugin(Name = "DiscordSync.Stats", Author = "Tiliboyy")]
-public class DiscordSyncStatsPlugin : DayLightCorePlugin<Config, StatsTranslation>
+[Plugin(Name = "DayLight.Stats", Author = "Tiliboyy")]
+public class DayLightStatsPlugin : DayLightCorePlugin<DayLightStatsConfig, DayLightStatsTranslation>
 {
-    public static DiscordSyncStatsPlugin Instance;
-    public static bool DisableDiscordSyncStats = false;
+    public static DayLightStatsPlugin Instance;
+    public static bool DisableSyncStats = false;
     public static string PlaytimeLeaderboard = "";
     protected override void Enabled()
     {

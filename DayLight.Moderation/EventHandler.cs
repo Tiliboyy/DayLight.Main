@@ -2,7 +2,6 @@
 
 #endregion
 
-using DayLight.Core;
 using DayLight.Core.API.Events.EventArgs;
 using DayLight.Moderation.Warn;
 using System;

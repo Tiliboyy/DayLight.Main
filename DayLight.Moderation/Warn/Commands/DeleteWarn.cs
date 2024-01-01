@@ -1,9 +1,7 @@
 ﻿#region
 
-using CommandSystem;
 using DayLight.Core.API.Attributes;
 using DayLight.Core.API.CommandSystem;
-using Exiled.Permissions.Extensions;
 using Neuron.Core.Meta;
 using System;
 using Player = Exiled.API.Features.Player;

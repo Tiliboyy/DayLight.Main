@@ -3,11 +3,9 @@ using DayLight.Core.API.Attributes;
 using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
 using Neuron.Core;
-using Neuron.Core.Logging;
 using Neuron.Core.Meta;
 using Neuron.Modules.Reload;
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace DayLight.Misc.Commands;
 [Automatic]

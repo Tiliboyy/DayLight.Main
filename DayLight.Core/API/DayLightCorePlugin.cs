@@ -1,5 +1,4 @@
 ﻿using Exiled.Events.Handlers;
-using Neuron.Core;
 using Neuron.Modules.Configs.Localization;
 using Neuron.Modules.Reload;
 using System.Reflection;

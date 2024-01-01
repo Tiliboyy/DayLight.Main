@@ -1,12 +1,8 @@
 using DayLight.Core.API;
-using DayLight.Core.API.Database;
 using DayLight.Core.API.Features;
-using Discord;
 using Exiled.API.Enums;
-using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using PlayerRoles;
-using System;
 using System.Collections.Generic;
 using DamageType = Exiled.API.Enums.DamageType;
 using Player = Exiled.API.Features.Player;

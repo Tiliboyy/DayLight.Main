@@ -1,11 +1,9 @@
 ﻿#region
 
 using DayLight.Core.API;
-using DayLight.Core.API.Attributes;
 using DayLight.Moderation.Configs;
 using Exiled.API.Features;
 using Neuron.Core.Plugins;
-using Neuron.Modules.Reload;
 using System;
 using System.IO;
 

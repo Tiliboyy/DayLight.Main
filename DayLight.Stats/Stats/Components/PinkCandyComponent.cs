@@ -4,7 +4,7 @@ using UnityEngine;
 
 #endregion
 
-namespace DayLight.Stat.Stats.Components;
+namespace DayLight.Stats.Stats.Components;
 
 public class PinkCandyComponent : MonoBehaviour
 {

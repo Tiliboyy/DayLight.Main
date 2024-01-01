@@ -1,10 +1,8 @@
 using CommandSystem;
 using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
-using Exiled.Permissions.Extensions;
 using PlayerRoles;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Vector3 = UnityEngine.Vector3;
 
 

@@ -1,11 +1,9 @@
 ﻿#region
 
-using DayLight.Core;
 using DayLight.Core.API;
-using DayLight.Core.API.Database;
 using DayLight.Dependency.Utils;
-using DayLight.Stat.Achievements;
-using DayLight.Stat.Stats.Components;
+using DayLight.Stats.Achievements;
+using DayLight.Stats.Stats.Components;
 using Exiled.API.Extensions;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Map;
@@ -20,7 +18,7 @@ using Server = Exiled.Events.Handlers.Server;
 
 #endregion
 
-namespace DayLight.Stat.Stats;
+namespace DayLight.Stats.Stats;
 
 internal class StatsEventHandler
 {

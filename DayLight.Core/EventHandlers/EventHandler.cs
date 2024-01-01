@@ -1,13 +1,8 @@
-﻿using DayLight.Core.API;
-using DayLight.Core.API.Events.EventArgs;
-using DayLight.Core.API.Features;
+﻿using DayLight.Core.API.Features;
 using DayLight.Core.API.Subclasses.EventHandlers;
-using Discord;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
 using Exiled.Events.Handlers;
-using System;
-using VoiceChat;
 
 namespace DayLight.Core.EventHandlers;
 

@@ -1,7 +1,5 @@
-﻿using CommandSystem;
-using DayLight.Core.API.CommandSystem;
+﻿using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
-using Exiled.Permissions.Extensions;
 using System;
 
 namespace DayLight.GameStore.Commands.RemoteAdmin.SubCommands;

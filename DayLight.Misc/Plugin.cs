@@ -1,7 +1,6 @@
 ﻿using DayLight.Core.API;
 using DayLight.Misc.Configs;
 using Exiled.Events.Handlers;
-using HarmonyLib;
 using Neuron.Core.Plugins;
 
 namespace DayLight.Misc;

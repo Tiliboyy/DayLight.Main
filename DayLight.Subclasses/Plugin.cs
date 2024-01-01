@@ -1,10 +1,8 @@
 ﻿using DayLight.Core.API;
-using DayLight.Core.API.Attributes;
 using DayLight.Core.API.Subclasses.Features;
 using DayLight.Subclasses.Subclasses;
 using Neuron.Core;
 using Neuron.Core.Plugins;
-using Neuron.Modules.Reload;
 using Ninject;
 using System;
 

@@ -1,9 +1,7 @@
 using CommandSystem;
 using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
-using Exiled.Permissions.Extensions;
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 
 namespace DayLight.Misc.Commands;

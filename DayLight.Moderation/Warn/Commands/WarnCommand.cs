@@ -1,10 +1,8 @@
 ﻿#region
 
-using CommandSystem;
 using DayLight.Core.API.Attributes;
 using DayLight.Core.API.CommandSystem;
 using Exiled.API.Features;
-using Exiled.Permissions.Extensions;
 using Neuron.Core.Meta;
 using NorthwoodLib.Pools;
 using System;

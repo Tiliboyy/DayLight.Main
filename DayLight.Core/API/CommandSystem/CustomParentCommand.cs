@@ -1,7 +1,5 @@
 ﻿using CommandSystem;
-using Exiled.API.Extensions;
 using Exiled.Permissions.Extensions;
-using PluginAPI.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
