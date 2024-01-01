@@ -1,8 +1,8 @@
-using DayLight.Dependencys.Enums;
+using DayLight.Dependency.Enums;
 using Newtonsoft.Json;
 using System;
 
-namespace DayLight.Dependencys.Models.Communication;
+namespace DayLight.Dependency.Models.Communication;
 
 [Serializable]
 public struct PluginMessage

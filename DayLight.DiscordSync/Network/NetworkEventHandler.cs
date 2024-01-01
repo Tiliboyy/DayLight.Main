@@ -1,9 +1,9 @@
 ﻿using DayLight.Core;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
-using DayLight.Dependencys.Enums;
-using DayLight.Dependencys.Models;
-using DayLight.Dependencys.Models.Helpers;
+using DayLight.Dependency.Enums;
+using DayLight.Dependency.Models;
+using DayLight.Dependency.Models.Helpers;
 using DiscordSync.Plugin.Network.EventArgs.Network;
 using Exiled.API.Features;
 using System.Globalization;

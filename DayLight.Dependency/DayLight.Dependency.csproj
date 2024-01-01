@@ -8,8 +8,8 @@
         <ProjectGuid>{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>DayLight.Dependencys</RootNamespace>
-        <AssemblyName>DayLight.Dependencys</AssemblyName>
+        <RootNamespace>DayLight.Dependency</RootNamespace>
+        <AssemblyName>DayLight.Dependency</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>latest</LangVersion>

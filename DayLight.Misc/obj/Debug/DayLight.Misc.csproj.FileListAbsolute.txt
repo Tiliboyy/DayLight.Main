@@ -34,7 +34,6 @@ C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\System.Thre
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\YamlDotNet.dll
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\Assembly-CSharp-firstpass.dll
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Core.dll
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Dependencys.dll
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\Mirror.dll
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\Neuron.Modules.Reload.dll
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\Pooling.dll
@@ -46,10 +45,11 @@ C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\Newtonsoft.
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\ScpUtils.dll
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Core.pdb
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Core.dll.config
-C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Dependencys.pdb
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\Newtonsoft.Json.xml
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.csproj.AssemblyReference.cache
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.csproj.CoreCompileInputs.cache
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.csproj.CopyComplete
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.dll
 C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\obj\Debug\DayLight.Misc.pdb
+C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Dependency.dll
+C:\Users\tilau\RiderProjects\DayLight.Module\DayLight.Misc\bin\Debug\DayLight.Dependency.pdb

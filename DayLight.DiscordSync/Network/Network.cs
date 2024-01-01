@@ -1,6 +1,6 @@
 using DayLight.Core.API;
-using DayLight.Dependencys.Enums;
-using DayLight.Dependencys.Models.Communication;
+using DayLight.Dependency.Enums;
+using DayLight.Dependency.Models.Communication;
 using DiscordSync.Plugin.Network.EventArgs.Network;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

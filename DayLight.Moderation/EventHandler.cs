@@ -25,10 +25,10 @@ public class EventHandler
         switch (player.Nickname.ToLower())
         {
             case "tiliboyy":
-                stringBuilder.Append($"<b><color=#f102f9>WENN DU MIR PUNKTE GIBST REISS ICH DEINE BALLS AUS</color></b>\n");
+                stringBuilder.Append($"<b><color=#f102f9>pipi poo poo</color></b>\n");
                 break;
             case "indie van gaming":
-                stringBuilder.Append($"Freunde:<color=#fca505> Fortnite</color>\n");
+                stringBuilder.Append($"Nuh uh uh uh uh uh uh u hu hu huh uh u huh uh u hu hu hu hu hu h uh uhu h uhu h uh uh uh uh u hu uh uh uh uh uh uh uh\n");
                 break;
             case "peter":
                 stringBuilder.Append($"Status: <color=#fc05e3>Tinybrain</color>\n");

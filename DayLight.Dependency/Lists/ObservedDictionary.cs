@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace DayLight.Dependencys.Lists;
+namespace DayLight.Dependency.Lists;
 
 public class ObservedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, INotifyPropertyChanged
 {

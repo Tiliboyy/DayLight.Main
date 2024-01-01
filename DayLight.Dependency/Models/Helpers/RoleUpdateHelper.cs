@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DayLight.Dependencys.Models.Helpers;
+namespace DayLight.Dependency.Models.Helpers;
 
 [Serializable]
 public struct RoleSyncHelper

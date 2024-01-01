@@ -1,5 +1,5 @@
 ﻿using DayLight.Core.API.Database;
-using DayLight.Dependencys.Models;
+using DayLight.Dependency.Models;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using JetBrains.Annotations;

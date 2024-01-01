@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DayLight.Dependencys.Utils;
+namespace DayLight.Dependency.Utils;
 
 public class TimeSpanUtils
 {

@@ -1,10 +1,6 @@
 ﻿using DayLight.Core.API;
 using DayLight.Core.API.Database;
-using DayLight.Dependencys;
 using DiscordSync.Plugin.Commands.ClientConsole;
-using Exiled.API.Features;
-using Utils.NonAllocLINQ;
-using YamlDotNet.Serialization;
 
 namespace DiscordSync.Plugin.Link;
 

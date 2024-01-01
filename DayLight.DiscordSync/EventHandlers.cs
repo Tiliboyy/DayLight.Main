@@ -1,7 +1,7 @@
 ﻿using DayLight.Core.API;
-using DayLight.Dependencys.Enums;
-using DayLight.Dependencys.Models.Communication;
-using DayLight.Dependencys.Models.Helpers;
+using DayLight.Dependency.Enums;
+using DayLight.Dependency.Models.Communication;
+using DayLight.Dependency.Models.Helpers;
 using DiscordSync.Plugin.Link;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
@@ -9,6 +9,7 @@ using MEC;
 using Neuron.Core;
 using SCPUtils;
 using Player = Exiled.API.Features.Player;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 namespace DiscordSync.Plugin;
 

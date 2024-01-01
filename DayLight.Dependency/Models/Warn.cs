@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DayLight.Dependencys.Models;
+namespace DayLight.Dependency.Models;
 
 public struct Warn
 {

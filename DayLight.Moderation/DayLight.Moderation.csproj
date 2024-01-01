@@ -417,9 +417,9 @@
         <Project>{2d7e872a-83f3-469b-8f77-ad2a86a345f3}</Project>
         <Name>DayLight.Core</Name>
       </ProjectReference>
-      <ProjectReference Include="..\DayLight.Dependencys\DayLight.Dependencys.csproj">
+      <ProjectReference Include="..\DayLight.Dependency\DayLight.Dependency.csproj">
         <Project>{04f7a49f-5696-4b43-80f7-ac5b7f01eb63}</Project>
-        <Name>DayLight.Dependencys</Name>
+        <Name>DayLight.Dependency</Name>
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>

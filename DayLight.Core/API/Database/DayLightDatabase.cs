@@ -4,7 +4,7 @@ using DayLight.Core.API.Events.EventArgs;
 using DayLight.Core.API.Events.Handlers;
 using DayLight.Core.API.Features;
 using DayLight.Core.Models;
-using DayLight.Dependencys.Models;
+using DayLight.Dependency.Models;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using JetBrains.Annotations;

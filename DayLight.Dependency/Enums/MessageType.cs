@@ -1,4 +1,4 @@
-namespace DayLight.Dependencys.Enums;
+namespace DayLight.Dependency.Enums;
 
 public enum MessageType
 {

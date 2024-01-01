@@ -4,7 +4,7 @@
 // MVID: E055863A-833D-488B-B818-80C6FA4C7570
 // Assembly location: C:\Users\tilau\.nuget\packages\exiled\8.0.0-beta.1\lib\net48\Assembly-CSharp-Publicized.dll
 
-namespace DayLight.Dependencys.Utils;
+namespace DayLight.Dependency.Utils;
 
 public enum ParsedItemType
 {

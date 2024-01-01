@@ -3,6 +3,7 @@
 using DayLight.Core;
 using DayLight.Core.API;
 using DayLight.Core.API.Database;
+using DayLight.Dependency.Utils;
 using DayLight.Stat.Achievements;
 using DayLight.Stat.Stats.Components;
 using Exiled.API.Extensions;
@@ -60,7 +61,7 @@ internal class StatsEventHandler
     public static void OnUsingItem(UsedItemEventArgs ev)
     {
         if(ev.Player.DoNotTrack) return;
-        Enum.TryParse<Dependencys.Utils.ParsedItemType>(ev.Item.Type.ToString(), out var itemType);
+        Enum.TryParse<ParsedItemType>(ev.Item.Type.ToString(), out var itemType);
         if (ev.Player.GetAdvancedPlayer().DatabasePlayer.Stats.UsedItems.ContainsKey(itemType))
         {
 

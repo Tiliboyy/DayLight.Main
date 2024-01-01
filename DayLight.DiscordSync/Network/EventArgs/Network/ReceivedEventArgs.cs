@@ -5,8 +5,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using DayLight.Dependencys.Enums;
-using DayLight.Dependencys.Models.Communication;
+using DayLight.Dependency.Enums;
+using DayLight.Dependency.Models.Communication;
 
 namespace DiscordSync.Plugin.Network.EventArgs.Network;
 

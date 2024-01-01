@@ -1,10 +1,10 @@
-﻿using DayLight.Dependencys.Lists;
-using DayLight.Dependencys.Utils;
+﻿using DayLight.Dependency.Lists;
+using DayLight.Dependency.Utils;
 using LiteDB;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace DayLight.Dependencys.Models;
+namespace DayLight.Dependency.Models;
 
 public interface IDatabasePlayer
 {

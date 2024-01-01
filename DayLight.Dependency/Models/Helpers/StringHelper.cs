@@ -1,4 +1,4 @@
-﻿namespace DayLight.Dependencys.Models.Helpers;
+﻿namespace DayLight.Dependency.Models.Helpers;
 
 public struct StringHelper
 {

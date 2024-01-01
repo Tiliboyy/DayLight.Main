@@ -5,7 +5,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using DayLight.Dependencys.Models.Communication;
+using DayLight.Dependency.Models.Communication;
 
 namespace DiscordSync.Plugin.Network.EventArgs.Network;
 

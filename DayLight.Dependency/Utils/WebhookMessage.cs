@@ -1,4 +1,4 @@
-﻿namespace DayLight.Dependencys.Utils;
+﻿namespace DayLight.Dependency.Utils;
 
 public struct WebhookMessage
 {

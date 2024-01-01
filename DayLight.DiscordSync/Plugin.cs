@@ -12,7 +12,7 @@ namespace DiscordSync.Plugin;
 [Plugin(Name = "DayLight.DiscordSync", Author = "Tiliboyy")]
 public class DiscordSyncPlugin : DayLightCorePlugin<DiscordSyncConfig, DiscordSyncTranslation>
 {
-    public static DiscordSyncPlugin Instance;
+    public static DiscordSyncPlugin Instance = null!;
 
     public static CancellationTokenSource NetworkCancellationTokenSource = null!;
     public Network.Network Network = null!;

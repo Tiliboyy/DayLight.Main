@@ -1,6 +1,6 @@
 using System;
 
-namespace DayLight.Dependencys.Models.Helpers;
+namespace DayLight.Dependency.Models.Helpers;
 
 [Serializable]
 public struct LinkHelper

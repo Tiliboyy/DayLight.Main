@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.DiscordSync", "Day
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Stats", "DayLight.Stats\DayLight.Stats.csproj", "{DEDC332A-E423-4C38-9CC7-7280D24E885F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Dependencys", "DayLight.Dependencys\DayLight.Dependencys.csproj", "{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Dependency", "DayLight.Dependency\DayLight.Dependency.csproj", "{04F7A49F-5696-4B43-80F7-AC5B7F01EB63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayLight.Hints", "DayLight.Hints\DayLight.Hints.csproj", "{9C537F5A-EE9E-4508-BCD5-38F6FF9A9078}"
 EndProject

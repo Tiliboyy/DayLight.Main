@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace DayLight.Dependencys.Lists;
+namespace DayLight.Dependency.Lists;
 
 public class ObservedList<T> : ICollection<T>, INotifyPropertyChanged
 {

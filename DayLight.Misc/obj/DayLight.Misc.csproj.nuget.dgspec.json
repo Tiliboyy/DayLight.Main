@@ -28,8 +28,8 @@
         "frameworks": {
           "net481": {
             "projectReferences": {
-              "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependencys\\DayLight.Dependencys.csproj": {
-                "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependencys\\DayLight.Dependencys.csproj"
+              "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependency\\DayLight.Dependency.csproj": {
+                "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependency\\DayLight.Dependency.csproj"
               },
               "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Bootstrap\\Neuron.Bootstrap.csproj": {
                 "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\Neuron.Bootstrap\\Neuron.Bootstrap.csproj"
@@ -140,11 +140,11 @@
         }
       }
     },
-    "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependencys\\DayLight.Dependencys.csproj": {
+    "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependency\\DayLight.Dependency.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependencys\\DayLight.Dependencys.csproj",
-        "projectName": "DayLight.Dependencys",
-        "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependencys\\DayLight.Dependencys.csproj",
+        "projectUniqueName": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependency\\DayLight.Dependency.csproj",
+        "projectName": "DayLight.Dependency",
+        "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependency\\DayLight.Dependency.csproj",
         "frameworks": {
           "net472": {
             "projectReferences": {}
@@ -182,8 +182,8 @@
               "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Core\\DayLight.Core.csproj": {
                 "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Core\\DayLight.Core.csproj"
               },
-              "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependencys\\DayLight.Dependencys.csproj": {
-                "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependencys\\DayLight.Dependencys.csproj"
+              "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependency\\DayLight.Dependency.csproj": {
+                "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependency\\DayLight.Dependency.csproj"
               }
             }
           }

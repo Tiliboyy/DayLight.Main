@@ -397,7 +397,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.8.1",
         "dependencies": {
-          "DayLight.Dependencys": "1.0.0",
+          "DayLight.Dependency": "1.0.0",
           "EXILED": "8.5.0",
           "Lib.Harmony": "2.2.2",
           "LiteDB": "5.0.17",
@@ -428,13 +428,13 @@
           "bin/placeholder/DayLight.Core.dll": {}
         }
       },
-      "DayLight.Dependencys/1.0.0": {
+      "DayLight.Dependency/1.0.0": {
         "type": "project",
         "compile": {
-          "bin/placeholder/DayLight.Dependencys.dll": {}
+          "bin/placeholder/DayLight.Dependency.dll": {}
         },
         "runtime": {
-          "bin/placeholder/DayLight.Dependencys.dll": {}
+          "bin/placeholder/DayLight.Dependency.dll": {}
         }
       },
       "Neuron.Bootstrap/1.0.0": {
@@ -847,7 +847,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.8.1",
         "dependencies": {
-          "DayLight.Dependencys": "1.0.0",
+          "DayLight.Dependency": "1.0.0",
           "EXILED": "8.5.0",
           "Lib.Harmony": "2.2.2",
           "LiteDB": "5.0.17",
@@ -878,13 +878,13 @@
           "bin/placeholder/DayLight.Core.dll": {}
         }
       },
-      "DayLight.Dependencys/1.0.0": {
+      "DayLight.Dependency/1.0.0": {
         "type": "project",
         "compile": {
-          "bin/placeholder/DayLight.Dependencys.dll": {}
+          "bin/placeholder/DayLight.Dependency.dll": {}
         },
         "runtime": {
-          "bin/placeholder/DayLight.Dependencys.dll": {}
+          "bin/placeholder/DayLight.Dependency.dll": {}
         }
       },
       "Neuron.Bootstrap/1.0.0": {
@@ -1297,7 +1297,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.8.1",
         "dependencies": {
-          "DayLight.Dependencys": "1.0.0",
+          "DayLight.Dependency": "1.0.0",
           "EXILED": "8.5.0",
           "Lib.Harmony": "2.2.2",
           "LiteDB": "5.0.17",
@@ -1328,13 +1328,13 @@
           "bin/placeholder/DayLight.Core.dll": {}
         }
       },
-      "DayLight.Dependencys/1.0.0": {
+      "DayLight.Dependency/1.0.0": {
         "type": "project",
         "compile": {
-          "bin/placeholder/DayLight.Dependencys.dll": {}
+          "bin/placeholder/DayLight.Dependency.dll": {}
         },
         "runtime": {
-          "bin/placeholder/DayLight.Dependencys.dll": {}
+          "bin/placeholder/DayLight.Dependency.dll": {}
         }
       },
       "Neuron.Bootstrap/1.0.0": {
@@ -1747,7 +1747,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.8.1",
         "dependencies": {
-          "DayLight.Dependencys": "1.0.0",
+          "DayLight.Dependency": "1.0.0",
           "EXILED": "8.5.0",
           "Lib.Harmony": "2.2.2",
           "LiteDB": "5.0.17",
@@ -1778,13 +1778,13 @@
           "bin/placeholder/DayLight.Core.dll": {}
         }
       },
-      "DayLight.Dependencys/1.0.0": {
+      "DayLight.Dependency/1.0.0": {
         "type": "project",
         "compile": {
-          "bin/placeholder/DayLight.Dependencys.dll": {}
+          "bin/placeholder/DayLight.Dependency.dll": {}
         },
         "runtime": {
-          "bin/placeholder/DayLight.Dependencys.dll": {}
+          "bin/placeholder/DayLight.Dependency.dll": {}
         }
       },
       "Neuron.Bootstrap/1.0.0": {
@@ -2337,10 +2337,10 @@
       "path": "../DayLight.Core/DayLight.Core.csproj",
       "msbuildProject": "../DayLight.Core/DayLight.Core.csproj"
     },
-    "DayLight.Dependencys/1.0.0": {
+    "DayLight.Dependency/1.0.0": {
       "type": "project",
-      "path": "../DayLight.Dependencys/DayLight.Dependencys.csproj",
-      "msbuildProject": "../DayLight.Dependencys/DayLight.Dependencys.csproj"
+      "path": "../DayLight.Dependency/DayLight.Dependency.csproj",
+      "msbuildProject": "../DayLight.Dependency/DayLight.Dependency.csproj"
     },
     "Neuron.Bootstrap/1.0.0": {
       "type": "project",
@@ -2351,7 +2351,7 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8.1": [
       "DayLight.Core >= 1.0.0",
-      "DayLight.Dependencys >= 1.0.0",
+      "DayLight.Dependency >= 1.0.0",
       "Microsoft.Bcl.AsyncInterfaces >= 8.0.0",
       "Microsoft.Extensions.Caching.Abstractions >= 8.0.0",
       "Microsoft.Extensions.Caching.Memory >= 6.0.1",
@@ -2400,8 +2400,8 @@
             "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Core\\DayLight.Core.csproj": {
               "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Core\\DayLight.Core.csproj"
             },
-            "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependencys\\DayLight.Dependencys.csproj": {
-              "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependencys\\DayLight.Dependencys.csproj"
+            "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependency\\DayLight.Dependency.csproj": {
+              "projectPath": "C:\\Users\\tilau\\RiderProjects\\DayLight.Module\\DayLight.Dependency\\DayLight.Dependency.csproj"
             }
           }
         }
