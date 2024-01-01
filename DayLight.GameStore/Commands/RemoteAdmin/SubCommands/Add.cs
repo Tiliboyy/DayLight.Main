@@ -1,10 +1,11 @@
-﻿using DayLight.Core.API;
+﻿using CommandSystem;
+using DayLight.Core.API;
 using DayLight.Core.API.CommandSystem;
 using System;
 using Player = Exiled.API.Features.Player;
 
 namespace DayLight.GameStore.Commands.RemoteAdmin.SubCommands;
-
+[CommandHandler(typeof(GameStoreParentCommand))]
 internal class Add : CustomCommand
 {
     public override string Command { get; } = "add";

@@ -178,15 +178,7 @@ public class GameStoreConfig : IConfig
                     MaxAmount = 1
                 },
 
-                new()
-                {
-                    Id = 3,
-                    Price = 600,
-                    IgnoreFullInventory = false,
-                    Name = "Schmerzmittel",
-                    ItemTypes = new List<ItemType> { ItemType.Painkillers },
-                    MaxAmount = 2
-                }
+                
             }
         },
         new Category
@@ -236,18 +228,10 @@ public class GameStoreConfig : IConfig
                     MaxAmount = 2
                 },
 
+
                 new()
                 {
                     Id = 5,
-                    Price = 400,
-                    IgnoreFullInventory = false,
-                    Name = "Schmerzmittel",
-                    ItemTypes = new List<ItemType> { ItemType.Painkillers },
-                    MaxAmount = 2
-                },
-                new()
-                {
-                    Id = 6,
                     Price = 5000,
                     IgnoreFullInventory = false,
                     Name = "SCP-018",
@@ -256,7 +240,7 @@ public class GameStoreConfig : IConfig
                 },
                 new()
                 {
-                    Id = 7,
+                    Id = 6,
                     Price = 7000,
                     IgnoreFullInventory = false,
                     Name = "SCP-268",
@@ -265,7 +249,7 @@ public class GameStoreConfig : IConfig
                 },
                 new()
                 {
-                    Id = 8,
+                    Id = 7,
                     Price = 3500,
                     IgnoreFullInventory = false,
                     Name = "Leichte Brustpanzerung",
@@ -331,17 +315,7 @@ public class GameStoreConfig : IConfig
                     ItemTypes = new List<ItemType> { ItemType.ArmorHeavy },
                     MaxAmount = 1
                 },
-
-
-                new()
-                {
-                    Id = 6,
-                    Price = 500,
-                    IgnoreFullInventory = false,
-                    Name = "Schmerzmittel",
-                    ItemTypes = new List<ItemType> { ItemType.Painkillers },
-                    MaxAmount = 2
-                }
+                
             }
         },
         new Category
@@ -392,20 +366,11 @@ public class GameStoreConfig : IConfig
                     ItemTypes = new List<ItemType> { ItemType.SCP500 },
                     MaxAmount = 2
                 },
+                
 
                 new()
                 {
                     Id = 5,
-                    Price = 500,
-                    IgnoreFullInventory = false,
-                    Name = "Schmerzmittel",
-                    ItemTypes = new List<ItemType> { ItemType.Painkillers },
-                    MaxAmount = 2
-                },
-
-                new()
-                {
-                    Id = 6,
                     Price = 1000,
                     IgnoreFullInventory = false,
                     Name = "Granate",
@@ -416,7 +381,7 @@ public class GameStoreConfig : IConfig
 
                 new()
                 {
-                    Id = 7,
+                    Id = 6,
                     Price = 750,
                     IgnoreFullInventory = false,
                     Name = "Flash Granate",
@@ -426,7 +391,7 @@ public class GameStoreConfig : IConfig
 
                 new()
                 {
-                    Id = 8,
+                    Id = 7,
                     Price = 50000,
                     IgnoreFullInventory = false,
                     Name = "X3-Particle-Disruptor",
@@ -486,17 +451,6 @@ public class GameStoreConfig : IConfig
                     Name = "Schwere Brustpanzerung",
                     ItemTypes = new List<ItemType> { ItemType.ArmorHeavy },
                     MaxAmount = 1
-                },
-
-
-                new()
-                {
-                    Id = 5,
-                    Price = 500,
-                    Name = "Schmerzmittel",
-                    IgnoreFullInventory = false,
-                    ItemTypes = new List<ItemType> { ItemType.Painkillers },
-                    MaxAmount = 2
                 },
 
                 new()
@@ -587,6 +541,19 @@ public class GameStoreConfig : IConfig
                     Name = "Medkit",
                     ItemTypes = new List<ItemType> { ItemType.Medkit },
                     MaxAmount = 3
+                },
+                
+                new()
+                {
+                    Id = 6,
+                    Price = 500,
+                    IgnoreFullInventory = false,
+                    Name = "Painkillers",
+                    ItemTypes = new List<ItemType>
+                    {
+                        ItemType.Painkillers
+                    },
+                    MaxAmount = 3
                 }
             }
         },
@@ -604,8 +571,11 @@ public class GameStoreConfig : IConfig
                     Name = "Kostenlose Munition",
                     AmmoTypes = new Dictionary<AmmoType, ushort>
                     {
-                        { AmmoType.Nato762, 60 }, { AmmoType.Ammo44Cal, 12 }, { AmmoType.Nato556, 60 },
-                        { AmmoType.Ammo12Gauge, 12 }, { AmmoType.Nato9, 60 }
+                        { AmmoType.Nato762, 60 },
+                        { AmmoType.Ammo44Cal, 12 }, 
+                        { AmmoType.Nato556, 60 },
+                        { AmmoType.Ammo12Gauge, 12 },
+                        { AmmoType.Nato9, 60 }
                     },
                     MaxAmount = 1,
                     IsAmmo = true
@@ -620,10 +590,31 @@ public class GameStoreConfig : IConfig
                     AmmoTypes = new Dictionary<AmmoType, ushort> { { AmmoType.Nato9, 60 } },
                     MaxAmount = 2,
                     IsAmmo = true
-                },
+                }
+                ,
                 new()
                 {
                     Id = 3,
+                    Price = 75,
+                    IgnoreFullInventory = true,
+                    Name = "7.62x39 Munition",
+                    AmmoTypes = new Dictionary<AmmoType, ushort> { { AmmoType.Nato762, 60 } },
+                    MaxAmount = 2,
+                    IsAmmo = true
+                },
+                new()
+                {
+                    Id = 4,
+                    Price = 75,
+                    IgnoreFullInventory = true,
+                    Name = "5.56x45 Munition",
+                    AmmoTypes = new Dictionary<AmmoType, ushort> { { AmmoType.Nato556, 60 } },
+                    MaxAmount = 2,
+                    IsAmmo = true
+                },
+                new()
+                {
+                    Id = 5,
                     Price = 75,
                     IgnoreFullInventory = true,
                     Name = "12/70 Buckshot",
@@ -633,7 +624,7 @@ public class GameStoreConfig : IConfig
                 },
                 new()
                 {
-                    Id = 4,
+                    Id = 6,
                     Price = 75,
                     IgnoreFullInventory = true,
                     Name = ".44 Mag",
@@ -643,14 +634,22 @@ public class GameStoreConfig : IConfig
                 },
                 new()
                 {
-                    Id = 6,
-                    Price = 75,
+                    Id = 7,
+                    Price = 300,
                     IgnoreFullInventory = true,
-                    Name = "7.62x39mm Munition",
-                    AmmoTypes = new Dictionary<AmmoType, ushort> { { AmmoType.Nato762, 60 } },
+                    Name = "Munitions Paket",
+                    AmmoTypes = new Dictionary<AmmoType, ushort>
+                    {
+                        { AmmoType.Nato762, 60 },
+                        { AmmoType.Ammo44Cal, 12 }, 
+                        { AmmoType.Nato556, 60 },
+                        { AmmoType.Ammo12Gauge, 12 },
+                        { AmmoType.Nato9, 60 }
+                    },
                     MaxAmount = 2,
                     IsAmmo = true
-                }
+                },
+
             }
         }
     };

@@ -39,15 +39,24 @@ public abstract class CustomParentCommand : CommandHandler, ICommand
     }
     protected void RegisterCommand(CustomCommand command)
     {
-        if (string.IsNullOrWhiteSpace(command.Command))
-            throw new ArgumentException("Command text of " + command.GetType().Name + " cannot be null or whitespace!");
-        SubCommands.Add(command.Command, command);
-        if (command.Aliases == null)
-            return;
-        foreach (var alias in command.Aliases)
+        try
         {
-            if (!string.IsNullOrWhiteSpace(alias))
-                SubCommandsAliases.Add(alias, command.Command);
+            if (string.IsNullOrWhiteSpace(command.Command))
+                throw new ArgumentException("Command text of " + command.GetType().Name + " cannot be null or whitespace!");
+            SubCommands.Add(command.Command, command);
+            Logger.Debug($"Registered subcommand {command.Command} of parent {Command}");
+            if (command.Aliases == null)
+                return;
+            foreach (var alias in command.Aliases)
+            {
+                if (!string.IsNullOrWhiteSpace(alias))
+                    SubCommandsAliases.Add(alias, command.Command);
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e);
+            throw;
         }
     }
     protected virtual bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)

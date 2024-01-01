@@ -5,6 +5,7 @@ using DayLight.Core.Models;
 using DayLight.Dependency.Models;
 using PlayerRoles;
 using System;
+using System.Globalization;
 using System.Linq;
 using Player = Exiled.API.Features.Player;
 using Round = Exiled.API.Features.Round;
@@ -18,14 +19,11 @@ public static class Extensions
     {
         if (player == null) return false;
         if (player.DoNotTrack) return false;
-        var playerID = ulong.Parse(player.RawUserId.Split('@')[0]);
-        var players = DayLightDatabase.Database.GetCollection<DatabasePlayer>("players");
-        var dbplayer = players.FindOne(x => x.SteamID == playerID);
-
+        var dbplayer = player.GetAdvancedPlayer().DatabasePlayer;
         if (dbplayer == null) return false;
         dbplayer.Stats.Money = money;
         if (dbplayer.Stats.Money < 0) dbplayer.Stats.Money = 0;
-        players.Update(dbplayer);
+        player.ShowHint(DayLight.GameStore.GameStorePlugin.Instance.Translation.SetMoneyHintText.Replace("(money)", money.ToString(CultureInfo.InvariantCulture)));
         return true;
     }
     public static string GetAvailableCategories(this Player player, bool ShowAll = false)

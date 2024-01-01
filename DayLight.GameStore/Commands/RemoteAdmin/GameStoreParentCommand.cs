@@ -9,7 +9,10 @@ namespace DayLight.GameStore.Commands.RemoteAdmin;
 [Command(new [] { Platform.RemoteAdmin })]
 public class GameStoreParentCommand : CustomParentCommand
 {
-    public override string Command => "gamestore";
+    
+    public GameStoreParentCommand() => LoadGeneratedCommands();
+
+    public override string Command { get; } = "gamestore";
 
     public override string[] Aliases { get; } = { "gs" };
 

@@ -73,7 +73,6 @@ public class SubclassEventHandlers
 
         if (spawned > max)
         {
-            Logger.Debug($"Max amount ({spawned}/{max}) reached for role {subclasses[range].ClassName}");
             return;
         }
 

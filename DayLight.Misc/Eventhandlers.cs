@@ -21,11 +21,17 @@ public class Eventhandlers
     }
     public static void OnHurt(HurtingEventArgs ev)
     {
-        if (ev.Attacker.Role != null && ev.Player != null && ev.DamageHandler != null && ev.Attacker != null && ev.DamageHandler.Type == DamageType.Scp018 && ev.Attacker.Role.Team == ev.Player.Role.Team && ev.Attacker != ev.Player)
+        if (ev.Player != null 
+            && ev.DamageHandler != null 
+            && ev.Attacker != null 
+            && ev.DamageHandler.Type == DamageType.Scp018
+            && ev.Attacker.Role.Team == ev.Player.Role.Team 
+            && ev.Attacker != ev.Player)
             ev.IsAllowed = false;
     }
     public static void OnUsingItem(UsedItemEventArgs ev)
     {
+
         switch (ev.Item.Type)
         {
             case ItemType.SCP207:
@@ -36,7 +42,7 @@ public class Eventhandlers
                     
                 if (curlevel == MiscPlugin.Instance.Config.Scp207ExplosionAmount)
                 {
-                    for (int i = 0; i < MiscPlugin.Instance.Config.Scp207ExplosionGrenadeAmount; i++)
+                    for (var i = 0; i < MiscPlugin.Instance.Config.Scp207ExplosionGrenadeAmount; i++)
                     {
                         var grenade = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE);
                         var time = MiscPlugin.Instance.Config.FuseTime;
@@ -78,22 +84,7 @@ public class Eventhandlers
     {
         MiscPlugin.EnableTeamRespawns = true;
         if (!MiscPlugin.Instance.Config.AutoFriendlyFireToggle) return;
-        var roles = new List<RoleTypeId>()
-        {
-            RoleTypeId.Scientist,
-            RoleTypeId.Tutorial,
-            RoleTypeId.ChaosConscript,
-            RoleTypeId.ChaosMarauder,
-            RoleTypeId.ChaosRepressor,
-            RoleTypeId.ChaosRifleman,
-            RoleTypeId.ChaosConscript,
-            RoleTypeId.ClassD,
-            RoleTypeId.FacilityGuard,
-            RoleTypeId.NtfCaptain,
-            RoleTypeId.NtfPrivate,
-            RoleTypeId.NtfSergeant,
-            RoleTypeId.NtfSpecialist,
-        };
+        var roles = Core.API.StaticUtils.GetEnumValues<RoleTypeId>();
         foreach (var player in Player.List)
         {
             foreach (var role in roles)

@@ -1,12 +1,17 @@
 ﻿using DayLight.Core.API.Database;
 using DayLight.Dependency.Models;
+using Exiled.API.Enums;
+using Exiled.API.Extensions;
 using Exiled.API.Features;
 using JetBrains.Annotations;
+using MEC;
+using PlayerRoles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
+using Warhead = PluginAPI.Core.Warhead;
 
 namespace DayLight.Core.API.Features;
 
@@ -118,9 +123,30 @@ public class AdvancedPlayer : MonoBehaviour
 
 
 
+  private void Update()
+  {
+
+    if (transform.position.y < -3000)
+    {
+      if (!Warhead.IsDetonated)
+      {
+        ExiledPlayer.IsGodModeEnabled = true;
+        ExiledPlayer.Teleport(ExiledPlayer.Role.Type.GetRandomSpawnLocation().Position);
+        Timing.CallDelayed(1f,
+          () =>
+          {
+            ExiledPlayer.IsGodModeEnabled = false;
+          });
+      }
+      else
+      {
+        ExiledPlayer.Kill(DamageType.Falldown);
+      }
+      
+    }
+  }
 
 
 
 
-    
 }

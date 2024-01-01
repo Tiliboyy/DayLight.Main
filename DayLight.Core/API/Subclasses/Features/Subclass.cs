@@ -248,7 +248,7 @@ public abstract class Subclass : Exiled.CustomRoles.API.Features.CustomRole
             }
             Registered.Add(this);
             Init();
-            Logger.Debug($"{(object)Name} ({(object)Id}) has been successfully registered.");
+            //Logger.Debug($"{(object)Name} ({(object)Id}) has been successfully registered.");
             return true;
         }
         Logger.Warn($"Couldn't register {(object)Name} ({(object)Id}) [{(object)Role}] as it already exists.");

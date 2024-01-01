@@ -8,7 +8,8 @@ namespace DayLight.Sync.Commands.RemoteAdmin;
 [Command(new [] { Platform.RemoteAdmin })]
 public class GameStoreParentCommand : CustomParentCommand
 {
-    public override string Command => "DiscordSync";
+    public GameStoreParentCommand() => LoadGeneratedCommands();
+    public override string Command { get; } = "DiscordSync";
 
     public override string[] Aliases { get; } = { "ds" };
 
